@@ -43,6 +43,6 @@ else{
         $sUchenik = $sParametr2;
         $sPredmet = $sParametr3;
         $iNomerZadaniya = $sParametr4;
-        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadaniya.php";
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/urok-dz.php";
     }
 }

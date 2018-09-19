@@ -55,17 +55,17 @@ $(function(){
         // c.c(iCheckBox);
 
         //обновим таблицу uchenik-zadachi
-        $.post(
-            "/post/zakonchili-na-etom.php",
-            {
-                suchenik: sUchenik,
-                idzadachi: iIdZadachi,
-                icheckbox: iCheckBox,
-            },
-            function(response){
-                location.reload();
-            }
-        );
+        // $.post(
+        //     "/post/zakonchili-na-etom.php",
+        //     {
+        //         suchenik: sUchenik,
+        //         idzadachi: iIdZadachi,
+        //         icheckbox: iCheckBox,
+        //     },
+        //     function(response){
+        //         location.reload();
+        //     }
+        // );
         //--обновим таблицу uchenik-zadachi
     });
 
