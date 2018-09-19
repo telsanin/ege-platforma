@@ -35,8 +35,11 @@ echo "<p><b>Задачи</b>:</p>";
 $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
+$tObscheeVremyaVypolneniya=0;
 $iNumDZ = 1;
 while ($row = $res->fetch_assoc()) {
+
+    $tObscheeVremyaVypolneniya+=(strtotime($row['vremya-vypolneniya'])-strtotime("00:00:00"));
 
     //добавление горизонтальной полосы, разделяющией разные номера заданий
     $iZadanie = $row['zadanie'];
@@ -86,12 +89,15 @@ while ($row = $res->fetch_assoc()) {
     if(!($row['kolichestvo-popytok']==1&&!$row['razobrat-na-zanyatii']&&$row['resheno-pravilno'])){
         echo "Правильный ответ:</br>" . $row['pravilnyi-otvet'];
         echo "</br>Решение:</br>" . ($row['reshenie'] ? $row['reshenie'] : "-");
+        echo "</br>";
     }
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
-    echo $row['vremya-vypolneniya']."</br>";
-    echo "</br></br>";
+    echo $row['vremya-vypolneniya']."</br></br>";
 }
+
+echo "Всего: ".date("H:i:s",intval($tObscheeVremyaVypolneniya)-3*3600)."</br></br>";
+//приходится вычитать 3 часа из-за часовых поясов
 
 ?>
 
