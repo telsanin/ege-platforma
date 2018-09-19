@@ -3,7 +3,7 @@
 //$uploaddir = '/img/';
 //$uploaddir = '/';
 //$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-$uploadfile ="/img/123.gif";
+$uploadfile ="img/123.gif";
 
 echo '<pre>';
 
