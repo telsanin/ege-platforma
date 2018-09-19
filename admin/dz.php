@@ -66,22 +66,32 @@ while ($row = $res->fetch_assoc()) {
     //echo "</br>".$row['pravilnyi-otvet'];
     //-вывод правильного ответа для тестирования
 
-    echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input disabled ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>Все плохо</label></div>";
+    //если решено правильно с 1й попытки и не отмечено "все плохо"
+    if(!($row['kolichestvo-popytok']==1&&!$row['razobrat-na-zanyatii']&&$row['resheno-pravilno']))
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input disabled ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>Все плохо</label></div>";
+    //-если решено правильно с 1й попытки и не отмечено "все плохо"
+
     if($row['kolichestvo-popytok']>0)
         if($row['resheno-pravilno'])
-            echo "<span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span></br>";
+            echo "<div id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</div>";
         else
-            echo "<span id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</span></br>";
+            echo "<div id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</div>";
     else
         if(!$row['razobrat-na-zanyatii'])
             echo "<span id='result".$row['id-zadachi']."' style='color: magenta;'>Не решал!</span></br>";
     if($row['kolichestvo-popytok']>0)
         echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-    echo "Правильный ответ:</br>".$row['pravilnyi-otvet'];
-    echo "</br>Решение:</br>".($row['reshenie']?$row['reshenie']:"-");
+
+    //если решено правильно с 1й попытки и не отмечено "все плохо"
+    if(!($row['kolichestvo-popytok']==1&&!$row['razobrat-na-zanyatii']&&$row['resheno-pravilno'])){
+        echo "Правильный ответ:</br>" . $row['pravilnyi-otvet'];
+        echo "</br>Решение:</br>" . ($row['reshenie'] ? $row['reshenie'] : "-");
+    }
+    //-если решено правильно с 1й попытки и не отмечено "все плохо"
+
     echo "</br></br>";
 }
 
 ?>
 
-<button id="provereno">Проверено</button>
+<button id="provereno">Проверено</button></br></br>
