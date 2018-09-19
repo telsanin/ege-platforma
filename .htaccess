@@ -1,4 +1,4 @@
-#поставим кодировку utf-8
+﻿#поставим кодировку utf-8
 #AddDefaultCharset UTF-8
 
 #включим регистрацию переменных, полученных методом POST или GET в глобальный массив $GLOBALS
@@ -18,44 +18,44 @@ RewriteBase  /
 
 #!это временно - на время перехода!
 RewriteCond %{REQUEST_URI} ^/artem-matematika$
-RewriteRule ^.*$ http://ege-platforma.local/artem/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/artem/matematika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/artem-matematika/$
-RewriteRule ^.*$ http://ege-platforma.local/artem/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/artem/matematika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/artem-informatika$
-RewriteRule ^.*$ http://ege-platforma.local/artem/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/artem/informatika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/artem-informatika/$
-RewriteRule ^.*$ http://ege-platforma.local/artem/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/artem/informatika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/nikita$
-RewriteRule ^.*$ http://ege-platforma.local/nikita/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/nikita/matematika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/nikita/$
-RewriteRule ^.*$ http://ege-platforma.local/nikita/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/nikita/matematika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/andrey$
-RewriteRule ^.*$ http://ege-platforma.local/andrei/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/andrei/matematika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/andrey/$
-RewriteRule ^.*$ http://ege-platforma.local/andrei/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/andrei/matematika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/roman$
-RewriteRule ^.*$ http://ege-platforma.local/roman/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/roman/informatika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/roman/$
-RewriteRule ^.*$ http://ege-platforma.local/roman/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/roman/informatika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/egor$
-RewriteRule ^.*$ http://ege-platforma.local/egor/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/egor/matematika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/egor/$
-RewriteRule ^.*$ http://ege-platforma.local/egor/matematika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/egor/matematika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/egor-informatika$
-RewriteRule ^.*$ http://ege-platforma.local/egor/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/egor/informatika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/egor-informatika/$
-RewriteRule ^.*$ http://ege-platforma.local/egor/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/egor/informatika/dz [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/daniil$
-RewriteRule ^.*$ http://ege-platforma.local/daniil/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/daniil/informatika/dz [R=301,L]
 RewriteCond %{REQUEST_URI} ^/daniil/$
-RewriteRule ^.*$ http://ege-platforma.local/daniil/informatika/dz [R=301,L]
+RewriteRule ^.*$ http://teleginresume.ru/daniil/informatika/dz [R=301,L]
 
 #-!это временно - на время перехода!
 
