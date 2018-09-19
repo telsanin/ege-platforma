@@ -54,19 +54,16 @@ $(function(){
         // c.c(iIdZadachi);
         // c.c(iCheckBox);
 
-        //обновим таблицу uchenik-zadachi
-        // $.post(
-        //     "/post/zakonchili-na-etom.php",
-        //     {
-        //         suchenik: sUchenik,
-        //         idzadachi: iIdZadachi,
-        //         icheckbox: iCheckBox,
-        //     },
-        //     function(response){
-        //         location.reload();
-        //     }
-        // );
-        //--обновим таблицу uchenik-zadachi
+        обновим таблицу uchenik-zadachi
+        $.post(
+            "/post/zakonchili-na-etom.php",
+            {
+                suchenik: sUchenik,
+                idzadachi: iIdZadachi,
+                icheckbox: iCheckBox,
+            }
+        );
+        --обновим таблицу uchenik-zadachi
     });
 
     $(".razaktualizirovat").click(function(e) {
