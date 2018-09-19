@@ -1,0 +1,101 @@
+#поставим кодировку utf-8
+#AddDefaultCharset UTF-8
+
+#включим регистрацию переменных, полученных методом POST или GET в глобальный массив $GLOBALS
+#php_flag register_globals on
+#получится так
+#index.php?asd=123
+#1)локальная переменная $asd
+#2)ссылка в глобальном массиве $GLOBALS["asd"]
+#3)$_GET['asd']
+
+#включим работу механизма преобразований url
+RewriteEngine on
+
+#т.к. url не соответствуют физическим путям к файлам, для использования 
+#RewriteRule нужно указать базовый URL для преобразований
+RewriteBase  /
+
+#!это временно - на время перехода!
+RewriteCond %{REQUEST_URI} ^/artem-matematika$
+RewriteRule ^.*$ http://ege-platforma.local/artem/matematika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/artem-matematika/$
+RewriteRule ^.*$ http://ege-platforma.local/artem/matematika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/artem-informatika$
+RewriteRule ^.*$ http://ege-platforma.local/artem/informatika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/artem-informatika/$
+RewriteRule ^.*$ http://ege-platforma.local/artem/informatika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/nikita$
+RewriteRule ^.*$ http://ege-platforma.local/nikita/matematika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/nikita/$
+RewriteRule ^.*$ http://ege-platforma.local/nikita/matematika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/andrey$
+RewriteRule ^.*$ http://ege-platforma.local/andrei/matematika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/andrey/$
+RewriteRule ^.*$ http://ege-platforma.local/andrei/matematika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/roman$
+RewriteRule ^.*$ http://ege-platforma.local/roman/informatika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/roman/$
+RewriteRule ^.*$ http://ege-platforma.local/roman/informatika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/egor$
+RewriteRule ^.*$ http://ege-platforma.local/egor/matematika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/egor/$
+RewriteRule ^.*$ http://ege-platforma.local/egor/matematika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/egor-informatika$
+RewriteRule ^.*$ http://ege-platforma.local/egor/informatika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/egor-informatika/$
+RewriteRule ^.*$ http://ege-platforma.local/egor/informatika/dz [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/daniil$
+RewriteRule ^.*$ http://ege-platforma.local/daniil/informatika/dz [R=301,L]
+RewriteCond %{REQUEST_URI} ^/daniil/$
+RewriteRule ^.*$ http://ege-platforma.local/daniil/informatika/dz [R=301,L]
+
+#-!это временно - на время перехода!
+
+#Правила подстановки url:
+#Символ ^ обозначает начало строки.
+#Символ $ обозначает конец строки.
+#Круглые скобки () используются для выделения групп символов. В дальнейшем к ним можно обращаться как к переменной $1.
+#Квадратные скобки [] используются для перечисления допустимых символов.
+#Вертикальная черта |  - ИЛИ, перечисление вариантов (например, слов).
+#Квадратные скобки [^] используются для перечисления недопустимых символов.
+#Фигурные скобки {} - количесто повторений символа(группы), который записан до.
+#a{3,} - 3 или больше повторений символа "a"
+#a{3,6}	от 3 до 6 повторений символа "a"
+#Точка . - один любой символ.
+#Звездочка * - любое количество символа(группы), который записан до.
+#Плюсик + - 1 и более символа(группы), который записан до.
+#Вопрос ? - 0 или 1 символа(группы), который записан до.
+#\s - пробел.
+#\S - непробел.
+#\d - цифра.
+#\D - нецифра.
+#\w - буква, цифра, нижнее подчеркивание (не проверено, работает ли в .htaccess).
+#\W - НЕ буква, символ, нижнее подчеркивание (не проверено, работает ли в .htaccess)
+#Обратный слеш \ - экранирование приведенных выше (служебных) симоволов.
+#RewriteRule - правила преобразований.
+#[L] - флаг, который говорит о том, что если это правило сработало - дальнейшие правила не проверять.
+
+#параметр на самом деле не нужен, т.к. он берется из $_SERVER['REQUEST_URI']
+#RewriteRule ^([^.]*)$ index.php?a=$1
+#если идет вызов .php файла из строки браузера, то вызываем этот .php файл
+RewriteRule ^(.*\.php).$ $1 [L]
+#если идет все кроме точки (чтобы не задеть например markup.css):
+#все передаем как параметр
+RewriteRule ^[^.]*$ index.php [L]
+
+#если введен url с точкой (типа markup.cs), но такого файла нет, то перейти на /not-found
+#not-found в моем случае абракатабра; index.php поймет, что такого url в БД не существует 
+#и выведет страницу-заглушку (если указать  not-found без слеша, то откроется страница с этим текстом и все)
+ErrorDocument 404 /not-found
+
+#RewriteRule ^(novosti)$ /not-found
+
+
