@@ -71,7 +71,7 @@ while ($row = $res->fetch_assoc()) {
 
 //Вопросы:
 echo "<p><b>Вопросы</b>:</p>";
-$SqlQuery = "SELECT DISTINCT `voprosy`.`id-voprosa`, `voprosy`.`text-voprosa`, `aktualno` FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
+$SqlQuery = "SELECT DISTINCT `voprosy`.`id-voprosa`, `voprosy`.`text-voprosa`, `aktualno` FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-voprosy`.`uchenik`='".$sUchenik."' AND `voprosy`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $iNumDZ = 1;
