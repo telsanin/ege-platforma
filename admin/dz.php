@@ -89,6 +89,7 @@ while ($row = $res->fetch_assoc()) {
     }
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
+    echo $row['vremya-vypolneniya']."</br>";
     echo "</br></br>";
 }
 
