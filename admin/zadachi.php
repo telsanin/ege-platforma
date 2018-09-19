@@ -61,6 +61,15 @@ while ($row = $res->fetch_assoc()) {
 Решение: <textarea id="reshenie" cols="100" rows="5"></textarea></br>
 Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-zadachi" cols="100" rows="5"></textarea></br>
 Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="pravilnyi-otvet"/></br>
+
+
+<form id="fileForm" method="post" enctype="multipart/form-data" action="">
+    <input type="file" id="file" name="file" />
+    <input type="submit" id="btn" value="Submit" />
+</form>
+
+
+</br>
 <button id="insert-zadacha">Добавить</button>
 
 <!--/Добавление задачи-->

@@ -4,6 +4,33 @@
 
 $(function(){
 
+
+
+    $("form#fileForm").submit(function(e){
+        e.preventDefault();
+
+        var formData = new FormData();
+        var fileData = document.getElementById("file");
+        file = fileData.files[0];
+        formData.append("userfile", file, 'matematika-1-123.gif');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/post/file-upload.php");
+        xhr.send(formData);
+
+        // $.post(
+        //     "/post/file-upload.php",
+        //     {
+        //         data: formData,
+        //     },
+        //     function(response){
+        //         c.c(response);
+        //     }
+        // );
+
+    });
+
+
     $(".copy-task").click(function(e){
 
         sPredmet = $('#predmet').val();
