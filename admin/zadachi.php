@@ -34,6 +34,7 @@ while ($row = $res->fetch_assoc()) {
 //        echo "С моими цифрами</br>";
     echo $iNum++ . ") ";
     echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
+    echo "<img src='/img/matematika-3-123.jpg'/></br>";
     echo "<b>Ответ: </b><span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
     echo "</br><b>Решение:</b></br>";

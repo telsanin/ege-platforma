@@ -16,7 +16,7 @@ $(function(){
 
         //здесь надо как-то брать id вновь добавленной задачи и это будет имя файла
 
-        formData.append("userfile", file, sPredmet+'-'+iNomerZadaniya+'-'+'123.gif');
+        formData.append("userfile", file, sPredmet+'-'+iNomerZadaniya+'-'+'123.jpg');
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/post/file-upload.php");
