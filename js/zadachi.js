@@ -4,19 +4,25 @@
 
 $(function(){
 
-
-
     $("form#fileForm").submit(function(e){
         e.preventDefault();
+
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
 
         var formData = new FormData();
         var fileData = document.getElementById("file");
         file = fileData.files[0];
-        formData.append("userfile", file, 'matematika-1-123.gif');
+
+        //здесь надо как-то брать id вновь добавленной задачи и это будет имя файла
+
+        formData.append("userfile", file, sPredmet+'-'+iNomerZadaniya+'-'+'123.gif');
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/post/file-upload.php");
         xhr.send(formData);
+
+        //здесь в полу "имя файла" вновь добавленной задачи нужно прописать имя файла с картинкой
 
         // $.post(
         //     "/post/file-upload.php",

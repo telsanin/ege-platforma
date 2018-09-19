@@ -1,9 +1,7 @@
 <?php
 
-//$uploaddir = '/img/';
-//$uploaddir = '/';
-//$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-$uploadfile ="img/123.gif";
+$uploaddir = $_SERVER["DOCUMENT_ROOT"]."/img/";
+$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
 echo '<pre>';
 
