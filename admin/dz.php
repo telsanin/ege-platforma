@@ -18,7 +18,7 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 echo "<p><b>Вопросы</b>:</p>";
 
 //Вопросы:
-$SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
+$SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $iNumDZ = 1;
