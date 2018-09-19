@@ -8,7 +8,8 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/cconsole.js"></script>
-<script src="/js/proverka-otveta-na-zadachu.js"></script>
+<!--<script src="/js/proverka-otveta-na-zadachu.js"></script>-->
+<script src="/js/front.js"></script>
 
 <script>
     $(function(){

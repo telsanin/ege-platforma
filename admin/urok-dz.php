@@ -12,17 +12,21 @@
 <?php
 
 if($iNomerZadaniya=='')
-    echo "введите в URL номер задания!</br></br>";
+    echo "введите в URL номер задания!</br>";
 
 //$SqlQuery = "SELECT * FROM `zadacha`, `zadachi-uchenika` WHERE `zadacha`.`id-zadachi`=`zadachi-uchenika`.`id-zadachi` ORDER BY `zadachi-uchenika`.`id-podtemy`;";
 $SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` ORDER BY `zadacha`.`id-podtemy`;";
 ?>
 
-<button id="import-zadach-ucheniku">Импорт задач и вопросов - и урок и дз</button></br></br>
+<button id="import-zadach-ucheniku">Импорт задач и вопросов - и урок и дз</button></br>
 <!--<button>Импорт задач - урок</button></br></br>-->
 <!--<button>Импорт задач - дз</button>-->
 
 <?php
+
+echo "Формирование УРОКА И ДЗ для ученика</br>";
+echo "ученик: <b>".$sUchenik."</b></br>";
+echo "предмет: <b>".$sPredmet."</b></br>";
 
 echo "<p><b>Задачи</b>:</p>";
 

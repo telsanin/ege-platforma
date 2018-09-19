@@ -6,8 +6,9 @@ $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' A
 if($sParametr5=="sort")
     $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `kommentarii`;";
 
-echo $sPredmet."</br>";
-echo $iNomerZadaniya."</br>";
+echo "Формирование ЗАДАЧ И ВОПРОСОВ по заданию</br>";
+echo "предмет: <b>".$sPredmet."</b></br>";
+echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
