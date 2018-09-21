@@ -1,5 +1,6 @@
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
-<input type="hidden" id="last-time" value="<?=time()*1000?>"></input>
+<input type="hidden" id="begin-time" value="<?=time()*1000?>"></input>
+<input type="hidden" id="end-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
 
 <?php

@@ -37,19 +37,19 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<img src='/img/matematika-3-123.jpg'/></br>";
     echo "<b>Ответ: </b><span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
-    echo "</br><b>Решение:</b></br>";
-    echo "<textarea class='reshenie' id='reshenie".$row['id-zadachi']."' cols='100' rows='7'>".$row['reshenie']."</textarea></br>";
+    echo "</br>Решение:</br>";
+    echo "<textarea class='reshenie' id='reshenie".$row['id-zadachi']."' cols='42' rows='7'>".$row['reshenie']."</textarea></br>";
     echo "<input disabled ".($row['s-moimi-ciframi']==1?"checked":"")." class='s-moimi-ciframi' id='s-moimi-ciframi".$row['id-zadachi']."' type='checkbox'/><label for='s-moimi-ciframi".$row['id-zadachi']."'>с моими цифрами</label></br>";
 
     echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>-</label>";
     echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";
-    echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в дз</label></br>";
+    echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в дз</label></br></br>";
 
 //    echo "</div>";
 
-    echo "<button>Вверх</button>&nbsp;&nbsp;<button>Вниз</button>";
-    echo "&nbsp;&nbsp;&nbsp;<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'>&nbsp;подтема</label>";
-    echo "&nbsp;&nbsp;&nbsp;<input size=40 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/><label for='kommentarii".$row['id-zadachi']."'>&nbsp;коммент</label></br>";
+    echo "<button>Вверх</button>&nbsp;&nbsp;&nbsp;<button>Вниз</button></br>";
+    echo "<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'</label>&nbsp;&nbsp;&nbsp;";
+    echo "<input size=31 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/><label for='kommentarii".$row['id-zadachi']."'></label></br></br>";
     echo "<button class='copy-task' id='copy-task".$row['id-zadachi']."'>Скопировать задачу</button>";
     echo "</div>";
 }
@@ -59,14 +59,14 @@ while ($row = $res->fetch_assoc()) {
 
 </br></br></br></br><b>Добавить задачу:</b></br>
 <input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
-Решение: <textarea id="reshenie" cols="100" rows="5"></textarea></br>
-Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-zadachi" cols="100" rows="5"></textarea></br>
-Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="pravilnyi-otvet"/></br>
+Решение: <textarea id="reshenie" cols='42' rows="5"></textarea></br>
+Текст: <textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
+Ответ: <input size="32" id="pravilnyi-otvet"/></br></br>
 
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
     <input type="file" id="file" name="file" />
-    <input type="submit" id="btn" value="Submit" />
+    <input type="submit" id="btn" value="Тест" />
 </form>
 
 
@@ -94,7 +94,7 @@ while ($row = $res->fetch_assoc()) {
 <!--Добавление вопроса-->
 
 </br><b>Добавить вопрос:</b></br>
-Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" cols="100" rows="5"></textarea></br>
+Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" rows="5"></textarea></br>
 Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="otvet-na-vopros"/></br>
 <button id="insert-vopros">Добавить</button>
 

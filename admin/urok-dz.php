@@ -77,8 +77,13 @@ $res->data_seek(0);
 $iNumDZ = 1;
 while ($row = $res->fetch_assoc()) {
     echo $iNumDZ++.") ";
-    echo $row['text-voprosa'];
-    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>актуален</label>";
+//    echo $row['text-voprosa'];
+//    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>актуален</label>";
+
+    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
+
+
+
     echo "</br>";
 }
 
@@ -87,8 +92,8 @@ while ($row = $res->fetch_assoc()) {
 <!--Добавление вопроса-->
 
 </br><b>Добавить вопрос:</b></br>
-Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" cols="100" rows="5"></textarea></br>
-Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="otvet-na-vopros"/></br>
+Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" cols="42" rows="5"></textarea></br>
+Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size ="39" id="otvet-na-vopros"/></br>
 <button id="insert-vopros-ucheniku">Добавить</button>
 
 <!--/Добавление вопроса-->

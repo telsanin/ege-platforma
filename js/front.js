@@ -25,11 +25,19 @@ $(function(){
 	$("button.uveren").click(function(e) {
 
         sUchenik=$('#uchenik').val();
+
         iTaskNumber=$(this).attr("id").substring(6);
         sOtvetUchenika=$('#input'+iTaskNumber).val();
+        iLastZadacha=$('#last-zadacha').val();
+        // iLastTime = $('#last-time').val();
+        iBeginTime = $('#begin-time').val();
+        iEndTime = $('#end-time').val();
 
-        iLastTime = $('#last-time').val();
-        iLastZadacha = $('#last-zadacha').val();
+        // c.c('пред задача: '+iLastZadacha);
+        // c.c('тек задача: '+iTaskNumber);
+        // c.c('старт: '+iBeginTime);
+        // c.c('конец: '+iEndTime);
+        // c.c('');
 
         //c.c(sUchenik);
         //c.c(iTaskNumber);
@@ -45,31 +53,45 @@ $(function(){
         );
         //-обновим поле kolichestvo-popytok таблицы uchenik-zadachi
 
-        if(iTaskNumber!=iLastZadacha) {
+        //c.c(iLastTime);
+        //c.c(+new Date());
 
-            //c.c(iLastTime);
-            //c.c(+new Date());
+        tNow=+new Date();
 
-            iVremyaVypolneniya =  Math.round((+new Date() - iLastTime))-3*60*60*1000;//милисекунд; вычитать 3 часа приходится из-за временной зоны
-            dTime = new Date(iVremyaVypolneniya);
-            sVremyaVypolneniya = dTime.getHours() +':' +  dTime.getMinutes() +':' +  dTime.getSeconds();
-            //c.c(iVremyaVypolneniya);
-            //c.c(sVremyaVypolneniya);
-
-
-            $('#last-zadacha').val(iTaskNumber);
-            $('#last-time').val(+new Date());
-            //обновим поле vremya-vypolneniya таблицы uchenik-zadachi
-            $.post(
-                "/post/vremya-vypolneniya.php",
-                {
-                    idzadachi: iTaskNumber,
-                    uchenik: sUchenik,
-                    vremyavypolneniya: sVremyaVypolneniya,
-                }
-            );
-            //--обновим поле vremya-vypolneniya таблицы uchenik-zadachi
+        if(iTaskNumber!=iLastZadacha){
+            iVremyaVypolneniya = Math.round(tNow - iEndTime) - 3 * 60 * 60 * 1000;//милисекунд; вычитать 3 часа приходится из-за временной зоны
+            $('#begin-time').val(iEndTime);
         }
+        else {
+            iVremyaVypolneniya = Math.round((tNow) - iBeginTime) - 3 * 60 * 60 * 1000;//милисекунд; вычитать 3 часа приходится из-за временной зоны
+        }
+        dTime = new Date(iVremyaVypolneniya);
+        sVremyaVypolneniya = dTime.getHours() +':' +  dTime.getMinutes() +':' +  dTime.getSeconds();
+        //c.c(iVremyaVypolneniya);
+        //c.c(sVremyaVypolneniya);
+
+
+        $('#end-time').val(tNow);
+
+        $('#last-zadacha').val(iTaskNumber);
+        //$('#begin-time').val(iEndTime);
+
+        // c.c('пред задача: '+iTaskNumber);
+        // c.c('тек задача: '+iTaskNumber);
+        // c.c('старт: '+$('#begin-time').val());
+        // c.c('конец: '+$('#end-time').val());
+        // c.c('-----------------------------------');
+
+        //обновим поле vremya-vypolneniya таблицы uchenik-zadachi
+        $.post(
+            "/post/vremya-vypolneniya.php",
+            {
+                idzadachi: iTaskNumber,
+                uchenik: sUchenik,
+                vremyavypolneniya: sVremyaVypolneniya,
+            }
+        );
+        //--обновим поле vremya-vypolneniya таблицы uchenik-zadachi
 
         //получим правильный ответ на задачу из БД
 		$.get(

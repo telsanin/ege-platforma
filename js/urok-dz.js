@@ -108,28 +108,28 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
-    $(".vopros-aktualen").click(function(e) {
-
-        sUchenik=$('#uchenik').val();
-        iVoprosNumber=$(this).attr("id").substring(15);
-
-        if($(this).prop('checked'))
-            iAktualen=1;
-        else
-            iAktualen=0;
-
-        //обновим поле aktualno таблицы uchenik-voprosy
-        //!используем уже готовый запрос!
-        $.post(
-            "/post/rasskazal.php",
-            {
-                uchenik: sUchenik,
-                ivoprosnumber: iVoprosNumber,
-                irasskazal: iAktualen,
-            }
-        );
-        //--обновим поле aktualno таблицы uchenik-voprosy
-    });
+    // $(".vopros-aktualen").click(function(e) {
+    //
+    //     sUchenik=$('#uchenik').val();
+    //     iVoprosNumber=$(this).attr("id").substring(15);
+    //
+    //     if($(this).prop('checked'))
+    //         iAktualen=1;
+    //     else
+    //         iAktualen=0;
+    //
+    //     //обновим поле aktualno таблицы uchenik-voprosy
+    //     //!используем уже готовый запрос!
+    //     $.post(
+    //         "/post/rasskazal.php",
+    //         {
+    //             uchenik: sUchenik,
+    //             ivoprosnumber: iVoprosNumber,
+    //             irasskazal: iAktualen,
+    //         }
+    //     );
+    //     //--обновим поле aktualno таблицы uchenik-voprosy
+    // });
 
     $(".vopros-rasskazal").click(function(e) {
 
