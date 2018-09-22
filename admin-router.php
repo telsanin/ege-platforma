@@ -50,7 +50,7 @@ else{
 ?>
 
 <!-- This is a button toggling the off-canvas sidebar -->
-<button style="position: absolute; right: 0; top: 0;" class="uk-button" data-uk-offcanvas="{target:'#menu', mode:'slide'}">&#9776;</button>
+<button style="position: fixed; right: 0; top: 0;" class="uk-button" data-uk-offcanvas="{target:'#menu', mode:'slide'}">&#9776;</button>
 
 <div id="menu" class="uk-offcanvas">
     <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
