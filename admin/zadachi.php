@@ -10,6 +10,7 @@ echo "Формирование ЗАДАЧ И ВОПРОСОВ по задани�
 echo "предмет: <b>".$sPredmet."</b></br>";
 echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
+echo "<p><b>ЗАДАЧИ</b>:</p>";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $row = $res->fetch_assoc();
@@ -18,13 +19,6 @@ $res->data_seek(0);
 $iNum = 1;
 while ($row = $res->fetch_assoc()) {
     $iIdGruppyAnalogov = $row['id-podtemy'];
-    if ($iIdGruppyAnalogov <> $iOldIdGruppyAnalogov) {
-        $iOldIdGruppyAnalogov=$iIdGruppyAnalogov;
-        echo "</br></br><button>Вверх подтему</button>&nbsp;&nbsp;<button>Вниз подтему</button>";
-        echo "</br></br><hr></br>";
-    }
-    else
-        echo "</br></br>";
 
     if($row['urok']==0) echo "<div style='color: black;'>";
     if($row['urok']==1) echo "<div style='color: blue;'>";
@@ -47,11 +41,20 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "</div>";
 
-    echo "<button>Вверх</button>&nbsp;&nbsp;&nbsp;<button>Вниз</button></br>";
     echo "<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'</label>&nbsp;&nbsp;&nbsp;";
     echo "<input size=31 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/><label for='kommentarii".$row['id-zadachi']."'></label></br></br>";
+    echo "<button>Вверх</button>&nbsp;&nbsp;&nbsp;<button>Вниз</button></br></br>";
     echo "<button class='copy-task' id='copy-task".$row['id-zadachi']."'>Скопировать задачу</button>";
-    echo "</div>";
+    echo "</div></br>";
+
+    if ($iIdGruppyAnalogov <> $iOldIdGruppyAnalogov) {
+        $iOldIdGruppyAnalogov=$iIdGruppyAnalogov;
+        echo "<button>Вверх подтему</button>&nbsp;&nbsp;<button>Вниз подтему</button>";
+        echo "</br></br></br>";
+    }
+    else
+        echo "</br>";
+
 }
 ?>
 
@@ -61,7 +64,7 @@ while ($row = $res->fetch_assoc()) {
 <input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
 Решение: <textarea id="reshenie" cols='42' rows="5"></textarea></br>
 Текст: <textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
-Ответ: <input size="32" id="pravilnyi-otvet"/></br></br>
+Ответ: <input size="39" id="pravilnyi-otvet"/></br></br>
 
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
@@ -78,7 +81,7 @@ while ($row = $res->fetch_assoc()) {
 <?php
 
 //Вопросы:
-echo "</br></br><p><b>Вопросы</b>:</p>";
+echo "</br></br></br><p><b>ВОПРОСЫ</b>:</p>";
 $SqlQuery = "SELECT DISTINCT `voprosy`.`id-voprosa`, `voprosy`.`text-voprosa` FROM `voprosy` WHERE `voprosy`.`predmet`='".$sPredmet."' AND `voprosy`.`zadanie`='".$iNomerZadaniya."' ;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
@@ -94,8 +97,8 @@ while ($row = $res->fetch_assoc()) {
 <!--Добавление вопроса-->
 
 </br><b>Добавить вопрос:</b></br>
-Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" rows="5"></textarea></br>
-Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="otvet-na-vopros"/></br>
+Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea cols="42" id="text-voprosa" rows="5"></textarea></br>
+Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="39" id="otvet-na-vopros"/></br></br>
 <button id="insert-vopros">Добавить</button>
 
 <!--/Добавление вопроса-->
