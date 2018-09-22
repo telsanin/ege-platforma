@@ -108,50 +108,50 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
-    // $(".vopros-aktualen").click(function(e) {
-    //
-    //     sUchenik=$('#uchenik').val();
-    //     iVoprosNumber=$(this).attr("id").substring(15);
-    //
-    //     if($(this).prop('checked'))
-    //         iAktualen=1;
-    //     else
-    //         iAktualen=0;
-    //
-    //     //обновим поле aktualno таблицы uchenik-voprosy
-    //     //!используем уже готовый запрос!
-    //     $.post(
-    //         "/post/rasskazal.php",
-    //         {
-    //             uchenik: sUchenik,
-    //             ivoprosnumber: iVoprosNumber,
-    //             irasskazal: iAktualen,
-    //         }
-    //     );
-    //     //--обновим поле aktualno таблицы uchenik-voprosy
-    // });
-
-    $(".vopros-rasskazal").click(function(e) {
+    $(".vopros-aktualen").click(function(e) {
 
         sUchenik=$('#uchenik').val();
-        iVoprosNumber=$(this).attr("id").substring(16);
+        iVoprosNumber=$(this).attr("id").substring(15);
+
         if($(this).prop('checked'))
-            iRasskazal=0;
+            iAktualen=1;
         else
-            iRasskazal=1;
-        // c.c($(this).prop('checked'));
+            iAktualen=0;
 
         //обновим поле aktualno таблицы uchenik-voprosy
+        //!используем уже готовый запрос!
         $.post(
             "/post/rasskazal.php",
             {
                 uchenik: sUchenik,
                 ivoprosnumber: iVoprosNumber,
-                irasskazal: iRasskazal,
+                irasskazal: iAktualen,
             }
         );
         //--обновим поле aktualno таблицы uchenik-voprosy
     });
+
+    // $(".vopros-rasskazal").click(function(e) {
+    //
+    //     sUchenik=$('#uchenik').val();
+    //     iVoprosNumber=$(this).attr("id").substring(16);
+    //     if($(this).prop('checked'))
+    //         iRasskazal=0;
+    //     else
+    //         iRasskazal=1;
+    //     // c.c($(this).prop('checked'));
+    //
+    //     //обновим поле aktualno таблицы uchenik-voprosy
+    //     $.post(
+    //         "/post/rasskazal.php",
+    //         {
+    //             uchenik: sUchenik,
+    //             ivoprosnumber: iVoprosNumber,
+    //             irasskazal: iRasskazal,
+    //         }
+    //     );
+    //     //--обновим поле aktualno таблицы uchenik-voprosy
+    // });
 
     $(".sbrosit-vremya").click(function(e) {
         $('#last-time').val(+new Date());

@@ -90,7 +90,7 @@ $res->data_seek(0);
 $iNumDZ = 1;
 while ($row = $res->fetch_assoc()) {
     echo $iNumDZ++.") ";
-    echo $row['text-voprosa'];
-    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>актуален</label>";
+//    echo ;
+    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
     echo "</br>";
 }
