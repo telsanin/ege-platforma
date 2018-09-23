@@ -47,6 +47,12 @@ while ($row = $res->fetch_assoc()) {
     echo "<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'</label>&nbsp;&nbsp;&nbsp;";
     echo "<input size=31 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/><label for='kommentarii".$row['id-zadachi']."'></label></br></br>";
     echo "<button>Вверх</button>&nbsp;&nbsp;&nbsp;<button>Вниз</button></br></br>";
+
+    echo "<form class='upload-form' id='frm".$row['id-zadachi']."' method='post' enctype='multipart/form-data' action=''>";
+    echo "<input type='file' id='file".$row['id-zadachi']."' name='file".$row['id-zadachi']."' />";
+    echo "<input type='submit' value='Добавить'/>";
+    echo "</form></br>";
+
     echo "<button class='copy-task' id='copy-task".$row['id-zadachi']."'>Скопировать задачу</button>";
     echo "</div></br>";
 
@@ -68,7 +74,6 @@ while ($row = $res->fetch_assoc()) {
 Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
 Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
 Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
-
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
     <input type="file" id="file" name="file" /></br></br>

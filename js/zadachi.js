@@ -4,7 +4,58 @@
 
 $(function(){
 
+    $("form.upload-form").submit(function(e){
+
+        // e.preventDefault();
+
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
+        iIdZadachi = $(this).attr("id").substring(3);
+
+        // c.c(sPredmet);
+        // c.c(iNomerZadaniya);
+        // c.c(iIdZadachi);
+
+        var fileData = document.getElementById("file"+iIdZadachi);
+        file = fileData.files[0];
+
+        if(file) {
+
+            sFileName = sPredmet + '-' + iNomerZadaniya + '-' + iIdZadachi + '.jpg';
+
+            var formData = new FormData();
+            formData.append("userfile", file, sFileName);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/post/file-upload.php");
+            xhr.send(formData);
+
+            // так почему-то не работает..
+            // $.post(
+            //     "/post/file-upload.php",
+            //     {
+            //         data: formData,
+            //     },
+            //     function(response){
+            //         c.c(response);
+            //     }
+            // );
+
+            //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
+            $.post(
+                "/post/update-zadacha.php",
+                {
+                    iidzadachi: iIdZadachi,
+                    sfilename: sFileName,
+                },
+                function (response) {
+                    // location.reload();
+                }
+            );
+        }
+    });
+
     $("form#fileForm").submit(function(e){
+    //загрузка файла с картинкой для новой задачи
         // e.preventDefault();
 
         // c.c('test');
