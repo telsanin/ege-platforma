@@ -5,8 +5,13 @@
 
 <?php
 
-echo "<a href='/".$sUchenik."/".$sPredmet."/stat'>Отчет по занятиям</a>"
+echo "<a href='/".$sUchenik."/".$sPredmet."/stat'>Отчет по занятиям</a></br></br>";
 
+if($sUchenik=='artem')
+    if($sPredmet=='matematika')
+        echo "Математика&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='/".$sUchenik."/informatika/dz'>Информатика</a>";
+    elseif($sPredmet=='informatika')
+        echo "<a href='/".$sUchenik."/matematika/dz'>Математика</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Информатика";
 ?>
 
 <p><b>ДОМАШНЕЕ ЗАДАНИЕ</b>:</p>
