@@ -44,7 +44,7 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "</div>";
 
-    echo "<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'</label>&nbsp;&nbsp;&nbsp;";
+    echo "<input size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/><label for='id-podtemy".$row['id-zadachi']."'></label>&nbsp;&nbsp;&nbsp;";
     echo "<input size=31 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/><label for='kommentarii".$row['id-zadachi']."'></label></br></br>";
     echo "<button>Вверх</button>&nbsp;&nbsp;&nbsp;<button>Вниз</button></br></br>";
 
