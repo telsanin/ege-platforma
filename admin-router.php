@@ -152,7 +152,7 @@ else{
                 </ul>
             </li>
             <li class="uk-nav-divider"></li>
-            <div class="uk-panel">Информатика</div>
+            <li class="uk-nav-header">Информатика:</li>
             <li class="uk-parent">
                 <a href="#">АРТЕМ</a>
                 <ul class="uk-nav-sub">

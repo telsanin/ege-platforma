@@ -51,17 +51,21 @@ else
 </head>
 
 
-<body style="margin: 8px;">
+<body>
 
-<header>
-</header>
+<div style="margin: 8px;">
 
-<?php
-    include_once $_SERVER['DOCUMENT_ROOT']."/".$sRole."-router.php";
-?>
+    <header>
+    </header>
 
-<footer>
-</footer>
+    <?php
+        include_once $_SERVER['DOCUMENT_ROOT']."/".$sRole."-router.php";
+    ?>
+
+    <footer>
+    </footer>
+
+</div>
 
 </body>
 </html>

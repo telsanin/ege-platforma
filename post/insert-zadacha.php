@@ -4,6 +4,10 @@
 добавляет строку в таблицу zadacha (через AJAX).
 */
 
+ //подключаем функцию логгинга чего угодно; include: если файла не будет - выдастся Warning и работа продолжится
+ //работает так: logger('любой текст');
+//include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
+
 //подключимся к БД
 $DbAccessFile=$_SERVER['DOCUMENT_ROOT']."/_db-info.php";
 include_once $DbAccessFile;
@@ -23,5 +27,8 @@ $res = $mysqli->query($SqlQuery);
 //отладочные строки
 //echo $SqlQuery;
 //echo mysqli_error();
+
+echo $mysqli->insert_id;
+//logger($mysqli->insert_id);
 
 ?>

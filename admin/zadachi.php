@@ -2,6 +2,7 @@
 <input type="hidden" id="zadanie" value="<?=$iNomerZadaniya?>"></input>
 
 <?php
+
 $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `id-podtemy`, `kommentarii`;";
 if($sParametr5=="sort")
     $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `kommentarii`;";
@@ -28,6 +29,8 @@ while ($row = $res->fetch_assoc()) {
 //        echo "С моими цифрами</br>";
     echo $iNum++ . ") ";
     echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
+    if($row['foto-teksta'])
+        echo "<img style='width: 200px;' src='/img/".$row['foto-teksta']."'/></br>";
 //    echo "<img src='/img/matematika-3-123.jpg'/></br>";
     echo "<b>Ответ: </b><span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
@@ -62,20 +65,17 @@ while ($row = $res->fetch_assoc()) {
 
 </br></br></br></br><b>Добавить задачу:</b></br>
 <input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
-Решение: <textarea id="reshenie" cols='42' rows="5"></textarea></br>
-Текст: <textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
-Ответ: <input size="39" id="pravilnyi-otvet"/></br></br>
+Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
+Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
+Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
 
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
-    <input type="file" id="file" name="file" />
-    <input type="submit" id="btn" value="Тест" />
+    <input type="file" id="file" name="file" /></br></br>
+    <input type="submit" id="btn" value="Добавить" />
 </form>
 
-
-</br>
-<button id="insert-zadacha">Добавить</button>
-
+<!--<button id="insert-zadacha">Добавить</button>-->
 <!--/Добавление задачи-->
 
 <?php
@@ -97,8 +97,8 @@ while ($row = $res->fetch_assoc()) {
 <!--Добавление вопроса-->
 
 </br><b>Добавить вопрос:</b></br>
-Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea cols="42" id="text-voprosa" rows="5"></textarea></br>
-Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="39" id="otvet-na-vopros"/></br></br>
+Текст:</br><textarea cols="42" id="text-voprosa" rows="5"></textarea></br>
+Ответ:</br><input size="39" id="otvet-na-vopros"/></br></br>
 <button id="insert-vopros">Добавить</button>
 
 <!--/Добавление вопроса-->

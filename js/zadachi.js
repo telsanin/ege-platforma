@@ -5,35 +5,77 @@
 $(function(){
 
     $("form#fileForm").submit(function(e){
-        e.preventDefault();
+        //e.preventDefault();
+
+        // c.c('test');
 
         sPredmet = $('#predmet').val();
         iNomerZadaniya = $('#zadanie').val();
+        sTextZadachi = $('#text-zadachi').val();
+        sPravilnyiOtvet = $('#pravilnyi-otvet').val();
+        sReshenie = $('#reshenie').val();
+        if($('#s-moimi-ciframi').prop('checked'))
+            iSMoimiCiframi = 1;
+        else
+            iSMoimiCiframi = 0;
 
-        var formData = new FormData();
-        var fileData = document.getElementById("file");
-        file = fileData.files[0];
+        //добавим в таблицу zadacha новую строку
+        $.post(
+            "/post/insert-zadacha.php",
+            {
+                predmet: sPredmet,
+                nomerzadaniya: iNomerZadaniya,
+                textzadachi: sTextZadachi,
+                pravilnyiotvet: sPravilnyiOtvet,
+                reshenie: sReshenie,
+                smoimiciframi: iSMoimiCiframi,
+            },GetResponseCallbackFunction
+        );
+        //--обновим поле vremya-vypolneniya таблицы uchenik-zadachi
 
-        //здесь надо как-то брать id вновь добавленной задачи и это будет имя файла
+        function GetResponseCallbackFunction(response) {
+            //благодаря замыканиям в JavaScript, эта callback-функция видит переменнные
 
-        formData.append("userfile", file, sPredmet+'-'+iNomerZadaniya+'-'+'123.jpg');
+            // c.c(response);
+            iIdZadachi = Number(response);
+            // c.c(iIdZadachi);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/post/file-upload.php");
-        xhr.send(formData);
+            //здесь надо берем id вновь добавленной задачи и это будет имя файла
+            sFileName = sPredmet+'-'+iNomerZadaniya+'-'+iIdZadachi+'.jpg';
 
-        //здесь в полу "имя файла" вновь добавленной задачи нужно прописать имя файла с картинкой
+            // c.c(sFileName);
 
-        // $.post(
-        //     "/post/file-upload.php",
-        //     {
-        //         data: formData,
-        //     },
-        //     function(response){
-        //         c.c(response);
-        //     }
-        // );
+            var formData = new FormData();
+            var fileData = document.getElementById("file");
+            file = fileData.files[0];
+            formData.append("userfile", file, sFileName);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/post/file-upload.php");
+            xhr.send(formData);
 
+            // так почему-то не работает..
+            // $.post(
+            //     "/post/file-upload.php",
+            //     {
+            //         data: formData,
+            //     },
+            //     function(response){
+            //         c.c(response);
+            //     }
+            // );
+
+            //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
+            $.post(
+                "/post/update-zadacha.php",
+                {
+                    iidzadachi: iIdZadachi,
+                    sfilename: sFileName,
+                },
+                function(response){
+                    location.reload();
+                }
+            );
+        }
     });
 
 
@@ -138,10 +180,10 @@ $(function(){
     });
 
     $("#insert-vopros").click(function(e){
-        sPredmet = $('#predmet').val()
-        iNomerZadaniya = $('#zadanie').val()
-        sTextVoprosa = $('#text-voprosa').val()
-        sOtvetNaVopros = $('#otvet-na-vopros').val()
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
+        sTextVoprosa = $('#text-voprosa').val();
+        sOtvetNaVopros = $('#otvet-na-vopros').val();
 
         //добавим в таблицу voprosy новую строку
         $.post(
@@ -160,13 +202,13 @@ $(function(){
     });
 
     $("#insert-zadacha").click(function(e){
-        sPredmet = $('#predmet').val()
-        iNomerZadaniya = $('#zadanie').val()
-        sTextZadachi = $('#text-zadachi').val()
-        sPravilnyiOtvet = $('#pravilnyi-otvet').val()
-        sReshenie = $('#reshenie').val()
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
+        sTextZadachi = $('#text-zadachi').val();
+        sPravilnyiOtvet = $('#pravilnyi-otvet').val();
+        sReshenie = $('#reshenie').val();
         if($('#s-moimi-ciframi').prop('checked'))
-            iSMoimiCiframi = 1
+            iSMoimiCiframi = 1;
         else
             iSMoimiCiframi = 0;
 
