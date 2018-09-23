@@ -95,7 +95,7 @@ else{
                     <li><a href="/telsanin/artem/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
-            <li class="uk-parent uk-active">
+            <li class="uk-parent">
                 <a href="#">НИКИТА</a>
                 <ul class="uk-nav-sub">
                     <li><a href="/telsanin/nikita/matematika/dz">Дз - проверка</a></li>
