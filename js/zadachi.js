@@ -5,7 +5,7 @@
 $(function(){
 
     $("form#fileForm").submit(function(e){
-        //e.preventDefault();
+        // e.preventDefault();
 
         // c.c('test');
 
@@ -36,45 +36,49 @@ $(function(){
         function GetResponseCallbackFunction(response) {
             //благодаря замыканиям в JavaScript, эта callback-функция видит переменнные
 
-            // c.c(response);
-            iIdZadachi = Number(response);
-            // c.c(iIdZadachi);
-
-            //здесь надо берем id вновь добавленной задачи и это будет имя файла
-            sFileName = sPredmet+'-'+iNomerZadaniya+'-'+iIdZadachi+'.jpg';
-
-            // c.c(sFileName);
-
-            var formData = new FormData();
             var fileData = document.getElementById("file");
             file = fileData.files[0];
-            formData.append("userfile", file, sFileName);
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/post/file-upload.php");
-            xhr.send(formData);
 
-            // так почему-то не работает..
-            // $.post(
-            //     "/post/file-upload.php",
-            //     {
-            //         data: formData,
-            //     },
-            //     function(response){
-            //         c.c(response);
-            //     }
-            // );
+            if(file) {
 
-            //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
-            $.post(
-                "/post/update-zadacha.php",
-                {
-                    iidzadachi: iIdZadachi,
-                    sfilename: sFileName,
-                },
-                function(response){
-                    location.reload();
-                }
-            );
+                // c.c(response);
+                iIdZadachi = Number(response);
+                // c.c(iIdZadachi);
+
+                //здесь надо берем id вновь добавленной задачи и это будет имя файла
+                sFileName = sPredmet + '-' + iNomerZadaniya + '-' + iIdZadachi + '.jpg';
+
+                // c.c(sFileName);
+
+                var formData = new FormData();
+                formData.append("userfile", file, sFileName);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/post/file-upload.php");
+                xhr.send(formData);
+
+                // так почему-то не работает..
+                // $.post(
+                //     "/post/file-upload.php",
+                //     {
+                //         data: formData,
+                //     },
+                //     function(response){
+                //         c.c(response);
+                //     }
+                // );
+
+                //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
+                $.post(
+                    "/post/update-zadacha.php",
+                    {
+                        iidzadachi: iIdZadachi,
+                        sfilename: sFileName,
+                    },
+                    function (response) {
+                        // location.reload();
+                    }
+                );
+            }
         }
     });
 
