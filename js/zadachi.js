@@ -126,7 +126,7 @@ $(function(){
                         sfilename: sFileName,
                     },
                     function (response) {
-                        // location.reload();
+                        location.reload();
                     }
                 );
             }
