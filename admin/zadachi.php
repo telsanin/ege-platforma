@@ -30,7 +30,7 @@ while ($row = $res->fetch_assoc()) {
     echo $iNum++ . ") ";
     echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
     if($row['foto-teksta'])
-        echo "<img style='width: 350px;' src='/img/".$row['foto-teksta']."'/></br>";
+        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 //    echo "<img src='/img/matematika-3-123.jpg'/></br>";
     echo "<b>Ответ: </b><span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
