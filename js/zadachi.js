@@ -148,7 +148,8 @@ $(function(){
         $('#reshenie').val(sReshenie);
         $('#s-moimi-ciframi').val(iSMoimiCiframi);
 
-        $("html, body").animate({scrollTop: $("body").height()}, 300);
+        // $("html, body").animate({scrollTop: $("body").height()}, 300);
+        $("html, body").animate({scrollTop: 0}, 300);
 
     });
 
