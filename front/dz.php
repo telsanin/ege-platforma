@@ -81,7 +81,10 @@ while ($row = $res->fetch_assoc()) {
         echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
-    echo $row['text-zadachi'];
+    echo $row['text-zadachi']."</br>";
+    if($row['foto-teksta'])
+        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+
     $iVsyoPloho=($row['razobrat-na-zanyatii']?"checked":"");
     //вывод правильного ответа для тестирования
     //echo "</br>".$row['pravilnyi-otvet'];
