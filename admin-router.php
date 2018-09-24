@@ -162,8 +162,8 @@ else{
                     <li><a class="uk-active" href="/artem/informatika/dz">Дз</a></li>
                     <li><a href="/artem/informatika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/artem/informatika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/artem/informatika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/artem/informatika/3">Задание 8</a></li>
+                    <li><a href="/telsanin/artem/informatika/2">Задание 16</a></li>
                     <li><a href="/telsanin/artem/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
@@ -176,8 +176,8 @@ else{
                     <li><a class="uk-active" href="/daniil/informatika/dz">Дз</a></li>
                     <li><a href="/daniil/informatika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/daniil/informatika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/daniil/informatika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/daniil/informatika/3">Задание 8</a></li>
+                    <li><a href="/telsanin/daniil/informatika/2">Задание 16</a></li>
                     <li><a href="/telsanin/daniil/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
@@ -190,8 +190,8 @@ else{
                     <li><a class="uk-active" href="/egor/informatika/dz">Дз</a></li>
                     <li><a href="/egor/informatika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/egor/informatika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/egor/informatika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/egor/informatika/3">Задание 8</a></li>
+                    <li><a href="/telsanin/egor/informatika/2">Задание 16</a></li>
                     <li><a href="/telsanin/egor/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
@@ -204,8 +204,8 @@ else{
                     <li><a class="uk-active" href="/nikita/informatika/dz">Дз</a></li>
                     <li><a href="/nikita/informatika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/nikita/informatika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/nikita/informatika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/nikita/informatika/3">Задание 8</a></li>
+                    <li><a href="/telsanin/nikita/informatika/2">Задание 16</a></li>
                     <li><a href="/telsanin/nikita/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
