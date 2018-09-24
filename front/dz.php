@@ -15,7 +15,6 @@ if($sUchenik=='artem')
 ?>
 
 <p><b>ДОМАШНЕЕ ЗАДАНИЕ</b>:</p>
-<p><b>Вопросы</b>:</p>
 
 <?php
 
@@ -27,13 +26,14 @@ if($sUchenik=='artem')
 //Вопросы:
 $SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."' ORDER BY `voprosy`.`zadanie`, `voprosy`.`id-voprosa`;";
 $res = $mysqli->query($SqlQuery);
-$res->data_seek(0);
-$iNumDZ = 1;
-while ($row = $res->fetch_assoc()) {
-    echo $iNumDZ++.") ";
-    echo $row['text-voprosa']."</br>";
+if($res->data_seek(0)){
+    $iNumDZ = 1;
+    echo "<p><b>Вопросы</b>:</p>";
+    while ($row = $res->fetch_assoc()) {
+        echo $iNumDZ++ . ") ";
+        echo $row['text-voprosa'] . "</br>";
+    }
 }
-
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
 
