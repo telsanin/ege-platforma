@@ -11,6 +11,26 @@ echo "Формирование ЗАДАЧ И ВОПРОСОВ по задани�
 echo "предмет: <b>".$sPredmet."</b></br>";
 echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
+?>
+
+<!--Добавление задачи-->
+
+</br></br></br></br><b>Добавить задачу:</b></br>
+<input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
+Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
+Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
+Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
+
+<form id="fileForm" method="post" enctype="multipart/form-data" action="">
+    <input type="file" id="file" name="file" /></br></br>
+    <input type="submit" id="btn" value="Добавить" />
+</form>
+
+<!--<button id="insert-zadacha">Добавить</button>-->
+<!--/Добавление задачи-->
+
+<?php
+
 echo "<p><b>ЗАДАЧИ</b>:</p>";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
@@ -66,22 +86,6 @@ while ($row = $res->fetch_assoc()) {
 
 }
 ?>
-
-<!--Добавление задачи-->
-
-</br></br></br></br><b>Добавить задачу:</b></br>
-<input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
-Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
-Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
-Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
-
-<form id="fileForm" method="post" enctype="multipart/form-data" action="">
-    <input type="file" id="file" name="file" /></br></br>
-    <input type="submit" id="btn" value="Добавить" />
-</form>
-
-<!--<button id="insert-zadacha">Добавить</button>-->
-<!--/Добавление задачи-->
 
 <?php
 

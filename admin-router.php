@@ -62,6 +62,7 @@ else{
                     <li class="uk-parent">
                         <div class="uk-nav-header">Математика</div>
                         <ul class="uk-nav-sub">
+                            <li><a href="/telsanin/zadachi/matematika/4">Задание 4</a></li>
                             <li><a href="/telsanin/zadachi/matematika/3">Задание 3</a></li>
                             <li><a href="/telsanin/zadachi/matematika/2">Задание 2</a></li>
                             <li><a href="/telsanin/zadachi/matematika/1">Задание 1</a></li>
