@@ -53,6 +53,4 @@ while ($row = $res->fetch_assoc()) {
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
-    if($row['foto-teksta'])
-        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 }
