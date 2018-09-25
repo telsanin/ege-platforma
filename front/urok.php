@@ -10,7 +10,7 @@
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $iNumDZ = 1;
@@ -51,6 +51,8 @@ while ($row = $res->fetch_assoc()) {
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
     echo $row['text-zadachi']."</br>";
+    if($row['foto-teksta'])
+        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 }
