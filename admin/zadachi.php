@@ -20,13 +20,15 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
 Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
 Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
+<input size=1 class="id-podtemy" id="id-podtemy" name="id-podtemy"/><label for="id-podtemy"></label>&nbsp;&nbsp;&nbsp;
+<input size=31 class="kommentarii" id="kommentarii" name="kommentarii"/><label for="kommentarii"></label></br></br>
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
-    <input type="file" id="file" name="file" /></br></br>
-    <input type="submit" id="btn" value="Добавить" />
+    <input type="file" id="file" name="file" />
+    <input type="submit" id="btn" value="Загрузить" />
 </form>
 
-<!--<button id="insert-zadacha">Добавить</button>-->
+<button id="insert-zadacha">Добавить</button>
 <!--/Добавление задачи-->
 
 <?php

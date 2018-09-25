@@ -142,11 +142,19 @@ $(function(){
         sPravilnyiOtvet = $(this).parent().children('.pravilnyi-otvet').html();
         sReshenie = $(this).parent().children('.reshenie').val();
         iSMoimiCiframi = ($(this).parent().children('.s-moimi-ciframi').prop('checked')?1:0);
+        sIdPodtemy = $(this).parent().children('.id-podtemy').val();
+        sPodtema = $(this).parent().children('.kommentarii').val();
+
+        c.c(sTextZadachi);
+        c.c(sIdPodtemy);
+        c.c(sPodtema);
 
         $('#text-zadachi').val(sTextZadachi);
         $('#pravilnyi-otvet').val(sPravilnyiOtvet);
         $('#reshenie').val(sReshenie);
         $('#s-moimi-ciframi').val(iSMoimiCiframi);
+        $('#id-podtemy').val(sIdPodtemy);
+        $('#kommentarii').val(sPodtema);
 
         // $("html, body").animate({scrollTop: $("body").height()}, 300);
         $("html, body").animate({scrollTop: 0}, 300);
@@ -258,11 +266,19 @@ $(function(){
     });
 
     $("#insert-zadacha").click(function(e){
+        e.preventDefault();
         sPredmet = $('#predmet').val();
         iNomerZadaniya = $('#zadanie').val();
         sTextZadachi = $('#text-zadachi').val();
         sPravilnyiOtvet = $('#pravilnyi-otvet').val();
         sReshenie = $('#reshenie').val();
+        sIdPodtemy = $('#id-podtemy').val();
+        sPodtema = $('#kommentarii').val();
+
+        // c.c(sIdPodtemy);
+        // c.c(sPodtema);
+        // c.c(sReshenie);
+
         if($('#s-moimi-ciframi').prop('checked'))
             iSMoimiCiframi = 1;
         else
@@ -277,6 +293,8 @@ $(function(){
                 textzadachi: sTextZadachi,
                 pravilnyiotvet: sPravilnyiOtvet,
                 reshenie: sReshenie,
+                sidpodtemy: sIdPodtemy,
+                kommentarii: sPodtema,
                 smoimiciframi: iSMoimiCiframi,
             },
             function(response){

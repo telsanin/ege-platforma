@@ -18,10 +18,13 @@ $sNomerZadaniya=$_POST["nomerzadaniya"];
 $sTextZadachi=$_POST["textzadachi"];
 $sPravilnyiOtvet=$_POST["pravilnyiotvet"];
 $sReshenie=$_POST["reshenie"];
+$sIdPodtemy=$_POST["sidpodtemy"];
+$sPodtema=$_POST["kommentarii"];
 $iSMoimiCiframi=$_POST["smoimiciframi"];
 
 //сформируем SQL-запрос
-$SqlQuery = "INSERT INTO `zadacha` (`predmet`, `zadanie`, `text-zadachi`, `pravilnyi-otvet`, `reshenie`, `s-moimi-ciframi`) VALUES ('".$sPredmet."', '".$sNomerZadaniya."', '".$sTextZadachi."','".$sPravilnyiOtvet."', '".$sReshenie."', '".$iSMoimiCiframi."');";
+$SqlQuery = "INSERT INTO `zadacha` (`predmet`, `zadanie`, `text-zadachi`, `pravilnyi-otvet`, `reshenie`, `s-moimi-ciframi`, `id-podtemy`, `kommentarii`) VALUES ('".$sPredmet."', '".$sNomerZadaniya."', '".$sTextZadachi."','".$sPravilnyiOtvet."', '".$sReshenie."', '".$iSMoimiCiframi."', '".$sIdPodtemy."', '".$sPodtema."');";
+
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 //отладочные строки
