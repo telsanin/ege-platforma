@@ -15,11 +15,12 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
 <!--Добавление задачи-->
 
-</br></br></br></br><b>Добавить задачу:</b></br>
+</br><b>Добавить задачу:</b></br>
 <input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
-Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
 Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
 Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
+<button id="insert-zadacha">Добавить</button></br></br>
+Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
 <input size=1 class="id-podtemy" id="id-podtemy" name="id-podtemy"/><label for="id-podtemy"></label>&nbsp;&nbsp;&nbsp;
 <input size=31 class="kommentarii" id="kommentarii" name="kommentarii"/><label for="kommentarii"></label></br></br>
 
@@ -27,8 +28,6 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
     <input type="file" id="file" name="file" />
     <input type="submit" id="btn" value="Загрузить" />
 </form>
-
-<button id="insert-zadacha">Добавить</button>
 <!--/Добавление задачи-->
 
 <?php
