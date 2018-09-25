@@ -27,7 +27,7 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
     <input type="file" id="file" name="file" />
     <input type="submit" id="btn" value="Загрузить" />
-</form>
+</form></br>
 <!--/Добавление задачи-->
 
 <?php
@@ -48,12 +48,15 @@ while ($row = $res->fetch_assoc()) {
 
 //    if($row['s-moimi-ciframi'])
 //        echo "С моими цифрами</br>";
-    echo $iNum++ . ") ";
-    echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
+    echo $iNum++ . ")</br>";
+    echo "<textarea class='text-zadachi' id='text-zadachi".$row['id-zadachi']."' cols='42' rows='7'>".$row['text-zadachi']."</textarea></br>";
+//    echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
+//    echo "<img src='/img/matematika-3-123.jpg'/></br>";
+    echo "<b>Ответ:</b></br>";
+    echo "<textarea class='pravilnyi-otvet' id='pravilnyi-otvet".$row['id-zadachi']."' cols='42' rows='1'>".$row['pravilnyi-otvet']."</textarea>";
+//    echo "<span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
-//    echo "<img src='/img/matematika-3-123.jpg'/></br>";
-    echo "<b>Ответ: </b><span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
     echo "</br>Решение:</br>";
     echo "<textarea class='reshenie' id='reshenie".$row['id-zadachi']."' cols='42' rows='7'>".$row['reshenie']."</textarea></br>";

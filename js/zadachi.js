@@ -177,7 +177,39 @@ $(function(){
                 sreshenie: sReshenie,
             }
         );
-        //-сделать запрос на обновление поля reshenie таблицы zadacha
+        //-сделать запрос на обновление поля text-zadachi таблицы zadacha
+    });
+
+    $(".text-zadachi").focusout(function(e){
+
+        sTextZadachi = $(this).val();
+        iTaskNumber = $(this).attr("id").substring(12);
+
+        //сделать запрос на обновление поля reshenie таблицы zadacha
+        $.post(
+            "/post/update-text-zadachi.php",
+            {
+                idzadachi: iTaskNumber,
+                stextzadachi: sTextZadachi,
+            }
+        );
+        //-сделать запрос на обновление поля text-zadachi таблицы zadacha
+    });
+
+    $(".pravilnyi-otvet").focusout(function(e){
+
+        sPravilnyiOtvet = $(this).val();
+        iTaskNumber = $(this).attr("id").substring(15);
+
+        //сделать запрос на обновление поля pravilnyi-otvet таблицы zadacha
+        $.post(
+            "/post/update-pravilnyi-otvet.php",
+            {
+                idzadachi: iTaskNumber,
+                spravilnyiotvet: sPravilnyiOtvet,
+            }
+        );
+        //-сделать запрос на обновление поля pravilnyi-otvet таблицы zadacha
     });
 
     $(".kommentarii").focusout(function(e){
