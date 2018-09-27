@@ -3,9 +3,9 @@
 
 <?php
 
-$SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `id-podtemy`, `kommentarii`;";
-if($sParametr5=="sort")
-    $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `kommentarii`;";
+$SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `id-podtemy`, `kommentarii`, `id-zadachi`;";
+//if($sParametr5=="sort")
+//    $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `kommentarii`;";
 
 echo "Формирование ЗАДАЧ И ВОПРОСОВ по заданию</br>";
 echo "предмет: <b>".$sPredmet."</b></br>";
@@ -26,7 +26,7 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
 <form id="fileForm" method="post" enctype="multipart/form-data" action="">
     <input type="file" id="file" name="file" />
-    <input type="submit" id="btn" value="Загрузить" />
+    <input type="submit" id="btn" value="Загрузить и добавить/обновить картинку" />
 </form></br>
 <!--/Добавление задачи-->
 

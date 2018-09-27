@@ -108,6 +108,30 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
+    $(".zadacha-uchenika-aktualna").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        iIdZadachi=$(this).attr("id").substring(8);
+        sPredmet=$('#predmet').val();
+
+        if($(this).prop('checked'))
+            iAktualen=1;
+        else
+            iAktualen=0;
+
+        //обновим поле aktualno таблицы uchenik-zadachi
+        $.post(
+            "/post/zadacha-uchenika-aktualna.php",
+            {
+                suchenik: sUchenik,
+                iidzadachi: iIdZadachi,
+                iaktualno: iAktualen,
+                spredmet: sPredmet,
+            }
+        );
+        //--обновим поле aktualno таблицы uchenik-zadachi
+    });
+
     $(".vopros-aktualen").click(function(e) {
 
         sUchenik=$('#uchenik').val();

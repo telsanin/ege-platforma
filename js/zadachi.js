@@ -145,9 +145,9 @@ $(function(){
         sIdPodtemy = $(this).parent().children('.id-podtemy').val();
         sPodtema = $(this).parent().children('.kommentarii').val();
 
-        c.c(sTextZadachi);
-        c.c(sIdPodtemy);
-        c.c(sPodtema);
+        // c.c(sTextZadachi);
+        // c.c(sIdPodtemy);
+        // c.c(sPodtema);
 
         $('#text-zadachi').val(sTextZadachi);
         $('#pravilnyi-otvet').val(sPravilnyiOtvet);

@@ -15,13 +15,15 @@ elseif($sParametr3 == "urok"){
     $sPredmet = $sParametr2;
     include_once $_SERVER['DOCUMENT_ROOT']."/front/urok.php";
 }
-elseif($sParametr3 == "stat"){
+elseif($sParametr3 == "otchet") {
     $sUchenik = $sParametr1;
     $sPredmet = $sParametr2;
-    #include_once $_SERVER['DOCUMENT_ROOT']."/front/stat.php";
-
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/front/otchet.php";
+}
+    elseif($sParametr3 == "stat"){
+    $sUchenik = $sParametr1;
+    $sPredmet = $sParametr2;
     #!это временно - на время перехода!
     include_once $_SERVER['DOCUMENT_ROOT']."/stat/".$sUchenik."-".$sPredmet."/index.html";
     #-!это временно - на время перехода!
-
 }

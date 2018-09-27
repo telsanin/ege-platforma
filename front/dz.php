@@ -1,5 +1,5 @@
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
-<input type="hidden" id="begin-time" value="<?=time()*1000?>"></input>
+<!--<input type="hidden" id="begin-time" value="--><?//=time()*1000?><!--"></input>-->
 <input type="hidden" id="end-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
 
@@ -89,6 +89,8 @@ while ($row = $res->fetch_assoc()) {
     //вывод правильного ответа для тестирования
     //echo "</br>".$row['pravilnyi-otvet'];
     //-вывод правильного ответа для тестирования
+
+    echo "<input type='hidden' id='vremya-predyduschih-popytok".$row['id-zadachi']."' value=".$row['vremya-vypolneniya']."></input>";
 
     if($row['kolichestvo-popytok']==0) {
         echo "</br>Ответ: <input id='input" . $row['id-zadachi'] . "'></input>&nbsp;&nbsp;";

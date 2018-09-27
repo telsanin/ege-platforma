@@ -69,7 +69,9 @@ while ($row = $res->fetch_assoc()) {
 
     echo "</div>";
 
-    echo "<button>Вверх</button>&nbsp;&nbsp;<button>Вниз</button>";
+    echo "<button>Вверх</button>&nbsp;&nbsp;<button>Вниз</button></br>";
+    echo "<input type='checkbox' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label></br>";
+    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br>";
 }
 
 //Вопросы:
