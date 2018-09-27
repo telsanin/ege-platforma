@@ -6,6 +6,7 @@
 ?>
 
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
+<input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <input type="hidden" id="last-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
 
@@ -40,18 +41,17 @@ $tObscheeVremyaVypolneniya=0;
 $iNumDZ = 1;
 while ($row = $res->fetch_assoc()) {
 
-    $tObscheeVremyaVypolneniya+=(strtotime($row['vremya-vypolneniya'])-strtotime("00:00:00"));
+    $tObscheeVremyaVypolneniya += (strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00"));
 
     //добавление горизонтальной полосы, разделяющией разные номера заданий
     $iZadanie = $row['zadanie'];
-    if ($iOldZadanie!=0)
+    if ($iOldZadanie != 0)
         //если это НЕ первая строка
-        if($iZadanie!=$iOldZadanie){
+        if ($iZadanie != $iOldZadanie) {
             //если задание изменилось
-            $iOldZadanie=$iZadanie;
+            $iOldZadanie = $iZadanie;
             echo "<hr style='height: 1px; background-color: black;'></br>";
-        }
-        else{
+        } else {
             echo "</br>";
         }
     else {
@@ -60,48 +60,50 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные номера заданий
 
-    if($row['srednee-vremya-vypolneniya']!="00:00:00")
-        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
-    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
-    echo $iNumDZ++.") ";
-    echo $row['text-zadachi']."</br>";
-    if($row['foto-teksta'])
-        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+    if ($row['srednee-vremya-vypolneniya'] != "00:00:00")
+        echo "в среднем: " . $row['srednee-vremya-vypolneniya'] . "</br>";
+    echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
+    echo $iNumDZ++ . ") ";
+    echo $row['text-zadachi'] . "</br>";
+    if ($row['foto-teksta'])
+        echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
 
-    $iVsyoPloho=($row['razobrat-na-zanyatii']?"checked":"");
+    $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
     //вывод правильного ответа для тестирования
     //echo "</br>".$row['pravilnyi-otvet'];
     //-вывод правильного ответа для тестирования
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
-    if(!($row['kolichestvo-popytok']==1&&!$row['razobrat-na-zanyatii']&&$row['resheno-pravilno']))
-        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input disabled ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>Все плохо</label></div>";
+    if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno']))
+        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>Все плохо</label></div>";
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
-    if($row['kolichestvo-popytok']>0)
-        if($row['resheno-pravilno'])
-            echo "<div id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</div>";
+    if ($row['kolichestvo-popytok'] > 0)
+        if ($row['resheno-pravilno'])
+            echo "<div id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</div>";
         else
-            echo "<div id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</div>";
+            echo "<div id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</div>";
     else
-        if(!$row['razobrat-na-zanyatii'])
-            echo "<span id='result".$row['id-zadachi']."' style='color: magenta;'>Не решал!</span></br>";
-    if($row['kolichestvo-popytok']>0)
-        echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
+        if (!$row['razobrat-na-zanyatii'])
+            echo "<span id='result" . $row['id-zadachi'] . "' style='color: magenta;'>Не решал!</span></br>";
+    if ($row['kolichestvo-popytok'] > 0)
+        echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
-    if(!($row['kolichestvo-popytok']==1&&!$row['razobrat-na-zanyatii']&&$row['resheno-pravilno'])){
+    if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno'])) {
         echo "Правильный ответ:</br>" . $row['pravilnyi-otvet'];
         echo "</br>Решение:</br>" . ($row['reshenie'] ? $row['reshenie'] : "-");
         echo "</br>";
     }
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
-    echo $row['vremya-vypolneniya']."</br></br>";
+    echo $row['vremya-vypolneniya'] . "</br>";
+    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno" . $row['id-zadachi'] . "' " . ($row['aktualno'] > 0 ? "checked" : "") . "><label for='aktualno" . $row['id-zadachi'] . "'>актуально</label></br></br>";
+
 }
 
-echo "Всего: ".date("H:i:s",intval($tObscheeVremyaVypolneniya)-3*3600)."</br></br>";
-//приходится вычитать 3 часа из-за часовых поясов
+    echo "Всего: ".date("H:i:s",intval($tObscheeVremyaVypolneniya)-3*3600)."</br></br>";
+    //приходится вычитать 3 часа из-за часовых поясов
 
 ?>
 

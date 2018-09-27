@@ -18,7 +18,13 @@ if($iNomerZadaniya=='')
 $SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` ORDER BY `zadacha`.`id-podtemy`;";
 ?>
 
-<button id="import-zadach-ucheniku">Импорт задач и вопросов - и урок и дз</button></br>
+<button id="import-zadach-ucheniku">Импорт задач и вопросов - и урок и дз</button></br></br>
+Урок</br>
+<button id="import-zadach-ucheniku-urok">Импорт задач и вопросов - урок</button></br></br>
+<button disabled id="">Сделать новый урок - текущим</button></br></br>
+Дз</br>
+<button id="import-zadach-ucheniku-dz">Импорт задач и вопросов - дз</button></br></br>
+<button disabled id="">Сделать новое ДЗ - текущим</button></br></br>
 <!--<button>Импорт задач - урок</button></br></br>-->
 <!--<button>Импорт задач - дз</button>-->
 

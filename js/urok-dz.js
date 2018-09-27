@@ -114,6 +114,10 @@ $(function(){
         iIdZadachi=$(this).attr("id").substring(8);
         sPredmet=$('#predmet').val();
 
+        c.c(sUchenik);
+        c.c(iIdZadachi);
+        c.c(sPredmet);
+
         if($(this).prop('checked'))
             iAktualen=1;
         else
@@ -214,6 +218,52 @@ $(function(){
             $('#fiks-vremya'+iTaskNumber).html(sVremyaVypolneniya);
             $("#fiks-vremya"+iTaskNumber).hide().fadeIn(200);
         }
+    });
+
+    $("#import-zadach-ucheniku-urok").click(function(e){
+
+        c.c('urok');
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
+
+        //сделать запрос на добавление
+        $.post(
+            "/post/import-zadach-ucheniku-urok.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                izadanie: iNomerZadaniya,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+        //-сделать запрос на добавление
+    });
+
+    $("#import-zadach-ucheniku-dz").click(function(e){
+
+        c.c('dz');
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
+
+        //сделать запрос на добавление
+        $.post(
+            "/post/import-zadach-ucheniku-dz.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                izadanie: iNomerZadaniya,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+        //-сделать запрос на добавление
     });
 
     $("#import-zadach-ucheniku").click(function(e){

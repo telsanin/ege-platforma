@@ -12,7 +12,7 @@ include_once $DbAccessFile;
 $sUchenik=$_POST["uchenik"];
 
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `uchenik`='".$sUchenik."';";
+$SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `resheno-pravilno`=1 AND `uchenik`='".$sUchenik."';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 
