@@ -9,7 +9,8 @@ $DbAccessFile=$_SERVER['DOCUMENT_ROOT']."/_db-info.php";
 include_once $DbAccessFile;
 
 //параметры полученного POST-запроса на обновление поля записи БД
-$sUchenik=$_POST["uchenik"];
+$sUchenik=$_POST["suchenik"];
+$sPredmet=$_POST["spredmet"];
 
 //разактуализируем решенные задачи
 //сформируем SQL-запрос

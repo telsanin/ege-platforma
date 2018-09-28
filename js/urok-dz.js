@@ -105,6 +105,7 @@ $(function(){
     $("#provereno").click(function(e) {
 
         sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
 
         //обновим таблицу uchenik-zadachi
         //поставим в поле urok 2 (новое ДЗ) везде, где стоит 3 (актуалное ДЗ)
@@ -112,7 +113,8 @@ $(function(){
         $.post(
             "/post/provereno.php",
             {
-                uchenik: sUchenik,
+                suchenik: sUchenik,
+                spredmet: sPredmet,
             },
             function(response){
                 location.reload();
