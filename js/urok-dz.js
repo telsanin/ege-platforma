@@ -69,10 +69,22 @@ $(function(){
     $(".razaktualizirovat").click(function(e) {
 
         iNomerZadaniya = $(this).parent().children('.zadanie').html();
+        sPredmet=$('#predmet').val();
         sUchenik=$('#uchenik').val();
         iIdPodtemy=$(this).attr("id").substring(17);
 
-        c.c(iNomerZadaniya);
+        //обновим таблицу uchenik-zadachi
+        $.post(
+            "/post/update-otchet.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            },
+            function(response){
+                // location.reload();
+            }
+        );
+        //--обновим таблицу uchenik-zadachi
 
         //обновим таблицу uchenik-zadachi
         $.post(
@@ -87,6 +99,7 @@ $(function(){
             }
         );
         //--обновим таблицу uchenik-zadachi
+
     });
 
     $("#provereno").click(function(e) {
