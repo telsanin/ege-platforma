@@ -43,6 +43,6 @@ if($res->data_seek(0)){
         echo "</br>";
         echo "<b>Занятие №".$iNum--."</b></br>";
         echo $row['zanyatie'];
-        echo $row['dz'] . "</br></br>";
+        echo $row['dz'] . "</br>";
     }
 }
