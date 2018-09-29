@@ -85,19 +85,19 @@ else{
 
             <li class="uk-nav-header">Математика:</li>
             <li class="uk-parent">
-                <a href="#">АРТЕМ</a>
-                <ul class="uk-nav-sub uk-active">
-                    <li><a href="/telsanin/artem/matematika/dz">Дз - проверка</a></li>
-                    <li><a href="/telsanin/artem/matematika/urok">Урок - проведение</a></li>
+                <a href="#">ЕГОР</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="/telsanin/egor/matematika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/egor/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/artem/matematika/dz">Дз</a></li>
-                    <li><a href="/artem/matematika/urok">Урок</a></li>
+                    <li><a class="uk-active" href="/egor/matematika/dz">Дз</a></li>
+                    <li><a href="/egor/matematika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/artem/matematika/5">Задание 5</a></li>
-                    <li><a href="/telsanin/artem/matematika/4">Задание 4</a></li>
-                    <li><a href="/telsanin/artem/matematika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/artem/matematika/2">Задание 2</a></li>
-                    <li><a href="/telsanin/artem/matematika/1">Задание 1</a></li>
+                    <li><a href="/telsanin/egor/matematika/5">Задание 5</a></li>
+                    <li><a href="/telsanin/egor/matematika/4">Задание 4</a></li>
+                    <li><a href="/telsanin/egor/matematika/3">Задание 3</a></li>
+                    <li><a href="/telsanin/egor/matematika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/egor/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
             <li class="uk-parent">
@@ -117,22 +117,6 @@ else{
                 </ul>
             </li>
             <li class="uk-parent">
-                <a href="#">ЕГОР</a>
-                <ul class="uk-nav-sub">
-                    <li><a href="/telsanin/egor/matematika/dz">Дз - проверка</a></li>
-                    <li><a href="/telsanin/egor/matematika/urok">Урок - проведение</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/egor/matematika/dz">Дз</a></li>
-                    <li><a href="/egor/matematika/urok">Урок</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/egor/matematika/5">Задание 5</a></li>
-                    <li><a href="/telsanin/egor/matematika/4">Задание 4</a></li>
-                    <li><a href="/telsanin/egor/matematika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/egor/matematika/2">Задание 2</a></li>
-                    <li><a href="/telsanin/egor/matematika/1">Задание 1</a></li>
-                </ul>
-            </li>
-            <li class="uk-parent">
                 <a href="#">АНДРЕЙ</a>
                 <ul class="uk-nav-sub">
                     <li><a href="/telsanin/andrei/matematika/dz">Дз - проверка</a></li>
@@ -146,6 +130,22 @@ else{
                     <li><a href="/telsanin/andrei/matematika/3">Задание 3</a></li>
                     <li><a href="/telsanin/andrei/matematika/2">Задание 2</a></li>
                     <li><a href="/telsanin/andrei/matematika/1">Задание 1</a></li>
+                </ul>
+            </li>
+            <li class="uk-parent">
+                <a href="#">АРТЕМ</a>
+                <ul class="uk-nav-sub uk-active">
+                    <li><a href="/telsanin/artem/matematika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/artem/matematika/urok">Урок - проведение</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a class="uk-active" href="/artem/matematika/dz">Дз</a></li>
+                    <li><a href="/artem/matematika/urok">Урок</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/artem/matematika/5">Задание 5</a></li>
+                    <li><a href="/telsanin/artem/matematika/4">Задание 4</a></li>
+                    <li><a href="/telsanin/artem/matematika/3">Задание 3</a></li>
+                    <li><a href="/telsanin/artem/matematika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/artem/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
             <li class="uk-parent">
@@ -164,23 +164,24 @@ else{
                     <li><a href="/telsanin/elizaveta/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
-            <li class="uk-nav-divider"></li>
-            <li class="uk-nav-header">Информатика:</li>
             <li class="uk-parent">
-                <a href="#">АРТЕМ</a>
-                <ul class="uk-nav-sub">
-                    <li><a href="/telsanin/artem/informatika/dz">Дз - проверка</a></li>
-                    <li><a href="/telsanin/artem/informatika/urok">Урок - проведение</a></li>
+                <a href="#">ВЛАДИМИР</a>
+                <ul class="uk-nav-sub uk-active">
+                    <li><a href="/telsanin/vladimir/matematika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/artem/informatika/dz">Дз</a></li>
-                    <li><a href="/artem/informatika/urok">Урок</a></li>
+                    <li><a class="uk-active" href="/vladimir/matematika/dz">Дз</a></li>
+                    <li><a href="/vladimir/matematika/urok">Урок</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/artem/informatika/11">Задание 11</a></li>
-                    <li><a href="/telsanin/artem/informatika/8">Задание 8</a></li>
-                    <li><a href="/telsanin/artem/informatika/16">Задание 16</a></li>
-                    <li><a href="/telsanin/artem/informatika/1">Задание 1</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/5">Задание 5</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/4">Задание 4</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/3">Задание 3</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/2">Задание 2</a></li>
+                    <li><a href="/telsanin/vladimir/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
+            <li class="uk-nav-divider"></li>
+            <li class="uk-nav-header">Информатика:</li>
             <li class="uk-parent">
                 <a href="#">ДАНИИЛ</a>
                 <ul class="uk-nav-sub">
@@ -194,6 +195,21 @@ else{
                     <li><a href="/telsanin/daniil/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/daniil/informatika/16">Задание 16</a></li>
                     <li><a href="/telsanin/daniil/informatika/1">Задание 1</a></li>
+                </ul>
+            </li>
+            <li class="uk-parent">
+                <a href="#">АРТЕМ</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="/telsanin/artem/informatika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/artem/informatika/urok">Урок - проведение</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a class="uk-active" href="/artem/informatika/dz">Дз</a></li>
+                    <li><a href="/artem/informatika/urok">Урок</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/artem/informatika/11">Задание 11</a></li>
+                    <li><a href="/telsanin/artem/informatika/8">Задание 8</a></li>
+                    <li><a href="/telsanin/artem/informatika/16">Задание 16</a></li>
+                    <li><a href="/telsanin/artem/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
             <li class="uk-parent">
