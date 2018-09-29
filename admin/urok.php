@@ -61,7 +61,7 @@ while ($row = $res->fetch_assoc()) {
     echo "<div>";
 
     echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
-    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
+//    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
     echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
     echo $row['text-zadachi']."</br>";
@@ -76,7 +76,7 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['urok']==2?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzvy".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='2'><label for='radio-dzvy".$row['id-zadachi']."'>в выданном дз</label>";
     echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в новом дз</label></br>";
 
-    echo "<button class='zafiksirovat-vremya' id='zafiksirovat-vremya".$row['id-zadachi']."'>Зафиксировать время</button>&nbsp;";
+//    echo "<button class='zafiksirovat-vremya' id='zafiksirovat-vremya".$row['id-zadachi']."'>Зафиксировать время</button>&nbsp;";
     echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
     echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label>";
     echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['id-podtemy']."'>разактуализировать пред подтемы (и пред задания)</button>";

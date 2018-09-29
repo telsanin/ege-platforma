@@ -37,7 +37,7 @@ $iPravilno = 0;
 $iSumPopytok = 0;
 $iSumVremya = 0;
 $iOtmechenoRazobrat = 0;
-$TextZanyatiya="<b>Задачи, которые нужно было решить:</b></br>";
+$TextZadachi="<b>Задачи, которые нужно было решить:</b></br>";
 if($res->data_seek(0))
     while ($row = $res->fetch_assoc()) {
         $iVsego++;
@@ -52,15 +52,18 @@ if($res->data_seek(0))
     }
 $iSredPopytok = round($iSumPopytok/$iReshal,1);
 $iSredVremya = (int) ($iSumVremya/$iReshal);
-$TextZanyatiya.="Решено ".$iReshal." задач из ".$iVsego."</br>";
-$TextZanyatiya.="Из них правильно: ".$iPravilno."</br>";
-$TextZanyatiya.="Среднее количество попыток: ".$iSredPopytok."</br>";
-$TextZanyatiya.="Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>";
-$TextZanyatiya.="Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."";
+$TextZadachi.="Попытался решить ".$iReshal." задач из ".$iVsego." (".round($iReshal/$iVsego*100)."%)</br>";
+$TextZadachi.="Отмечено \"не понимаю; разобрать на занятии\": ".$iOtmechenoRazobrat." (".round($iOtmechenoRazobrat/$iVsego*100)."%)</br>";
+$TextZadachi.="Решено правильно: ".$iPravilno." (".round($iPravilno/$iReshal*100)."%)</br>";
+$TextZadachi.="Среднее количество попыток: ".$iSredPopytok."</br>";
+$TextZadachi.="Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>";
+$TextZadachi.="Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."";
 //-сформируем "задачную" часть отчета
+
+$TextZanyatiya="";
 
 //добавим строку в таблицу otchet
 $iCurDate=date('d.m.Y', ((int) time()/60/60/24)*24*60*60);
-$SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `zanyatie`,`date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextVoprosy."', '".$TextZanyatiya."', '".$iCurDate."');";//выполним запрос
+$SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `zanyatie`,`date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextVoprosy.$TextZadachi."', '".$TextZanyatiya."', '".$iCurDate."');";//выполним запрос
 $res = $mysqli->query($SqlQuery);
 //-добавим строку в таблицу otchet

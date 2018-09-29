@@ -68,38 +68,37 @@ $(function(){
 
     $(".razaktualizirovat").click(function(e) {
 
-        iNomerZadaniya = $(this).parent().children('.zadanie').html();
-        sPredmet=$('#predmet').val();
         sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
         iIdPodtemy=$(this).attr("id").substring(17);
-
+        iNomerZadaniya = $(this).parent().children('.zadanie').html();
         //обновим таблицу uchenik-zadachi
         $.post(
             "/post/update-otchet.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-            },
-            function(response){
-                // location.reload();
-            }
-        );
-        //--обновим таблицу uchenik-zadachi
-
-        //обновим таблицу uchenik-zadachi
-        $.post(
-            "/post/razaktualizirovat.php",
-            {
-                suchenik: sUchenik,
                 idpodtemy: iIdPodtemy,
                 izadanie: iNomerZadaniya,
             },
             function(response){
-                location.reload();
+                //обновим таблицу uchenik-zadachi
+                $.post(
+                    "/post/razaktualizirovat.php",
+                    {
+                        suchenik: sUchenik,
+                        spredmet: sPredmet,
+                        idpodtemy: iIdPodtemy,
+                        izadanie: iNomerZadaniya,
+                    },
+                    function(response){
+                        location.reload();
+                    }
+                );
+                //--обновим таблицу uchenik-zadachi
             }
         );
         //--обновим таблицу uchenik-zadachi
-
     });
 
     $("#provereno").click(function(e) {
@@ -180,7 +179,7 @@ $(function(){
         sPredmet=$('#predmet').val();
 
         $.post(
-            "/post/zafiksirovat.php",
+            "/post/zafiksirovat-dz.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
