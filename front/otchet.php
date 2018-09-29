@@ -3,7 +3,7 @@
 $SqlQuery = "SELECT `plan-obucheniya` FROM `uchenik-predmet` WHERE `uchenik-predmet`.`uchenik`='".$sUchenik."' AND `uchenik-predmet`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)) {
-    echo "<u>Общий план обучения:</u>:</br>";
+    echo "<u>Общий план обучения:</u></br>";
     while ($row = $res->fetch_assoc()) {
         echo $row['plan-obucheniya'];
     }
@@ -13,7 +13,7 @@ echo "</br>";
 $SqlQuery = "SELECT * FROM `otchet` WHERE `otchet`.`predmet`='".$sPredmet."' AND `otchet`.`uchenik`='".$sUchenik."' ORDER BY `otchet`.`date` DESC;";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)){
-    echo "<u>Отчет по занятиям</u>:</br>";
+    echo "<u>Отчет по занятиям:</u></br>";
     $iNum=$res->num_rows;
     while ($row = $res->fetch_assoc()) {
         echo date("d.m.Y",strtotime($row['date']))." ";

@@ -34,6 +34,10 @@ else
     <script src="/js/cconsole.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
+    <style type="text/css">
+        p {margin: 0;}
+    </style>
+
     <script>
         $(function(){
             /*
