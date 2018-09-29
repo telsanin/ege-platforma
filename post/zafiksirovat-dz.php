@@ -17,8 +17,8 @@ $sUchenik=$_POST["suchenik"];
 $SqlQuery = "SELECT `text-voprosa`, `aktualno`, `otvetil` FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `uchenik-voprosy`.`predmet`='".$sPredmet."' AND (`uchenik-voprosy`.`otvetil`=1 OR `uchenik-voprosy`.`aktualno`=1) AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
 $res = $mysqli->query($SqlQuery);
 $iNumDZ = 1;
-$TextVoprosy="<b>Вопросы, к которым нужно было подготовиться:</b></br>";
 if($res->data_seek(0))
+    $TextVoprosy="<b>Вопросы, к которым нужно было подготовиться:</b></br>";
     while ($row = $res->fetch_assoc()) {
         $TextVoprosy.=$iNumDZ++.") ";
         if($row['aktualno'])
@@ -37,8 +37,8 @@ $iPravilno = 0;
 $iSumPopytok = 0;
 $iSumVremya = 0;
 $iOtmechenoRazobrat = 0;
-$TextZadachi="<b>Задачи, которые нужно было решить:</b></br>";
 if($res->data_seek(0))
+    $TextZadachi="<b>Задачи, которые нужно было решить:</b></br>";
     while ($row = $res->fetch_assoc()) {
         $iVsego++;
         if($row['kolichestvo-popytok'])
