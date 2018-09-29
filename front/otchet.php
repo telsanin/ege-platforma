@@ -1,6 +1,6 @@
 <?php
 
-$SqlQuery = "SELECT `plan-obucheniya` FROM `uchenik` WHERE `uchenik`.`uchenik`='".$sUchenik."';";
+$SqlQuery = "SELECT `plan-obucheniya` FROM `uchenik-predmet` WHERE `uchenik-predmet`.`uchenik`='".$sUchenik."' AND `uchenik-predmet`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)) {
     echo "<u>Общий план обучения:</u>:</br>";
