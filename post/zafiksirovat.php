@@ -50,7 +50,7 @@ if($res->data_seek(0))
         if($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
-$iSredPopytok = $iSumPopytok/$iReshal;
+$iSredPopytok = round($iSumPopytok/$iReshal,1);
 $iSredVremya = (int) ($iSumVremya/$iReshal);
 $TextZanyatiya.="Решено ".$iReshal." задач из ".$iVsego."</br>";
 $TextZanyatiya.="Из них правильно: ".$iPravilno."</br>";
