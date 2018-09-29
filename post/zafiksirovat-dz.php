@@ -29,7 +29,7 @@ if($res->data_seek(0))
 //-сформируем "вопросную" часть отчета
 
 //сформируем "задачную" часть отчета
-$SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2;";
+$SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 $iVsego = 0;
 $iReshal = 0;
@@ -52,7 +52,7 @@ if($res->data_seek(0))
     }
 $iSredPopytok = round($iSumPopytok/$iReshal,1);
 $iSredVremya = (int) ($iSumVremya/$iReshal);
-$TextZadachi.="Попытался решить ".$iReshal." задач из ".$iVsego." (".round($iReshal/$iVsego*100)."%)</br>";
+$TextZadachi.="Попытался решить: ".$iReshal." задач из ".$iVsego." (".round($iReshal/$iVsego*100)."%)</br>";
 $TextZadachi.="Отмечено \"не понимаю; разобрать на занятии\": ".$iOtmechenoRazobrat." (".round($iOtmechenoRazobrat/$iVsego*100)."%)</br>";
 $TextZadachi.="Решено правильно: ".$iPravilno." (".round($iPravilno/$iReshal*100)."%)</br>";
 $TextZadachi.="Среднее количество попыток: ".$iSredPopytok."</br>";
