@@ -98,7 +98,7 @@ while ($row = $res->fetch_assoc()) {
 
         echo "<div style='display: none;' id='result".$row['id-zadachi']."'></div>";
         echo "<div style='display: none;' id='kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>все плохо</label></div>";
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не понимаю; разобрать на занятии</label></div>";
     }
     if($row['kolichestvo-popytok']>0 && $row['resheno-pravilno']){
         echo "</br><span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span>";
@@ -110,7 +110,7 @@ while ($row = $res->fetch_assoc()) {
         echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
         echo "</br><span id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</span>";
         echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>все плохо</label></div>";
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не понимаю; разобрать на занятии</label></div>";
     }
 //    echo "</br>";
 }

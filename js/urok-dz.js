@@ -164,11 +164,49 @@ $(function(){
         //обновим поле aktualno таблицы uchenik-voprosy
         //!используем уже готовый запрос!
         $.post(
-            "/post/rasskazal.php",
+            "/post/vopros-aktualen.php",
             {
                 uchenik: sUchenik,
                 ivoprosnumber: iVoprosNumber,
                 irasskazal: iAktualen,
+            }
+        );
+        //--обновим поле aktualno таблицы uchenik-voprosy
+    });
+
+    $("#zafiksirovat").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+
+        $.post(
+            "/post/zafiksirovat.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            }
+        );
+        //--обновим поле aktualno таблицы uchenik-voprosy
+    });
+
+    $(".otvetil").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        iVoprosNumber=$(this).attr("id").substring(7);
+
+        if($(this).prop('checked'))
+            iAktualen=1;
+        else
+            iAktualen=0;
+
+        //обновим поле aktualno таблицы uchenik-voprosy
+        //!используем уже готовый запрос!
+        $.post(
+            "/post/rasskazal.php",
+            {
+                uchenik: sUchenik,
+                ivoprosnumber: iVoprosNumber,
+                iaktualno: iAktualen,
             }
         );
         //--обновим поле aktualno таблицы uchenik-voprosy

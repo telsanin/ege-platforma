@@ -27,9 +27,13 @@ while ($row = $res->fetch_assoc()) {
     echo $iNumDZ++.") ";
 //    echo $row['text-voprosa'];
 //    echo "<input class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>рассказал</label>";
-    echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
+    echo "<input ".($row['aktualno']==1?"checked":"")." class='otvetil' id='otvetil".$row['id-voprosa']."' type='checkbox'/><label for='otvetil".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
     echo "</br>";
 }
+echo "</br>";
+
+echo "<button id='zafiksirovat'>Зафиксировать для статистики</button></br></br>";
+echo "<button id='provereno'>Разактуализировать правильно решенные задачи</button></br></br>";
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
@@ -106,5 +110,3 @@ while ($row = $res->fetch_assoc()) {
     //приходится вычитать 3 часа из-за часовых поясов
 
 ?>
-
-<button id="provereno">Проверено</button></br></br>
