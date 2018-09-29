@@ -1,5 +1,7 @@
 <?php
 
+echo "Вернуться в <a href='/".$sUchenik."/".$sPredmet."/dz'>Домашнее задание</a></br></br>";
+
 $SqlQuery = "SELECT `plan-obucheniya` FROM `uchenik-predmet` WHERE `uchenik-predmet`.`uchenik`='".$sUchenik."' AND `uchenik-predmet`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)) {

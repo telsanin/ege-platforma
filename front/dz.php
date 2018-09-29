@@ -5,7 +5,7 @@
 
 <?php
 
-echo "<a href='/".$sUchenik."/".$sPredmet."/stat'>Отчет по занятиям</a></br></br>";
+echo "<a href='/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br></br>";
 
 if($sUchenik=='artem')
     if($sPredmet=='matematika')
