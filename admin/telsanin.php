@@ -21,7 +21,7 @@
 
 <?php
 
-$SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchenik`, `predmet`;";
+$SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchenik`, `predmet` ORDER BY `predmet` DESC;";
 $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
@@ -53,20 +53,18 @@ if($res1->data_seek(0)) {
                     $iSredVremya = (int)($iSumVremya / $iReshal);
                     echo "Попытался решить: " . round($iReshal / $iVsego * 100) . "% (" . $iReshal . " задач из " . $iVsego . ")</br>";
                     echo "Отмечено \"все плохо\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
-                    if ($iReshal) {
-                        echo "Решено правильно: " . round($iPravilno / $iReshal * 100) . "% (" . $iPravilno . ")</br>";
-                        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-                        echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-                        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
-                    } else {
-                        echo "Решено правильно: -</br>";
-                        echo "Среднее количество попыток: -</br>";
-                        echo "Среднее время выполнения: -</br>";
-                        echo "Общее время выполнения: -</br></br>";
-                    }
+                    echo "Решено правильно: " . round($iPravilno / $iReshal * 100) . "% (" . $iPravilno . ")</br>";
+                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
+                    echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
+                    echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+                } else {
+                    echo "Попытался решить: -</br>";
+                    echo "Отмечено \"все плохо\": -</br>";
+                    echo "Решено правильно: -</br>";
+                    echo "Среднее количество попыток: -</br>";
+                    echo "Среднее время выполнения: -</br>";
+                    echo "Общее время выполнения: -</br></br>";
                 }
-                else
-                    echo "</br>";
             }
         }
     }
