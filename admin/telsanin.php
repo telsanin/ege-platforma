@@ -58,7 +58,7 @@ if($res1->data_seek(0)) {
                     echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
                     echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
                 } else {
-                    echo "-</br></br>";
+                    echo "-</br>";
                 }
             }
         }
