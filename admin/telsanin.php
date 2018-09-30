@@ -16,7 +16,7 @@
     <tr>	<td>	18:10	</td><td>		</td><td>		</td><td>		</td><td>	Артем	</td><td>	Даниил	</td>	</tr>
     <tr>	<td>	19:15	</td><td>		</td><td>		</td><td>		</td><td>	Артем	</td><td>		</td>	</tr>
     <tr>	<td>	20:20	</td><td>		</td><td>		</td><td>		</td><td>	Никита	</td><td>		</td>	</tr>
-    </tbody></table>
+    </tbody></table></br>
 
 
 <?php
@@ -25,47 +25,50 @@ $SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchen
 $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
-        echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
-        //сформируем "задачную" часть отчета
-        $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='" . $row1['predmet'] . "';";
-        $res = $mysqli->query($SqlQuery);
-        $iVsego = 0;
-        $iReshal = 0;
-        $iPravilno = 0;
-        $iSumPopytok = 0;
-        $iSumVremya = 0;
-        $iOtmechenoRazobrat = 0;
-        if ($res->data_seek(0)) {
-            //    echo "<b>Насколько сделано ДЗ:</b></br>";
-            while ($row = $res->fetch_assoc()) {
-                $iVsego++;
-                if ($row['kolichestvo-popytok'])
-                    $iReshal++;
-                if ($row['resheno-pravilno'])
-                    $iPravilno++;
-                $iSumPopytok += $row['kolichestvo-popytok'];
-                $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
-                if ($row['razobrat-na-zanyatii'])
-                    $iOtmechenoRazobrat++;
-            }
-            if($iReshal){
-                $iSredPopytok = round($iSumPopytok / $iReshal, 1);
-                $iSredVremya = (int)($iSumVremya / $iReshal);
-                echo "Попытался решить: " . round($iReshal / $iVsego * 100) . "% (" . $iReshal . " задач из " . $iVsego . ")</br>";
-                echo "Отмечено \"все плохо\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
-                if ($iReshal) {
-                    echo "Решено правильно: " . round($iPravilno / $iReshal * 100) . "% (" . $iPravilno . ")</br>";
-                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-                    echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-                    echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
-                } else {
-                    echo "Решено правильно: -</br>";
-                    echo "Среднее количество попыток: -</br>";
-                    echo "Среднее время выполнения: -</br>";
-                    echo "Общее время выполнения: -</br></br>";
+        if($row1['uchenik']<>"test"){
+            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
+            //сформируем "задачную" часть отчета
+            $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='" . $row1['predmet'] . "';";
+            $res = $mysqli->query($SqlQuery);
+            $iVsego = 0;
+            $iReshal = 0;
+            $iPravilno = 0;
+            $iSumPopytok = 0;
+            $iSumVremya = 0;
+            $iOtmechenoRazobrat = 0;
+            if ($res->data_seek(0)) {
+                while ($row = $res->fetch_assoc()) {
+                    $iVsego++;
+                    if ($row['kolichestvo-popytok'])
+                        $iReshal++;
+                    if ($row['resheno-pravilno'])
+                        $iPravilno++;
+                    $iSumPopytok += $row['kolichestvo-popytok'];
+                    $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
+                    if ($row['razobrat-na-zanyatii'])
+                        $iOtmechenoRazobrat++;
                 }
+                if ($iReshal) {
+                    $iSredPopytok = round($iSumPopytok / $iReshal, 1);
+                    $iSredVremya = (int)($iSumVremya / $iReshal);
+                    echo "Попытался решить: " . round($iReshal / $iVsego * 100) . "% (" . $iReshal . " задач из " . $iVsego . ")</br>";
+                    echo "Отмечено \"все плохо\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
+                    if ($iReshal) {
+                        echo "Решено правильно: " . round($iPravilno / $iReshal * 100) . "% (" . $iPravilno . ")</br>";
+                        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
+                        echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
+                        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+                    } else {
+                        echo "Решено правильно: -</br>";
+                        echo "Среднее количество попыток: -</br>";
+                        echo "Среднее время выполнения: -</br>";
+                        echo "Общее время выполнения: -</br></br>";
+                    }
+                }
+                else
+                    echo "</br>";
             }
         }
     }
 }
-    //-сформируем "задачную" часть отчета
+//-сформируем "задачную" часть отчета
