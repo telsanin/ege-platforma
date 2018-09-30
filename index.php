@@ -10,7 +10,7 @@ $sUrl = $_SERVER["REQUEST_URI"];
 if( $sUrl!="/" ) {
     $sUrl=substr($sUrl,1,strlen($sUrl)-1);
 }
-/*если url содержит telsanin, то это админка
+/*если url содержит teltsanin, то это админка
 если нет, то это лицевая часть для учеников и родителей*/
 
 if (substr_count($sUrl, "telsanin")){

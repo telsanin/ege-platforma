@@ -79,7 +79,7 @@ while ($row = $res->fetch_assoc()) {
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
     if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno']))
-        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>Все плохо</label></div>";
+        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>Не понимаю; разобрать на занятии</label></div>";
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
     if ($row['kolichestvo-popytok'] > 0)

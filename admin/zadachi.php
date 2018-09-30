@@ -55,6 +55,11 @@ while ($row = $res->fetch_assoc()) {
     echo "<b>Ответ:</b></br>";
     echo "<textarea class='pravilnyi-otvet' id='pravilnyi-otvet".$row['id-zadachi']."' cols='42' rows='1'>".$row['pravilnyi-otvet']."</textarea>";
 //    echo "<span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
+
+//    $filename=$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg";
+//    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
+//        echo "<img src='/img/".$filename."'/></br>";
+
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";

@@ -82,6 +82,10 @@ while ($row = $res->fetch_assoc()) {
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
     echo $row['text-zadachi']."</br>";
+
+//    $filename =$sPredmet."-".$sZadanie."-".$row['id-zadachi'].".jpg";
+//    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
+//        echo "<img src='/img/".$filename."'/></br>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 
