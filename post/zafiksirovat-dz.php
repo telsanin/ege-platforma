@@ -61,7 +61,6 @@ $TextZadachi.="Общее время выполнения: ".gmdate("H:i:s", $iS
 //-сформируем "задачную" часть отчета
 
 $TextZanyatiya="";
-
 //добавим строку в таблицу otchet
 $iCurDate=date('d.m.Y', ((int) time()/60/60/24)*24*60*60);
 $SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `zanyatie`,`date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextVoprosy.$TextZadachi."', '".$TextZanyatiya."', '".$iCurDate."');";//выполним запрос
