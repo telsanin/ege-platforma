@@ -40,12 +40,19 @@ if($res->data_seek(0)) {
     }
     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
     $iSredVremya = (int)($iSumVremya / $iReshal);
-    echo "Попытался решить: " . $iReshal . " задач из " . $iVsego . " (" . round($iReshal / $iVsego * 100) . "%)</br>";
-    echo "Отмечено \"не понимаю; разобрать на занятии\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
-    echo "Решено правильно: " . $iPravilno . " (" . round($iPravilno / $iReshal * 100) . "%)</br>";
-    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-    echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-    echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+    echo "Попытался решить: ".round($iReshal / $iVsego * 100)."% (".$iReshal." задач из ".$iVsego. ")</br>";
+    echo "Отмечено \"все плохо\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
+    if ($iReshal) {
+        echo "Решено правильно: ".round($iPravilno / $iReshal * 100)."% (".$iPravilno.")</br>";
+        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
+        echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
+        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+    } else {
+        echo "Решено правильно: -</br>";
+        echo "Среднее количество попыток: -</br>";
+        echo "Среднее время выполнения: -</br>";
+        echo "Общее время выполнения: -</br></br>";
+    }
 }
 //-сформируем "задачную" часть отчета
 
