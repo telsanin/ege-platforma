@@ -62,6 +62,8 @@ else{
                     <li class="uk-parent">
                         <div class="uk-nav-header">Математика</div>
                         <ul class="uk-nav-sub">
+                            <li><a href="/telsanin/zadachi/matematika/7">Задание 7</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/6">Задание 6</a></li>
                             <li><a href="/telsanin/zadachi/matematika/5">Задание 5</a></li>
                             <li><a href="/telsanin/zadachi/matematika/4">Задание 4</a></li>
                             <li><a href="/telsanin/zadachi/matematika/3">Задание 3</a></li>
@@ -72,6 +74,8 @@ else{
                     <li class="uk-parent">
                         <div class="uk-nav-header">Информатика</div>
                         <ul class="uk-nav-sub">
+                            <li><a href="/telsanin/zadachi/informatika/20">Задание 20</a></li>
+                            <li><a href="/telsanin/zadachi/informatika/19">Задание 19</a></li>
                             <li><a href="/telsanin/zadachi/informatika/11">Задание 11</a></li>
                             <li><a href="/telsanin/zadachi/informatika/8">Задание 8</a></li>
                             <li><a href="/telsanin/zadachi/informatika/16">Задание 16</a></li>
@@ -164,22 +168,22 @@ else{
                     <li><a href="/telsanin/elizaveta/matematika/1">Задание 1</a></li>
                 </ul>
             </li>
-            <li class="uk-parent">
-                <a href="#">ВЛАДИМИР</a>
-                <ul class="uk-nav-sub uk-active">
-                    <li><a href="/telsanin/vladimir/matematika/dz">Дз - проверка</a></li>
-                    <li><a href="/telsanin/vladimir/matematika/urok">Урок - проведение</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/vladimir/matematika/dz">Дз</a></li>
-                    <li><a href="/vladimir/matematika/urok">Урок</a></li>
-                    <li class="uk-nav-divider"></li>
-                    <li><a href="/telsanin/vladimir/matematika/5">Задание 5</a></li>
-                    <li><a href="/telsanin/vladimir/matematika/4">Задание 4</a></li>
-                    <li><a href="/telsanin/vladimir/matematika/3">Задание 3</a></li>
-                    <li><a href="/telsanin/vladimir/matematika/2">Задание 2</a></li>
-                    <li><a href="/telsanin/vladimir/matematika/1">Задание 1</a></li>
-                </ul>
-            </li>
+        <li class="uk-parent">
+            <a href="#">ВЛАДИМИР</a>
+            <ul class="uk-nav-sub uk-active">
+                <li><a href="/telsanin/vladimir/matematika/dz">Дз - проверка</a></li>
+                <li><a href="/telsanin/vladimir/matematika/urok">Урок - проведение</a></li>
+                <li class="uk-nav-divider"></li>
+                <li><a class="uk-active" href="/vladimir/matematika/dz">Дз</a></li>
+                <li><a href="/vladimir/matematika/urok">Урок</a></li>
+                <li class="uk-nav-divider"></li>
+                <li><a href="/telsanin/vladimir/matematika/5">Задание 5</a></li>
+                <li><a href="/telsanin/vladimir/matematika/4">Задание 4</a></li>
+                <li><a href="/telsanin/vladimir/matematika/3">Задание 3</a></li>
+                <li><a href="/telsanin/vladimir/matematika/2">Задание 2</a></li>
+                <li><a href="/telsanin/vladimir/matematika/1">Задание 1</a></li>
+            </ul>
+        </li>
             <li class="uk-nav-divider"></li>
             <li class="uk-nav-header">Информатика:</li>
             <li class="uk-parent">
