@@ -61,8 +61,13 @@ else {
     <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
         <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav>
 
+            <li class="uk-nav-header">
+                <a href="/telsanin">расписание</a>
+            </li>
+            <li class="uk-nav-divider"></li>
+
             <li class="uk-parent">
-                <a href="#">ЗАДАЧИ</a>
+            <a href="#">ЗАДАЧИ</a>
                 <ul class="uk-nav-sub" data-uk-nav">
                     <li class="uk-parent">
                         <div class="uk-nav-header">Математика</div>
