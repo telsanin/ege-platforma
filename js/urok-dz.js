@@ -4,6 +4,28 @@
 
 $(function(){
 
+    $("#kommentarii").focusout(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+        sKommentarii=$(this).val();
+
+        c.c(sUchenik);
+        c.c(sPredmet);
+        c.c(sKommentarii);
+
+        //обновим таблицу uchenik-predmet
+        $.post(
+            "/post/update-kommentarii.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                skommentarii: sKommentarii,
+            }
+        );
+        //--обновим таблицу uchenik-zadachi
+    });
+
     $(".propustil").click(function(e) {
 
         sId=$(this).attr("id");

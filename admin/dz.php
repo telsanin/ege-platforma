@@ -38,10 +38,10 @@ if($res->data_seek(0)) {
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
-    $iSredPopytok = round($iSumPopytok / $iReshal, 1);
-    $iSredVremya = (int)($iSumVremya / $iReshal);
     echo "Всего задачо: ".$iVsego."</br>";
     if ($iReshal) {
+        $iSredPopytok = round($iSumPopytok / $iReshal, 1);
+        $iSredVremya = (int)($iSumVremya / $iReshal);
         echo "Попытался решить: ".$iReshal." </br>";
         echo "Отмечено \"разобрать\": ".$iOtmechenoRazobrat."</br>";
         echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
@@ -58,6 +58,14 @@ if($res->data_seek(0)) {
     }
 }
 //-сформируем "задачную" часть отчета
+
+$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$res = $mysqli->query($SqlQuery);
+if($res->data_seek(0)){
+    while ($row = $res->fetch_assoc()) {
+        echo "<textarea cols='42' rows='3' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br></br>";
+    }
+}
 
 
 echo "<p><b>Вопросы</b>:</p>";
@@ -78,7 +86,7 @@ while ($row = $res->fetch_assoc()) {
 echo "</br>";
 
 echo "<button id='zafiksirovat'>Зафиксировать для статистики</button></br></br>";
-echo "<button id='provereno'>Разактуализировать правильно решенные задачи</button></br></br>";
+echo "<button id='provereno'>Правильно решенные - разактуализировать, новые сделать текущими</button></br></br>";
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";

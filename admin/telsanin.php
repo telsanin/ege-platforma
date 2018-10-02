@@ -26,15 +26,7 @@ $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
         if($row1['uchenik']<>"test"){
-            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b>";
-            echo "&nbsp;&nbsp";
-            echo "Пропустил: ";
-            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-vchera'>Вчера</button>";
-            echo "&nbsp;&nbsp";
-            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-segodnya'>Сегодня</button>";
-            echo "&nbsp;&nbsp";
-            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-zavtra'>Завтра</button>";
-            echo "</br>";
+            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
             //сформируем "задачную" часть отчета
             $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='" . $row1['predmet'] . "';";
             $res = $mysqli->query($SqlQuery);
@@ -62,14 +54,21 @@ if($res1->data_seek(0)) {
                     echo "Всего было задано: ".$iVsego."</br>";
                     echo "Попытался решить: " .$iReshal."</br>";
                     echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
-                    echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100).")%</br>";
+                    echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
                     echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
                     echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-                    echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+                    echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
                 } else {
                     echo "-</br>";
                 }
             }
+            echo "Пропустил: ";
+            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-vchera'>Вчера</button>";
+            echo "&nbsp;&nbsp";
+            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-segodnya'>Сегодня</button>";
+            echo "&nbsp;&nbsp";
+            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-zavtra'>Завтра</button>";
+            echo "</br></br>";
         }
     }
 }
