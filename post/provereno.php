@@ -14,13 +14,13 @@ $sPredmet=$_POST["spredmet"];
 
 //разактуализируем правильно решенные задачи
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `resheno-pravilno`=1 AND `uchenik`='".$sUchenik."';";
+$SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `resheno-pravilno`=1 AND `uchenik`='".$sUchenik."' AND `predmet`='.$sPredmet.';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 
 //превратим новое дз в текущее дз
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi` SET `urok`=2 WHERE `urok`='3' AND `uchenik`='".$sUchenik."';";
+$SqlQuery = "UPDATE `uchenik-zadachi` SET `urok`=2 WHERE `urok`='3' AND `uchenik`='".$sUchenik."' AND `predmet`='.$sPredmet.';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 

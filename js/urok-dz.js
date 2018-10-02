@@ -4,6 +4,58 @@
 
 $(function(){
 
+    $(".propustil").click(function(e) {
+
+        sId=$(this).attr("id");
+
+        aId = sId.split('-');
+
+        sUchenik=aId[0];
+        sPredmet=aId[1];
+        sKogda=aId[2];
+
+        //секунд
+        iDate=Math.round(Date.now()/1000);
+
+        switch (sKogda) {
+            case 'vchera':
+                iDate-=60*60*24;
+                break;
+            case 'zavtra':
+                iDate+=60*60*24;
+                break;
+        }
+
+        //секунд
+        dDate=new Date(iDate*1000)
+
+        sDay=String(dDate.getDate());
+        if(sDay.length==1)
+            sDay="0"+sDay;
+        sMonth=String((dDate.getMonth()+1));
+        if(sMonth.length==1)
+            sMonth="0"+sMonth;
+        sYear=dDate.getFullYear();
+
+        sDate = sDay + "." + sMonth + "." + sYear;
+
+        //вызнвать по AJAX: добавить строку в таблицу otchet
+        //ученик предмет дата
+        $.post(
+            "/post/update-otchet-propustil.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                sdate: sDate,
+            }
+        );
+
+        //вызнвать по AJAX: обновить строку в таблице uchenik-predmet
+        //propuskov++
+
+
+    });
+
     $("#insert-vopros-ucheniku").click(function(e){
         sPredmet = $('#predmet').val()
         iNomerZadaniya = $('#zadanie').val()
@@ -185,7 +237,6 @@ $(function(){
                 spredmet: sPredmet,
             }
         );
-        //--обновим поле aktualno таблицы uchenik-voprosy
     });
 
     $(".otvetil").click(function(e) {

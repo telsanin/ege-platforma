@@ -40,14 +40,17 @@ if($res->data_seek(0)) {
     }
     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
     $iSredVremya = (int)($iSumVremya / $iReshal);
-    echo "Попытался решить: ".round($iReshal / $iVsego * 100)."% (".$iReshal." задач из ".$iVsego. ")</br>";
-    echo "Отмечено \"все плохо\": " . $iOtmechenoRazobrat . " (" . round($iOtmechenoRazobrat / $iVsego * 100) . "%)</br>";
+    echo "Всего задачо: ".$iVsego."</br>";
     if ($iReshal) {
-        echo "Решено правильно: ".round($iPravilno / $iReshal * 100)."% (".$iPravilno.")</br>";
+        echo "Попытался решить: ".$iReshal." </br>";
+        echo "Отмечено \"разобрать\": ".$iOtmechenoRazobrat."</br>";
+        echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
         echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
         echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
         echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
     } else {
+        echo "Попытался решить: -</br>";
+        echo "Отмечено \"разобрать\": -</br>";
         echo "Решено правильно: -</br>";
         echo "Среднее количество попыток: -</br>";
         echo "Среднее время выполнения: -</br>";
@@ -69,6 +72,7 @@ while ($row = $res->fetch_assoc()) {
 //    echo $row['text-voprosa'];
 //    echo "<input class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>рассказал</label>";
     echo "<input ".($row['aktualno']==1?"checked":"")." class='otvetil' id='otvetil".$row['id-voprosa']."' type='checkbox'/><label for='otvetil".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
+//    echo "<input ".($row['aktualno']==1?"checked":"")." class='otvetil' id='otvetil".$row['id-voprosa']."' type='checkbox'/>";
     echo "</br>";
 }
 echo "</br>";
