@@ -26,7 +26,10 @@ $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
         if($row1['uchenik']<>"test"){
-            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
+//            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
+
+            echo "<a href='/telsanin/".$row1['uchenik']."/".$row1['predmet']."/dz'>".$row1['uchenik']."-".$row1['predmet']."</a></b></br>";
+
             //сформируем "задачную" часть отчета
             $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='" . $row1['predmet'] . "';";
             $res = $mysqli->query($SqlQuery);
