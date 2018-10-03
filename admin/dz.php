@@ -38,7 +38,7 @@ if($res->data_seek(0)) {
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
-    echo "Всего задачо: ".$iVsego."</br>";
+    echo "Всего задач: ".$iVsego."</br>";
     if ($iReshal) {
         $iSredPopytok = round($iSumPopytok / $iReshal, 1);
         $iSredVremya = (int)($iSumVremya / $iReshal);
@@ -47,14 +47,14 @@ if($res->data_seek(0)) {
         echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
         echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
         echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br></br>";
+        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
     } else {
         echo "Попытался решить: -</br>";
         echo "Отмечено \"разобрать\": -</br>";
         echo "Решено правильно: -</br>";
         echo "Среднее количество попыток: -</br>";
         echo "Среднее время выполнения: -</br>";
-        echo "Общее время выполнения: -</br></br>";
+        echo "Общее время выполнения: -</br>";
     }
 }
 //-сформируем "задачную" часть отчета
@@ -63,10 +63,9 @@ $SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz` FROM `uchenik-predmet` WHERE `
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)){
     while ($row = $res->fetch_assoc()) {
-        echo "<textarea cols='42' rows='3' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br></br>";
+        echo "<textarea cols='42' rows='3' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br>";
     }
 }
-
 
 echo "<p><b>Вопросы</b>:</p>";
 
@@ -86,7 +85,7 @@ while ($row = $res->fetch_assoc()) {
 echo "</br>";
 
 echo "<button id='zafiksirovat'>Зафиксировать для статистики</button></br></br>";
-echo "<button id='provereno'>Правильно решенные - разактуализировать, новые сделать текущими</button></br></br>";
+echo "<button id='provereno'>Правильно решенные - разактуализировать, новые сделать текущими; очистить комментарий</button></br></br>";
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
