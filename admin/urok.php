@@ -59,6 +59,7 @@ while ($row = $res->fetch_assoc()) {
     //-добавление горизонтальной полосы, разделяющией разные задания
 
     echo "<div>";
+    echo ($row['zakonchili-na-etom']?"<b>":"");
 
     echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
@@ -81,6 +82,7 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label>";
     echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['id-podtemy']."'>разактуализировать пред подтемы (и пред задания)</button>";
 
+    echo ($row['zakonchili-na-etom']?"</b>":"");
     echo "</div>";
 
 }

@@ -22,21 +22,35 @@ else {
     }
     //http://ege-platforma.local/telsanin/egor/matematika/1
     else{
-        //http://ege-platforma.local/telsanin/egor/matematika/1/urok
+        //http://ege-platforma.local/telsanin/egor/matematika/urok
         if($sParametr4 == "urok"){
             $sUchenik=$sParametr2;
             $sPredmet=$sParametr3;
             $iNomerZadaniya=$sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT']."/admin/urok.php";
         }
-        //http://ege-platforma.local/telsanin/egor/matematika/1/dz
+        elseif($sParametr4 == "urok-uchenika"){
+            //http://ege-platforma.local/telsanin/egor/matematika/urok-uchenika
+            $sUchenik=$sParametr2;
+            $sPredmet=$sParametr3;
+            $iNomerZadaniya=$sParametr4;
+            include_once $_SERVER['DOCUMENT_ROOT']."/front/urok.php";
+        }
+        //http://ege-platforma.local/telsanin/egor/matematika/dz
         elseif($sParametr4 == "dz"){
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;
             $iNomerZadaniya = $sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/dz.php";
         }
-        elseif($sParametr5 == "test"){
+        //http://ege-platforma.local/telsanin/egor/matematika/dz-uchenika
+        elseif($sParametr4 == "dz-uchenika"){
+            $sUchenik = $sParametr2;
+            $sPredmet = $sParametr3;
+            $iNomerZadaniya = $sParametr4;
+            include_once $_SERVER['DOCUMENT_ROOT'] . "/front/dz.php";
+        }
+        elseif($sParametr2 == "test"){
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;
             $iNomerZadaniya = $sParametr4;
@@ -104,8 +118,8 @@ else {
                     <li><a href="/telsanin/egor/matematika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/egor/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/egor/matematika/dz">Дз</a></li>
-                    <li><a href="/egor/matematika/urok">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/egor/matematika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/egor/matematika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/egor/matematika/5">Задание 5</a></li>
                     <li><a href="/telsanin/egor/matematika/4">Задание 4</a></li>

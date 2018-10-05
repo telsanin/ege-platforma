@@ -44,7 +44,53 @@ if($res->data_seek(0)){
 }
 echo "</br>";
 //Задачи:
-echo "<p><b>Задачи</b>:</p>";
+echo "<p><b>Задачи</b>:</p></br>";
+
+
+//сформируем "задачную" часть отчета
+$SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."';";
+$res = $mysqli->query($SqlQuery);
+$iVsego = 0;
+$iReshal = 0;
+$iPravilno = 0;
+$iSumPopytok = 0;
+$iSumVremya = 0;
+$iOtmechenoRazobrat = 0;
+if($res->data_seek(0)) {
+    while ($row = $res->fetch_assoc()) {
+        $iVsego++;
+        if ($row['kolichestvo-popytok'])
+            $iReshal++;
+        if ($row['resheno-pravilno'])
+            $iPravilno++;
+        $iSumPopytok += $row['kolichestvo-popytok'];
+        $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
+        if ($row['razobrat-na-zanyatii'])
+            $iOtmechenoRazobrat++;
+    }
+    echo "Всего задач: ".$iVsego."</br>
+
+";
+    if ($iReshal) {
+        $iSredPopytok = round($iSumPopytok / $iReshal, 1);
+        $iSredVremya = (int)($iSumVremya / $iReshal);
+        echo "Попытался решить: ".$iReshal." </br>";
+        echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+        echo "Отмечено \"разобрать\": ".$iOtmechenoRazobrat."</br>";
+        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
+        echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
+        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya);
+    } else {
+        echo "Попытался решить: -</br>";
+        echo "Решено правильно: -</br>";
+        echo "Отмечено \"разобрать\": -</br>";
+        echo "Среднее количество попыток: -</br>";
+        echo "Среднее время выполнения: -</br>";
+        echo "Общее время выполнения: -";
+    }
+}
+//-сформируем "задачную" часть отчета
+
 
 $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
 if($sParametr4=="sort")

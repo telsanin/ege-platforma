@@ -18,12 +18,6 @@ $SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `res
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 
-//превратим новое дз в текущее дз
-//сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi` SET `urok`=2 WHERE `urok`='3' AND `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
-//выполним запрос
-$res = $mysqli->query($SqlQuery);
-
 //очистим поле `kommentarii-k-tekuschemu-dz`
 //сформируем SQL-запрос
 $SqlQuery = "UPDATE `uchenik-predmet` SET `kommentarii-k-tekuschemu-dz`='' WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";

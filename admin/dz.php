@@ -67,6 +67,9 @@ if($res->data_seek(0)){
     }
 }
 
+echo "</br>";
+echo "<button id='zafiksirovat'>Задачи -> в отчет (создать)</button></br></br>";
+
 echo "<p><b>Вопросы</b>:</p>";
 
 //Вопросы:
@@ -84,8 +87,9 @@ while ($row = $res->fetch_assoc()) {
 }
 echo "</br>";
 
-echo "<button id='zafiksirovat'>Зафиксировать для статистики</button></br></br>";
-echo "<button id='provereno'>Правильно решенные - разактуализировать, новые сделать текущими; очистить комментарий</button></br></br>";
+echo "<button id='voprosy-v-otchet'>Вопросы -> в отчет (обновить)</button></br></br>";
+echo "<button id='provereno'>Правильно решенные - разактуализировать, очистить комментарий</button></br></br>";
+echo "<button id='novye-sdelat-tekuschimi'>Новые сделать текущими</button></br></br>";
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";

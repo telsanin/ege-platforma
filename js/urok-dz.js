@@ -196,6 +196,27 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
+    $("#novye-sdelat-tekuschimi").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+
+        //обновим таблицу uchenik-zadachi
+        //поставим в поле urok 2 (новое ДЗ) везде, где стоит 3 (актуалное ДЗ)
+        //поставим в поле aktualno=0
+        $.post(
+            "/post/novye-sdelat-tekuschimi.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+        //--обновим таблицу uchenik-zadachi
+    });
+
     $(".zadacha-uchenika-aktualna").click(function(e) {
 
         sUchenik=$('#uchenik').val();
@@ -254,6 +275,20 @@ $(function(){
 
         $.post(
             "/post/zafiksirovat-dz.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            }
+        );
+    });
+
+    $("#voprosy-v-otchet").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+
+        $.post(
+            "/post/voprosy-v-otchet.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
@@ -434,13 +469,26 @@ $(function(){
             $(this).parent().css({'color': 'blue'});
             iVUrok=1;
         }
+        c.c($(this).attr("id"));
+        c.c($(this).attr("id").substring(10));
+        c.c('#reshal-'+$(this).attr("id").substring(10));
+        c.c($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'));
+        c.c($(this).parent().css('color'));
         if($(this).attr('id').indexOf("dzdz")>0){
-            $(this).parent().css({'color': 'brown'});
+            if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
+                $(this).parent().css({'color': 'Green'});
+            else
+                $(this).parent().css({'color': 'LimeGreen'});
             iVUrok=3;
+            c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzvy")>0){
-            $(this).parent().css({'color': 'red'});
+            if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
+                $(this).parent().css({'color': 'IndianRed'});
+            else
+                $(this).parent().css({'color': 'Red'});
             iVUrok=2;
+            c.c($(this).parent().css('color'));
         }
 
         //сделать запрос на обновление поля urok таблицы zadacha

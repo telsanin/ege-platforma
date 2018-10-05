@@ -54,8 +54,22 @@ while ($row = $res->fetch_assoc()) {
 
     if($row['urok']==0) echo "<div style='color: black;'>";
     if($row['urok']==1) echo "<div style='color: blue;'>";
-    if($row['urok']==3) echo "<div style='color: brown;'>";
-    if($row['urok']==2) echo "<div style='color: red;'>";
+    if($row['urok']==2)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: IndianRed;'>";
+        else
+            echo "<div style='color: Red;'>";
+
+    if($row['urok']==3)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: Green;'>";
+        else
+            echo "<div style='color: LimeGreen;'>";
+
+
+
+    echo ($row['zakonchili-na-etom']?"<b>":"");
+
 
     if($row['s-moimi-ciframi'])
         echo "С моими цифрами</br>";
@@ -74,9 +88,13 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в новом дз</label></br>";
 
     echo "</div>";
+    echo ($row['zakonchili-na-etom']?"</b>":"");
 
     echo "<button>Вверх</button>&nbsp;&nbsp;<button>Вниз</button></br>";
-    echo "<input type='checkbox' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label></br>";
+
+    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
+
+    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label></br>";
     echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br>";
 }
 
