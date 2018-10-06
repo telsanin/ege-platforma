@@ -11,11 +11,10 @@ include_once $DbAccessFile;
 //параметры полученного POST-запроса на обновление поля записи БД
 $sUchenik=$_POST["suchenik"];
 $sPredmet=$_POST["spredmet"];
-$iIdPodtemy=$_POST["idpodtemy"];
-$iNomerZadaniya=$_POST["izadanie"];
+$iSkrytReshennye=$_POST["iskrytreshennye"];
 
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi`, `zadacha` SET `uchenik-zadachi`.`aktualno`=0, `uchenik-zadachi`.`kolichestvo-popytok`=1, `zakonchili-na-etom`=0 WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-podtemy`<".$iIdPodtemy."));";
+$SqlQuery = "UPDATE `uchenik-predmet` SET `skryt-reshennye`=".$iSkrytReshennye." WHERE `uchenik`='".$sUchenik."' AND `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 //отладочные строки

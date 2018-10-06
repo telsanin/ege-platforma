@@ -1,4 +1,14 @@
+<style type="text/css">
+    table{
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid lightgray;
+    }
+</style>
+
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
+<input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <!--<input type="hidden" id="begin-time" value="--><?//=time()*1000?><!--"></input>-->
 <input type="hidden" id="end-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
@@ -23,12 +33,14 @@ if($sUchenik=='artem')
 домашнее задание ученика
 */
 
-$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)){
-    while ($row = $res->fetch_assoc())
-        if($row['kommentarii-k-tekuschemu-dz']!='')
-            echo "<font color='blue'>Комментарий:</br>".$row['kommentarii-k-tekuschemu-dz']."</font></br></br>";
+    while ($row = $res->fetch_assoc()) {
+        if ($row['kommentarii-k-tekuschemu-dz'] != '')
+            echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
+        $iSkrytReshennye=($row['skryt-reshennye']);
+    }
 }
 
 //Вопросы:
@@ -74,23 +86,27 @@ if($res->data_seek(0)) {
     if ($iReshal) {
         $iSredPopytok = round($iSumPopytok / $iReshal, 1);
         $iSredVremya = (int)($iSumVremya / $iReshal);
-        echo "Попытался решить: ".$iReshal." </br>";
+        echo "Попытался решить: ".$iReshal." (".round($iReshal / $iVsego * 100)."%)</br>";
         echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
-        echo "Отмечено \"разобрать\": ".$iOtmechenoRazobrat."</br>";
-        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-        echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
-        echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya);
-    } else {
+//        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
+        echo $sPopytki;
+        echo "Отмечено \"не получается, разобрать на занятии\": ".$iOtmechenoRazobrat."</br>";
+        echo "Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>";
+        echo "Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."</br>";
+    }
+    else {
         echo "Попытался решить: -</br>";
         echo "Решено правильно: -</br>";
-        echo "Отмечено \"разобрать\": -</br>";
-        echo "Среднее количество попыток: -</br>";
+        echo "Отмечено \"не получается, разобрать на занятии\": -</br>";
+//        echo "Среднее количество попыток: -</br>";
         echo "Среднее время выполнения: -</br>";
-        echo "Общее время выполнения: -";
+        echo "Общее время выполнения: -</br>";
     }
 }
 //-сформируем "задачную" часть отчета
 
+echo "</br>";
+echo "<input type='checkbox' id='skryt-reshennye' ".($iSkrytReshennye?'checked':'')." /><label for='skryt-reshennye'>скрыть решенные правильно</label>";
 
 $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
 if($sParametr4=="sort")
@@ -102,14 +118,16 @@ $iOldIdPodtemy = 0;
 $iOldNomerZadaniya = 0;
 while ($row = $res->fetch_assoc()) {
 
+    echo "<div ".(($iSkrytReshennye&&$row["resheno-pravilno"]) ? "style='display: none;'" : "")." class='zadacha' resheno-pravilno='".$row['resheno-pravilno']."'>";
+
     //добавление горизонтальной полосы, разделяющией разные задания
     $iNomerZadaniya = $row['zadanie'];
     if ($iOldNomerZadaniya!=0)
         //если это НЕ первая строка
         if($iNomerZadaniya!=$iOldNomerZadaniya){
-            //если задание изменилось
+            //если Задание изменилось
             $iOldNomerZadaniya=$iNomerZadaniya;
-            echo "</br></br><hr style='height: 1px; background-color: black;'></br>";
+            echo "</br><hr style='height: 1px; background-color: black;'></br>";
         }
         else{
             //добавление горизонтальной полосы, разделяющией разные подтемы
@@ -117,10 +135,10 @@ while ($row = $res->fetch_assoc()) {
             if($iIdPodtemy!=$iOldIdPodtemy){
                 //если подтема изменилась
                 $iOldIdPodtemy=$iIdPodtemy;
-                echo "</br><hr></br>";
+                echo "<hr>";
             }
             else{
-                echo "</br></br>";
+                echo "</br>";
             }
             //-добавление горизонтальной полосы, разделяющией разные подтемы
         }
@@ -132,8 +150,8 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные задания
 
-    if($row['srednee-vremya-vypolneniya']!="00:00:00")
-        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
+//    if($row['srednee-vremya-vypolneniya']!="00:00:00")
+//        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
     echo $row['text-zadachi']."</br>";
@@ -157,10 +175,10 @@ while ($row = $res->fetch_assoc()) {
 
         echo "<div style='display: none;' id='result".$row['id-zadachi']."'></div>";
         echo "<div style='display: none;' id='kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не понимаю; разобрать на занятии</label></div>";
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не получается; разобрать на занятии</label></div>";
     }
     if($row['kolichestvo-popytok']>0 && $row['resheno-pravilno']){
-        echo "</br><span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span>";
+        echo "<span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span>";
         echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
     }
 
@@ -169,7 +187,10 @@ while ($row = $res->fetch_assoc()) {
         echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
         echo "</br><span id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</span>";
         echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не понимаю; разобрать на занятии</label></div>";
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input ".$iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho".$row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не получается; разобрать на занятии</label></div>";
     }
+
+    echo "</div>";
+
 //    echo "</br>";
 }

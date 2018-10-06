@@ -16,6 +16,15 @@ echo "ДОМАШНЕЕ ЗАДАНИЕ - проверка</b></br>";
 echo "ученик: <b>".$sUchenik."</b></br>";
 echo "предмет: <b>".$sPredmet."</b></br></br>";
 
+$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$res = $mysqli->query($SqlQuery);
+if($res->data_seek(0)){
+    while ($row = $res->fetch_assoc()) {
+        echo "<font color='blue'>Комментарий:</br>".($row['kommentarii-k-tekuschemu-dz']?($row['kommentarii-k-tekuschemu-dz']."</br>"):"")."</font>";
+        echo "<textarea cols='42' rows='4' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br></br>";
+    }
+}
+
 //сформируем "задачную" часть отчета
 $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
@@ -59,15 +68,6 @@ if($res->data_seek(0)) {
 }
 //-сформируем "задачную" часть отчета
 
-$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
-$res = $mysqli->query($SqlQuery);
-if($res->data_seek(0)){
-    while ($row = $res->fetch_assoc()) {
-        echo "<textarea cols='42' rows='3' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br>";
-    }
-}
-
-echo "</br>";
 echo "<button id='zafiksirovat'>Задачи -> в отчет (создать)</button></br></br>";
 
 echo "<p><b>Вопросы</b>:</p>";
@@ -135,7 +135,7 @@ while ($row = $res->fetch_assoc()) {
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
     if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno']))
-        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>Не понимаю; разобрать на занятии</label></div>";
+        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
     if ($row['kolichestvo-popytok'] > 0)

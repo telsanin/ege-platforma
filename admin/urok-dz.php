@@ -12,7 +12,11 @@
 <?php
 
 if($iNomerZadaniya=='')
-    echo "введите в URL номер задания!</br>";
+    echo "<span style='color:red;'>введите в URL номер задания!</span></br>";
+
+echo "Формирование УРОКА И ДЗ для ученика</br>";
+echo "ученик: <b>".$sUchenik."</b></br>";
+echo "предмет: <b>".$sPredmet."</b></br></br>";
 
 //$SqlQuery = "SELECT * FROM `zadacha`, `zadachi-uchenika` WHERE `zadacha`.`id-zadachi`=`zadachi-uchenika`.`id-zadachi` ORDER BY `zadachi-uchenika`.`id-podtemy`;";
 $SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` ORDER BY `zadacha`.`id-podtemy`;";
@@ -30,9 +34,23 @@ $SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.
 
 <?php
 
-echo "Формирование УРОКА И ДЗ для ученика</br>";
-echo "ученик: <b>".$sUchenik."</b></br>";
-echo "предмет: <b>".$sPredmet."</b></br>";
+echo "сделать все: <input class='vse-radio-v-urok-uchenika' id='radio-none' type='radio' value='0' /><label for='radio-none'>-</label>";
+echo "<input class='vse-radio-v-urok-uchenika' id='radio-urok' type='radio' value='1' /><label style='color: blue;' for='radio-urok'>в урок</label>";
+echo "<input class='vse-radio-v-urok-uchenika' id='radio-dzvy' type='radio' value='2' /><label style='color: red;' for='radio-dzvy'>в выданном дз</label>";
+echo "<input class='vse-radio-v-urok-uchenika' id='radio-dzdz' type='radio' value='3' /><label style='color: green;' for='radio-dzdz'>в новом дз</label></br></br>";
+
+
+echo "<span style='color: black;'>все-все: </span><input class='vse-aktualno' id='radio-aktualno-0-vse' type='radio' value='0' name='radio-aktualno-vse' /><label for='radio-aktualno-0-vse'>-</label>";
+echo "<input class='vse-aktualno' id='radio-aktualno-1-vse' type='radio' value='1' name='radio-aktualno-vse' /><label for='radio-aktualno-1-vse'>актуально</label></br>";
+
+echo "<span style='color: blue;'>все в урокe: </span><input class='vse-aktualno' id='radio-aktualno-0-vurok' type='radio' value='0' name='radio-aktualno-vurok' /><label for='radio-aktualno-0-vurok'>-</label>";
+echo "<input class='vse-aktualno' id='radio-aktualno-1-vurok' type='radio' value='1' name='radio-aktualno-vurok' /><label for='radio-aktualno-1-vurok'>актуально</label></br>";
+
+echo "<span style='color: red;'>все в выданном дз : </span><input class='vse-aktualno' id='radio-aktualno-0-vvydannomdz' type='radio' value='0' name='radio-aktualno-vvydannomdz' /><label for='radio-aktualno-0-vvydannomdz'>-</label>";
+echo "<input class='vse-aktualno' id='radio-aktualno-1-vvydannomdz' type='radio' value='1' name='radio-aktualno-vvydannomdz' /><label for='radio-aktualno-1-vvydannomdz'>актуально</label></br>";
+
+echo "<span style='color: green;'>все в новом дз: </span><input class='vse-aktualno' id='radio-aktualno-0-vnovomdz' type='radio' value='0' name='radio-aktualno-vnovomdz' /><label for='radio-aktualno-0-vnovomdz'>-</label>";
+echo "<input class='vse-aktualno' id='radio-aktualno-1-vnovomdz' type='radio' value='1' name='radio-aktualno-vnovomdz' /><label for='radio-aktualno-1-vnovomdz'>актуально</label></br></br>";
 
 echo "<p><b>Задачи</b>:</p>";
 
@@ -52,8 +70,18 @@ while ($row = $res->fetch_assoc()) {
     else
         echo "</br></br>";
 
-    if($row['urok']==0) echo "<div style='color: black;'>";
-    if($row['urok']==1) echo "<div style='color: blue;'>";
+    if($row['urok']==0)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: Gray;'>";
+        else
+            echo "<div style='color: Black;'>";
+
+    if($row['urok']==1)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: RoyalBlue;'>";
+        else
+            echo "<div style='color: Blue;'>";
+
     if($row['urok']==2)
         if($row['kolichestvo-popytok']>0)
             echo "<div style='color: IndianRed;'>";
@@ -62,9 +90,9 @@ while ($row = $res->fetch_assoc()) {
 
     if($row['urok']==3)
         if($row['kolichestvo-popytok']>0)
-            echo "<div style='color: Green;'>";
+            echo "<div style='color: MediumSeaGreen;'>";
         else
-            echo "<div style='color: LimeGreen;'>";
+            echo "<div style='color: Green;'>";
 
 
 

@@ -454,6 +454,64 @@ $(function(){
         //-сделать запрос на добавление
     });
 
+    $(".vse-aktualno").click(function(e){
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        switch($(this).attr("id").substring(17)) {
+            case 'vurok':
+                iAim=1;
+                break;
+            case 'vvydannomdz':
+                iAim=2;
+                break;
+            case 'vnovomdz':
+                iAim=3;
+                break;
+            case 'vse':
+                iAim=5;
+                break;
+        }
+        iZadanie = $('#zadanie').val();
+        iAktualno = $(this).val();
+
+        $.post(
+            "/post/vse-aktualno.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                iaim: iAim,
+                izadanie: iZadanie,
+                iaktualno: iAktualno,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+    });
+
+    $(".vse-radio-v-urok-uchenika").click(function(e){
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iUrok = $(this).val();
+        iZadanie = $('#zadanie').val();
+
+        $.post(
+            "/post/vse-v-urok-uchenika.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                surok: iUrok,
+                izadanie: iZadanie,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+    });
+
+
     $(".radio-v-urok-uchenika").click(function(e){
 
         // c.c('test');
@@ -469,26 +527,47 @@ $(function(){
             $(this).parent().css({'color': 'blue'});
             iVUrok=1;
         }
-        c.c($(this).attr("id"));
-        c.c($(this).attr("id").substring(10));
-        c.c('#reshal-'+$(this).attr("id").substring(10));
-        c.c($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'));
-        c.c($(this).parent().css('color'));
-        if($(this).attr('id').indexOf("dzdz")>0){
-            if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
-                $(this).parent().css({'color': 'Green'});
+        // c.c($(this).attr("id"));
+        // c.c($(this).attr("id").substring(10));
+        // c.c('#reshal-'+$(this).attr("id").substring(10));
+        // c.c($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'));
+        // c.c($(this).parent().css('color'));
+
+        reshal=0;
+        if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
+            reshal=1;
+
+        if($(this).attr('id').indexOf("none")>0){
+            if(reshal)
+                $(this).parent().css({'color': 'Gray'});
             else
-                $(this).parent().css({'color': 'LimeGreen'});
+                $(this).parent().css({'color': 'Black'});
             iVUrok=3;
-            c.c($(this).parent().css('color'));
+            // c.c($(this).parent().css('color'));
+        }
+        if($(this).attr('id').indexOf("urok")>0){
+            if(reshal)
+                $(this).parent().css({'color': 'RoyalBlue'});
+            else
+                $(this).parent().css({'color': 'Blue'});
+            iVUrok=3;
+            // c.c($(this).parent().css('color'));
+        }
+        if($(this).attr('id').indexOf("dzdz")>0){
+            if(reshal)
+                $(this).parent().css({'color': 'MediumSeaGreen'});
+            else
+                $(this).parent().css({'color': 'Green'});
+            iVUrok=3;
+            // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzvy")>0){
-            if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
+            if(reshal)
                 $(this).parent().css({'color': 'IndianRed'});
             else
                 $(this).parent().css({'color': 'Red'});
             iVUrok=2;
-            c.c($(this).parent().css('color'));
+            // c.c($(this).parent().css('color'));
         }
 
         //сделать запрос на обновление поля urok таблицы zadacha

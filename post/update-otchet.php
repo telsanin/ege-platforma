@@ -19,7 +19,7 @@ $iCount=0;
 $iFlag=1;
 $SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-podtemy`<".$iIdPodtemy.")) GROUP BY `zadacha`.`zadanie`;";
 $res = $mysqli->query($SqlQuery);
-$sTextZanyatiya.="Работа над Заданиями: №";
+$sTextZanyatiya.="Работа над Заданием №";
 if($res->data_seek(0)) {
     while ($row = $res->fetch_assoc()) {
         if ($iFlag)

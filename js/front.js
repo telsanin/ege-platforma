@@ -4,6 +4,33 @@
 
 $(function(){
 
+    $("#skryt-reshennye").click(function(e) {
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iSkrytReshennye = ($(this).prop('checked')?1:0);
+
+        // c.c(sUchenik);
+        // c.c(sPredmet);
+        // c.c(iSkrytReshennye);
+
+        //здесь надо скрыть со страницы решенные задачи
+        if(iSkrytReshennye)
+            $('.zadacha[resheno-pravilno=1]').hide('slow')
+        else
+            $('.zadacha').show('slow');
+        //-здесь надо скрыть со страницы решенные задачи
+
+        $.post(
+            "/post/skryt-reshennye.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                iskrytreshennye: iSkrytReshennye,
+            }
+        );
+    })
+
     $("input.vsyo-ploho").click(function(e) {
 
         sUchenik = $('#uchenik').val();

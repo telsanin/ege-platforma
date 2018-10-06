@@ -1,3 +1,12 @@
+<style type="text/css">
+    table{
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid lightgray;
+    }
+</style>
+
 <?php
 
 echo "Вернуться в <a href='/".$sUchenik."/".$sPredmet."/dz'>Домашнее задание</a></br></br>";
@@ -18,8 +27,10 @@ if($res->data_seek(0)){
     echo "<u>Отчет по занятиям:</u></br>";
     $iNum=$res->num_rows;
     while ($row = $res->fetch_assoc()) {
+//        echo date("d.m.Y",$row['date'])." ";
         echo date("d.m.Y",strtotime($row['date']))." ";
-        switch (date("N",strtotime($row['date']))) {
+//        echo $row['date']." ";
+        switch (date("N",$row['date'])) {
             case 1:
                 echo "ПН";
                 break;
