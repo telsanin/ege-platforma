@@ -26,32 +26,8 @@ if($sUchenik=='artem')
 
 <p><b>ДОМАШНЕЕ ЗАДАНИЕ</b>:</p></br>
 
+test
+
 <?php
 
-/*
-лицевая часть сайта (для школьников и родителей)
-домашнее задание ученика
-*/
-
-$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
-$res = $mysqli->query($SqlQuery);
-if($res->data_seek(0)){
-    while ($row = $res->fetch_assoc()) {
-        if ($row['kommentarii-k-tekuschemu-dz'] != '')
-            echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
-        $iSkrytReshennye=($row['skryt-reshennye']);
-    }
-}
-
-//Вопросы:
-$SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."' ORDER BY `voprosy`.`zadanie`, `voprosy`.`id-voprosa`;";
-$res = $mysqli->query($SqlQuery);
-if($res->data_seek(0)){
-    $iNumDZ = 1;
-    echo "<p><b>Вопросы</b>:</p>";
-    while ($row = $res->fetch_assoc()) {
-        echo $iNumDZ++ . ") ";
-        echo $row['text-voprosa'] . "</br>";
-    }
-}
-echo "</br>";
+echo 'test';
