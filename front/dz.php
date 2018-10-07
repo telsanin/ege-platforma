@@ -17,7 +17,7 @@
 
 echo "<a href='/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br></br>";
 
-if($sUchenik=='artem')
+if($sUchenik=='artem'||$sUchenik=='ilya')
     if($sPredmet=='matematika')
         echo "Математика&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='/".$sUchenik."/informatika/dz'>Информатика</a>";
     elseif($sPredmet=='informatika')
