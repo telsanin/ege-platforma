@@ -35,7 +35,7 @@ if($sUchenik=='artem')
 
 $SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 if($res = $mysqli->query($SqlQuery)){
-$res->data_seek(0);
+    $res->data_seek(0);
     while ($row = $res->fetch_assoc()) {
         if ($row['kommentarii-k-tekuschemu-dz'] != '')
             echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
@@ -45,8 +45,8 @@ $res->data_seek(0);
 
 //Вопросы:
 $SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."' ORDER BY `voprosy`.`zadanie`, `voprosy`.`id-voprosa`;";
-if($res = $mysqli->query($SqlQuery)){
-$res->data_seek(0);
+$res = $mysqli->query($SqlQuery);
+if($res->data_seek(0)){
     $iNumDZ = 1;
     echo "<p><b>Вопросы</b>:</p>";
     while ($row = $res->fetch_assoc()) {

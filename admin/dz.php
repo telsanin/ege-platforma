@@ -73,7 +73,8 @@ if($res = $mysqli->query($SqlQuery)) {
         $iSredVremya = (int)($iSumVremya / $iReshal);
         echo "Попытался решить: " . $iReshal . " задач из " . $iVsego . " (" . round($iReshal / $iVsego * 100) . "%)</br>";
         echo "Решено правильно: " . $iPravilno . " (" . round($iPravilno / $iVsego * 100) . "%)</br>";
-        echo $sPopytki;
+        if($iPravilno)
+            echo $sPopytki;
         //$TextZadachi.="Среднее количество попыток: ".$iSredPopytok."</br>";
         echo "Отмечено \"не получается, разобрать на занятии\": " . $iOtmechenoRazobrat . "</br>";
         echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";

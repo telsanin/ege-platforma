@@ -69,7 +69,8 @@ if($res1->data_seek(0)) {
                     echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
                     echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-                    echo $sPopytki;
+                    if($iPravilno)
+                        echo $sPopytki;
                     echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
                     echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
                 } else {
