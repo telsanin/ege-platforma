@@ -34,8 +34,8 @@ if($sUchenik=='artem')
 */
 
 $SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
-if($res = $mysqli->query($SqlQuery)){
-    $res->data_seek(0);
+$res = $mysqli->query($SqlQuery);
+if($res->data_seek(0)){
     while ($row = $res->fetch_assoc()) {
         if ($row['kommentarii-k-tekuschemu-dz'] != '')
             echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
@@ -53,10 +53,10 @@ if($res->data_seek(0)){
         echo $iNumDZ++ . ") ";
         echo $row['text-voprosa'] . "</br>";
     }
+    echo "</br>";
 }
-echo "</br>";
-//Задачи:
 
+//Задачи:
 $SqlQuery = "select count(`kolichestvo-popytok`) as count, `kolichestvo-popytok`  from `uchenik-zadachi` where `uchenik`='".$sUchenik."' and `predmet`='".$sPredmet."' and `urok`=2 and `aktualno`=1 and `resheno-pravilno`=1 group by `kolichestvo-popytok` asc;";
 if($res = $mysqli->query($SqlQuery)) {
 $res->data_seek(0);
