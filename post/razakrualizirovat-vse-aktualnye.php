@@ -12,9 +12,9 @@ include_once $DbAccessFile;
 $sUchenik=$_POST["suchenik"];
 $sPredmet=$_POST["spredmet"];
 
-//превратим новое дз в текущее дз
+//разактуализируем правильно решенные задачи
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `uchenik-zadachi` SET `urok`=2, `aktualno`=1 WHERE `urok`='3' AND `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$SqlQuery = "UPDATE `uchenik-zadachi` SET `aktualno`=0 WHERE `urok`='2' AND `aktualno`=1 AND `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 

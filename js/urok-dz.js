@@ -119,14 +119,16 @@ $(function(){
 
         sUchenik=$('#uchenik').val();
         iIdZadachi=$(this).attr("id").substring(18);
-        if($(this).prop("checked"))
-            iCheckBox=1
-        else
-            iCheckBox=0;
+        if($(this).prop("checked")) {
+            iCheckBox = 1
+            $(this).parent().css('font-weight', 'bold');
+        }
+        else {
+            iCheckBox = 0;
+            $(this).parent().css('font-weight', 'normal');
+        }
 
-        // c.c(sUchenik);
-        // c.c(iIdZadachi);
-        // c.c(iCheckBox);
+
 
         //обновим таблицу uchenik-zadachi
         $.post(
@@ -175,13 +177,31 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
+    $("#razakrualizirovat-vse-aktualnye").click(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+
+        //обновим таблицу uchenik-zadachi
+        $.post(
+            "/post/razakrualizirovat-vse-aktualnye.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+        //--обновим таблицу uchenik-zadachi
+    });
+
     $("#provereno").click(function(e) {
 
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
 
         //обновим таблицу uchenik-zadachi
-        //поставим в поле urok 2 (новое ДЗ) везде, где стоит 3 (актуалное ДЗ)
         //поставим в поле aktualno=0
         $.post(
             "/post/provereno.php",
@@ -202,8 +222,6 @@ $(function(){
         sPredmet=$('#predmet').val();
 
         //обновим таблицу uchenik-zadachi
-        //поставим в поле urok 2 (новое ДЗ) везде, где стоит 3 (актуалное ДЗ)
-        //поставим в поле aktualno=0
         $.post(
             "/post/novye-sdelat-tekuschimi.php",
             {
@@ -490,6 +508,27 @@ $(function(){
         );
     });
 
+    $(".nereshennye-radio-v-urok-uchenika").click(function(e){
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iUrok = $(this).val();
+        iZadanie = $('#zadanie').val();
+
+        $.post(
+            "/post/nereshennye-v-urok-uchenika.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                surok: iUrok,
+                izadanie: iZadanie,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+    });
+
     $(".vse-radio-v-urok-uchenika").click(function(e){
 
         sUchenik = $('#uchenik').val();
@@ -519,19 +558,14 @@ $(function(){
         sUchenik = $('#uchenik').val();
         iTaskNumber = $(this).attr("id").substring(10);
 
-        if($(this).attr('id').indexOf("none")>0){
-            $(this).parent().css({'color': 'black'});
-            iVUrok=0;
-        }
-        if($(this).attr('id').indexOf("urok")>0){
-            $(this).parent().css({'color': 'blue'});
-            iVUrok=1;
-        }
-        // c.c($(this).attr("id"));
-        // c.c($(this).attr("id").substring(10));
-        // c.c('#reshal-'+$(this).attr("id").substring(10));
-        // c.c($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'));
-        // c.c($(this).parent().css('color'));
+        // if($(this).attr('id').indexOf("none")>0){
+        //     $(this).parent().css({'color': 'black'});
+        //     iVUrok=0;
+        // }
+        // if($(this).attr('id').indexOf("urok")>0){
+        //     $(this).parent().css({'color': 'blue'});
+        //     iVUrok=1;
+        // }
 
         reshal=0;
         if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
@@ -542,7 +576,7 @@ $(function(){
                 $(this).parent().css({'color': 'Gray'});
             else
                 $(this).parent().css({'color': 'Black'});
-            iVUrok=3;
+            iVUrok=0;
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("urok")>0){
@@ -550,15 +584,7 @@ $(function(){
                 $(this).parent().css({'color': 'RoyalBlue'});
             else
                 $(this).parent().css({'color': 'Blue'});
-            iVUrok=3;
-            // c.c($(this).parent().css('color'));
-        }
-        if($(this).attr('id').indexOf("dzdz")>0){
-            if(reshal)
-                $(this).parent().css({'color': 'MediumSeaGreen'});
-            else
-                $(this).parent().css({'color': 'Green'});
-            iVUrok=3;
+            iVUrok=1;
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzvy")>0){
@@ -567,6 +593,14 @@ $(function(){
             else
                 $(this).parent().css({'color': 'Red'});
             iVUrok=2;
+            // c.c($(this).parent().css('color'));
+        }
+        if($(this).attr('id').indexOf("dzdz")>0){
+            if(reshal)
+                $(this).parent().css({'color': 'MediumSeaGreen'});
+            else
+                $(this).parent().css({'color': 'Green'});
+            iVUrok=3;
             // c.c($(this).parent().css('color'));
         }
 

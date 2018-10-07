@@ -39,7 +39,6 @@ echo "<input class='vse-radio-v-urok-uchenika' id='radio-urok' type='radio' valu
 echo "<input class='vse-radio-v-urok-uchenika' id='radio-dzvy' type='radio' value='2' /><label style='color: red;' for='radio-dzvy'>в выданном дз</label>";
 echo "<input class='vse-radio-v-urok-uchenika' id='radio-dzdz' type='radio' value='3' /><label style='color: green;' for='radio-dzdz'>в новом дз</label></br></br>";
 
-
 echo "<span style='color: black;'>все-все: </span><input class='vse-aktualno' id='radio-aktualno-0-vse' type='radio' value='0' name='radio-aktualno-vse' /><label for='radio-aktualno-0-vse'>-</label>";
 echo "<input class='vse-aktualno' id='radio-aktualno-1-vse' type='radio' value='1' name='radio-aktualno-vse' /><label for='radio-aktualno-1-vse'>актуально</label></br>";
 
@@ -51,6 +50,14 @@ echo "<input class='vse-aktualno' id='radio-aktualno-1-vvydannomdz' type='radio'
 
 echo "<span style='color: green;'>все в новом дз: </span><input class='vse-aktualno' id='radio-aktualno-0-vnovomdz' type='radio' value='0' name='radio-aktualno-vnovomdz' /><label for='radio-aktualno-0-vnovomdz'>-</label>";
 echo "<input class='vse-aktualno' id='radio-aktualno-1-vnovomdz' type='radio' value='1' name='radio-aktualno-vnovomdz' /><label for='radio-aktualno-1-vnovomdz'>актуально</label></br></br>";
+
+echo "<button id='provereno'>Разактуализировать правильно решенные, очистить комментарий</button></br></br>";
+
+echo "сделать нерешенные: <input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-none' type='radio' value='0' /><label for='nereshennye-radio-none'>-</label>";
+echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-urok' type='radio' value='1' /><label style='color: blue;' for='nereshennye-radio-urok'>в урок</label>";
+echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzvy' type='radio' value='2' /><label style='color: red;' for='nereshennye-radio-dzvy'>в выданном дз</label>";
+echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzdz' type='radio' value='3' /><label style='color: green;' for='nereshennye-radio-dzdz'>в новом дз</label></br></br>";
+
 
 echo "<p><b>Задачи</b>:</p>";
 
@@ -115,15 +122,25 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['urok']==2?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzvy".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='2'><label for='radio-dzvy".$row['id-zadachi']."'>в выданном дз</label>";
     echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в новом дз</label></br>";
 
-    echo "</div>";
-    echo ($row['zakonchili-na-etom']?"</b>":"");
 
     echo "<button>Вверх</button>&nbsp;&nbsp;<button>Вниз</button></br>";
 
     echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
 
-    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label></br>";
+    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
+    if ($row['kolichestvo-popytok'] > 0)
+        if ($row['resheno-pravilno'])
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+        else
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+    else
+        echo "</br>";
+
     echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br>";
+
+    echo "</div>";
+
+    echo ($row['zakonchili-na-etom']?"</b>":"");
 }
 
 //Вопросы:

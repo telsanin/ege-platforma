@@ -19,8 +19,9 @@ $iCount=0;
 $iFlag=1;
 $SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-podtemy`<".$iIdPodtemy.")) GROUP BY `zadacha`.`zadanie`;";
 $res = $mysqli->query($SqlQuery);
-$sTextZanyatiya.="Работа над Заданием №";
 if($res->data_seek(0)) {
+    $sTextZanyatiya.="<b>Содержание занятия:</b></br>";
+    $sTextZanyatiya.="Работа над Заданием №";
     while ($row = $res->fetch_assoc()) {
         if ($iFlag)
             $iFlag = 0;
@@ -33,7 +34,7 @@ if($res->data_seek(0)) {
     $sTextZanyatiya .= "Решено более " . $iCount . " задач</br>";
 }
 //сформируем SQL-запрос
-$SqlQuery = "UPDATE `otchet` SET `zanyatie`='".$sTextZanyatiya."' WHERE `otchet`.`uchenik`='".$sUchenik."' AND `otchet`.`predmet`='".$sPredmet."' AND `otchet`.`date`='".gmdate("d.m.Y",time()+3*60*60)."';";
+$SqlQuery = "UPDATE `otchet` SET `zanyatie`='".$sTextZanyatiya."' WHERE `otchet`.`uchenik`='".$sUchenik."' AND `otchet`.`predmet`='".$sPredmet."' AND `otchet`.`date`='".date("Y.m.d")."';";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 

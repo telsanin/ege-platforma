@@ -58,10 +58,33 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные задания
 
-    echo "<div>";
+    if($row['urok']==0)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: Gray;'>";
+        else
+            echo "<div style='color: Black;'>";
+
+    if($row['urok']==1)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: RoyalBlue;'>";
+        else
+            echo "<div style='color: Blue;'>";
+
+    if($row['urok']==2)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: IndianRed;'>";
+        else
+            echo "<div style='color: Red;'>";
+
+    if($row['urok']==3)
+        if($row['kolichestvo-popytok']>0)
+            echo "<div style='color: MediumSeaGreen;'>";
+        else
+            echo "<div style='color: Green;'>";
+
     echo ($row['zakonchili-na-etom']?"<b>":"");
 
-    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
+//    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
     echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNumDZ++.") ";
@@ -78,9 +101,20 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в новом дз</label></br>";
 
 //    echo "<button class='zafiksirovat-vremya' id='zafiksirovat-vremya".$row['id-zadachi']."'>Зафиксировать время</button>&nbsp;";
-    echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
-    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label>";
-    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['id-podtemy']."'>разактуализировать пред подтемы (и пред задания)</button>";
+//    echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
+    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
+
+    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
+    if ($row['kolichestvo-popytok'] > 0)
+        if ($row['resheno-pravilno'])
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+        else
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+    else
+        echo "</br>";
+    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
+
+    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['id-podtemy']."'>разактуализировать пред подтемы (и пред задания) и -> в отчет</button>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
     echo "</div>";
@@ -88,8 +122,8 @@ while ($row = $res->fetch_assoc()) {
 }
 
 //Вопросы:
-echo "</br><p><b>Вопросы</b>:</p>";
-$SqlQuery = "SELECT DISTINCT `voprosy`.`id-voprosa`, `voprosy`.`text-voprosa`, `aktualno` FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`zadanie`='".$iNomerZadaniya."' AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
+echo "</br><p><b>Вопросы (по заданию, которое последнее в уроке)</b>:</p>";
+$SqlQuery = "SELECT `voprosy`.`id-voprosa`, `voprosy`.`text-voprosa`, `aktualno` FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`zadanie`='".$iNomerZadaniya."' AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $iNumDZ = 1;
