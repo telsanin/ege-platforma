@@ -76,7 +76,7 @@ $iPravilno = 0;
 $iSumPopytok = 0;
 $iSumVremya = 0;
 $iOtmechenoRazobrat = 0;
-if($res->data_seek(0)) {
+if($res->data_seek(0)){
     while ($row = $res->fetch_assoc()) {
         $iVsego++;
         if ($row['kolichestvo-popytok'])
