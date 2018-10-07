@@ -31,3 +31,19 @@ test
 <?php
 
 echo 'test';
+
+/*
+лицевая часть сайта (для школьников и родителей)
+домашнее задание ученика
+*/
+
+$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$res = $mysqli->query($SqlQuery);
+if($res->data_seek(0)){
+    while ($row = $res->fetch_assoc()) {
+        if ($row['kommentarii-k-tekuschemu-dz'] != '')
+            echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
+        $iSkrytReshennye=($row['skryt-reshennye']);
+    }
+}
+
