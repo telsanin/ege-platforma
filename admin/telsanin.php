@@ -61,7 +61,7 @@ if($res1->data_seek(0)) {
                     if ($row['razobrat-na-zanyatii'])
                         $iOtmechenoRazobrat++;
                 }
-                if ($iReshal) {
+                if ($iReshal&&$iPravilno) {
                     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
                     $iSredVremya = (int)($iSumVremya / $iReshal);
                     echo "Всего было задано: ".$iVsego."</br>";
@@ -80,10 +80,18 @@ if($res1->data_seek(0)) {
             echo "Пропустил: ";
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-vchera'>Вчера</button>";
             echo "&nbsp;&nbsp";
-            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-segodnya'>Сегодня</button>";
+            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-segodnya'>Сегод</button>";
             echo "&nbsp;&nbsp";
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-zavtra'>Завтра</button>";
+            echo "&nbsp;&nbsp";
+            echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-poslezavtra'>Послез</button>";
+            echo "</br>";
+
+            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-vosstanovil'>Восстановил</button>";
+            echo "&nbsp;&nbsp";
+            echo "+1 занятие";
             echo "</br></br>";
+
         }
     }
 }

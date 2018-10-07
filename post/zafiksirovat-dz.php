@@ -12,6 +12,7 @@ include_once $DbAccessFile;
 //параметры полученного POST-запроса на добавление строки в таблицу БД
 $sPredmet=$_POST["spredmet"];
 $sUchenik=$_POST["suchenik"];
+$sDate=$_POST["sdate"];
 
 $SqlQuery = "select count(`kolichestvo-popytok`) as count, `kolichestvo-popytok`  from `uchenik-zadachi` where `uchenik`='".$sUchenik."' and `predmet`='".$sPredmet."' and `urok`=2 and `aktualno`=1 and `resheno-pravilno`=1 group by `kolichestvo-popytok` asc;";
 $res = $mysqli->query($SqlQuery);
@@ -59,12 +60,8 @@ if($res->data_seek(0)) {
 }
 
 //добавим строку в таблицу otchet
-$iCurDate=date('Y.m.d', ((int) time()/60/60/24)*24*60*60);
 
-//include_once $_SERVER['DOCUMENT_ROOT']."/PART_logger.php";
-//logger($TextZadachi);
-
-$SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextZadachi."', '".$iCurDate."');";//выполним запрос
+$SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextZadachi."', '".$sDate."');";//выполним запрос
 $res = $mysqli->query($SqlQuery);
 
 //-добавим строку в таблицу otchet

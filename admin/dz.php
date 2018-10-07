@@ -21,6 +21,8 @@
 
 <?php
 
+echo "<a href='/telsanin/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br></br>";
+
 echo "ДОМАШНЕЕ ЗАДАНИЕ - проверка</b></br>";
 echo "ученик: <b>".$sUchenik."</b></br>";
 echo "предмет: <b>".$sPredmet."</b></br></br>";
@@ -89,8 +91,14 @@ if($res = $mysqli->query($SqlQuery)) {
     }
 }
 //-сформируем "задачную" часть отчета
-
-echo "<button id='zafiksirovat'>Задачи -> в отчет (создать)</button></br></br>";
+echo "</br>";
+echo "Задачи -> в отчет (создать)";
+echo "&nbsp;&nbsp";
+echo "<button class='zafiksirovat' id='zafiksirovat-segodnya'>Сегод</button>";
+echo "&nbsp;&nbsp";
+echo "<button class='zafiksirovat' id='zafiksirovat-zavtra'>Завтра</button>";
+echo "&nbsp;&nbsp";
+echo "<button class='zafiksirovat' id='zafiksirovat-poslezavtra'>Послез</button></br></br>";
 
 //Вопросы:
 echo "<p><b>Вопросы</b>:</p>";
@@ -111,7 +119,7 @@ if($res = $mysqli->query($SqlQuery)) {
     echo "</br>";
 }
 
-echo "<button id='voprosy-v-otchet'>Вопросы -> в отчет (обновить)</button></br></br>";
+echo "<button id='voprosy-v-otchet'>Вопросы -> в отчет (обновить)</button> (сегодня)</br></br>";
 echo "<button id='provereno'>Разактуализировать правильно решенные, очистить комментарий</button></br></br>";
 echo "<button id='razakrualizirovat-vse-aktualnye'>Разактуализировать все актуальные</button></br></br>";
 echo "<button id='novye-sdelat-tekuschimi'>Новые сделать текущими и актуализировать</button></br></br>";

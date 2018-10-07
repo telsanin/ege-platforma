@@ -4,6 +4,35 @@
 
 $(function(){
 
+    $(".otchet-kommentarii").focusout(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+        sKommentarii=$(this).val();
+        sDate=$(this).parent().children('.data-zanyatiya').html();
+
+        sId = $(this).attr("id");
+        aId = sId.split('-');
+        sCvet = aId[1];
+
+        c.c(sUchenik);
+        c.c(sPredmet);
+        c.c(sKommentarii);
+        c.c(sDate);
+        c.c(sCvet);
+
+        $.post(
+            "/post/update-otchet-kommentarii.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                skommentarii: sKommentarii,
+                sdate: sDate,
+                scvet: sCvet,
+            }
+        );
+    });
+
     $("#kommentarii").focusout(function(e) {
 
         sUchenik=$('#uchenik').val();
@@ -26,40 +55,54 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
+    $(".vosstanovil").click(function(e) {
+
+        sId = $(this).attr("id");
+        aId = sId.split('-');
+        sUchenik = aId[0];
+        sPredmet = aId[1];
+
+        //вызнвать по AJAX: добавить строку в таблицу otchet
+        //ученик предмет дата
+        $.post(
+            "/post/vosstanovil.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+            }
+        );
+        //-вызнвать по AJAX: обновить строку в таблице uchenik-predmet
+    });
+
     $(".propustil").click(function(e) {
 
-        sId=$(this).attr("id");
+        sId = $(this).attr("id");
 
         aId = sId.split('-');
 
-        sUchenik=aId[0];
-        sPredmet=aId[1];
-        sKogda=aId[2];
+        sUchenik = aId[0];
+        sPredmet = aId[1];
+        sKogda = aId[2];
 
-        //секунд
-        iDate=Math.round(Date.now()/1000);
+        var dDate = new Date();
+        year = dDate.getFullYear();
+        month = dDate.getMonth();
+        day = dDate.getDate();
 
         switch (sKogda) {
             case 'vchera':
-                iDate-=60*60*24;
+                day--;
                 break;
             case 'zavtra':
-                iDate+=60*60*24;
+                day++;
+                break;
+            case 'poslezavtra':
+                day++;
+                day++;
                 break;
         }
 
-        //секунд
-        dDate=new Date(iDate*1000)
-
-        sDay=String(dDate.getDate());
-        if(sDay.length==1)
-            sDay="0"+sDay;
-        sMonth=String((dDate.getMonth()+1));
-        if(sMonth.length==1)
-            sMonth="0"+sMonth;
-        sYear=dDate.getFullYear();
-
-        sDate = sDay + "." + sMonth + "." + sYear;
+        sDate = year + '.' + ('0' + (month + 1)).slice(-2) + '.' + ('0' + day).slice(-2);
 
         //вызнвать по AJAX: добавить строку в таблицу otchet
         //ученик предмет дата
@@ -71,11 +114,7 @@ $(function(){
                 sdate: sDate,
             }
         );
-
-        //вызнвать по AJAX: обновить строку в таблице uchenik-predmet
-        //propuskov++
-
-
+        //-вызнвать по AJAX: обновить строку в таблице uchenik-predmet
     });
 
     $("#insert-vopros-ucheniku").click(function(e){
@@ -286,16 +325,38 @@ $(function(){
         //--обновим поле aktualno таблицы uchenik-voprosy
     });
 
-    $("#zafiksirovat").click(function(e) {
+    $(".zafiksirovat").click(function(e) {
 
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
+
+        sId = $(this).attr("id");
+        aId = sId.split('-');
+        sKogda = aId[1];
+
+        var dDate = new Date();
+        year = dDate.getFullYear();
+        month = dDate.getMonth();
+        day = dDate.getDate();
+
+        switch (sKogda) {
+            case 'zavtra':
+                day++;
+                break;
+            case 'poslezavtra':
+                day++;
+                day++;
+                break;
+        }
+
+        sDate = year + '.' + ('0' + (month + 1)).slice(-2) + '.' + ('0' + day).slice(-2);
 
         $.post(
             "/post/zafiksirovat-dz.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
+                sdate: sDate,
             }
         );
     });

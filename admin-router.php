@@ -50,6 +50,11 @@ else {
             $iNomerZadaniya = $sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/front/dz.php";
         }
+        elseif($sParametr4 == "otchet"){
+            $sUchenik = $sParametr2;
+            $sPredmet = $sParametr3;
+            include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/otchet.php";
+        }
         elseif($sParametr2 == "test"){
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;

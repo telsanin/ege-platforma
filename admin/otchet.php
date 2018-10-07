@@ -7,9 +7,12 @@
     }
 </style>
 
+<input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
+<input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
+
 <?php
 
-echo "Вернуться в <a href='/".$sUchenik."/".$sPredmet."/dz'>Домашнее задание</a></br></br>";
+echo "Вернуться в <a href='/telsanin/".$sUchenik."/".$sPredmet."/dz'>Домашнее задание</a></br></br>";
 
 $SqlQuery = "SELECT `plan-obucheniya`, `propuscheno` FROM `uchenik-predmet` WHERE `uchenik-predmet`.`uchenik`='".$sUchenik."' AND `uchenik-predmet`.`predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
@@ -34,7 +37,8 @@ if($res->data_seek(0)){
     $iNum=$res->num_rows;
     while ($row = $res->fetch_assoc()) {
 //        echo date("d.m.Y",$row['date'])." ";
-        echo date("d.m.Y",strtotime($row['date']))." ";
+        echo "<div>";
+        echo "<span class='data-zanyatiya'>".date("d.m.Y",strtotime($row['date']))."</span> ";
 //        echo $row['date']." ";
 //        switch (date("N",$row['date'])) {
         switch (date("N",strtotime(str_replace(".","-",$row['date'])))) {
@@ -65,10 +69,11 @@ if($res->data_seek(0)){
         echo $row['dz-voprosy'];
         echo $row['dz'];
         echo $row['zanyatie'];
-        echo "<span style='color: blue;'>Комментарий: </span></br>";
-        if($row['zelenyi-kommentarii'])
-            echo "<span style='color: blue;'>".$row['zelenyi-kommentarii']."</span></br>";
-        if($row['krasnyi-kommentarii'])
-            echo "<span style='color: red;'>".$row['krasnyi-kommentarii']."</span></br></br>";
+        echo "<textarea class='otchet-kommentarii' cols='42' rows='4' id='kommentarii-zanyatie'>".$row['zanyatie']."</textarea></br>";
+        echo "<font color='blue'>".$row['zelenyi-kommentarii']."</font></br>";
+        echo "<textarea class='otchet-kommentarii' style='color: blue;' cols='42' rows='4' id='kommentarii-zelenyi'>".$row['zelenyi-kommentarii']."</textarea></br>";
+        echo "<font color='red'>".$row['krasnyi-kommentarii']."</font></br>";
+        echo "<textarea class='otchet-kommentarii' style='color: red;' cols='42' rows='4' id='kommentarii-krasnyi'>".$row['krasnyi-kommentarii']."</textarea></br>";
+        echo "</br></div>";
     }
 }

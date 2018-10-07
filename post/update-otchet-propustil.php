@@ -15,9 +15,12 @@ $sDate=$_POST["sdate"];
 
 $sTextZanyatiya="Занятие пропущено</br>";
 
-//сформируем SQL-запрос
+//вставим строку в таблицу `otchet`
 $SqlQuery = "INSERT INTO `otchet` (`uchenik`,`predmet`,`date`, `zanyatie`) VALUES ('".$sUchenik."','".$sPredmet."','".$sDate."','".$sTextZanyatiya."');";
-//выполним запрос
+$res = $mysqli->query($SqlQuery);
+
+//добавим 1 в поле `propuscheno` таблицы `uchenik-predmet`
+$SqlQuery = "UPDATE `uchenik-predmet` SET `propuscheno`=`propuscheno`+1 WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 
 ?>
