@@ -71,6 +71,7 @@ if($res->data_seek(0)){
         echo $row['dz-voprosy'];
         echo $row['dz'];
         echo $row['zanyatie'];
+        echo "</br>";
         echo "<textarea class='otchet-kommentarii' cols='42' rows='4' id='kommentarii-zanyatie'>".$row['zanyatie']."</textarea></br>";
         echo "<font color='blue'>".$row['zelenyi-kommentarii']."</font></br>";
         echo "<textarea class='otchet-kommentarii' style='color: blue;' cols='42' rows='4' id='kommentarii-zelenyi'>".$row['zelenyi-kommentarii']."</textarea></br>";
