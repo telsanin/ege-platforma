@@ -65,6 +65,8 @@ if($res->data_seek(0)){
                 break;
         }
         echo "</br>";
+        echo "<input id='data-zanyatiya-input' value='".$row['date']."' />";
+        echo "</br>";
         echo "<b>Занятие №".$iNum--."</b></br>";
         echo $row['dz-voprosy'];
         echo $row['dz'];

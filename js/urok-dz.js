@@ -4,6 +4,28 @@
 
 $(function(){
 
+    $("#data-zanyatiya-input").focusout(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+        sDateFrom=$(this).parent().children('.data-zanyatiya').html();
+        sDateTo=$(this).val();
+
+        $.post(
+            "/post/update-data-zanyatiya.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                sdatefrom: sDateFrom,
+                sdateto: sDateTo,
+            },
+            function(response){
+                location.reload();
+            }
+        );
+    });
+
+
     $(".otchet-kommentarii").focusout(function(e) {
 
         sUchenik=$('#uchenik').val();
@@ -14,12 +36,6 @@ $(function(){
         sId = $(this).attr("id");
         aId = sId.split('-');
         sCvet = aId[1];
-
-        c.c(sUchenik);
-        c.c(sPredmet);
-        c.c(sKommentarii);
-        c.c(sDate);
-        c.c(sCvet);
 
         $.post(
             "/post/update-otchet-kommentarii.php",
