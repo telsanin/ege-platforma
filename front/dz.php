@@ -118,7 +118,7 @@ if($sParametr4=="sort")
     $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC;";
 $res = $mysqli->query($SqlQuery);
 //if($res->data_seek(0)){
-    $res->data_seek(0)
+    $res->data_seek(0);
 
     echo "<p><b>Задачи</b>:</p></br>";
     echo "<input type='checkbox' id='skryt-reshennye' ".($iSkrytReshennye?'checked':'')." /><label for='skryt-reshennye'>скрыть решенные правильно</label>";
