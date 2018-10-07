@@ -4,7 +4,7 @@
 
 $(function(){
 
-    $("#data-zanyatiya-input").focusout(function(e) {
+    $(".data-zanyatiya-input").focusout(function(e) {
 
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
