@@ -90,10 +90,10 @@ if($res1->data_seek(0)) {
 //            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-vosstanovil'>Восстановил</button>";
 //            echo "&nbsp;&nbsp";
 //            echo "-1 занятие";
-            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-minus'> -1 </button>";
-            echo "&nbsp;&nbsp";
-            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-plus'> +1 </button>";
-            echo "&nbsp;&nbsp";
+            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-minus'>&nbsp;&nbsp;-1&nbsp;&nbsp;</button>";
+            echo "&nbsp;&nbsp;";
+            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-plus'>&nbsp;&nbsp;+1&nbsp;&nbsp;</button>";
+            echo "&nbsp;&nbsp;";
             echo " восстановил";
             echo "</br></br>";
 
