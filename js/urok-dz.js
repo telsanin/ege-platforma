@@ -77,14 +77,25 @@ $(function(){
         aId = sId.split('-');
         sUchenik = aId[0];
         sPredmet = aId[1];
+        sKuda = aId[2];
 
         //вызнвать по AJAX: добавить строку в таблицу otchet
         //ученик предмет дата
+
+        switch(sKuda) {
+            case 'plus':
+                sKuda='+1';
+                break;
+            case 'minus':
+                sKuda='-1';
+                break;
+        }
         $.post(
             "/post/vosstanovil.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
+                skuda: sKuda,
             }
         );
         //-вызнвать по AJAX: обновить строку в таблице uchenik-predmet

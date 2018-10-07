@@ -87,9 +87,14 @@ if($res1->data_seek(0)) {
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-poslezavtra'>Послез</button>";
             echo "</br>";
 
-            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-vosstanovil'>Восстановил</button>";
+//            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-vosstanovil'>Восстановил</button>";
+//            echo "&nbsp;&nbsp";
+//            echo "-1 занятие";
+            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-minus'> -1 </button>";
             echo "&nbsp;&nbsp";
-            echo "-1 занятие";
+            echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-plus'> +1 </button>";
+            echo "&nbsp;&nbsp";
+            echo " восстановил";
             echo "</br></br>";
 
         }
