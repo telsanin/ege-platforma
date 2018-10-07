@@ -89,7 +89,7 @@ if($res1->data_seek(0)) {
 
             echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-vosstanovil'>Восстановил</button>";
             echo "&nbsp;&nbsp";
-            echo "+1 занятие";
+            echo "-1 занятие";
             echo "</br></br>";
 
         }
