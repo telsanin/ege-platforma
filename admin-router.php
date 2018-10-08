@@ -276,7 +276,7 @@ else {
                 </ul>
             </li>
             <li class="uk-parent">
-                <a href="#">АМИР</a>
+                <a href="#">АЛЕКСАНДР</a>
                 <ul class="uk-nav-sub">
                     <li><a href="/telsanin/aleksandr/informatika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/urok">Урок - проведение</a></li>
