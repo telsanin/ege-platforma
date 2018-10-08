@@ -20,6 +20,9 @@ else {
         $iNomerZadaniya=$sParametr4;
         include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi.php";
     }
+    elseif($sParametr2 == "upload") {
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/upload.php";
+    }
     //http://ege-platforma.local/telsanin/egor/matematika/1
     else{
         //http://ege-platforma.local/telsanin/egor/matematika/urok

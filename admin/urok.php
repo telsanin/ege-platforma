@@ -19,9 +19,12 @@ echo "ученик: <b>".$sUchenik."</b></br>";
 echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
-echo "<p><b>Задачи</b>:</p>";
+echo "<b>Задачи</b>: ";
 $SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND `aktualno`=1 AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
 $res = $mysqli->query($SqlQuery);
+
+echo "(".mysqli_num_rows($res).")";
+
 $res->data_seek(0);
 $iNumDZ = 1;
 $iOldIdPodtemy = 0;

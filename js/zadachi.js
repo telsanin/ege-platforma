@@ -1,8 +1,22 @@
 /*
 распределение задач: - ИЛИ в урок ИЛИ в дз
+а также другие полезные вещи ;)
 */
 
 $(function(){
+
+    $("#upload-zadachi").click(function(e){
+
+        $.post(
+            "/post/SERVICE_import_from_txt.php"
+        ,
+        function (response) {
+            $('#answer').html(response);
+            // location.reload();
+        }
+        );
+
+    });
 
     $("form.upload-form").submit(function(e){
 
