@@ -275,6 +275,21 @@ else {
                     <li><a href="/telsanin/amir/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
+            <li class="uk-parent">
+                <a href="#">АМИР</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="/telsanin/aleksandr/informatika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/aleksandr/informatika/urok">Урок - проведение</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a class="uk-active" href="/telsanin/aleksandr/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/aleksandr/informatika/urok-uchenika">Урок</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/aleksandr/informatika/11">Задание 11</a></li>
+                    <li><a href="/telsanin/aleksandr/informatika/8">Задание 8</a></li>
+                    <li><a href="/telsanin/aleksandr/informatika/16">Задание 16</a></li>
+                    <li><a href="/telsanin/aleksandr/informatika/1">Задание 1</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
