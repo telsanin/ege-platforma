@@ -70,9 +70,8 @@ if($res->data_seek(0)){
             if ($row['zelenyi-kommentarii'])
                 echo "<span style='color: blue;'>" . $row['zelenyi-kommentarii'] . "</span></br>";
             if ($row['krasnyi-kommentarii'])
-                echo "<span style='color: red;'>" . $row['krasnyi-kommentarii'] . "</span></br></br>";
+                echo "<span style='color: red;'>" . $row['krasnyi-kommentarii'] . "</span></br>";
         }
-        else
-            echo "</br>";
+        echo "</br>";
     }
 }
