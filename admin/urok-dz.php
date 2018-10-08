@@ -53,7 +53,7 @@ echo "<input class='vse-aktualno' id='radio-aktualno-1-vnovomdz' type='radio' va
 
 echo "<button id='provereno'>Разактуализировать правильно решенные, очистить комментарий</button></br></br>";
 
-echo "сделать нерешенные: <input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-none' type='radio' value='0' /><label for='nereshennye-radio-none'>-</label>";
+echo "сделать нерешенные правильно: <input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-none' type='radio' value='0' /><label for='nereshennye-radio-none'>-</label>";
 echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-urok' type='radio' value='1' /><label style='color: blue;' for='nereshennye-radio-urok'>в урок</label>";
 echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzvy' type='radio' value='2' /><label style='color: red;' for='nereshennye-radio-dzvy'>в выданном дз</label>";
 echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzdz' type='radio' value='3' /><label style='color: green;' for='nereshennye-radio-dzdz'>в новом дз</label></br></br>";
