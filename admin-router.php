@@ -139,8 +139,8 @@ else {
                     <li><a href="/telsanin/nikita/matematika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/nikita/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/nikita/matematika/dz-uchenika">Дз</a></li>
-                    <li><a href="/nikita/matematika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/nikita/matematika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/nikita/matematika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/nikita/matematika/5">Задание 5</a></li>
                     <li><a href="/telsanin/nikita/matematika/4">Задание 4</a></li>
@@ -155,8 +155,8 @@ else {
                     <li><a href="/telsanin/andrei/matematika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/andrei/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/andrei/matematika/dz-uchenika">Дз</a></li>
-                    <li><a href="/andrei/matematika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/andrei/matematika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/andrei/matematika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/andrei/matematika/5">Задание 5</a></li>
                     <li><a href="/telsanin/andrei/matematika/4">Задание 4</a></li>
@@ -171,8 +171,8 @@ else {
                     <li><a href="/telsanin/artem/matematika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/artem/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/artem/matematika/dz-uchenika">Дз</a></li>
-                    <li><a href="/artem/matematika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/artem/matematika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/artem/matematika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/artem/matematika/5">Задание 5</a></li>
                     <li><a href="/telsanin/artem/matematika/4">Задание 4</a></li>
@@ -187,8 +187,8 @@ else {
                     <li><a href="/telsanin/elizaveta/matematika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/elizaveta/matematika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/elizaveta/matematika/dz-uchenika">Дз</a></li>
-                    <li><a href="/elizaveta/matematika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/elizaveta/matematika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/elizaveta/matematika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/elizaveta/matematika/5">Задание 5</a></li>
                     <li><a href="/telsanin/elizaveta/matematika/4">Задание 4</a></li>
@@ -203,8 +203,8 @@ else {
                 <li><a href="/telsanin/vladimir/matematika/dz">Дз - проверка</a></li>
                 <li><a href="/telsanin/vladimir/matematika/urok">Урок - проведение</a></li>
                 <li class="uk-nav-divider"></li>
-                <li><a class="uk-active" href="/vladimir/matematika/dz-uchenika">Дз</a></li>
-                <li><a href="/vladimir/matematika/urok-uchenika">Урок</a></li>
+                <li><a class="uk-active" href="/telsanin/vladimir/matematika/dz-uchenika">Дз</a></li>
+                <li><a href="/telsanin/vladimir/matematika/urok-uchenika">Урок</a></li>
                 <li class="uk-nav-divider"></li>
                 <li><a href="/telsanin/vladimir/matematika/5">Задание 5</a></li>
                 <li><a href="/telsanin/vladimir/matematika/4">Задание 4</a></li>
@@ -221,8 +221,8 @@ else {
                     <li><a href="/telsanin/daniil/informatika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/daniil/informatika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/daniil/informatika/dz-uchenika">Дз</a></li>
-                    <li><a href="/daniil/informatika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/daniil/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/daniil/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/daniil/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/daniil/informatika/8">Задание 8</a></li>
@@ -236,8 +236,8 @@ else {
                     <li><a href="/telsanin/artem/informatika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/artem/informatika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/artem/informatika/dz-uchenika">Дз</a></li>
-                    <li><a href="/artem/informatika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/artem/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/artem/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/artem/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/artem/informatika/8">Задание 8</a></li>
@@ -251,8 +251,8 @@ else {
                     <li><a href="/telsanin/egor/informatika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/egor/informatika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/egor/informatika/dz-uchenika">Дз</a></li>
-                    <li><a href="/egor/informatika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/egor/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/egor/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/egor/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/egor/informatika/8">Задание 8</a></li>
@@ -266,8 +266,8 @@ else {
                     <li><a href="/telsanin/amir/informatika/dz">Дз - проверка</a></li>
                     <li><a href="/telsanin/amir/informatika/urok">Урок - проведение</a></li>
                     <li class="uk-nav-divider"></li>
-                    <li><a class="uk-active" href="/amir/informatika/dz-uchenika">Дз</a></li>
-                    <li><a href="/amir/informatika/urok-uchenika">Урок</a></li>
+                    <li><a class="uk-active" href="/telsanin/amir/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/amir/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
                     <li><a href="/telsanin/amir/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/amir/informatika/8">Задание 8</a></li>
