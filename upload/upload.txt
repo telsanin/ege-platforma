@@ -1,3 +1,0 @@
-zadanie	predmet	text-zadachi	pravilnyi-otvet	foto-teksta
-20	informatika	text zadachi1	5	informatika-20-995.jpg
-20	informatika	Текст	10	informatika-20-996.jpg
