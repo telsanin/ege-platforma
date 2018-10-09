@@ -129,12 +129,19 @@ while ($row = $res->fetch_assoc()) {
 
     echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
     if ($row['kolichestvo-popytok'] > 0)
-        if($row['resheno-pravilno']==1)
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
-        elseif($row['resheno-pravilno']==0)
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
-        else
-            echo "</br>";
+        switch($row['resheno-pravilno']) {
+            case 1:
+                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+                break;
+            case 0:
+                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+                break;
+            case 2:
+                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>На занятии</span></br>";
+                break;
+            default:
+                echo "</br>";
+        }
     else
         echo "</br>";
 
