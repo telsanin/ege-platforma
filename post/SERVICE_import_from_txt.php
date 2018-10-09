@@ -2,6 +2,7 @@
 
 //!!!нужно для корректной работы fgetcsv
 //setlocale(LC_ALL, 'ru_RU.CP1251');
+//setlocale(LANG, 'ru_RU.CP1251');
 //!!!нужно для корректной работы fgetcsv
 
 //подключимся к БД
@@ -29,6 +30,9 @@ function load_data($file, $column_divider, $table_name){
     $i=0;
     $s=0;
     while($str_arr=fgetcsv($file_name,0,$column_divider)){
+//    while($str_arr1=fgets($file_name)){
+
+//     $str_arr=explode(chr(9), iconv('windows-1251','utf-8',$str_arr1));
 
      $s++;
 
@@ -39,6 +43,7 @@ function load_data($file, $column_divider, $table_name){
 
     // 	$v=str_replace('"','',$v);
 
+            $v = iconv('windows-1251','utf-8', $v);
 
             if($v<>'') $only_null=false;
             if($v=='') $v='';
