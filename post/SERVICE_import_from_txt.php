@@ -51,13 +51,13 @@ function load_data($file, $column_divider, $table_name){
             if($j>1) $sql_query_values.=',';//между строками
 
             if ($s==1){
-                $v=str_replace(';','"`,`"',$v);
+//              $v=str_replace(';','"`,`"',$v);
                 $v="`".$v."`";
                 $sql_query_values.=$v;
             }
             else{
-                $v=str_replace(';','","',$v);
-        //$newv=str_replace(',','","',$v);
+//                $v=str_replace(';','","',$v);
+                //$newv=str_replace(',','","',$v);
                 //$v=$newv;
                 $sql_query_values.='"'.$v.'"';
         }
