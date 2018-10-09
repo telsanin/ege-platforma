@@ -58,7 +58,7 @@ else {
             $sPredmet = $sParametr3;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/otchet.php";
         }
-        elseif($sParametr2 == "test"){
+        elseif($sParametr2 == "testing"){
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;
             $iNomerZadaniya = $sParametr4;
