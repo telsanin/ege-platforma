@@ -227,6 +227,7 @@ else {
                     <li><a class="uk-active" href="/telsanin/daniil/informatika/dz-uchenika">Дз</a></li>
                     <li><a href="/telsanin/daniil/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/daniil/informatika/20">Задание 20</a></li>
                     <li><a href="/telsanin/daniil/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/daniil/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/daniil/informatika/16">Задание 16</a></li>
@@ -242,6 +243,7 @@ else {
                     <li><a class="uk-active" href="/telsanin/artem/informatika/dz-uchenika">Дз</a></li>
                     <li><a href="/telsanin/artem/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/artem/informatika/20">Задание 20</a></li>
                     <li><a href="/telsanin/artem/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/artem/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/artem/informatika/16">Задание 16</a></li>
@@ -257,6 +259,7 @@ else {
                     <li><a class="uk-active" href="/telsanin/egor/informatika/dz-uchenika">Дз</a></li>
                     <li><a href="/telsanin/egor/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/egor/informatika/20">Задание 20</a></li>
                     <li><a href="/telsanin/egor/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/egor/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/egor/informatika/16">Задание 16</a></li>
@@ -272,6 +275,7 @@ else {
                     <li><a class="uk-active" href="/telsanin/amir/informatika/dz-uchenika">Дз</a></li>
                     <li><a href="/telsanin/amir/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/amir/informatika/20">Задание 20</a></li>
                     <li><a href="/telsanin/amir/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/amir/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/amir/informatika/16">Задание 16</a></li>
@@ -287,10 +291,27 @@ else {
                     <li><a class="uk-active" href="/telsanin/aleksandr/informatika/dz-uchenika">Дз</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/urok-uchenika">Урок</a></li>
                     <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/aleksandr/informatika/20">Задание 20</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/11">Задание 11</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/8">Задание 8</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/16">Задание 16</a></li>
                     <li><a href="/telsanin/aleksandr/informatika/1">Задание 1</a></li>
+                </ul>
+            </li>
+            <li class="uk-parent">
+                <a href="#">ИЛЬЯ</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="/telsanin/ilya/informatika/dz">Дз - проверка</a></li>
+                    <li><a href="/telsanin/ilya/informatika/urok">Урок - проведение</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a class="uk-active" href="/telsanin/ilya/informatika/dz-uchenika">Дз</a></li>
+                    <li><a href="/telsanin/ilya/informatika/urok-uchenika">Урок</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li><a href="/telsanin/ilya/informatika/20">Задание 20</a></li>
+                    <li><a href="/telsanin/ilya/informatika/11">Задание 11</a></li>
+                    <li><a href="/telsanin/ilya/informatika/8">Задание 8</a></li>
+                    <li><a href="/telsanin/ilya/informatika/16">Задание 16</a></li>
+                    <li><a href="/telsanin/ilya/informatika/1">Задание 1</a></li>
                 </ul>
             </li>
         </ul>
