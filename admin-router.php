@@ -10,6 +10,10 @@ $sParametr3 = explode( '/', $sUrl )[2];
 $sParametr4 = explode( '/', $sUrl )[3];
 $sParametr5 = explode( '/', $sUrl )[4];
 
+//подключаем функцию логгинга чего угодно; include: если файла не будет - выдастся Warning и работа продолжится
+//работает так: logger('любой текст');
+include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
+
 if($sUrl == "telsanin" or $sUrl == "telsanin/") {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/telsanin.php";
 }
