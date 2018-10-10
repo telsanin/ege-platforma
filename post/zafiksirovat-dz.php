@@ -61,7 +61,12 @@ if($res->data_seek(0)) {
 
 //добавим строку в таблицу otchet
 
+
+
 $SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextZadachi."', '".$sDate."');";//выполним запрос
+
+logger($SqlQuery);
+
 $res = $mysqli->query($SqlQuery);
 
 //-добавим строку в таблицу otchet
