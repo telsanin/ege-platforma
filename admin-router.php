@@ -7,6 +7,7 @@
 //подключаем функцию логгинга чего угодно; include: если файла не будет - выдастся Warning и работа продолжится
 //работает так: logger('любой текст');
 //include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
+//
 
 //$sParametr1 = explode( '/', $sUrl )[0];
 $sParametr2 = explode( '/', $sUrl )[1];
