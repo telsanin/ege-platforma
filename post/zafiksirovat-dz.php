@@ -65,6 +65,9 @@ if($res->data_seek(0)) {
 
 $SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextZadachi."', '".$sDate."');";//выполним запрос
 
+//подключаем функцию логгинга чего угодно; include: если файла не будет - выдастся Warning и работа продолжится
+//работает так: logger('любой текст');
+include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
 logger($SqlQuery);
 
 $res = $mysqli->query($SqlQuery);
