@@ -20,7 +20,7 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
 echo "<b>Задачи</b>: ";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND `aktualno`=1 AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND `aktualno`=1 AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 
 echo "(".mysqli_num_rows($res).")";
@@ -95,8 +95,26 @@ while ($row = $res->fetch_assoc()) {
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 
-    echo "<b>Ответ: </b></br>" . $row['pravilnyi-otvet'];
-    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
+    echo "<b>Ответ: </b>" . $row['pravilnyi-otvet']."</br>";
+
+    if($row['reshenie'])
+        echo "</br><b>Решение:</b></br>".$row['reshenie']."</br>";
+//        echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
+
+    if($row['kolichestvo-popytok'])
+        echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
+
+    if ($row['kolichestvo-popytok'] > 0)
+        if ($row['resheno-pravilno'])
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+        else
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+
+    //если решено правильно с 1й попытки и не отмечено "все плохо"
+    $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
+    if ($row['razobrat-na-zanyatii'])
+        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
+    //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
     echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok-uchenika' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>-</label>";
     echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok-uchenika' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";
@@ -107,17 +125,9 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
     echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
 
-    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
-    if ($row['kolichestvo-popytok'] > 0)
-        if ($row['resheno-pravilno'])
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
-        else
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
-    else
-        echo "</br>";
-    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
+//    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
 
-    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['id-podtemy']."'>разактуализировать пред подтемы (и пред задания) и -> в отчет</button>";
+    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разактуализировать пред подтемы (и пред задания) и -> в отчет</button>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
     echo "</div>";

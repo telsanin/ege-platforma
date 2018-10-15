@@ -15,7 +15,7 @@
     <tr>	<td>	17:05	</td><td>	Егор        </td><td>	Андрей	</td><td>	Елизавета	</td><td>	Андрей	</td><td>	Владимир	</td>	</tr>
     <tr>	<td>	18:10	</td><td>		        </td><td>		    </td><td>		        </td><td>	Артем	</td><td>	Даниил	    </td>	</tr>
     <tr>	<td>	19:15	</td><td>	Амир        </td><td>	Илья    </td><td>		        </td><td>	Артем	</td><td>		        </td>	</tr>
-    <tr>	<td>	20:20	</td><td>	Александр   </td><td>		    </td><td>   Анастасия   </td><td>           </td><td>	Александр	</td>	</tr>
+    <tr>	<td>	20:20	</td><td>	Александр   </td><td>		    </td><td>   Анастасия   </td><td>   Денис   </td><td>	Александр	</td>	</tr>
     </tbody></table></br>
 
 
@@ -46,6 +46,7 @@ if($res1->data_seek(0)) {
                 $iVsego = 0;
                 $iReshal = 0;
                 $iPravilno = 0;
+                $iNepravilno = 0;
                 $iSumPopytok = 0;
                 $iSumVremya = 0;
                 $iOtmechenoRazobrat = 0;
@@ -56,6 +57,8 @@ if($res1->data_seek(0)) {
                         $iReshal++;
                     if ($row['resheno-pravilno'])
                         $iPravilno++;
+                    if ($row['kolichestvo-popytok']&&!$row['resheno-pravilno'])
+                        $iNepravilno++;
                     $iSumPopytok += $row['kolichestvo-popytok'];
                     $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
                     if ($row['razobrat-na-zanyatii'])
@@ -65,9 +68,14 @@ if($res1->data_seek(0)) {
                     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
                     $iSredVremya = (int)($iSumVremya / $iReshal);
                     echo "Всего было задано: ".$iVsego."</br>";
-                    echo "Попытался решить: " .$iReshal."</br>";
+//                    echo "Попытался решить: " .$iReshal."</br>";
+                    if($iPravilno)
+                        echo "<font color='lime'>Правильно: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+                    if($iNepravilno)
+                        echo "<font color='red'>Неправильно: </font>".$iNepravilno."</br>";
+                    if($iVsego-$iReshal)
+                        echo "<font color='magenta'>Не решал: </font>".($iVsego-$iReshal)."</br>";
                     echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
-                    echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iReshal * 100)."%)</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
                     if($iPravilno)
                         echo $sPopytki;

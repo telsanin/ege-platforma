@@ -184,6 +184,7 @@ $(function(){
      $(".zakonchili-na-etom").click(function(e) {
 
         sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
         iIdZadachi=$(this).attr("id").substring(18);
         if($(this).prop("checked")) {
             iCheckBox = 1
@@ -201,8 +202,11 @@ $(function(){
             "/post/zakonchili-na-etom.php",
             {
                 suchenik: sUchenik,
+                spredmet: sPredmet,
                 idzadachi: iIdZadachi,
                 icheckbox: iCheckBox,
+            }, function(response){
+                location.reload();
             }
         );
         //--обновим таблицу uchenik-zadachi
@@ -212,16 +216,19 @@ $(function(){
 
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
-        iIdPodtemy=$(this).attr("id").substring(17);
+        // iIdPodtemy=$(this).attr("id").substring(17);
         iNomerZadaniya = $(this).parent().children('.zadanie').html();
+        iSortirovka = $(this).attr("id").substring(17);
+
         //обновим таблицу uchenik-zadachi
         $.post(
             "/post/update-otchet.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-                idpodtemy: iIdPodtemy,
+                // idpodtemy: iIdPodtemy,
                 izadanie: iNomerZadaniya,
+                isortirovka: iSortirovka,
             },
             function(response){
                 //обновим таблицу uchenik-zadachi
@@ -230,8 +237,9 @@ $(function(){
                     {
                         suchenik: sUchenik,
                         spredmet: sPredmet,
-                        idpodtemy: iIdPodtemy,
+                        // idpodtemy: iIdPodtemy,
                         izadanie: iNomerZadaniya,
+                        isortirovka: iSortirovka,
                     },
                     function(response){
                         location.reload();
@@ -488,7 +496,7 @@ $(function(){
 
     $("#import-zadach-ucheniku-urok").click(function(e){
 
-        c.c('urok');
+        // c.c('urok');
 
         sUchenik = $('#uchenik').val();
         sPredmet = $('#predmet').val();
@@ -536,6 +544,7 @@ $(function(){
 
         sUchenik = $('#uchenik').val();
         sPredmet = $('#predmet').val();
+        iNomerZadaniya = $('#zadanie').val();
         iNomerZadaniya = $('#zadanie').val();
 
         //c.c(sUchenik);
@@ -644,6 +653,8 @@ $(function(){
         // c.c('test');
 
         sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iZadanie = $('#zadanie').val();
         iTaskNumber = $(this).attr("id").substring(10);
 
         // if($(this).attr('id').indexOf("none")>0){
@@ -655,8 +666,12 @@ $(function(){
         //     iVUrok=1;
         // }
 
+
+        // c.c($('#result'+$(this).attr("id").substring(10)).html());
+        // c.c($('#result'+$(this).attr("id").substring(10)).html()!=undefined);
+
         reshal=0;
-        if($('#reshal-'+$(this).attr("id").substring(10)).prop('checked'))
+        if($('#result'+$(this).attr("id").substring(10)).html()!=undefined)
             reshal=1;
 
         if($(this).attr('id').indexOf("none")>0){
@@ -699,8 +714,26 @@ $(function(){
                 idzadachi: iTaskNumber,
                 ivurok: iVUrok,
                 suchenik: sUchenik,
+            },function(response) {
+                $.post(
+                    "/post/top-block.php",
+                    {
+                        suchenik: sUchenik,
+                        spredmet: sPredmet,
+                        izadanie: iZadanie,
+                    },
+                    function(response){
+                        jTopBlock = JSON.parse(response);
+                        c.c(jTopBlock);
+                        $('#TopBlockReshenoVNigde').html(jTopBlock.TopBlockReshenoVNigde);
+                        $('#TopBlockReshenoVUroke').html(jTopBlock.TopBlockReshenoVUroke);
+                        $('#TopBlockReshenoVVydannomDz').html(jTopBlock.TopBlockReshenoVVydannomDz);
+                        $('#TopBlockVNigde').html(jTopBlock.TopBlockVNigde);
+                        $('#TopBlockVUroke').html(jTopBlock.TopBlockVUroke);
+                        $('#TopBlockVVydannomDz').html(jTopBlock.TopBlockVVydannomDz);
+                    }
+                );
             }
         );
-        //-сделать запрос на обновление поля urok таблицы zadacha
     });
 });

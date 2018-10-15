@@ -15,7 +15,7 @@
 
 <?php
 
-echo "<a href='/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br></br>";
+echo "<a href='/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br>";
 
 if($sUchenik=='artem')
     if($sPredmet=='matematika')
@@ -24,7 +24,7 @@ if($sUchenik=='artem')
         echo "<a href='/".$sUchenik."/matematika/dz'>Математика</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Информатика";
 ?>
 
-<p><b>ДОМАШНЕЕ ЗАДАНИЕ</b>:</p></br>
+<p><b>ДОМАШНЕЕ ЗАДАНИЕ:</b></p>
 
 <?php
 
@@ -60,7 +60,7 @@ if($res->data_seek(0)){
 $SqlQuery = "select count(`kolichestvo-popytok`) as count, `kolichestvo-popytok`  from `uchenik-zadachi` where `uchenik`='".$sUchenik."' and `predmet`='".$sPredmet."' and `urok`=2 and `aktualno`=1 and `resheno-pravilno`=1 group by `kolichestvo-popytok` asc;";
 if($res = $mysqli->query($SqlQuery)) {
 $res->data_seek(0);
-    $sPopytki = "<table><tbody><tr><td>Сколько задач</td><td>С какой попытки</td></tr>";
+    $sPopytki = "<table><tbody><tr><td>Сколько задач получилось</td><td>С какой попытки</td></tr>";
     while ($row = $res->fetch_assoc()) {
         $sPopytki .= "<tr><td>".$row['count']."</td><td>".$row['kolichestvo-popytok']."</td></tr>";
     }
@@ -73,41 +73,48 @@ if($res = $mysqli->query($SqlQuery)){
     $iVsego = 0;
     $iReshal = 0;
     $iPravilno = 0;
+    $iNePravilno = 0;
     $iSumPopytok = 0;
     $iSumVremya = 0;
     $iOtmechenoRazobrat = 0;
     $res->data_seek(0);
     while ($row = $res->fetch_assoc()) {
         $iVsego++;
-        if ($row['kolichestvo-popytok'])
+        if ($row['kolichestvo-popytok']) {
             $iReshal++;
-        if ($row['resheno-pravilno'])
+            if (!$row['resheno-pravilno'])
+                $iNePravilno++;
+        }
+        if ($row['resheno-pravilno']==1)
             $iPravilno++;
         $iSumPopytok += $row['kolichestvo-popytok'];
         $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
-    echo "Всего задач: ".$iVsego."</br>";
-    if ($iReshal) {
-        $iSredPopytok = round($iSumPopytok / $iReshal, 1);
-        $iSredVremya = (int)($iSumVremya / $iReshal);
-        echo "Попытался решить: ".$iReshal." (".round($iReshal / $iVsego * 100)."%)</br>";
-        echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+    echo "Всего задано: <b>".$iVsego."</b></br>";
+//     if ($iReshal) {
+        ($iReshal?$iSredPopytok = round($iSumPopytok / $iReshal, 1):"");
+        ($iReshal?$iSredVremya = (int)($iSumVremya / $iReshal):"");
+        echo ($iPravilno?"<font color='lime'>Получилось:</font> <b>".$iPravilno."</b> (".round($iPravilno/$iVsego * 100)."%)</br>":"");
+    echo ($iNePravilno?"<font color='red'>Не получилось:</font> <b>".$iNePravilno."</b></br>":"");
+    echo (($iVsego-$iReshal)?"<font color='magenta'>Не решал:</font> <b>".($iVsego-$iReshal)."</b></br>":"");
+    echo ($iOtmechenoRazobrat?"Отмечено \"не получается, разобрать на занятии\": ".$iOtmechenoRazobrat."</br>":"");
+//        echo "Попытался решить: ".$iReshal." (".round($iReshal / $iVsego * 100)."%)</br>";
+//        echo "Решено правильно: ".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
 //        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-        echo $sPopytki;
-        echo "Отмечено \"не получается, разобрать на занятии\": ".$iOtmechenoRazobrat."</br>";
-        echo "Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>";
-        echo "Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."</br>";
-    }
-    else {
-        echo "Попытался решить: -</br>";
-        echo "Решено правильно: -</br>";
-        echo "Отмечено \"не получается, разобрать на занятии\": -</br>";
-//        echo "Среднее количество попыток: -</br>";
-        echo "Среднее время выполнения: -</br>";
-        echo "Общее время выполнения: -</br>";
-    }
+    echo ($iSredVremya?"Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>":"");
+    echo ($iSumVremya?"Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."</br>":"");
+    echo ($iReshal?$sPopytki:"");
+//    }
+//    else {
+//        echo "Попытался решить: -</br>";
+//        echo "Решено правильно: -</br>";
+//        echo "Отмечено \"не получается, разобрать на занятии\": -</br>";
+////        echo "Среднее количество попыток: -</br>";
+//        echo "Среднее время выполнения: -</br>";
+//        echo "Общее время выполнения: -</br>";
+//    }
 }
 //-сформируем "задачную" часть отчета
 
@@ -120,8 +127,10 @@ if($res = $mysqli->query($SqlQuery)){
 //if($res->data_seek(0)){
     $res->data_seek(0);
 
-    echo "<p><b>Задачи</b>:</p></br>";
-    echo "<input type='checkbox' id='skryt-reshennye' ".($iSkrytReshennye?'checked':'')." /><label for='skryt-reshennye'>скрыть решенные правильно</label>";
+    if($iVsego) {
+        echo "<p><b>Задачи</b>:</p>";
+        echo "<input type='checkbox' id='skryt-reshennye' " . ($iSkrytReshennye ? 'checked' : '') . " /><label for='skryt-reshennye'>скрыть решенные правильно</label>";
+    }
 
     $iNumDZ = 1;
     $iOldIdPodtemy = 0;
@@ -154,7 +163,7 @@ if($res = $mysqli->query($SqlQuery)){
             //если это первая строка, инициализируем iIdPodtemy значением из первой строки
             $iOldNomerZadaniya = $iNomerZadaniya;
             $iOldIdPodtemy = $iIdPodtemy;
-            echo "</br></br>";
+            echo "</br>";
         }
         //-добавление горизонтальной полосы, разделяющией разные задания
 

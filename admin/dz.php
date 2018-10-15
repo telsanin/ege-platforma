@@ -101,7 +101,7 @@ echo "&nbsp;&nbsp";
 echo "<button class='zafiksirovat' id='zafiksirovat-poslezavtra'>Послез</button></br></br>";
 
 //Вопросы:
-echo "<p><b>Вопросы</b>:</p>";
+echo "<p><b>Вопросы</b>: (!если снимаешь - он как-бы ответил!)</p>";
 
 $SqlQuery = "SELECT * FROM `uchenik-voprosy`, `voprosy` WHERE `uchenik-voprosy`.`id-voprosa`=`voprosy`.`id-voprosa` AND `voprosy`.`predmet`='".$sPredmet."' AND `uchenik-voprosy`.`aktualno`=1 AND `uchenik-voprosy`.`uchenik`='".$sUchenik."';";
 if($res = $mysqli->query($SqlQuery)) {
@@ -127,13 +127,14 @@ echo "<button id='novye-sdelat-tekuschimi'>Новые сделать текущ�
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
 
-$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC;";
+$SqlQuery = "SELECT `zadacha`.`zadanie`, `zadacha`.`text-zadachi`, `zadacha`.`foto-teksta`, `uchenik-zadachi`.`sortirovka`, `uchenik-zadachi`.`uchenik`, `uchenik-zadachi`.`predmet`, `uchenik-zadachi`.`urok`, `uchenik-zadachi`.`id-zadachi`, `uchenik-zadachi`.`resheno-pravilno`, `uchenik-zadachi`.`vremya-vypolneniya`, `uchenik-zadachi`.`kolichestvo-popytok`, `uchenik-zadachi`.`reshali`, `uchenik-zadachi`.`razobrat-na-zanyatii`, `uchenik-zadachi`.`aktualno`, `uchenik-zadachi`.`zakonchili-na-etom` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`;";
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
     $tObscheeVremyaVypolneniya=0;
     $iNumDZ = 1;
     while ($row = $res->fetch_assoc()) {
 
+        echo "<div>";
         $tObscheeVremyaVypolneniya += (strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00"));
 
         //добавление горизонтальной полосы, разделяющией разные номера заданий
@@ -143,9 +144,9 @@ if($res = $mysqli->query($SqlQuery)) {
             if ($iZadanie != $iOldZadanie) {
                 //если задание изменилось
                 $iOldZadanie = $iZadanie;
-                echo "<hr style='height: 1px; background-color: black;'></br>";
+                echo "<hr style='height: 1px; background-color: black;'>";
             } else {
-                echo "</br>";
+//                echo "/";
             }
         else {
             //если это первая строка, инициализируем iIdPodtemy значением из первой строки
@@ -161,39 +162,48 @@ if($res = $mysqli->query($SqlQuery)) {
         if ($row['foto-teksta'])
             echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
 
-        $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
-        //вывод правильного ответа для тестирования
-        //echo "</br>".$row['pravilnyi-otvet'];
-        //-вывод правильного ответа для тестирования
-
-        //если решено правильно с 1й попытки и не отмечено "все плохо"
-        if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno']))
-            echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
-        //-если решено правильно с 1й попытки и не отмечено "все плохо"
-
-        if ($row['kolichestvo-popytok'] > 0)
-            if ($row['resheno-pravilno'])
-                echo "<div id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</div>";
-            else
-                echo "<div id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</div>";
-        else
-            if (!$row['razobrat-na-zanyatii'])
-                echo "<span id='result" . $row['id-zadachi'] . "' style='color: magenta;'>Не решал!</span></br>";
-        if ($row['kolichestvo-popytok'] > 0)
-            echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-
         //если решено правильно с 1й попытки и не отмечено "все плохо"
         if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno'])) {
-            echo "Правильный ответ:</br>" . $row['pravilnyi-otvet'];
-            echo "</br>Решение:</br>" . ($row['reshenie'] ? $row['reshenie'] : "-");
+            echo "Ответ: " . $row['pravilnyi-otvet'];
+            if($row['reshenie'])
+                echo "</br>Решение:</br>" . $row['reshenie'];
+//              echo "</br>Решение:</br>" . ($row['reshenie'] ? $row['reshenie'] : "-");
             echo "</br>";
         }
         //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
-        echo $row['vremya-vypolneniya'] . "</br>";
-        echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno" . $row['id-zadachi'] . "' " . ($row['aktualno'] > 0 ? "checked" : "") . "><label for='aktualno" . $row['id-zadachi'] . "'>актуально</label></br></br>";
+        //вывод правильного ответа для тестирования
+        //echo "</br>".$row['pravilnyi-otvet'];
+        //-вывод правильного ответа для тестирования
+
+        if ($row['kolichestvo-popytok'] > 0)
+            if ($row['resheno-pravilno'])
+                echo "<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>";
+            else
+                echo "<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>";
+        else
+            if (!$row['razobrat-na-zanyatii'])
+                echo "<span id='result" . $row['id-zadachi'] . "' style='color: magenta;'>Не решал!</span>";
+
+        if ($row['kolichestvo-popytok'] > 0)
+            echo "&nbsp;&nbsp;&nbsp;<span id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'></span>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</span>&nbsp;&nbsp;&nbsp;".$row['vremya-vypolneniya'];
+
+        //если решено правильно с 1й попытки и не отмечено "все плохо"
+        $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
+        if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno']))
+            echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
+        //-если решено правильно с 1й попытки и не отмечено "все плохо"
+
+//        echo ;
+        echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno" . $row['id-zadachi'] . "' " . ($row['aktualno'] > 0 ? "checked" : "") . "><label for='aktualno" . $row['id-zadachi'] . "'>актуально</label></br>";
+
+        echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok-uchenika' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>-</label>";
+        echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok-uchenika' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";
+        echo "<input ".($row['urok']==2?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzvy".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='2'><label for='radio-dzvy".$row['id-zadachi']."'>в выданном дз</label>";
+        echo "<input ".($row['urok']==3?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzdz".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='3'><label for='radio-dzdz".$row['id-zadachi']."'>в новом дз</label></br></br>";
 
     }
+
 }
 echo "Всего: ".date("H:i:s",intval($tObscheeVremyaVypolneniya)-3*3600)."</br></br>";
 //приходится вычитать 3 часа из-за часовых поясов
