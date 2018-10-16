@@ -92,6 +92,12 @@ if($res = $mysqli->query($SqlQuery)){
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
+
+    if($iVsego) {
+        echo "<p><b>Задачи</b>:</p>";
+        echo "<input type='checkbox' id='skryt-reshennye' " . ($iSkrytReshennye ? 'checked' : '') . " /><label for='skryt-reshennye'>скрыть решенные правильно</label></br>";
+    }
+
     echo "Всего задано: <b>".$iVsego."</b></br>";
 //     if ($iReshal) {
         ($iReshal?$iSredPopytok = round($iSumPopytok / $iReshal, 1):"");
@@ -105,7 +111,7 @@ if($res = $mysqli->query($SqlQuery)){
 //        echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
     echo ($iSredVremya?"Среднее время выполнения: ".gmdate("H:i:s", $iSredVremya)."</br>":"");
     echo ($iSumVremya?"Общее время выполнения: ".gmdate("H:i:s", $iSumVremya)."</br>":"");
-    echo ($iReshal?$sPopytki:"");
+    echo ($iPravilno?$sPopytki:"");
 //    }
 //    else {
 //        echo "Попытался решить: -</br>";
@@ -120,17 +126,12 @@ if($res = $mysqli->query($SqlQuery)){
 
 echo "</br>";
 
-$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
+$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 if($sParametr4=="sort")
-    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC;";
+    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 if($res = $mysqli->query($SqlQuery)){
 //if($res->data_seek(0)){
     $res->data_seek(0);
-
-    if($iVsego) {
-        echo "<p><b>Задачи</b>:</p>";
-        echo "<input type='checkbox' id='skryt-reshennye' " . ($iSkrytReshennye ? 'checked' : '') . " /><label for='skryt-reshennye'>скрыть решенные правильно</label>";
-    }
 
     $iNumDZ = 1;
     $iOldIdPodtemy = 0;

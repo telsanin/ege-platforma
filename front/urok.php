@@ -10,7 +10,7 @@
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`id-podtemy`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $iNumDZ = 1;
@@ -25,7 +25,8 @@ while ($row = $res->fetch_assoc()) {
         if($iNomerZadaniya!=$iOldNomerZadaniya){
             //если задание изменилось
             $iOldNomerZadaniya=$iNomerZadaniya;
-            echo "</br></br><hr style='height: 1px; background-color: black;'></br>";
+//            echo "</br></br><hr style='height: 1px; background-color: black;'></br>";
+            echo "</br></br>===</br>";
         }
         else{
             //добавление горизонтальной полосы, разделяющией разные подтемы
@@ -33,7 +34,8 @@ while ($row = $res->fetch_assoc()) {
             if($iIdPodtemy!=$iOldIdPodtemy){
                 //если подтема изменилась
                 $iOldIdPodtemy=$iIdPodtemy;
-                echo "</br></br><hr></br>";
+//                echo "</br></br><hr></br>";
+                echo "</br></br>---</br>";
             }
             else{
                 echo "</br></br>";

@@ -67,10 +67,10 @@ if($res->data_seek(0)){
         echo $row['zanyatie'];
         if($row['zelenyi-kommentarii']||$row['krasnyi-kommentarii']) {
 //            echo "<span style='color: blue;'>Комментарий: </span></br>";
-            if ($row['zelenyi-kommentarii'])
-                echo "<span style='color: blue;'>" . $row['zelenyi-kommentarii'] . "</span></br>";
             if ($row['krasnyi-kommentarii'])
                 echo "<span style='color: red;'>" . $row['krasnyi-kommentarii'] . "</span></br>";
+            if ($row['zelenyi-kommentarii'])
+                echo "<span style='color: blue;'>" . $row['zelenyi-kommentarii'] . "</span></br>";
         }
         echo "</br>";
     }

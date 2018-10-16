@@ -70,17 +70,17 @@ if($res1->data_seek(0)) {
                     echo "Всего было задано: ".$iVsego."</br>";
 //                    echo "Попытался решить: " .$iReshal."</br>";
                     if($iPravilno)
-                        echo "<font color='lime'>Правильно: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+                        echo "<font color='lime'>Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
                     if($iNepravilno)
-                        echo "<font color='red'>Неправильно: </font>".$iNepravilno."</br>";
+                        echo "<font color='red'>Не получилось: </font>".$iNepravilno."</br>";
                     if($iVsego-$iReshal)
                         echo "<font color='magenta'>Не решал: </font>".($iVsego-$iReshal)."</br>";
                     echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
-                    if($iPravilno)
-                        echo $sPopytki;
                     echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
                     echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
+                    if($iPravilno)
+                        echo $sPopytki;
                 } else {
                     echo "Всего было задано: ".$iVsego."</br>";
                 }

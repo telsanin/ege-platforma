@@ -15,7 +15,7 @@ $iZadanie=$_POST["izadanie"];
 
 //сформируем SQL-запрос
 //$SqlQuery = "select `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count from `uchenik-zadachi`, zadacha where `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iZadanie." group by `uchenik-zadachi`.urok;";
-$SqlQuery = "select `resheno-pravilno`, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count from `uchenik-zadachi`, zadacha where `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie='".$iZadanie."' group by `uchenik-zadachi`.`resheno-pravilno`, `uchenik-zadachi`.urok;";
+$SqlQuery = "SELECT IF(`resheno-pravilno`,1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iZadanie." group by rp, `uchenik-zadachi`.urok;";
 //выполним запрос
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
@@ -26,7 +26,7 @@ if($res = $mysqli->query($SqlQuery)) {
     $aTopBlock['TopBlockVUroke']=0;
     $aTopBlock['TopBlockVVydannomDz']=0;
     while ($row = $res->fetch_assoc()){
-        if($row['resheno-pravilno']) {
+        if($row['rp']) {
             switch ($row['urok']) {
                 case 0:
                     $aTopBlock['TopBlockReshenoVNigde'] = $row['count'];

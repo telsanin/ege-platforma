@@ -18,11 +18,11 @@ $aTopBlock[1][0]=0;
 $aTopBlock[1][1]=0;
 $aTopBlock[1][2]=0;
 
-$SqlQuery = "select `resheno-pravilno`, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count from `uchenik-zadachi`, zadacha where `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by `uchenik-zadachi`.`resheno-pravilno`, `uchenik-zadachi`.urok;";
+$SqlQuery = "SELECT IF(`resheno-pravilno`,1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
     while ($row = $res->fetch_assoc()){
-        if($row['resheno-pravilno'])
+        if($row['rp'])
             $aTopBlock[1][$row['urok']]=$row['count'];
         else
             $aTopBlock[0][$row['urok']]=$row['count'];
@@ -33,18 +33,21 @@ if($res = $mysqli->query($SqlQuery)) {
 echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
     echo "<div>";
     echo "<font color='Gray'>---: <span id='TopBlockReshenoVNigde'>".$aTopBlock[1][0]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='RoyalBlue'>в уроке: <span id='TopBlockReshenoVUroke'>".$aTopBlock[1][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='IndianRed'>в выданном дз: <span id='TopBlockReshenoVVydannomDz'>".$aTopBlock[1][2]."</span></font>";
+    echo "<font color='RoyalBlue'>сделано: <span id='TopBlockReshenoVUroke'>".$aTopBlock[1][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+    echo "<font color='IndianRed'>сделано: <span id='TopBlockReshenoVVydannomDz'>".$aTopBlock[1][2]."</span></font>";
     echo "</div>";
     echo "<div>";
     echo "---: <span id='TopBlockVNigde'>".$aTopBlock[0][0]."</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
     echo "<font color='blue'>в уроке: <span id='TopBlockVUroke'>".$aTopBlock[0][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
     echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>".$aTopBlock[0][2]."</span></font>";
     echo "</div>";
+    echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+    echo "<button id='urok'>урок</button>&nbsp;";
+    echo "<button id='dz'>дз</button>&nbsp;";
+    echo "<button id='otchet'>отчет</button>";
 echo "</div>";
 
-echo "</br>";
-echo "</br>";
+echo "</br></br></br>";
 if($iNomerZadaniya=='')
     echo "<span style='color:red;'>введите в URL номер задания!</span></br>";
 
@@ -173,7 +176,7 @@ while ($row = $res->fetch_assoc()) {
                 echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>";
                 break;
             case 2:
-                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: black;'>На занятии</span>";
+                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span>";
                 break;
         }
         echo "</br>";
@@ -182,6 +185,8 @@ while ($row = $res->fetch_assoc()) {
     if($row['reshenie'])
 //        echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
         echo "<b>Решение:</b></br>".$row['reshenie']."</br>";
+
+    echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['resheno-pravilno']."'/>";
 
     echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok-uchenika' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>---</label>";
     echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok-uchenika' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";

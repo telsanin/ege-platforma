@@ -4,6 +4,50 @@
 
 $(function(){
 
+    $("#dz").click(function(e) {
+        expl = location.pathname.split('/');
+        if($('#rejim').prop('checked')) {
+            if (location.pathname.indexOf('-uchenika') != -1)
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'dz'+'-uchenika';
+        }
+        else
+        if (location.pathname.indexOf('-uchenika') == -1)
+            location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'dz';
+    });
+
+    $("#urok").click(function(e) {
+        expl = location.pathname.split('/');
+        if($('#rejim').prop('checked')) {
+            if (location.pathname.indexOf('-uchenika') != -1)
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'urok'+'-uchenika';
+        }
+        else
+            if (location.pathname.indexOf('-uchenika') == -1)
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'urok';
+    });
+
+    $("#otchet").click(function(e) {
+        expl = location.pathname.split('/');
+        if($('#rejim').prop('checked')) {
+            if (location.pathname.indexOf('-uchenika') != -1)
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'otchet'+'-uchenika';
+        }
+        else
+        if (location.pathname.indexOf('-uchenika') == -1)
+            location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'otchet';
+    });
+
+    $("#rejim").click(function(e) {
+        if(location.pathname.indexOf('dz')!=-1||location.pathname.indexOf('urok')!=-1||location.pathname.indexOf('otchet')!=-1)
+            if($(this).prop('checked')) {
+                if (location.pathname.indexOf('-uchenika') == -1)
+                    location.pathname += '-uchenika';
+            }
+            else
+                if (location.pathname.indexOf('-uchenika') != -1)
+                    location.pathname=location.pathname.slice(0, location.pathname.indexOf('-uchenika'));
+    });
+
     $(".data-zanyatiya-input").focusout(function(e) {
 
         sUchenik=$('#uchenik').val();
@@ -413,6 +457,7 @@ $(function(){
     $(".otvetil").click(function(e) {
 
         sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
         iVoprosNumber=$(this).attr("id").substring(7);
 
         if($(this).prop('checked'))
@@ -426,6 +471,7 @@ $(function(){
             "/post/rasskazal.php",
             {
                 uchenik: sUchenik,
+                predmet: sPredmet,
                 ivoprosnumber: iVoprosNumber,
                 iaktualno: iAktualen,
             }
@@ -609,16 +655,16 @@ $(function(){
 
         sUchenik = $('#uchenik').val();
         sPredmet = $('#predmet').val();
-        iUrok = $(this).val();
         iZadanie = $('#zadanie').val();
+        iUrok = $(this).val();
 
         $.post(
             "/post/nereshennye-v-urok-uchenika.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-                surok: iUrok,
                 izadanie: iZadanie,
+                surok: iUrok,
             },
             function(response){
                 location.reload();
@@ -671,8 +717,13 @@ $(function(){
         // c.c($('#result'+$(this).attr("id").substring(10)).html()!=undefined);
 
         reshal=0;
-        if($('#result'+$(this).attr("id").substring(10)).html()!=undefined)
-            reshal=1;
+        // if($('#reshal-'+$(this).attr("id").substring(10)).html()!=undefined)
+        reshal=1*$('#reshal-'+$(this).attr("id").substring(10)).val();
+
+        // c.c('#reshal-'+$(this).attr("id").substring(10));
+        // c.c($('#reshal-'+$(this).attr("id").substring(10)).val());
+
+        // c.c(reshal);
 
         if($(this).attr('id').indexOf("none")>0){
             if(reshal)
@@ -724,7 +775,7 @@ $(function(){
                     },
                     function(response){
                         jTopBlock = JSON.parse(response);
-                        c.c(jTopBlock);
+                        // c.c(jTopBlock);
                         $('#TopBlockReshenoVNigde').html(jTopBlock.TopBlockReshenoVNigde);
                         $('#TopBlockReshenoVUroke').html(jTopBlock.TopBlockReshenoVUroke);
                         $('#TopBlockReshenoVVydannomDz').html(jTopBlock.TopBlockReshenoVVydannomDz);

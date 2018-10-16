@@ -1,8 +1,15 @@
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
-
 <input type="hidden" id="last-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
+
+<button id='urokdz'>урок-дз</button>
+<button id="urok">урок</button>
+<button id="dz">дз</button>
+<button id="otchet">отчет</button>
+<input id="rejim" type="checkbox" /><label for="rejim">Ученик</label>
+</br></br>
+
 <?php
 /*
 административная часть сайта
@@ -15,7 +22,7 @@
 <?php
 
 echo "ЗАНЯТИЕ - проведение</b></br>";
-echo "ученик: <b>".$sUchenik."</b></br>";
+echo "ученик: <b>".$sUchenik."</b>&nbsp;&nbsp;&nbsp;";
 echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
@@ -127,7 +134,7 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
 
-    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разактуализировать пред подтемы (и пред задания) и -> в отчет</button>";
+    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разактуализировать пред задания и -> в отчет</button>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
     echo "</div>";

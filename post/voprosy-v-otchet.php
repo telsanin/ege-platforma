@@ -28,14 +28,14 @@ if($res->data_seek(0))
     }
 //-сформируем "вопросную" часть отчета
 
-//сделаем все поля `otvetil` этого ученика = 0
-$SqlQuery = "UPDATE `uchenik-voprosy` SET `otvetil`=0 WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
-$res = $mysqli->query($SqlQuery);
-//-сделаем все поля `otvetil` этого ученика = 0
-
 //обновим строку таблицы otchet
 //$iCurDate=date('d.m.Y', ((int) time()/60/60/24)*24*60*60);
 $dCurDate=date('Y.m.d');
 $SqlQuery = "UPDATE `otchet` SET `dz-voprosy`='".$TextVoprosy."' WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."' AND `date`='".$dCurDate."';";
 $res = $mysqli->query($SqlQuery);
 //-обновим строку таблицы otchet
+
+//сделаем все поля `otvetil` этого ученика = 0
+$SqlQuery = "UPDATE `uchenik-voprosy` SET `otvetil`=0 WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$res = $mysqli->query($SqlQuery);
+//-сделаем все поля `otvetil` этого ученика = 0

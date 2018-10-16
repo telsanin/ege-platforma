@@ -43,6 +43,12 @@ else {
             $sUchenik=$sParametr2;
             $sPredmet=$sParametr3;
             $iNomerZadaniya=$sParametr4;
+            echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+            echo "<button id='urok'>урок</button>&nbsp;";
+            echo "<button id='dz'>дз</button>&nbsp;";
+            echo "<button id='otchet'>отчет</button>&nbsp;";
+            echo "<input id='rejim' type='checkbox' checked /><label for='rejim'>Ученик</label>";
+            echo "</br>";
             include_once $_SERVER['DOCUMENT_ROOT']."/front/urok.php";
         }
         //http://ege-platforma.local/telsanin/egor/matematika/dz
@@ -57,12 +63,35 @@ else {
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;
             $iNomerZadaniya = $sParametr4;
+            echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+            echo "<button id='urok'>урок</button>&nbsp;";
+            echo "<button id='dz'>дз</button>&nbsp;";
+            echo "<button id='otchet'>отчет</button>&nbsp;";
+            echo "<input id='rejim' type='checkbox' checked /><label for='rejim'>Ученик</label>";
+            echo "</br></br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/front/dz.php";
         }
         elseif($sParametr4 == "otchet"){
             $sUchenik = $sParametr2;
             $sPredmet = $sParametr3;
+            echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+            echo "<button id='urok'>урок</button>&nbsp;";
+            echo "<button id='dz'>дз</button>&nbsp;";
+            echo "<button id='otchet'>отчет</button>&nbsp;";
+            echo "<input id='rejim' type='checkbox' /><label for='rejim'>Ученик</label>";
+            echo "</br></br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/otchet.php";
+        }
+        elseif($sParametr4 == "otchet-uchenika"){
+            $sUchenik = $sParametr2;
+            $sPredmet = $sParametr3;
+            echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+            echo "<button id='urok'>урок</button>&nbsp;";
+            echo "<button id='dz'>дз</button>&nbsp;";
+            echo "<button id='otchet'>отчет</button>&nbsp;";
+            echo "<input id='rejim' type='checkbox' checked /><label for='rejim'>Ученик</label>";
+            echo "</br></br>";
+            include_once $_SERVER['DOCUMENT_ROOT'] . "/front/otchet.php";
         }
         elseif($sParametr2 == "testing"){
             $sUchenik = $sParametr2;

@@ -122,60 +122,10 @@ function load_data($file, $column_divider, $table_name){
 
     fclose($file_name);
 
+    include_once $_SERVER['DOCUMENT_ROOT']."/post/sortirovka.php";
 
-    $SqlQuery = "SET @old_predmet = '';
-    SET @old_zadanie = -1;
-    SET @old_id_podtemy = -1;
-    SET @num = 0;
-    
-    update `zadacha` inner join (
-    select @num := CASE 
-    WHEN (@old_predmet <> `predmet`) OR (@old_zadanie <> `zadanie`) THEN 10
-    ELSE 
-        CASE 
-        WHEN @old_id_podtemy <> `id-podtemy` THEN @num+10
-        ELSE @num
-        END
-    END 
-    
-    AS `new-id-podtemy`,
-    `id-zadachi`,
-    `predmet`,
-    `zadanie`,
-    `id-podtemy`,
-    @old_predmet:=`predmet`,
-    @old_zadanie:=`zadanie`,
-    @old_id_podtemy:=`id-podtemy`
-    from `zadacha` ORDER BY `predmet`, `zadanie`, `id-podtemy`, `id-zadachi`) as s 
-    on `zadacha`.`id-zadachi`=`s`.`id-zadachi`
-    set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
-    ;";
-    //выполним запрос
-    $res = $mysqli->query($SqlQuery);
-
-
-    $SqlQuery = "SET @old_predmet = '';
-    SET @old_zadanie = -1;
-    SET @num = -1;
-    
-    update `zadacha` inner join (
-    select @num := CASE
-    WHEN (@old_predmet <> `predmet`) OR (@old_zadanie <> `zadanie`) THEN 1
-    ELSE @num + 1
-    END AS `new-sortirovka`,
-    `id-zadachi`,
-    `predmet`,
-    `zadanie`,
-    `id-podtemy`,
-    `sortirovka`,
-    @old_predmet:=`predmet`,
-    @old_zadanie :=`zadanie`
-    from `zadacha` ORDER BY `predmet`, `zadanie`, `id-podtemy`, `id-zadachi`, `sortirovka`) as s
-    on `zadacha`.`id-zadachi`=`s`.`id-zadachi`
-    set `zadacha`.`sortirovka`=`s`.`new-sortirovka`
-    ;";
-    //выполним запрос
-    $res = $mysqli->query($SqlQuery);
+    echo '&nbsp;&nbsp;Перенумерованы подтемы<br/>';
+    echo '&nbsp;&nbsp;Перенумерована сортировка<br/>';
 
     return $status;
 
