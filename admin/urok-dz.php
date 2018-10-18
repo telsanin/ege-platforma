@@ -18,7 +18,7 @@ $aTopBlock[1][0]=0;
 $aTopBlock[1][1]=0;
 $aTopBlock[1][2]=0;
 
-$SqlQuery = "SELECT IF(`resheno-pravilno`,1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
+$SqlQuery = "SELECT IF(`resheno-pravilno`>0,1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
     while ($row = $res->fetch_assoc()){
@@ -157,7 +157,8 @@ while ($row = $res->fetch_assoc()) {
 
     if($row['s-moimi-ciframi'])
         echo "С моими цифрами</br>";
-    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+//    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNum++ . "/".$num_rows.") ";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
@@ -206,12 +207,18 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label>&nbsp;&nbsp;&nbsp;";
 
 //    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
+
     echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
 
-//    echo "</br>";
-    echo "</div>";
+//    if($row['urok']==1)
+        echo "<button ".(!($row['urok']==1&&$row['resheno-pravilno']!=2)?"style='display:none;'":"")." class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button></br></br>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
+
+    echo "</div>";
+
+//    echo "";
+
 }
 
 //Вопросы:

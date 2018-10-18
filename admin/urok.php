@@ -64,7 +64,7 @@ while ($row = $res->fetch_assoc()) {
                 echo "</br><hr></br>";
             }
             else{
-                echo "</br></br>";
+                echo "</br>";
             }
             //-добавление горизонтальной полосы, разделяющией разные подтемы
         }
@@ -149,12 +149,13 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
     echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
 
-//    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
-
     echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
+
     echo "</div>";
+
+//    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
 
 }
 

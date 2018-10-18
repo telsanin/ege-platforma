@@ -754,6 +754,7 @@ $(function(){
             else
                 $(this).parent().css({'color': 'Black'});
             iVUrok=0;
+            $(this).parent().children('.razaktualizirovat').hide();
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("urok")>0){
@@ -762,6 +763,8 @@ $(function(){
             else
                 $(this).parent().css({'color': 'Blue'});
             iVUrok=1;
+            if(reshal!=2)
+                $(this).parent().children('.razaktualizirovat').show();
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzvy")>0){
@@ -770,6 +773,7 @@ $(function(){
             else
                 $(this).parent().css({'color': 'Red'});
             iVUrok=2;
+            $(this).parent().children('.razaktualizirovat').hide();
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzdz")>0){
@@ -778,6 +782,7 @@ $(function(){
             else
                 $(this).parent().css({'color': 'Green'});
             iVUrok=3;
+            $(this).parent().children('.razaktualizirovat').hide();
             // c.c($(this).parent().css('color'));
         }
 
