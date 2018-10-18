@@ -145,7 +145,7 @@ if($res = $mysqli->query($SqlQuery)) {
         echo "Всего было задано: ".$iVsego."</br>";
 //                    echo "Попытался решить: " .$iReshal."</br>";
         if($iPravilno)
-            echo "<font color='lime'>Поолучилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+            echo "<font color='lime'>Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
         if($iNepravilno)
             echo "<font color='red'>Не получилось: </font>".$iNepravilno."</br>";
         if($iVsego-$iReshal)

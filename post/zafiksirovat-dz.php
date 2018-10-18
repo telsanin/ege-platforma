@@ -42,20 +42,38 @@ if($res->data_seek(0)) {
             $iReshal++;
         if ($row['resheno-pravilno']==1)
             $iPravilno++;
-        $iSumPopytok += $row['kolichestvo-popytok'];
+        if ($row['resheno-pravilno']==-1)
+            $iNepravilno++;
+//        $iSumPopytok += $row['kolichestvo-popytok'];
         $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
     }
     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
     $iSredVremya = (int)($iSumVremya / $iReshal);
-    $TextZadachi .= "Попытался решить: " . $iReshal . " задач из " . $iVsego . " (" . round($iReshal / $iVsego * 100) . "%)</br>";
-    $TextZadachi .= "Решено правильно: " . $iPravilno . " (" . round($iPravilno / $iVsego * 100) . "%)</br>";
-    $TextZadachi .=$sPopytki;
-    //$TextZadachi.="Среднее количество попыток: ".$iSredPopytok."</br>";
-    $TextZadachi .= "Отмечено \"не получается, разобрать на занятии\": " . $iOtmechenoRazobrat . "</br>";
+//    $TextZadachi .= "Попытался решить: " . $iReshal . " задач из " . $iVsego . " (" . round($iReshal / $iVsego * 100) . "%)</br>";
+//    $TextZadachi .= "Решено правильно: " . $iPravilno . " (" . round($iPravilno / $iVsego * 100) . "%)</br>";
+//    $TextZadachi .=$sPopytki;
+//    //$TextZadachi.="Среднее количество попыток: ".$iSredPopytok."</br>";
+//    $TextZadachi .= "Отмечено \"не получается, разобрать на занятии\": " . $iOtmechenoRazobrat . "</br>";
+//    $TextZadachi .= "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
+//    $TextZadachi .= "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
+
+    $TextZadachi .= "Всего было задано: ".$iVsego."</br>";
+    if($iPravilno)
+        $TextZadachi .= "<font color=\"lime\">Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+    if($iNepravilno)
+        $TextZadachi .= "<font color=\"red\">Не получилось: </font>".$iNepravilno."</br>";
+    if($iVsego-$iReshal)
+        $TextZadachi .= "<font color=\"magenta\">Не решал: </font>".($iVsego-$iReshal)."</br>";
+    $TextZadachi .= "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
+//                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
     $TextZadachi .= "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
     $TextZadachi .= "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
+    if($iPravilno)
+        $TextZadachi .= $sPopytki;
+
+
 //-сформируем "задачную" часть отчета
 }
 
