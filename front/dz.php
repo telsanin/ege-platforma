@@ -185,7 +185,7 @@ if($res = $mysqli->query($SqlQuery)){
         //    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
         //        echo "<img src='/img/".$filename."'/></br>";
         if ($row['foto-teksta'])
-            echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
+            echo "<img src='/img/" . $row['foto-teksta'] . "'/></br></br>";
 
         $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
         //вывод правильного ответа для тестирования
