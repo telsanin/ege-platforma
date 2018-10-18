@@ -10,9 +10,10 @@
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
+$num_rows = mysqli_num_rows($res);
 $iNumDZ = 1;
 $iOldIdPodtemy = 0;
 $iOldNomerZadaniya = 0;
@@ -50,9 +51,22 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные задания
 
+    if($row['resheno-pravilno']>0)
+        echo "<div style='color: Gray;'>";
+    else
+        echo "<div style='color: Black;'>";
+
+    echo ($row['zakonchili-na-etom']?"<b>":"");
+
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
-    echo $iNumDZ++.") ";
+//    echo $iNumDZ++.") ";
+    echo $iNumDZ++ . "/".$num_rows.") ";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+
+    echo ($row['zakonchili-na-etom']?"</b>":"");
+
+    echo "</div>";
+
 }

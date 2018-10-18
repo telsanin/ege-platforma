@@ -35,12 +35,13 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
 echo "<b>Задачи</b>: ";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`resheno-pravilno`<>2 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zakonchili-na-etom` DESC, `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`resheno-pravilno`<>2 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zakonchili-na-etom` DESC, `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 
-echo "(".mysqli_num_rows($res).")";
+//echo "(".mysqli_num_rows($res).")";
 
 $res->data_seek(0);
+$num_rows = mysqli_num_rows($res);
 $iNumDZ = 1;
 $iOldIdPodtemy = 0;
 $iOldNomerZadaniya = 0;
@@ -105,7 +106,8 @@ while ($row = $res->fetch_assoc()) {
 //    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
     echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
-    echo $iNumDZ++.") ";
+//    echo $iNumDZ++.") ";
+    echo $iNumDZ++ . "/".$num_rows.") ";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
@@ -140,6 +142,10 @@ while ($row = $res->fetch_assoc()) {
         echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
     //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
+    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button></br>";
+
+    echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
+
     echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok-uchenika' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>-</label>";
     echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok-uchenika' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";
     echo "<input ".($row['urok']==2?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzvy".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='2'><label for='radio-dzvy".$row['id-zadachi']."'>в выданном дз</label>";
@@ -147,9 +153,6 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "<button class='zafiksirovat-vremya' id='zafiksirovat-vremya".$row['id-zadachi']."'>Зафиксировать время</button>&nbsp;";
 //    echo "<span id='fiks-vremya".$row['id-zadachi']."'></span></br>";
-    echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
-
-    echo "<button class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
 

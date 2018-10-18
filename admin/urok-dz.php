@@ -38,7 +38,7 @@ echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background:
     echo "</div>";
     echo "<div>";
     echo "---: <span id='TopBlockVNigde'>".$aTopBlock[0][0]."</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='blue'>в уроке: <span id='TopBlockVUroke'>".$aTopBlock[0][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+    echo "<font color='blue'>в уроке:&nbsp;&nbsp;&nbsp;<span id='TopBlockVUroke'>".$aTopBlock[0][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
     echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>".$aTopBlock[0][2]."</span></font>";
     echo "</div>";
     echo "<button id='urokdz'>урок-дз</button>&nbsp;";
@@ -58,7 +58,7 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
 
 //$SqlQuery = "SELECT * FROM `zadacha`, `zadachi-uchenika` WHERE `zadacha`.`id-zadachi`=`zadachi-uchenika`.`id-zadachi` ORDER BY `zadachi-uchenika`.`id-podtemy`;";
-$SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` ORDER BY `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT * FROM `zadacha`, `uchenik-zadachi` WHERE `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` ORDER BY `uchenik-zadachi`.`sortirovka`;";
 ?>
 
 <!--Урок</br>-->
@@ -194,6 +194,10 @@ while ($row = $res->fetch_assoc()) {
 
     echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['resheno-pravilno']."'/>";
 
+    echo "<button ".(!($row['urok']==1&&$row['resheno-pravilno']!=2)?"style='display:none;'":"")." class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button>";
+
+    echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
+
     echo "<input ".($row['urok']==0?"checked":"")." class='radio-v-urok-uchenika' id='radio-none".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='0'><label for='radio-none".$row['id-zadachi']."''>---</label>";
     echo "<input ".($row['urok']==1?"checked":"")." class='radio-v-urok-uchenika' id='radio-urok".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='1'><label for='radio-urok".$row['id-zadachi']."'>в урок</label>";
     echo "<input ".($row['urok']==2?"checked":"")." class='radio-v-urok-uchenika' id='radio-dzvy".$row['id-zadachi']."' name='urok".$row['id-zadachi']."' type='radio' value='2'><label for='radio-dzvy".$row['id-zadachi']."'>в выданном дз</label>";
@@ -201,17 +205,14 @@ while ($row = $res->fetch_assoc()) {
 
 
 //    echo "<button>Вверх</button>&nbsp;&nbsp;<bu7tton>Вниз</bu7tton></br>";
-    echo "</br>";
+    echo "</br></br>";
 
 //    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>&nbsp;&nbsp;&nbsp;";
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label>&nbsp;&nbsp;&nbsp;";
 
 //    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
 
-    echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
-
 //    if($row['urok']==1)
-        echo "<button ".(!($row['urok']==1&&$row['resheno-pravilno']!=2)?"style='display:none;'":"")." class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button></br></br>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
 
