@@ -98,11 +98,12 @@ echo "все:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
 echo "<input class='vse-radio-v-urok-uchenika' id='radio-urok' type='radio' value='1' /><label style='color: blue;' for='radio-urok'>в урок</label>";
 echo "<input class='vse-radio-v-urok-uchenika' id='radio-dzvy' type='radio' value='2' /><label style='color: red;' for='radio-dzvy'>в выданном дз</label>";
 
-echo "</br>";
+//echo "</br>";
 
-echo "нереш правиль: <input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-none' type='radio' value='0' /><label for='nereshennye-radio-none'>---</label>";
-echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-urok' type='radio' value='1' /><label style='color: blue;' for='nereshennye-radio-urok'>в урок</label>";
-echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzvy' type='radio' value='2' /><label style='color: red;' for='nereshennye-radio-dzvy'>в выданном дз</label>";
+//echo "нереш правиль: <input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-none' type='radio' value='0' /><label for='nereshennye-radio-none'>---</label>";
+//echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-urok' type='radio' value='1' /><label style='color: blue;' for='nereshennye-radio-urok'>в урок</label>";
+//echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzvy' type='radio' value='2' /><label style='color: red;' for='nereshennye-radio-dzvy'>в выданном дз</label>";
+
 //echo "<input class='nereshennye-radio-v-urok-uchenika' id='nereshennye-radio-dzdz' type='radio' value='3' /><label style='color: green;' for='nereshennye-radio-dzdz'>в новом дз</label></br></br>";
 
 
@@ -167,24 +168,28 @@ while ($row = $res->fetch_assoc()) {
 
     echo "</br>";
 
-    if ($row['kolichestvo-popytok'] > 0) {
-        switch ($row['resheno-pravilno']) {
-            case 1:
-                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>";
-                break;
-            case 0:
-                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>";
-                break;
-            case 2:
-                echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span>";
-                break;
-        }
-        echo "</br>";
+    switch ($row['resheno-pravilno']) {
+        case -1:
+            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+            break;
+        case 1:
+            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+            break;
+        case 2:
+            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span></br>";
+            break;
     }
+//    echo "</br>";
 
     if($row['reshenie'])
-//        echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
         echo "<b>Решение:</b></br>".$row['reshenie']."</br>";
+//        echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
+
+    //если решено правильно с 1й попытки и не отмечено "все плохо"
+    $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
+    if ($row['razobrat-na-zanyatii'])
+        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
+    //-если решено правильно с 1й попытки и не отмечено "все плохо"
 
     echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['resheno-pravilno']."'/>";
 
@@ -200,17 +205,10 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>&nbsp;&nbsp;&nbsp;";
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label>&nbsp;&nbsp;&nbsp;";
 
+//    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
+    echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
 
-    echo "<input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></br>";
-
-
-    //если решено правильно с 1й попытки и не отмечено "все плохо"
-    $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
-    if ($row['razobrat-na-zanyatii'])
-        echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
-    //-если решено правильно с 1й попытки и не отмечено "все плохо"
-
-    echo "</br>";
+//    echo "</br>";
     echo "</div>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");

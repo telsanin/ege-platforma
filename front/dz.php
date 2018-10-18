@@ -24,7 +24,7 @@ if($sUchenik=='artem')
         echo "<a href='/".$sUchenik."/matematika/dz'>Математика</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Информатика";
 ?>
 
-<p><b>ДОМАШНЕЕ ЗАДАНИЕ:</b></p>
+<p><b>ДОМАШНЕЕ ЗАДАНИЕ:</b></p></br>
 
 <?php
 
@@ -33,13 +33,16 @@ if($sUchenik=='artem')
 домашнее задание ученика
 */
 
-$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+$sSsylkaNaDzReshuEge="";
+$SqlQuery = "SELECT `kommentarii-k-tekuschemu-dz`, `skryt-reshennye`, `ssylka-na-dz-reshu-ege` FROM `uchenik-predmet` WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)){
     while ($row = $res->fetch_assoc()) {
+        $iSkrytReshennye=($row['skryt-reshennye']);
         if ($row['kommentarii-k-tekuschemu-dz'] != '')
             echo "<font color='blue'>Комментарий:</br>" . $row['kommentarii-k-tekuschemu-dz'] . "</font></br></br>";
-        $iSkrytReshennye=($row['skryt-reshennye']);
+        if ($row['ssylka-na-dz-reshu-ege'] != '')
+            $sSsylkaNaDzReshuEge = $row['ssylka-na-dz-reshu-ege'];
     }
 }
 
@@ -80,17 +83,21 @@ if($res = $mysqli->query($SqlQuery)){
     $res->data_seek(0);
     while ($row = $res->fetch_assoc()) {
         $iVsego++;
-        if ($row['kolichestvo-popytok']) {
+        if ($row['kolichestvo-popytok'])
             $iReshal++;
-            if (!$row['resheno-pravilno'])
-                $iNePravilno++;
-        }
         if ($row['resheno-pravilno']==1)
             $iPravilno++;
+        if ($row['resheno-pravilno']==-1)
+            $iNePravilno++;
         $iSumPopytok += $row['kolichestvo-popytok'];
         $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
         if ($row['razobrat-na-zanyatii'])
             $iOtmechenoRazobrat++;
+    }
+
+    if($sSsylkaNaDzReshuEge) {
+        echo "<font color='blue'>Предлагаю дополнительно решить</font></br>";
+        echo "<a target='blanc' href='" . $sSsylkaNaDzReshuEge . "'>Задание на Решу ЕГЭ</a><font color='blue'> (чтобы не забывалось)</font></br></br>";
     }
 
     if($iVsego) {
@@ -124,11 +131,11 @@ if($res = $mysqli->query($SqlQuery)){
 }
 //-сформируем "задачную" часть отчета
 
-echo "</br>";
+//echo "</br>";
 
-$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 if($sParametr4=="sort")
-    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
+    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `zadacha`.`sortirovka`;";
 if($res = $mysqli->query($SqlQuery)){
 //if($res->data_seek(0)){
     $res->data_seek(0);
@@ -138,7 +145,7 @@ if($res = $mysqli->query($SqlQuery)){
     $iOldNomerZadaniya = 0;
     while ($row = $res->fetch_assoc()) {
 
-        echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='" . $row['resheno-pravilno'] . "'>";
+        echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]==1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='" . $row['resheno-pravilno'] . "'>";
 
         //добавление горизонтальной полосы, разделяющией разные задания
         $iNomerZadaniya = $row['zadanie'];
@@ -187,26 +194,26 @@ if($res = $mysqli->query($SqlQuery)){
 
         echo "<input type='hidden' id='vremya-predyduschih-popytok" . $row['id-zadachi'] . "' value=" . $row['vremya-vypolneniya'] . "></input>";
 
-        if ($row['kolichestvo-popytok'] == 0) {
-            echo "</br>Ответ: <input id='input" . $row['id-zadachi'] . "'></input>&nbsp;&nbsp;";
-            echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
+        if($row['resheno-pravilno']!=1) {
+            echo "Ответ: <input id='input".$row['id-zadachi']."'></input>&nbsp;&nbsp;";
+            echo "<button class='uveren' id='uveren".$row['id-zadachi']."'>Уверен</button>&nbsp;&nbsp;";
+        }
+        switch($row['resheno-pravilno']){
+            case -1:
+                echo "</br><span id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</span>";
+                echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
+                break;
+            case 0:
+                echo "<div style='display: none;' id='result".$row['id-zadachi'] . "'></div>";
+                echo "<div style='display: none;' id='kolichestvo-popytok" . $row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
+                break;
+            case 1:
+                echo "<span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span>";
+                echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
+                break;
+        }
+        echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input " . $iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не получается; разобрать на занятии</label></div>";
 
-            echo "<div style='display: none;' id='result" . $row['id-zadachi'] . "'></div>";
-            echo "<div style='display: none;' id='kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-            echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
-        }
-        if ($row['kolichestvo-popytok'] > 0 && $row['resheno-pravilno']) {
-            echo "<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>";
-            echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-        }
-
-        if ($row['kolichestvo-popytok'] > 0 && !$row['resheno-pravilno']) {
-            echo "</br>Ответ: <input id='input" . $row['id-zadachi'] . "'></input>&nbsp;&nbsp;";
-            echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
-            echo "</br><span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>";
-            echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-            echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
-        }
 
         echo "</div>";
 

@@ -115,6 +115,28 @@ $(function(){
         //--обновим таблицу uchenik-zadachi
     });
 
+    $("#ssylka-na-dz-reshu-ege").focusout(function(e) {
+
+        sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
+        sSsylkaNaDzReshuEge=$(this).val();
+
+        // c.c(sUchenik);
+        // c.c(sPredmet);
+        // c.c(sSsylkaNaDzReshuEge);
+
+        //обновим таблицу uchenik-predmet
+        $.post(
+            "/post/update-ssylka-na-dz-reshu-ege.php",
+            {
+                suchenik: sUchenik,
+                spredmet: sPredmet,
+                ssylka: sSsylkaNaDzReshuEge,
+            }
+        );
+        //--обновим таблицу uchenik-zadachi
+    });
+
     $(".vosstanovil").click(function(e) {
 
         sId = $(this).attr("id");
@@ -232,14 +254,12 @@ $(function(){
         iIdZadachi=$(this).attr("id").substring(18);
         if($(this).prop("checked")) {
             iCheckBox = 1
-            $(this).parent().css('font-weight', 'bold');
+            $(this).parent().parent().css('font-weight', 'bold');
         }
         else {
             iCheckBox = 0;
-            $(this).parent().css('font-weight', 'normal');
+            $(this).parent().parent().css('font-weight', 'normal');
         }
-
-
 
         //обновим таблицу uchenik-zadachi
         $.post(
@@ -250,7 +270,7 @@ $(function(){
                 idzadachi: iIdZadachi,
                 icheckbox: iCheckBox,
             }, function(response){
-                location.reload();
+                // location.reload();
             }
         );
         //--обновим таблицу uchenik-zadachi
@@ -540,51 +560,51 @@ $(function(){
         }
     });
 
-    $("#import-zadach-ucheniku-urok").click(function(e){
-
-        // c.c('urok');
-
-        sUchenik = $('#uchenik').val();
-        sPredmet = $('#predmet').val();
-        iNomerZadaniya = $('#zadanie').val();
-
-        //сделать запрос на добавление
-        $.post(
-            "/post/import-zadach-ucheniku-urok.php",
-            {
-                suchenik: sUchenik,
-                spredmet: sPredmet,
-                izadanie: iNomerZadaniya,
-            },
-            function(response){
-                location.reload();
-            }
-        );
-        //-сделать запрос на добавление
-    });
-
-    $("#import-zadach-ucheniku-dz").click(function(e){
-
-        c.c('dz');
-
-        sUchenik = $('#uchenik').val();
-        sPredmet = $('#predmet').val();
-        iNomerZadaniya = $('#zadanie').val();
-
-        //сделать запрос на добавление
-        $.post(
-            "/post/import-zadach-ucheniku-dz.php",
-            {
-                suchenik: sUchenik,
-                spredmet: sPredmet,
-                izadanie: iNomerZadaniya,
-            },
-            function(response){
-                location.reload();
-            }
-        );
-        //-сделать запрос на добавление
-    });
+    // $("#import-zadach-ucheniku-urok").click(function(e){
+    //
+    //     // c.c('urok');
+    //
+    //     sUchenik = $('#uchenik').val();
+    //     sPredmet = $('#predmet').val();
+    //     iNomerZadaniya = $('#zadanie').val();
+    //
+    //     //сделать запрос на добавление
+    //     $.post(
+    //         "/post/import-zadach-ucheniku-urok.php",
+    //         {
+    //             suchenik: sUchenik,
+    //             spredmet: sPredmet,
+    //             izadanie: iNomerZadaniya,
+    //         },
+    //         function(response){
+    //             location.reload();
+    //         }
+    //     );
+    //     //-сделать запрос на добавление
+    // });
+    //
+    // $("#import-zadach-ucheniku-dz").click(function(e){
+    //
+    //     c.c('dz');
+    //
+    //     sUchenik = $('#uchenik').val();
+    //     sPredmet = $('#predmet').val();
+    //     iNomerZadaniya = $('#zadanie').val();
+    //
+    //     //сделать запрос на добавление
+    //     $.post(
+    //         "/post/import-zadach-ucheniku-dz.php",
+    //         {
+    //             suchenik: sUchenik,
+    //             spredmet: sPredmet,
+    //             izadanie: iNomerZadaniya,
+    //         },
+    //         function(response){
+    //             location.reload();
+    //         }
+    //     );
+    //     //-сделать запрос на добавление
+    // });
 
     $("#import-zadach-ucheniku").click(function(e){
 
@@ -655,7 +675,7 @@ $(function(){
 
         sUchenik = $('#uchenik').val();
         sPredmet = $('#predmet').val();
-        iZadanie = $('#zadanie').val();
+        // iZadanie = $('#zadanie').val();
         iUrok = $(this).val();
 
         $.post(
@@ -663,7 +683,7 @@ $(function(){
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-                izadanie: iZadanie,
+                // izadanie: iZadanie,
                 surok: iUrok,
             },
             function(response){
@@ -716,9 +736,12 @@ $(function(){
         // c.c($('#result'+$(this).attr("id").substring(10)).html());
         // c.c($('#result'+$(this).attr("id").substring(10)).html()!=undefined);
 
-        reshal=0;
+        // reshal=0;
         // if($('#reshal-'+$(this).attr("id").substring(10)).html()!=undefined)
-        reshal=1*$('#reshal-'+$(this).attr("id").substring(10)).val();
+        // reshal=1*$('#reshal-'+$(this).attr("id").substring(10)).val();
+        reshal=$('#reshal-'+$(this).attr("id").substring(10)).val();
+
+        c.c(reshal);
 
         // c.c('#reshal-'+$(this).attr("id").substring(10));
         // c.c($('#reshal-'+$(this).attr("id").substring(10)).val());
@@ -726,7 +749,7 @@ $(function(){
         // c.c(reshal);
 
         if($(this).attr('id').indexOf("none")>0){
-            if(reshal)
+            if(reshal>0)
                 $(this).parent().css({'color': 'Gray'});
             else
                 $(this).parent().css({'color': 'Black'});
@@ -734,7 +757,7 @@ $(function(){
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("urok")>0){
-            if(reshal)
+            if(reshal>0)
                 $(this).parent().css({'color': 'RoyalBlue'});
             else
                 $(this).parent().css({'color': 'Blue'});
@@ -742,7 +765,7 @@ $(function(){
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzvy")>0){
-            if(reshal)
+            if(reshal>0)
                 $(this).parent().css({'color': 'IndianRed'});
             else
                 $(this).parent().css({'color': 'Red'});
@@ -750,7 +773,7 @@ $(function(){
             // c.c($(this).parent().css('color'));
         }
         if($(this).attr('id').indexOf("dzdz")>0){
-            if(reshal)
+            if(reshal>0)
                 $(this).parent().css({'color': 'MediumSeaGreen'});
             else
                 $(this).parent().css({'color': 'Green'});

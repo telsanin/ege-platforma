@@ -55,9 +55,9 @@ if($res1->data_seek(0)) {
                     $iVsego++;
                     if ($row['kolichestvo-popytok'])
                         $iReshal++;
-                    if ($row['resheno-pravilno'])
+                    if ($row['resheno-pravilno']==1)
                         $iPravilno++;
-                    if ($row['kolichestvo-popytok']&&!$row['resheno-pravilno'])
+                    if ($row['resheno-pravilno']==-1)
                         $iNepravilno++;
                     $iSumPopytok += $row['kolichestvo-popytok'];
                     $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");

@@ -24,4 +24,8 @@ $SqlQuery = "UPDATE `uchenik-predmet` SET `kommentarii-k-tekuschemu-dz`='' WHERE
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 
+$SqlQuery = "UPDATE `uchenik-predmet` SET `skryt-reshennye`=0 WHERE `uchenik`='".$sUchenik."' AND `predmet`='".$sPredmet."';";
+//выполним запрос
+$res = $mysqli->query($SqlQuery);
+
 ?>

@@ -52,6 +52,7 @@ $(function(){
 	$("button.uveren").click(function(e) {
 
         sUchenik=$('#uchenik').val();
+        sPredmet=$('#predmet').val();
         iTaskNumber=$(this).attr("id").substring(6);
         sOtvetUchenika=$('#input'+iTaskNumber).val();
         iLastZadacha=$('#last-zadacha').val();
@@ -125,6 +126,7 @@ $(function(){
 			 sOtvetUchenika
 			*/
             if(sOtvetUchenika==response) {
+
                 //ответ ученика совпадает с правильным ответом
                 $("#result"+iTaskNumber).html('Правильно :)');
                 $("#result"+iTaskNumber).hide().fadeIn();
@@ -133,30 +135,47 @@ $(function(){
                 $("#div-vsyo-ploho"+iTaskNumber).hide();
                 //$("#dontknow"+iTaskNumber).hide();
                 //обновим поле resheno таблицы uchenik-zadachi
+                iResult=1;
                 $.post(
                     "/post/resheno-pravilno.php",
                     {
                         idzadachi: iTaskNumber,
                         uchenik: sUchenik,
+                        predmet: sPredmet,
+                        result: iResult,
                     }
                 );
                 //-обновим поле resheno таблицы uchenik-zadachi
                 //обновим поле razobrat-na-zanyatii таблицы uchenik-zadachi
-                $.post(
-                    "/post/razobrat-na-zanyatii.php",
-                    {
-                        idzadachi: iTaskNumber,
-                        uchenik: sUchenik,
-                        razobratnazanyatii: 0,
-                    }
-                );
+                // $.post(
+                //     "/post/razobrat-na-zanyatii.php",
+                //     {
+                //         idzadachi: iTaskNumber,
+                //         uchenik: sUchenik,
+                //         razobratnazanyatii: 0,
+                //     }
+                // );
                 //-обновим поле razobrat-na-zanyatii таблицы uchenik-zadachi
 
             }
             else{
+
+                // c.c(sOtvetUchenika);
+                // c.c(response);
+
                 $("#result"+iTaskNumber).html('Неправильно :(');
                 $("#result"+iTaskNumber).hide().fadeIn();
                 $("#result"+iTaskNumber).css("color","red");
+                iResult=-1;
+                $.post(
+                    "/post/resheno-pravilno.php",
+                    {
+                        idzadachi: iTaskNumber,
+                        uchenik: sUchenik,
+                        predmet: sPredmet,
+                        result: iResult,
+                    }
+                );
             }
             $('#kolichestvo'+iTaskNumber).html(Number($('#kolichestvo'+iTaskNumber).html())+1);
             $('#kolichestvo-popytok'+iTaskNumber).show();

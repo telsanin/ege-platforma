@@ -18,7 +18,7 @@ $iNomerZadaniya=$_POST["izadanie"];
 $sTextZanyatiya="";
 $iCount=0;
 $iFlag=1;
-$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
+$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `resheno-pravilno`<>2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `zadacha`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)) {
     $sTextZanyatiya.="<b>Содержание занятия:</b></br>";
