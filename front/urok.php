@@ -51,7 +51,7 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные задания
 
-    if($row['resheno-pravilno']>0)
+    if($row['reshali-na-zanyatii']==1)
         echo "<div style='color: Gray;'>";
     else
         echo "<div style='color: Black;'>";

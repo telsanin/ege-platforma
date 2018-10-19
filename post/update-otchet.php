@@ -18,7 +18,14 @@ $iNomerZadaniya=$_POST["izadanie"];
 $sTextZanyatiya="";
 $iCount=0;
 $iFlag=1;
-$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `resheno-pravilno`<>2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-zadachi`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
+
+//!!!
+//здесь есть проблема в том, что в информатике задания идут не по порядку
+//и если мы решали №16 а потом №8, то если текущая задача в задании №8, то все задачи из №16
+//не попадут в этот отчет
+
+$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-zadachi`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
+//$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `resheno-pravilno`<>2 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-zadachi`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
 $res = $mysqli->query($SqlQuery);
 if($res->data_seek(0)) {
     $sTextZanyatiya.="<b>Содержание занятия:</b></br>";

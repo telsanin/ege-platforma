@@ -18,7 +18,7 @@ $aTopBlock[1][0]=0;
 $aTopBlock[1][1]=0;
 $aTopBlock[1][2]=0;
 
-$SqlQuery = "SELECT IF(`resheno-pravilno`>0,1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
+$SqlQuery = "SELECT IF(((`resheno-pravilno`=1) OR (`reshali-na-zanyatii`=1)),1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
     while ($row = $res->fetch_assoc()){
@@ -130,28 +130,29 @@ while ($row = $res->fetch_assoc()) {
 //    echo "</br>";
 
     if($row['urok']==0)
-        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: Gray;'>";
         else
             echo "<div style='color: Black;'>";
 
     if($row['urok']==1)
-        if($row['resheno-pravilno']>0)
+//        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: RoyalBlue;'>";
         else
             echo "<div style='color: Blue;'>";
 
     if($row['urok']==2)
-        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: IndianRed;'>";
         else
             echo "<div style='color: Red;'>";
 
-    if($row['urok']==3)
-        if($row['resheno-pravilno']>0)
-            echo "<div style='color: MediumSeaGreen;'>";
-        else
-            echo "<div style='color: Green;'>";
+//    if($row['urok']==3)
+//        if($row['resheno-pravilno']>0)
+//            echo "<div style='color: MediumSeaGreen;'>";
+//        else
+//            echo "<div style='color: Green;'>";
 
     echo ($row['zakonchili-na-etom']?"<b>":"");
 
@@ -171,15 +172,14 @@ while ($row = $res->fetch_assoc()) {
 
     switch ($row['resheno-pravilno']) {
         case -1:
-            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
             break;
         case 1:
-            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
-            break;
-        case 2:
-            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
             break;
     }
+        if($row['reshali-na-zanyatii'])
+            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span></br>";
 //    echo "</br>";
 
     if($row['reshenie'])
@@ -190,11 +190,15 @@ while ($row = $res->fetch_assoc()) {
     $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
     if ($row['razobrat-na-zanyatii'])
         echo "<div id='div-vsyo-ploho" . $row['id-zadachi'] . "'><input disabled " . $iVsyoPloho . " class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi'] . "' type='checkbox'/><label for='vsyo-ploho" . $row['id-zadachi'] . "'>не получается; разобрать на занятии</label></div>";
-    //-если решено правильно с 1й попытки и не отмечено "все плохо"
+    //-если решено правильно с 1й поwпытки и не отмечено "все плохо"
 
-    echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['resheno-pravilno']."'/>";
+    $iReshal=$row['resheno-pravilno'];
+    if($row['reshali-na-zanyatii'])
+        $iReshal=2;
 
-    echo "<button ".(!($row['urok']==1&&$row['resheno-pravilno']!=2)?"style='display:none;'":"")." class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button>";
+    echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$iReshal."'/>";
+
+    echo "<button ".(!($row['urok']==1&&!$row['reshali-na-zanyatii'])?"style='display:none;'":"")." class='razaktualizirovat' id='razaktualizirovat".$row['sortirovka']."'>разакт пред задания и -> в отчет</button>";
 
     echo "<div style='text-align: right;'><input ".($row['zakonchili-na-etom']==1?"checked":"")." class='zakonchili-na-etom' id='zakonchili-na-etom".$row['id-zadachi']."' type='checkbox'/><label for='zakonchili-na-etom".$row['id-zadachi']."'>последней сделали</label></div>";
 

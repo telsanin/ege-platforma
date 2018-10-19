@@ -105,7 +105,7 @@ if($res = $mysqli->query($SqlQuery)){
         echo "<input type='checkbox' id='skryt-reshennye' " . ($iSkrytReshennye ? 'checked' : '') . " /><label for='skryt-reshennye'>скрыть решенные правильно</label></br>";
     }
 
-    echo "Всего задано: <b>".$iVsego."</b></br>";
+    echo "Всего задано: ".$iVsego."</br>";
 //     if ($iReshal) {
         ($iReshal?$iSredPopytok = round($iSumPopytok / $iReshal, 1):"");
         ($iReshal?$iSredVremya = (int)($iSumVremya / $iReshal):"");
@@ -139,13 +139,13 @@ if($sParametr4=="sort")
 if($res = $mysqli->query($SqlQuery)){
 //if($res->data_seek(0)){
     $res->data_seek(0);
-
+    $num_rows = mysqli_num_rows($res);
     $iNumDZ = 1;
     $iOldIdPodtemy = 0;
     $iOldNomerZadaniya = 0;
     while ($row = $res->fetch_assoc()) {
 
-        echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]==1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='" . $row['resheno-pravilno'] . "'>";
+        echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]==1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='".$row['resheno-pravilno']."'>";
 
         //добавление горизонтальной полосы, разделяющией разные задания
         $iNomerZadaniya = $row['zadanie'];
@@ -178,7 +178,8 @@ if($res = $mysqli->query($SqlQuery)){
         //    if($row['srednee-vremya-vypolneniya']!="00:00:00")
         //        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
         echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
-        echo $iNumDZ++ . ") ";
+//        echo $iNumDZ++ . ") ";
+        echo $iNumDZ++ . "/".$num_rows.") ";
         echo $row['text-zadachi'] . "</br>";
 
         //    $filename =$sPredmet."-".$sZadanie."-".$row['id-zadachi'].".jpg";

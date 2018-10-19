@@ -61,11 +61,11 @@ if($res->data_seek(0)) {
 
     $TextZadachi .= "Всего было задано: ".$iVsego."</br>";
     if($iPravilno)
-        $TextZadachi .= "<font color=\"lime\">Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+        $TextZadachi .= "<font color=\"lime\">Получилось: </font><b>".$iPravilno."</b> (".round($iPravilno / $iVsego * 100)."%)</br>";
     if($iNepravilno)
-        $TextZadachi .= "<font color=\"red\">Не получилось: </font>".$iNepravilno."</br>";
+        $TextZadachi .= "<font color=\"red\">Не получилось: </font><b>".$iNepravilno."</b></br>";
     if($iVsego-$iReshal)
-        $TextZadachi .= "<font color=\"magenta\">Не решал: </font>".($iVsego-$iReshal)."</br>";
+        $TextZadachi .= "<font color=\"magenta\">Не решал: </font><b>".($iVsego-$iReshal)."</b></br>";
     $TextZadachi .= "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
     $TextZadachi .= "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";

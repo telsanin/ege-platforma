@@ -741,7 +741,7 @@ $(function(){
         // reshal=1*$('#reshal-'+$(this).attr("id").substring(10)).val();
         reshal=$('#reshal-'+$(this).attr("id").substring(10)).val();
 
-        c.c(reshal);
+        // c.c(reshal);
 
         // c.c('#reshal-'+$(this).attr("id").substring(10));
         // c.c($('#reshal-'+$(this).attr("id").substring(10)).val());

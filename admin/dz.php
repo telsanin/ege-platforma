@@ -144,13 +144,13 @@ if($res = $mysqli->query($SqlQuery)) {
         $iSredVremya = (int)($iSumVremya / $iReshal);
         echo "Всего было задано: ".$iVsego."</br>";
 //                    echo "Попытался решить: " .$iReshal."</br>";
-        if($iPravilno)
-            echo "<font color='lime'>Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+        echo "Отмечено \"разобрать\": <b>".$iOtmechenoRazobrat."</b></br>";
         if($iNepravilno)
-            echo "<font color='red'>Не получилось: </font>".$iNepravilno."</br>";
+            echo "<font color='red'>Не получилось: </font><b>".$iNepravilno."</b></br>";
         if($iVsego-$iReshal)
-            echo "<font color='magenta'>Не решал: </font>".($iVsego-$iReshal)."</br>";
-        echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
+            echo "<font color='magenta'>Не решал: </font><b>".($iVsego-$iReshal)."</b></br>";
+        if($iPravilno)
+            echo "<font color='lime'>Получилось: </font><b>".$iPravilno."</b> (".round($iPravilno / $iVsego * 100)."%)</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
         echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
         echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
@@ -225,25 +225,26 @@ echo "<p><b>Задачи</b>:</p>";
 $SqlQuery = "SELECT `zadacha`.`pravilnyi-otvet`, `zadacha`.`zadanie`, `zadacha`.`text-zadachi`, `zadacha`.`foto-teksta`, `uchenik-zadachi`.`sortirovka`, `uchenik-zadachi`.`uchenik`, `uchenik-zadachi`.`predmet`, `uchenik-zadachi`.`urok`, `uchenik-zadachi`.`id-zadachi`, `uchenik-zadachi`.`resheno-pravilno`, `uchenik-zadachi`.`vremya-vypolneniya`, `uchenik-zadachi`.`kolichestvo-popytok`, `uchenik-zadachi`.`razobrat-na-zanyatii`, `uchenik-zadachi`.`aktualno`, `uchenik-zadachi`.`zakonchili-na-etom` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `sortirovka`;";
 if($res = $mysqli->query($SqlQuery)) {
     $res->data_seek(0);
+    $num_rows = mysqli_num_rows($res);
     $tObscheeVremyaVypolneniya=0;
     $iNumDZ = 1;
     while ($row = $res->fetch_assoc()) {
 
 //        echo "<div>";
         if($row['urok']==0)
-            if($row['resheno-pravilno']>0)
+            if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
                 echo "<div style='color: Gray;'>";
             else
                 echo "<div style='color: Black;'>";
 
         if($row['urok']==1)
-            if($row['resheno-pravilno']>0)
+            if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
                 echo "<div style='color: RoyalBlue;'>";
             else
                 echo "<div style='color: Blue;'>";
 
         if($row['urok']==2)
-            if($row['resheno-pravilno']>0)
+            if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
                 echo "<div style='color: IndianRed;'>";
             else
                 echo "<div style='color: Red;'>";
@@ -277,7 +278,8 @@ if($res = $mysqli->query($SqlQuery)) {
 //        if ($row['srednee-vremya-vypolneniya'] != "00:00:00")
 //            echo "в среднем: " . $row['srednee-vremya-vypolneniya'] . "</br>";
         echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
-        echo $iNumDZ++ . ") ";
+//        echo $iNumDZ++ . ") ";
+        echo $iNumDZ++ . "/".$num_rows.") ";
         echo $row['text-zadachi'] . "</br>";
         if ($row['foto-teksta'])
             echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
@@ -297,8 +299,13 @@ if($res = $mysqli->query($SqlQuery)) {
         //echo "</br>".$row['pravilnyi-otvet'];
         //-вывод правильного ответа для тестирования
 
-//        echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['kolichest']."'/>";
-        echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".($row['resheno-pravilno']>0?1:0)."'/>";
+        $iReshal=$row['resheno-pravilno'];
+        if($row['reshali-na-zanyatii'])
+            $iReshal=2;
+
+        //        echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$row['kolichest']."'/>";
+//        echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".($row['resheno-pravilno']>0?1:0)."'/>";
+        echo "<input hidden id='reshal-".$row['id-zadachi']."' value='".$iReshal."'/>";
 
         switch($row['resheno-pravilno']) {
             case -1:
@@ -310,10 +317,10 @@ if($res = $mysqli->query($SqlQuery)) {
             case 1:
                 echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></b>";
                 break;
-            case 2:
-                echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></b>";
-                break;
         }
+
+        if($row['reshali-na-zanyatii'])
+            echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></b>";
 
         if ($row['kolichestvo-popytok'] > 0)
             echo "&nbsp;&nbsp;&nbsp;<span id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'></span>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</span>&nbsp;&nbsp;&nbsp;".$row['vremya-vypolneniya'];

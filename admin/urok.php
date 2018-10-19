@@ -35,11 +35,8 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
 echo "<b>Задачи</b>: ";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`resheno-pravilno`<>2 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zakonchili-na-etom` DESC, `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`reshali-na-zanyatii`<>1 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
-
-//echo "(".mysqli_num_rows($res).")";
-
 $res->data_seek(0);
 $num_rows = mysqli_num_rows($res);
 $iNumDZ = 1;
@@ -78,19 +75,19 @@ while ($row = $res->fetch_assoc()) {
     //-добавление горизонтальной полосы, разделяющией разные задания
 
     if($row['urok']==0)
-        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: Gray;'>";
         else
             echo "<div style='color: Black;'>";
 
     if($row['urok']==1)
-        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: RoyalBlue;'>";
         else
             echo "<div style='color: Blue;'>";
 
     if($row['urok']==2)
-        if($row['resheno-pravilno']>0)
+        if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
             echo "<div style='color: IndianRed;'>";
         else
             echo "<div style='color: Red;'>";
@@ -126,15 +123,13 @@ while ($row = $res->fetch_assoc()) {
         case -1:
             echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
             break;
-        case 0:
-            break;
         case 1:
             echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
             break;
-        case 2:
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></br>";
-            break;
     }
+
+    if($row['reshali-na-zanyatii'])
+        echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></br>";
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
     $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
@@ -161,6 +156,7 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
 
 }
+//echo "(".mysqli_num_rows($res).")";
 
 //Вопросы:
 echo "</br><p><b>Вопросы (по заданию, которое последнее в уроке)</b>:</p>";
