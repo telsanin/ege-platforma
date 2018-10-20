@@ -21,14 +21,7 @@
 
 <?php
 
-echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
-echo "<input id='rejim' type='checkbox' /><label for='rejim'>Ученик</label>&nbsp;";
-echo "</div>";
-
+echo "</br></br>";
 echo "ЗАНЯТИЕ - проведение</b></br>";
 echo "ученик: <b>".$sUchenik."</b>&nbsp;&nbsp;&nbsp;";
 echo "предмет: <b>".$sPredmet."</b></br>";
@@ -157,6 +150,8 @@ while ($row = $res->fetch_assoc()) {
 
 }
 //echo "(".mysqli_num_rows($res).")";
+
+echo "<input type='hidden' id='last-zadanie' value='".$iNomerZadaniya."'></input>";
 
 //Вопросы:
 echo "</br><p><b>Вопросы (по заданию, которое последнее в уроке)</b>:</p>";

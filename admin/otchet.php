@@ -10,6 +10,8 @@
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 
+</br>
+
 <?php
 
 echo "Вернуться в <a href='/telsanin/".$sUchenik."/".$sPredmet."/dz'>Домашнее задание</a></br></br>";

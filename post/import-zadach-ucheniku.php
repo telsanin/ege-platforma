@@ -17,7 +17,7 @@ $iZadanie=$_POST["izadanie"];
 //сформируем SQL-запрос
 //$SqlQuery = "INSERT INTO `zadacha` (`text-zadachi`, `predmet`, `pravilnyi-otvet`, `zadanie`, `s-moimi-ciframi`) VALUES ('".$sText."','".$sPredmet."','".$sPravilnyiOtvet."','".$sNomerZadaniya."','".$iSMoimiCiframi."');";
 
-$SqlQuery = "INSERT IGNORE INTO `uchenik-zadachi` (`id-zadachi`, `urok`, `uchenik`, `predmet`, `sortirovka`) SELECT `zadacha`.`id-zadachi`, `zadacha`.`urok`, '".$sUchenik."', '".$sPredmet."', `zadacha`.`sortirovka` FROM `zadacha` WHERE `zadacha`.`predmet` = '".$sPredmet."' AND `zadacha`.`zadanie` = ".$iZadanie.";";
+$SqlQuery = "INSERT IGNORE INTO `uchenik-zadachi` (`id-zadachi`, `urok`, `uchenik`, `predmet`, `sortirovka`, zadanie) SELECT `zadacha`.`id-zadachi`, `zadacha`.`urok`, '".$sUchenik."', '".$sPredmet."', `zadacha`.`sortirovka`, zadanie FROM `zadacha` WHERE `zadacha`.`predmet` = '".$sPredmet."' AND `zadacha`.`zadanie` = ".$iZadanie.";";
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 

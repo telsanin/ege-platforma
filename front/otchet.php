@@ -64,7 +64,10 @@ if($res->data_seek(0)){
         echo "<b>Занятие №".$iNum--."</b></br>";
         echo $row['dz-voprosy'];
         echo $row['dz'];
-        echo $row['zanyatie'];
+        if($row['zanyatie']) {
+            echo "<b>Содержание занятия:</b></br>";
+            echo $row['zanyatie'];
+        }
         if($row['zelenyi-kommentarii']||$row['krasnyi-kommentarii']) {
 //            echo "<span style='color: blue;'>Комментарий: </span></br>";
             if ($row['krasnyi-kommentarii'])

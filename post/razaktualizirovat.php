@@ -19,7 +19,7 @@ $iZadanie=$_POST["izadanie"];
 
 //$SqlQuery = "UPDATE `uchenik-zadachi`, `zadacha` SET `reshali-na-zanyatii`=1 WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND ((`zadacha`.`zadanie`='".$iZadanie."' AND (`uchenik-zadachi`.`sortirovka`<=".$iSortirovka." OR `resheno-pravilno`=-1 OR `razobrat-na-zanyatii`)) OR `zadacha`.`zadanie`<'".$iZadanie."');";
 
-$SqlQuery = "UPDATE `uchenik-zadachi`, `zadacha` SET `reshali-na-zanyatii`=1 WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND ((`zadacha`.`zadanie`='".$iZadanie."' AND (`uchenik-zadachi`.`sortirovka`<=".$iSortirovka." OR `resheno-pravilno`=-1 OR `razobrat-na-zanyatii`)));";
+$SqlQuery = "UPDATE `uchenik-zadachi`, `zadacha` SET `reshali-na-zanyatii`=1 WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`=1 AND `reshali-na-zanyatii`=0 AND `zadacha`.`zadanie`='".$iZadanie."' AND (`uchenik-zadachi`.`sortirovka`<=".$iSortirovka." OR `resheno-pravilno`=-1 OR `razobrat-na-zanyatii`);";
 
 //выполним запрос
 $res = $mysqli->query($SqlQuery);

@@ -22,96 +22,111 @@ if($sUrl == "telsanin" or $sUrl == "telsanin/") {
 else {
     //http://ege-platforma.local/telsanin/zadachi/matematika/1
     if($sParametr2 == "zadachi") {
-        $sPredmet=$sParametr3;
-        $iNomerZadaniya=$sParametr4;
-        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi.php";
-    }
-    elseif($sParametr2 == "upload") {
-        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/upload.php";
+        switch($sParametr3){
+            case "upload":
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/upload.php";
+                break;
+            case "edit":
+                $sPredmet=$sParametr4;
+                $iNomerZadaniya=$sParametr5;
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi.php";
+                break;
+            case "sortirovka":
+                $sPredmet=$sParametr4;
+                $iNomerZadaniya=$sParametr5;
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/sortirovka-zadach.php";
+                break;
+        }
     }
     //http://ege-platforma.local/telsanin/egor/matematika/1
     else{
-        //http://ege-platforma.local/telsanin/egor/matematika/urok
-        if($sParametr4 == "urok"){
+
             $sUchenik=$sParametr2;
             $sPredmet=$sParametr3;
             $iNomerZadaniya=$sParametr4;
+
+            //TopBlock
+//            if($sParametr4 == "urok"||$sParametr4 == "urok-uchenika"||$sParametr4 == "dz"||$sParametr4 == "dz-uchenika"||$sParametr4 == "otchet"||$sParametr4 == "otchet-uchenika") {
+            $aTopBlock[0][0] = 0;
+            $aTopBlock[0][1] = 0;
+            $aTopBlock[0][2] = 0;
+            $aTopBlock[1][0] = 0;
+            $aTopBlock[1][1] = 0;
+            $aTopBlock[1][2] = 0;
+
+            $SqlQuery = "SELECT IF(((`resheno-pravilno`=1) OR (`reshali-na-zanyatii`=1)),1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='" . $sUchenik . "' and `uchenik-zadachi`.predmet='" . $sPredmet . "'";
+            if(!($sParametr4 == "urok"||$sParametr4 == "urok-uchenika"||$sParametr4 == "dz"||$sParametr4 == "dz-uchenika"||$sParametr4 == "otchet"||$sParametr4 == "otchet-uchenika"))
+                $SqlQuery .= " and zadanie=".$iNomerZadaniya."";
+            $SqlQuery .= " group by rp, `uchenik-zadachi`.urok;";
+
+            if ($res = $mysqli->query($SqlQuery)) {
+                $res->data_seek(0);
+                while ($row = $res->fetch_assoc()) {
+                    if ($row['rp'])
+                        $aTopBlock[1][$row['urok']] = $row['count'];
+                    else
+                        $aTopBlock[0][$row['urok']] = $row['count'];
+                }
+            }
+
+            echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
+            echo "<div>";
+            echo "<font color='Gray'>---: <span id='TopBlockReshenoVNigde'>" . $aTopBlock[1][0] . "</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+            echo "<font color='RoyalBlue'>сделано: <span id='TopBlockReshenoVUroke'>" . $aTopBlock[1][1] . "</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+            echo "<font color='IndianRed'>сделано: <span id='TopBlockReshenoVVydannomDz'>" . $aTopBlock[1][2] . "</span></font>";
+            echo "</div>";
+            echo "<div>";
+            echo "---: <span id='TopBlockVNigde'>" . $aTopBlock[0][0] . "</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+            echo "<font color='blue'>в уроке:&nbsp;&nbsp;&nbsp;<span id='TopBlockVUroke'>" . $aTopBlock[0][1] . "</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+            echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>" . $aTopBlock[0][2] . "</span></font>";
+            echo "</div>";
+            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
+            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
+            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
+            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
+
+            if($sParametr4 == "urok"||$sParametr4 == "urok-uchenika"||$sParametr4 == "dz"||$sParametr4 == "dz-uchenika"||$sParametr4 == "otchet"||$sParametr4 == "otchet-uchenika") {
+                echo "<input id='rejim' type='checkbox' ";
+                echo(($sParametr4 == "urok-uchenika" || $sParametr4 == "dz-uchenika" || $sParametr4 == "otchet-uchenika") ? " checked " : "");
+                echo "/><label for='rejim'>Ученик</label>&nbsp;";
+            }
+
+            echo "</div>";
+            //-TopBlock
+
+//            echo "</br></br></br>";
+//        }
+
+        //http://ege-platforma.local/telsanin/egor/matematika/urok
+        if($sParametr4 == "urok"){
             include_once $_SERVER['DOCUMENT_ROOT']."/admin/urok.php";
         }
         elseif($sParametr4 == "urok-uchenika"){
             //http://ege-platforma.local/telsanin/egor/matematika/urok-uchenika
-            $sUchenik=$sParametr2;
-            $sPredmet=$sParametr3;
-            $iNomerZadaniya=$sParametr4;
-            echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
-            echo "<input id='rejim' type='checkbox' checked/><label for='rejim'>Ученик</label>&nbsp;";
-            echo "</div>";
-            echo "</br>";
+            echo "</br></br></br>";
             include_once $_SERVER['DOCUMENT_ROOT']."/front/urok.php";
         }
         //http://ege-platforma.local/telsanin/egor/matematika/dz
         elseif($sParametr4 == "dz"){
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            $iNomerZadaniya = $sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/dz.php";
         }
         //http://ege-platforma.local/telsanin/egor/matematika/dz-uchenika
         elseif($sParametr4 == "dz-uchenika"){
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            $iNomerZadaniya = $sParametr4;
-            echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
-            echo "<input id='rejim' type='checkbox' checked/><label for='rejim'>Ученик</label>&nbsp;";
-            echo "</div>";
-            echo "</br></br>";
+            echo "</br></br></br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/front/dz.php";
         }
         elseif($sParametr4 == "otchet"){
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
-            echo "<input id='rejim' type='checkbox' /><label for='rejim'>Ученик</label>&nbsp;";
-            echo "</div>";
-            echo "</br></br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/otchet.php";
         }
         elseif($sParametr4 == "otchet-uchenika"){
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
-            echo "<input id='rejim' type='checkbox' checked/><label for='rejim'>Ученик</label>&nbsp;";
-            echo "</div>";
-            echo "</br></br>";
+            echo "</br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/front/otchet.php";
         }
         elseif($sParametr2 == "testing"){
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            $iNomerZadaniya = $sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/test.php";
         }
         else{
             //http://ege-platforma.local/telsanin/egor/matematika/1
-            $sUchenik = $sParametr2;
-            $sPredmet = $sParametr3;
-            $iNomerZadaniya = $sParametr4;
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/urok-dz.php";
         }
     }

@@ -11,41 +11,41 @@
 
 <?php
 
-$aTopBlock[0][0]=0;
-$aTopBlock[0][1]=0;
-$aTopBlock[0][2]=0;
-$aTopBlock[1][0]=0;
-$aTopBlock[1][1]=0;
-$aTopBlock[1][2]=0;
-
-$SqlQuery = "SELECT IF(((`resheno-pravilno`=1) OR (`reshali-na-zanyatii`=1)),1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
-if($res = $mysqli->query($SqlQuery)) {
-    $res->data_seek(0);
-    while ($row = $res->fetch_assoc()){
-        if($row['rp'])
-            $aTopBlock[1][$row['urok']]=$row['count'];
-        else
-            $aTopBlock[0][$row['urok']]=$row['count'];
-
-    }
-}
-
-echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
-    echo "<div>";
-    echo "<font color='Gray'>---: <span id='TopBlockReshenoVNigde'>".$aTopBlock[1][0]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='RoyalBlue'>сделано: <span id='TopBlockReshenoVUroke'>".$aTopBlock[1][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='IndianRed'>сделано: <span id='TopBlockReshenoVVydannomDz'>".$aTopBlock[1][2]."</span></font>";
-    echo "</div>";
-    echo "<div>";
-    echo "---: <span id='TopBlockVNigde'>".$aTopBlock[0][0]."</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='blue'>в уроке:&nbsp;&nbsp;&nbsp;<span id='TopBlockVUroke'>".$aTopBlock[0][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
-    echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>".$aTopBlock[0][2]."</span></font>";
-    echo "</div>";
-    echo "<button id='urokdz'>урок-дз</button>&nbsp;";
-    echo "<button id='urok'>урок</button>&nbsp;";
-    echo "<button id='dz'>дз</button>&nbsp;";
-    echo "<button id='otchet'>отчет</button>";
-echo "</div>";
+//$aTopBlock[0][0]=0;
+//$aTopBlock[0][1]=0;
+//$aTopBlock[0][2]=0;
+//$aTopBlock[1][0]=0;
+//$aTopBlock[1][1]=0;
+//$aTopBlock[1][2]=0;
+//
+//$SqlQuery = "SELECT IF(((`resheno-pravilno`=1) OR (`reshali-na-zanyatii`=1)),1,0) AS rp, `uchenik-zadachi`.urok, count(`uchenik-zadachi`.urok) as count FROM `uchenik-zadachi`, zadacha WHERE `zadacha`.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` and uchenik='".$sUchenik."' and `uchenik-zadachi`.predmet='".$sPredmet."' and zadanie=".$iNomerZadaniya." group by rp, `uchenik-zadachi`.urok;";
+//if($res = $mysqli->query($SqlQuery)) {
+//    $res->data_seek(0);
+//    while ($row = $res->fetch_assoc()){
+//        if($row['rp'])
+//            $aTopBlock[1][$row['urok']]=$row['count'];
+//        else
+//            $aTopBlock[0][$row['urok']]=$row['count'];
+//
+//    }
+//}
+//
+//echo "<div style='position: fixed; top: 0; width: 100%; align: auto; background: white;'>";
+//    echo "<div>";
+//    echo "<font color='Gray'>---: <span id='TopBlockReshenoVNigde'>".$aTopBlock[1][0]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+//    echo "<font color='RoyalBlue'>сделано: <span id='TopBlockReshenoVUroke'>".$aTopBlock[1][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+//    echo "<font color='IndianRed'>сделано: <span id='TopBlockReshenoVVydannomDz'>".$aTopBlock[1][2]."</span></font>";
+//    echo "</div>";
+//    echo "<div>";
+//    echo "---: <span id='TopBlockVNigde'>".$aTopBlock[0][0]."</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+//    echo "<font color='blue'>в уроке:&nbsp;&nbsp;&nbsp;<span id='TopBlockVUroke'>".$aTopBlock[0][1]."</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
+//    echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>".$aTopBlock[0][2]."</span></font>";
+//    echo "</div>";
+//    echo "<button id='urokdz'>урок-дз</button>&nbsp;";
+//    echo "<button id='urok'>урок</button>&nbsp;";
+//    echo "<button id='dz'>дз</button>&nbsp;";
+//    echo "<button id='otchet'>отчет</button>";
+//echo "</div>";
 
 echo "</br></br></br>";
 if($iNomerZadaniya=='')

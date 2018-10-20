@@ -133,17 +133,41 @@ if($res = $mysqli->query($SqlQuery)){
 
 //echo "</br>";
 
-$SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+$SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+
 if($sParametr4=="sort")
-    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
-if($res = $mysqli->query($SqlQuery)){
-//if($res->data_seek(0)){
-    $res->data_seek(0);
-    $num_rows = mysqli_num_rows($res);
-    $iNumDZ = 1;
-    $iOldIdPodtemy = 0;
-    $iOldNomerZadaniya = 0;
-    while ($row = $res->fetch_assoc()) {
+//    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+    $SqlQuery = "SET @num = 0; 
+SELECT distinct k.* 
+FROM `uchenik-zadachi` INNER JOIN (
+SELECT @num:=@num+1 as `new-sortirovka`, s.* 
+FROM `uchenik-zadachi` INNER JOIN (
+SELECT `uchenik-zadachi`.*, `zadacha`.`pravilnyi-otvet`, `zadacha`.`zadanie`, `zadacha`.`text-zadachi`, `zadacha`.`foto-teksta`
+FROM `uchenik-zadachi`, `zadacha` 
+WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
+ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`) 
+AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+WHERE `uchenik-zadachi`.`predmet`='".$sPredmet."' AND`uchenik-zadachi`.`uchenik`='".$sUchenik."') 
+as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `sortirovka`;
+";
+
+$iNumDZ = 1;
+$iOldIdPodtemy = 0;
+$iOldNomerZadaniya = 0;
+
+//if($res = $mysqli->query($SqlQuery)){
+//    $res->data_seek(0);
+//    $num_rows = mysqli_num_rows($res);
+//    while ($row = $res->fetch_assoc()) {
+
+$res = $mysqli->multi_query($SqlQuery);
+do {
+    if ($res = $mysqli->store_result()) {
+        $rows =  $res->fetch_all(MYSQLI_ASSOC);
+        $res->free();
+        $num_rows = count($rows);
+        foreach($rows as $row) {
 
         echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]==1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='".$row['resheno-pravilno']."'>";
 
@@ -179,7 +203,11 @@ if($res = $mysqli->query($SqlQuery)){
         //        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
         echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
 //        echo $iNumDZ++ . ") ";
+        if($row['new-sortirovka'])
+            echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
+        else
         echo $iNumDZ++ . "/".$num_rows.") ";
+
         echo $row['text-zadachi'] . "</br>";
 
         //    $filename =$sPredmet."-".$sZadanie."-".$row['id-zadachi'].".jpg";
@@ -219,5 +247,9 @@ if($res = $mysqli->query($SqlQuery)){
         echo "</div>";
 
         //    echo "</br>";
-    }
-}
+
+//        }}
+        }}}
+while ($mysqli->more_results() && $mysqli->next_result());
+
+echo "<input type='hidden' id='last-zadanie' value='".$iNomerZadaniya."'></input>";

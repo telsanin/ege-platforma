@@ -4,6 +4,12 @@
 
 $(function(){
 
+    $("#urokdz").click(function(e) {
+        iNomerZadaniya=$('#last-zadanie').val();
+        expl = location.pathname.split('/');
+        location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+iNomerZadaniya;
+    });
+
     $("#dz").click(function(e) {
         expl = location.pathname.split('/');
         if($('#rejim').prop('checked')) {
@@ -28,13 +34,13 @@ $(function(){
 
     $("#otchet").click(function(e) {
         expl = location.pathname.split('/');
-        if($('#rejim').prop('checked')) {
-            if (location.pathname.indexOf('-uchenika') != -1)
+        // if($('#rejim').prop('checked')) {
+        //     if (location.pathname.indexOf('-uchenika') != -1)
                 location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'otchet'+'-uchenika';
-        }
-        else
-        if (location.pathname.indexOf('-uchenika') == -1)
-            location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'otchet';
+        // }
+        // else
+        // if (location.pathname.indexOf('-uchenika') == -1)
+        //     location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+'otchet';
     });
 
     $("#rejim").click(function(e) {
