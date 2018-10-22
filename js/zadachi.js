@@ -5,6 +5,90 @@
 
 $(function(){
 
+
+    $('.tr-for-selection').click(function(e){
+        $('.tr-for-selection').css('background-color','');
+        $(this).css('background-color','lightyellow');
+        iSelectionNumber=$(this).attr("id").substring(17);
+        $('#selectionnumber').val(iSelectionNumber);
+    });
+
+    $('.sort-zadachu').click(function(e){
+
+        iSelectionNumber=$('#selectionnumber').val();
+        iSortSelection=$('#sortirovka'+iSelectionNumber).val();
+
+        iIdPodtemyCurrent=$('#tr-for-selection-'+iSelectionNumber+' .id-podtemy').val();
+
+        if($(this).attr('id')=='vverh-zadachu')
+            oOtherObj=$('#tr-for-selection-'+iSelectionNumber).prev();
+        else
+            oOtherObj=$('#tr-for-selection-'+iSelectionNumber).next();
+
+        c.c(oOtherObj);
+
+        if(oOtherObj.attr("id")) {
+            iOtherSelectionNumber=oOtherObj.attr("id").substring(17);
+            iSortOtherSelection=$('#sortirovka'+iOtherSelectionNumber).val();
+
+            iIdPodtemyOther=$('#tr-for-selection-'+iOtherSelectionNumber+' .id-podtemy').val();
+
+            if(iIdPodtemyCurrent==iIdPodtemyOther) {
+
+                sContentOfCurrent = $('#tr-for-selection-' + iSelectionNumber).html();
+                sContentOfOther = $('#tr-for-selection-' + iOtherSelectionNumber).html();
+
+                $('#tr-for-selection-' + iOtherSelectionNumber).html(sContentOfCurrent);
+                $('#tr-for-selection-' + iSelectionNumber).html(sContentOfOther);
+
+                $('#sortirovka'+iSelectionNumber).val(iSortOtherSelection);
+                $('#sortirovka'+iOtherSelectionNumber).val(iSortSelection);
+
+                sContentOfCurrent = $('#tr-for-selection-' + iSelectionNumber).html();
+                sContentOfOther = $('#tr-for-selection-' + iOtherSelectionNumber).html();
+
+                $('#tr-for-selection-' + iSelectionNumber).css('background-color', '');
+                $('#tr-for-selection-' + iOtherSelectionNumber).css('background-color', 'lightyellow');
+
+
+                $('#tr-for-selection-' + iSelectionNumber).attr('id','tr-for-selection-temp');
+                $('#tr-for-selection-' + iOtherSelectionNumber).attr('id','tr-for-selection-'+iSelectionNumber);
+                $('#tr-for-selection-temp').attr('id','tr-for-selection-'+iOtherSelectionNumber);
+
+                $.post(
+                    "/post/update-sort-zadachu.php",
+                    {
+                        icurrentid: iSelectionNumber,
+                        iotherid: iOtherSelectionNumber,
+                        icurrentsortnumber: iSortSelection,
+                        iothersortnumber: iSortOtherSelection,
+                    },
+                    function (response) {
+                        // location.reload();
+                    }
+                );
+
+            }
+            else {
+                $('#tr-for-selection-'+iSelectionNumber).fadeOut('fast').fadeIn('fast');
+            }
+        }
+    });
+
+    $("#zadachi-sortirovka").click(function(e) {
+
+        $.post(
+            "/post/sortirovka.php",
+            {
+            }
+            ,
+            function(response){
+                // c.c(response);
+                location.reload();
+            }
+        );
+    });
+
     $("#upload-zadachi").click(function(e){
 
         $.post(
@@ -156,7 +240,7 @@ $(function(){
         sPravilnyiOtvet = $(this).parent().children('.pravilnyi-otvet').html();
         sReshenie = $(this).parent().children('.reshenie').val();
         iSMoimiCiframi = ($(this).parent().children('.s-moimi-ciframi').prop('checked')?1:0);
-        sIdPodtemy = $(this).parent().children('.id-podtemy').val();
+        sIdPodtemy = $(this).pFarent().children('.id-podtemy').val();
         sPodtema = $(this).parent().children('.kommentarii').val();
 
         // c.c(sTextZadachi);
@@ -224,6 +308,23 @@ $(function(){
             }
         );
         //-сделать запрос на обновление поля pravilnyi-otvet таблицы zadacha
+    });
+
+    $(".sortirovka").focusout(function(e){
+
+        iSortirovka = $(this).val();
+        iIdZadachi = $(this).attr("id").substring(10);
+
+        //сделать запрос на обновление поля sortirovka таблицы zadacha
+        $.post(
+            "/post/update-sortirovka.php",
+            {
+                iidzadachi: iIdZadachi,
+                isortirovka: iSortirovka,
+            }
+        );
+        //-сделать запрос на обновление поля sortirovka таблицы zadacha
+
     });
 
     $(".kommentarii").focusout(function(e){

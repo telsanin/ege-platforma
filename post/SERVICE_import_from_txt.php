@@ -122,6 +122,7 @@ function load_data($file, $column_divider, $table_name){
 
     fclose($file_name);
 
+//    include_once $_SERVER['DOCUMENT_ROOT']."/post/sortirovka.php?initial=1";
     include_once $_SERVER['DOCUMENT_ROOT']."/post/sortirovka.php";
 
     echo '&nbsp;&nbsp;Перенумерованы подтемы<br/>';

@@ -105,9 +105,9 @@ $(function(){
         sPredmet=$('#predmet').val();
         sKommentarii=$(this).val();
 
-        c.c(sUchenik);
-        c.c(sPredmet);
-        c.c(sKommentarii);
+        // c.c(sUchenik);
+        // c.c(sPredmet);
+        // c.c(sKommentarii);
 
         //обновим таблицу uchenik-predmet
         $.post(

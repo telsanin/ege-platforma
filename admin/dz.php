@@ -42,7 +42,17 @@ $res->data_seek(0);
     while ($row = $res->fetch_assoc()) {
         echo "<font color='blue'>Комментарий:</br>".($row['kommentarii-k-tekuschemu-dz']?($row['kommentarii-k-tekuschemu-dz']."</br>"):"")."</font>";
         echo "<textarea cols='42' rows='4' id='kommentarii'>".$row['kommentarii-k-tekuschemu-dz']."</textarea></br>";
-        echo "<font color='blue'>Ссылка на ДЗ на Решу ЭГЭ:</br>".($row['ssylka-na-dz-reshu-ege']?($row['ssylka-na-dz-reshu-ege']."</br>"):"")."</font>";
+        echo "<font color='blue'>Ссылка на ДЗ на Решу ЭГЭ:";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        if($sPredmet=='informatika')
+            echo "<a target='_blank' href='https://inf-ege.sdamgia.ru/teacher?a=tests'>Работы</a></br>";
+        else
+            echo "<a target='_blank' href='https://math-ege.sdamgia.ru/teacher?a=tests'>Работы</a></br>";
+
+        echo ($row['ssylka-na-dz-reshu-ege']?($row['ssylka-na-dz-reshu-ege']):"")."</font>";
+
+
+
         echo "<textarea cols='42' rows='4' id='ssylka-na-dz-reshu-ege'>".$row['ssylka-na-dz-reshu-ege']."</textarea></br>";
     }
 }

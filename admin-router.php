@@ -20,7 +20,7 @@ if($sUrl == "telsanin" or $sUrl == "telsanin/") {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/telsanin.php";
 }
 else {
-    //http://ege-platforma.local/telsanin/zadachi/matematika/1
+    //http://ege-platforma.local/telsanin/zadachi/edit/matematika/1
     if($sParametr2 == "zadachi") {
         switch($sParametr3){
             case "upload":
@@ -34,11 +34,14 @@ else {
             case "sortirovka":
                 $sPredmet=$sParametr4;
                 $iNomerZadaniya=$sParametr5;
-                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/sortirovka-zadach.php";
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-sortirovka.php";
                 break;
         }
     }
     //http://ege-platforma.local/telsanin/egor/matematika/1
+    elseif($sParametr2 == "testing"){
+        include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/testing.php";
+    }
     else{
 
             $sUchenik=$sParametr2;
@@ -122,9 +125,6 @@ else {
             echo "</br>";
             include_once $_SERVER['DOCUMENT_ROOT'] . "/front/otchet.php";
         }
-        elseif($sParametr2 == "testing"){
-            include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/test.php";
-        }
         else{
             //http://ege-platforma.local/telsanin/egor/matematika/1
             include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/urok-dz.php";
@@ -152,25 +152,25 @@ else {
                     <li class="uk-parent">
                         <div class="uk-nav-header">Математика</div>
                         <ul class="uk-nav-sub">
-                            <li><a href="/telsanin/zadachi/matematika/7">Задание 7</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/6">Задание 6</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/5">Задание 5</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/4">Задание 4</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/3">Задание 3</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/2">Задание 2</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/1">Задание 1</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/7">Задание 7</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/6">Задание 6</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/5">Задание 5</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/4">Задание 4</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/3">Задание 3</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/2">Задание 2</a></li>
+                            <li><a href="/telsanin/zadachi/edit/matematika/1">Задание 1</a></li>
                         </ul>
                     </li>
                     <li class="uk-parent">
                         <div class="uk-nav-header">Информатика</div>
                         <ul class="uk-nav-sub">
-                            <li><a href="/telsanin/zadachi/informatika/24">Задание 24</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/20">Задание 20</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/19">Задание 19</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/11">Задание 11</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/8">Задание 8</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/16">Задание 16</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/1">Задание 1</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/24">Задание 24</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/20">Задание 20</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/19">Задание 19</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/11">Задание 11</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/8">Задание 8</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/16">Задание 16</a></li>
+                            <li><a href="/telsanin/zadachi/edit/informatika/1">Задание 1</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -217,24 +217,24 @@ else {
 <!--                    <li class="uk-parent">-->
 <!--                        <div class="uk-nav-header">Математика</div>-->
 <!--                        <ul class="uk-nav-sub">-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/7">Задание 7</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/6">Задание 6</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/5">Задание 5</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/4">Задание 4</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/3">Задание 3</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/2">Задание 2</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/matematika/1">Задание 1</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/7">Задание 7</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/6">Задание 6</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/5">Задание 5</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/4">Задание 4</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/3">Задание 3</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/2">Задание 2</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/matematika/1">Задание 1</a></li>-->
 <!--                        </ul>-->
 <!--                    </li>-->
 <!--                    <li class="uk-parent">-->
 <!--                        <div class="uk-nav-header">Информатика</div>-->
 <!--                        <ul class="uk-nav-sub">-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/20">Задание 20</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/19">Задание 19</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/11">Задание 11</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/8">Задание 8</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/16">Задание 16</a></li>-->
-<!--                            <li><a href="/telsanin/zadachi/informatika/1">Задание 1</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/20">Задание 20</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/19">Задание 19</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/11">Задание 11</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/8">Задание 8</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/16">Задание 16</a></li>-->
+<!--                            <li><a href="/telsanin/zadachi/edit/informatika/1">Задание 1</a></li>-->
 <!--                        </ul>-->
 <!--                    </li>-->
 <!--                </ul>-->

@@ -34,8 +34,8 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 
 echo "<p><b>ЗАДАЧИ</b>:</p>";
 $res = $mysqli->query($SqlQuery);
-$res->data_seek(0);
-$row = $res->fetch_assoc();
+//$res->data_seek(0);
+//$row = $res->fetch_assoc();
 $iOldIdGruppyAnalogov = $row['id-podtemy'];
 $res->data_seek(0);
 $iNum = 1;
