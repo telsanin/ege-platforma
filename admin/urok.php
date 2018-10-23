@@ -28,7 +28,7 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
 echo "<b>Задачи</b>: ";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`reshali-na-zanyatii`<>1 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie`, `zadacha`.`id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`reshali-na-zanyatii`<>1 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $num_rows = mysqli_num_rows($res);
@@ -99,6 +99,9 @@ while ($row = $res->fetch_assoc()) {
 //    echo $iNumDZ++.") ";
     echo $iNumDZ++ . "/".$num_rows.") ";
     echo $row['text-zadachi']."</br>";
+
+    echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' /></br>";
+
     if($row['foto-teksta'])
         echo "<img src='/img/".$row['foto-teksta']."'/></br>";
 

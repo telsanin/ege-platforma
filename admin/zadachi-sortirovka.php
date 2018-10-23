@@ -1,10 +1,11 @@
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <input type="hidden" id="zadanie" value="<?=$iNomerZadaniya?>"></input>
 <input type="hidden" id="selectionnumber" value=""></input>
+<input type="hidden" id="selectionpodtemanumber" value=""></input>
 
 <?php
 
-$SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `sortirovka`;";
+$SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `id-podtemy`, `sortirovka`;";
 //if($sParametr5=="sort")
 //    $SqlQuery = "SELECT * FROM `zadacha` WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `kommentarii`;";
 
@@ -35,9 +36,11 @@ $res->data_seek(0);
 </style>
 
 <div style="position: fixed; right:0; top: 100px;">
+    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">Пересч</button></br></br></br>
+    <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">Подт</button></br></br>
     <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вверх</button></br></br>
-    <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button></br></br></br>
-    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px gray;">Перес</button>
+    <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button></br></br>
+    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: none; border: solid 1px gray;">Подт</br></button></br></br></br>
 </div>
 
 <table>
@@ -59,7 +62,7 @@ while ($row = $res->fetch_assoc()) {
     $sTopBorderClass="";
     if($iIdGruppyAnalogov!=$iOldIdGruppyAnalogov)
         $sTopBorderClass=" trborder";
-    echo "<tr class='tr-for-selection".$sTopBorderClass."' id='tr-for-selection-".$row['id-zadachi']."'>";
+    echo "<tr podt='".$row['id-podtemy']."' class='tr-for-selection".$sTopBorderClass."' id='tr-for-selection-".$row['id-zadachi']."'>";
 
     echo "<td>";
     echo "<input style='border: none;' size=1 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/>";

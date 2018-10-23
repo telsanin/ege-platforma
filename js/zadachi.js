@@ -9,8 +9,69 @@ $(function(){
     $('.tr-for-selection').click(function(e){
         $('.tr-for-selection').css('background-color','');
         $(this).css('background-color','lightyellow');
+
         iSelectionNumber=$(this).attr("id").substring(17);
         $('#selectionnumber').val(iSelectionNumber);
+
+        iSelectionPodtemaNumber=$(this).attr("podt");
+        $('#selectionpodtemanumber').val(iSelectionPodtemaNumber);
+    });
+
+    $('.sort-podtemu').click(function(e){
+
+        iIdPodtemyCurrent=$('#selectionpodtemanumber').val();
+
+        oCurrentObj = $('.tr-for-selection[podt='+iIdPodtemyCurrent+']');
+        oCurrentObj.css('background-color', 'lightyellow');
+
+        if($(this).attr('id')=='vverh-podtemu')
+            iIdPodtemyOther = 1*iIdPodtemyCurrent-10;
+        else
+            iIdPodtemyOther = 1*iIdPodtemyCurrent+10;
+
+        oOtherObj=$('.tr-for-selection[podt='+iIdPodtemyOther+']');
+
+        if(oOtherObj.length) {
+
+            if ($(this).attr('id') == 'vverh-podtemu') {
+                oOtherObjFirst = $('.tr-for-selection[podt=' + iIdPodtemyOther + ']:first');
+                oOtherObjFirst.before(oCurrentObj);
+            }
+            else {
+                oOtherObjFirst = $('.tr-for-selection[podt=' + iIdPodtemyOther + ']:last');
+                oOtherObjFirst.after(oCurrentObj);
+            }
+
+            oCurrentObj.attr('podt', iIdPodtemyOther);
+            oOtherObj.attr('podt', iIdPodtemyCurrent);
+
+            $('#selectionpodtemanumber').val(iIdPodtemyOther);
+
+            iNomerZadaniya = $('#zadanie').val();
+
+            $.post(
+                "/post/update-sort-podtemy.php",
+                {
+                    iidpodtemycurrent: iIdPodtemyCurrent,
+                    iidpodtemyother: iIdPodtemyOther,
+                },
+                function (response) {
+                    $.post(
+                        "/post/sortirovka.php",
+                        {
+                            onlysort: 1,
+                            inomerzadaniya: iNomerZadaniya,
+                        },
+                        function (response) {
+                            // location.reload();
+                        }
+                    );
+                }
+            );
+        }
+        else {
+            oCurrentObj.fadeOut('fast').fadeIn('fast');
+        }
     });
 
     $('.sort-zadachu').click(function(e){
@@ -18,20 +79,19 @@ $(function(){
         iSelectionNumber=$('#selectionnumber').val();
         iSortSelection=$('#sortirovka'+iSelectionNumber).val();
 
-        iIdPodtemyCurrent=$('#tr-for-selection-'+iSelectionNumber+' .id-podtemy').val();
+        iIdPodtemyCurrent=$('#selectionpodtemanumber').val();
 
         if($(this).attr('id')=='vverh-zadachu')
             oOtherObj=$('#tr-for-selection-'+iSelectionNumber).prev();
         else
             oOtherObj=$('#tr-for-selection-'+iSelectionNumber).next();
 
-        c.c(oOtherObj);
-
-        if(oOtherObj.attr("id")) {
+        if(oOtherObj.attr('podt')) {
             iOtherSelectionNumber=oOtherObj.attr("id").substring(17);
+
             iSortOtherSelection=$('#sortirovka'+iOtherSelectionNumber).val();
 
-            iIdPodtemyOther=$('#tr-for-selection-'+iOtherSelectionNumber+' .id-podtemy').val();
+            iIdPodtemyOther=$('#tr-for-selection-'+iOtherSelectionNumber).attr('podt');
 
             if(iIdPodtemyCurrent==iIdPodtemyOther) {
 
@@ -73,13 +133,19 @@ $(function(){
                 $('#tr-for-selection-'+iSelectionNumber).fadeOut('fast').fadeIn('fast');
             }
         }
+        else {
+            $('#tr-for-selection-'+iSelectionNumber).fadeOut('fast').fadeIn('fast');
+        }
     });
 
     $("#zadachi-sortirovka").click(function(e) {
 
+        iNomerZadaniya = $('#zadanie').val();
+
         $.post(
             "/post/sortirovka.php",
             {
+                inomerzadaniya: iNomerZadaniya,
             }
             ,
             function(response){

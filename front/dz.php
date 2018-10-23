@@ -96,8 +96,8 @@ if($res = $mysqli->query($SqlQuery)){
     }
 
     if($sSsylkaNaDzReshuEge) {
-        echo "<font color='blue'>Предлагаю дополнительно решить</font></br>";
-        echo "<a target='blanc' href='" . $sSsylkaNaDzReshuEge . "'>Задание на Решу ЕГЭ</a><font color='blue'> (чтобы не забывалось)</font></br></br>";
+        echo "<font color='blue'>Также нужно решить</font></br>";
+        echo "<a style='text-decoration: underline;' target='blanc' href='" . $sSsylkaNaDzReshuEge . "'>Задание на &laquo;Решу ЕГЭ&raquo;</a><font color='blue'></br>";       echo "(чтобы уже пройденное - не забывалось)</font></br></br>";
     }
 
     if($iVsego) {
@@ -133,7 +133,7 @@ if($res = $mysqli->query($SqlQuery)){
 
 //echo "</br>";
 
-$SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
+$SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `uchenik-zadachi`.`sortirovka`;";
 
 if($sParametr4=="sort")
 //    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
@@ -149,7 +149,7 @@ ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`)
 AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
 WHERE `uchenik-zadachi`.`predmet`='".$sPredmet."' AND`uchenik-zadachi`.`uchenik`='".$sUchenik."') 
 as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `sortirovka`;
+ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `id-podtemy`, `sortirovka`;
 ";
 
 $iNumDZ = 1;

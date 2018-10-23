@@ -231,16 +231,33 @@ echo "<p><b>Задачи</b>:</p>";
 $SqlQuery = "SET @num = 0; 
 SELECT distinct k.* 
 FROM `uchenik-zadachi` INNER JOIN (
-SELECT @num:=@num+1 as `new-sortirovka`, s.* 
-FROM `uchenik-zadachi` INNER JOIN (
-SELECT `uchenik-zadachi`.*, `zadacha`.`pravilnyi-otvet`, `zadacha`.`zadanie`, `zadacha`.`text-zadachi`, `zadacha`.`foto-teksta`
-FROM `uchenik-zadachi`, `zadacha` 
-WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
-ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`) 
-AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-WHERE `uchenik-zadachi`.`predmet`='".$sPredmet."' AND`uchenik-zadachi`.`uchenik`='".$sUchenik."') 
+    SELECT @num:=@num+1 as `new-sortirovka`, s.* 
+    FROM `uchenik-zadachi` INNER JOIN (
+        SELECT 
+        `uchenik-zadachi`.`uchenik`,
+        `uchenik-zadachi`.`predmet`,
+        `uchenik-zadachi`.`urok`,
+        `uchenik-zadachi`.`id-zadachi`,
+        `uchenik-zadachi`.`resheno-pravilno`,
+        `uchenik-zadachi`.`vremya-vypolneniya`,
+        `uchenik-zadachi`.`kolichestvo-popytok`,
+        `uchenik-zadachi`.`reshali-na-zanyatii`,
+        `uchenik-zadachi`.`razobrat-na-zanyatii`,
+        `uchenik-zadachi`.`aktualno`,
+        `uchenik-zadachi`.`zakonchili-na-etom`,  
+        `zadacha`.`id-podtemy`, 
+        `zadacha`.`pravilnyi-otvet`, 
+        `zadacha`.`zadanie`, 
+        `zadacha`.`text-zadachi`, 
+        `zadacha`.`foto-teksta`, 
+        `zadacha`.`sortirovka`
+        FROM `uchenik-zadachi`, `zadacha` 
+        WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
+        ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `sortirovka`) 
+    AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+    WHERE `uchenik-zadachi`.`predmet`='".$sPredmet."' AND`uchenik-zadachi`.`uchenik`='".$sUchenik."') 
 as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `sortirovka`;
+ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `id-podtemy`, `sortirovka`;
 ";
 
 

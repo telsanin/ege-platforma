@@ -287,6 +287,7 @@ $(function(){
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
         // iIdPodtemy=$(this).attr("id").substring(17);
+        iIdPodtemy = $(this).parent().children('.id-podtemy').val();
         iNomerZadaniya = $(this).parent().children('.zadanie').html();
         iSortirovka = $(this).attr("id").substring(17);
 
@@ -296,7 +297,6 @@ $(function(){
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-                // idpodtemy: iIdPodtemy,
                 izadanie: iNomerZadaniya,
                 isortirovka: iSortirovka,
             },
@@ -307,7 +307,7 @@ $(function(){
                     {
                         suchenik: sUchenik,
                         spredmet: sPredmet,
-                        // idpodtemy: iIdPodtemy,
+                        idpodtemy: iIdPodtemy,
                         izadanie: iNomerZadaniya,
                         isortirovka: iSortirovka,
                     },
