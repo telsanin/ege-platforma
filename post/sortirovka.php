@@ -4,6 +4,7 @@
 $DbAccessFile=$_SERVER['DOCUMENT_ROOT']."/_db-info.php";
 include_once $DbAccessFile;
 
+$sPredmet=$_POST["spredmet"];
 $iNomerZadaniya=$_POST["inomerzadaniya"];
 
 //    $sOrder="from `zadacha` ORDER BY `predmet`, `zadanie`, `kommentarii`) as s";
@@ -44,8 +45,8 @@ if($iOnlySort) {
     @old_zadanie:=`zadanie`, 
     @old_idpodtemy:=`id-podtemy` 
     from `zadacha` 
-    where `zadanie`=" . $iNomerZadaniya .
-        " ORDER BY `predmet`, `zadanie`, `id-podtemy`) as s 
+    where `zadanie`=".$iNomerZadaniya." and `predmet`='".$sPredmet."' 
+    ORDER BY `predmet`, `zadanie`, `id-podtemy`) as s 
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi` 
     set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
     ;";
@@ -75,8 +76,8 @@ else {
     @old_zadanie:=`zadanie`, 
     @old_kommentarii:=`kommentarii` 
     from `zadacha` 
-    where `zadanie`=".$iNomerZadaniya.
-    " ORDER BY `predmet`, `zadanie`, `kommentarii`) as s 
+    where `zadanie`=".$iNomerZadaniya." and `predmet`='".$sPredmet."'  
+    ORDER BY `predmet`, `zadanie`, `kommentarii`) as s 
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi` 
     set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
     ;";
@@ -100,7 +101,7 @@ $SqlQuery .="SET @old_predmet = '';
     @old_zadanie :=`zadanie`, 
     @old_idpodtemy :=`id-podtemy` 
     from `zadacha` 
-    where `zadanie`=".$iNomerZadaniya." 
+    where `zadanie`=".$iNomerZadaniya." and `predmet`='".$sPredmet."' 
     ORDER BY `predmet`, `zadanie`, `id-podtemy`, `sortirovka`, `id-zadachi`) as s
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi`
     set `zadacha`.`sortirovka`=`s`.`new-sortirovka`

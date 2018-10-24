@@ -48,10 +48,13 @@ $(function(){
             $('#selectionpodtemanumber').val(iIdPodtemyOther);
 
             iNomerZadaniya = $('#zadanie').val();
+            sPredmet = $('#predmet').val();
 
             $.post(
                 "/post/update-sort-podtemy.php",
                 {
+                    spredmet: sPredmet,
+                    inomerzadaniya: iNomerZadaniya,
                     iidpodtemycurrent: iIdPodtemyCurrent,
                     iidpodtemyother: iIdPodtemyOther,
                 },
@@ -131,12 +134,14 @@ $(function(){
     $("#only-sort").click(function(e) {
 
         iNomerZadaniya = $('#zadanie').val();
+        sPredmet = $('#predmet').val();
 
         $.post(
             "/post/sortirovka.php",
             {
                 onlysort: 1,
                 inomerzadaniya: iNomerZadaniya,
+                spredmet: sPredmet,
             },
             function (response) {
                 location.reload();
@@ -148,11 +153,13 @@ $(function(){
     $("#zadachi-sortirovka").click(function(e) {
 
         iNomerZadaniya = $('#zadanie').val();
+        sPredmet = $('#predmet').val();
 
         $.post(
             "/post/sortirovka.php",
             {
                 inomerzadaniya: iNomerZadaniya,
+                spredmet: sPredmet,
             }
             ,
             function(response){
