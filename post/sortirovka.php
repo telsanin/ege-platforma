@@ -21,8 +21,6 @@ $SqlQuery ="";
 
 $iOnlySort=$_POST["onlysort"];
 
-if(!$iOnlySort) {
-
 $SqlQuery = "SET @old_predmet = '';
     SET @old_zadanie = -1;
     SET @old_kommentarii = '';
@@ -46,12 +44,11 @@ $SqlQuery = "SET @old_predmet = '';
     @old_zadanie:=`zadanie`, 
     @old_kommentarii:=`kommentarii` 
     from `zadacha` 
-    where `zadanie`=".$iNomerZadaniya." 
-    ORDER BY `predmet`, `zadanie`, `kommentarii`) as s 
+    where `zadanie`=".$iNomerZadaniya.
+    " ORDER BY `predmet`, `zadanie`, ".($iOnlySort?"`id-podtemy`":"`kommentarii")."`) as s 
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi` 
     set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
     ;";
-}
 
 $SqlQuery .="SET @old_predmet = '';
     SET @old_zadanie = -1;

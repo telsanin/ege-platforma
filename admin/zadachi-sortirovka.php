@@ -36,8 +36,8 @@ $res->data_seek(0);
 </style>
 
 <div style="position: fixed; right:0; top: 100px;">
-    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">Пересч</button></br></br></br>
-<!--    <button id='only-sort' style="height: 40px; background: none; border: solid 1px gray;">Сорт</button></br></br></br>-->
+    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">По подт</button></br></br></br>
+    <button id='only-sort' style="height: 40px; background: none; border: solid 1px gray;">По ном</button></br></br></br>
     <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&uarr; Подт &uarr;</button></br></br>
     <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вверх</button></br></br>
     <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button></br></br>
@@ -68,9 +68,9 @@ while ($row = $res->fetch_assoc()) {
     echo "<td>";
     echo "<input style='border: none;' size=1 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/>";
     echo "</td>";
-//    echo "<td>";
-    echo "<input type='hidden' style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/>";
-//    echo "</td>";
+    echo "<td>";
+    echo "<input style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/>";
+    echo "</td>";
     echo "<td>";
         echo "<input style='border: none;' size=1 width='1px' class='sortirovka' id='sortirovka".$row['id-zadachi']."' name='sortirovka".$row['id-zadachi']."' value='".$row['sortirovka']."'/>";
     echo "</td>";
