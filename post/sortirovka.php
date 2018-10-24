@@ -72,7 +72,7 @@ $SqlQuery .="SET @old_predmet = '';
     @old_idpodtemy :=`id-podtemy` 
     from `zadacha` 
     where `zadanie`=".$iNomerZadaniya." 
-    ORDER BY `predmet`, `zadanie`, `id-podtemy`, `id-zadachi`) as s
+    ORDER BY `predmet`, `zadanie`, `id-podtemy`, `sortirovka`, `id-zadachi`) as s
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi`
     set `zadacha`.`sortirovka`=`s`.`new-sortirovka`
 ;";
