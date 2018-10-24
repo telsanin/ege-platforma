@@ -56,16 +56,6 @@ $(function(){
                     iidpodtemyother: iIdPodtemyOther,
                 },
                 function (response) {
-                    // $.post(
-                    //     "/post/sortirovka.php",
-                    //     {
-                    //         onlysort: 1,
-                    //         inomerzadaniya: iNomerZadaniya,
-                    //     },
-                    //     function (response) {
-                    //         // location.reload();
-                    //     }
-                    // );
                 }
             );
         }
@@ -137,6 +127,23 @@ $(function(){
             $('#tr-for-selection-'+iSelectionNumber).fadeOut('fast').fadeIn('fast');
         }
     });
+
+    $("#only-sort").click(function(e) {
+
+        iNomerZadaniya = $('#zadanie').val();
+
+        $.post(
+            "/post/sortirovka.php",
+            {
+                onlysort: 1,
+                inomerzadaniya: iNomerZadaniya,
+            },
+            function (response) {
+                location.reload();
+            }
+        );
+    });
+
 
     $("#zadachi-sortirovka").click(function(e) {
 

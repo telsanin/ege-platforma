@@ -31,7 +31,7 @@ else {
                 $iNomerZadaniya=$sParametr5;
                 include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi.php";
                 break;
-            case "sortirovka":
+            case "sort":
                 $sPredmet=$sParametr4;
                 $iNomerZadaniya=$sParametr5;
                 include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-sortirovka.php";
