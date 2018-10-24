@@ -37,10 +37,10 @@ $res->data_seek(0);
 
 <div style="position: fixed; right:0; top: 100px;">
     <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">Пересч</button></br></br></br>
-    <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">Подт</button></br></br>
+    <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&uarr; Подт</button></br></br>
     <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вверх</button></br></br>
     <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button></br></br>
-    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: none; border: solid 1px gray;">Подт</br></button></br></br></br>
+    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&darr; Подт</br></button></br></br></br>
 </div>
 
 <table>
@@ -81,7 +81,8 @@ while ($row = $res->fetch_assoc()) {
 //    echo "</td>";
     echo "<td width='250px'>";
         if($row['foto-teksta'])
-            echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+//            echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+            echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
     echo "</td>";
 
     echo "</tr>";

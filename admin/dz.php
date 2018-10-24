@@ -341,7 +341,8 @@ do {
             echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
             echo $row['text-zadachi'] . "</br>";
             if ($row['foto-teksta'])
-                echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
+//                echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
+                echo "<img src='/img/".$sPredmet."-".$iZadanie."-".$row['id-zadachi'].".jpg'/></br>";
 
             echo "Ответ: " . $row['pravilnyi-otvet'];
             echo "</br>";
@@ -435,3 +436,13 @@ while ($row = $res->fetch_assoc()) {
 }
 
 ?>
+
+<!--Добавление вопроса-->
+<input type="hidden" id="zadanie" value="<?=$iZadanie?>"></input>
+
+</br><b>Добавить вопрос:</b></br>
+Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" cols="42" rows="5"></textarea></br>
+Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size ="39" id="otvet-na-vopros"/></br>
+<button id="insert-vopros-ucheniku">Добавить</button>
+
+<!--/Добавление вопроса-->

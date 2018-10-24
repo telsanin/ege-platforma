@@ -63,7 +63,8 @@ while ($row = $res->fetch_assoc()) {
     echo $iNumDZ++ . "/".$num_rows.") ";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
-        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+//        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
     echo ($row['zakonchili-na-etom']?"</b>":"");
 

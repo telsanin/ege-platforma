@@ -36,6 +36,12 @@ else
 
     <style type="text/css">
         p {margin: 0;}
+        table{
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid lightgray;
+        }
     </style>
 
     <script>
@@ -56,6 +62,8 @@ else
 
 
 <body>
+
+<?=(strpos($_SERVER["DOCUMENT_ROOT"], "teleginresume")?"<div style='position: fixed; top: 0; width: 100%;z-index: 1; border: solid 1px #4caf50; margin: 0; padding: 0;'></div>":"")?>
 
 <div style="margin: 8px;">
 

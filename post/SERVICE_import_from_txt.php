@@ -128,6 +128,13 @@ function load_data($file, $column_divider, $table_name){
 //    echo '&nbsp;&nbsp;Перенумерованы подтемы<br/>';
 //    echo '&nbsp;&nbsp;Перенумерована сортировка<br/>';
 
+    $SqlQuery = "SELECT `id-zadachi` FROM `zadacha` ORDER BY `id-zadachi` DESC;";
+    $res = $mysqli->query($SqlQuery);
+    $res->data_seek(0);
+    $row = $res->fetch_assoc();
+    echo "Номер последней задачи: ".$row["id-zadachi"];
+    echo "</br></br>";
+
     return $status;
 
 }

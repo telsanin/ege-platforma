@@ -56,16 +56,16 @@ $(function(){
                     iidpodtemyother: iIdPodtemyOther,
                 },
                 function (response) {
-                    $.post(
-                        "/post/sortirovka.php",
-                        {
-                            onlysort: 1,
-                            inomerzadaniya: iNomerZadaniya,
-                        },
-                        function (response) {
-                            // location.reload();
-                        }
-                    );
+                    // $.post(
+                    //     "/post/sortirovka.php",
+                    //     {
+                    //         onlysort: 1,
+                    //         inomerzadaniya: iNomerZadaniya,
+                    //     },
+                    //     function (response) {
+                    //         // location.reload();
+                    //     }
+                    // );
                 }
             );
         }

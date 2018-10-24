@@ -61,7 +61,8 @@ while ($row = $res->fetch_assoc()) {
 //        echo "<img src='/img/".$filename."'/></br>";
 
     if($row['foto-teksta'])
-        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+//        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 //    echo "</br><b>Решение:</b></br>".($row['reshenie']?$row['reshenie']:"-")."</br>";
     echo "</br>Решение:</br>";
     echo "<textarea class='reshenie' id='reshenie".$row['id-zadachi']."' cols='42' rows='7'>".$row['reshenie']."</textarea></br>";

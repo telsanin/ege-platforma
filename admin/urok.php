@@ -103,7 +103,8 @@ while ($row = $res->fetch_assoc()) {
     echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' /></br>";
 
     if($row['foto-teksta'])
-        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+//        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
+        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
     echo "<b>Ответ: </b>" . $row['pravilnyi-otvet']."</br>";
 
@@ -113,6 +114,10 @@ while ($row = $res->fetch_assoc()) {
 
 //    if($row['kolichestvo-popytok'])
 //        echo "<input type='checkbox' id='reshal-".$row['id-zadachi']."' disabled ".($row['kolichestvo-popytok']>0?"checked":"")."><label>решал</label>";
+
+    $iReshal = $row['resheno-pravilno'];
+    if ($row['reshali-na-zanyatii'])
+        $iReshal = 2;
 
 //    if ($row['kolichestvo-popytok'] > 0)
     switch($row['resheno-pravilno']){
@@ -168,3 +173,15 @@ while ($row = $res->fetch_assoc()) {
     echo "<input ".($row['aktualno']==1?"checked":"")." class='vopros-aktualen' id='vopros-aktualen".$row['id-voprosa']."' type='checkbox'/><label for='vopros-aktualen".$row['id-voprosa']."'>".$row['text-voprosa']."</label>";
     echo "</br>";
 }
+
+?>
+
+<!--Добавление вопроса-->
+<input type="hidden" id="zadanie" value="<?=$iNomerZadaniya?>"></input>
+
+</br><b>Добавить вопрос:</b></br>
+Текст:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="text-voprosa" cols="42" rows="5"></textarea></br>
+Ответ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size ="39" id="otvet-na-vopros"/></br>
+<button id="insert-vopros-ucheniku">Добавить</button>
+
+<!--/Добавление вопроса-->

@@ -214,7 +214,8 @@ do {
         //    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
         //        echo "<img src='/img/".$filename."'/></br>";
         if ($row['foto-teksta'])
-            echo "<img src='/img/" . $row['foto-teksta'] . "'/></br></br>";
+//            echo "<img src='/img/" . $row['foto-teksta'] . "'/></br></br>";
+            echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br></br>";
 
         $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
         //вывод правильного ответа для тестирования

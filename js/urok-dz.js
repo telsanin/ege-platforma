@@ -222,6 +222,7 @@ $(function(){
         sTextVoprosa = $('#text-voprosa').val()
         sOtvetNaVopros = $('#otvet-na-vopros').val()
         sUchenik = $('#uchenik').val()
+
         //инициализируем
         // iIdVoprosa=0;
 
@@ -677,27 +678,27 @@ $(function(){
         );
     });
 
-    $(".nereshennye-radio-v-urok-uchenika").click(function(e){
-
-        sUchenik = $('#uchenik').val();
-        sPredmet = $('#predmet').val();
-        // iZadanie = $('#zadanie').val();
-        iUrok = $(this).val();
-
-        $.post(
-            "/post/nereshennye-v-urok-uchenika.php",
-            {
-                suchenik: sUchenik,
-                spredmet: sPredmet,
-                // izadanie: iZadanie,
-                surok: iUrok,
-            },
-            function(response){
-                location.reload();
-            }
-        );
-    });
-
+    // $(".nereshennye-radio-v-urok-uchenika").click(function(e){
+    //
+    //     sUchenik = $('#uchenik').val();
+    //     sPredmet = $('#predmet').val();
+    //     // iZadanie = $('#zadanie').val();
+    //     iUrok = $(this).val();
+    //
+    //     $.post(
+    //         "/post/nereshennye-v-urok-uchenika.php",
+    //         {
+    //             suchenik: sUchenik,
+    //             spredmet: sPredmet,
+    //             // izadanie: iZadanie,
+    //             surok: iUrok,
+    //         },
+    //         function(response){
+    //             location.reload();
+    //         }
+    //     );
+    // });
+    //
     $(".vse-radio-v-urok-uchenika").click(function(e){
 
         sUchenik = $('#uchenik').val();
