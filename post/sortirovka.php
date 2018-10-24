@@ -21,7 +21,38 @@ $SqlQuery ="";
 
 $iOnlySort=$_POST["onlysort"];
 
-$SqlQuery = "SET @old_predmet = '';
+if($iOnlySort) {
+    $SqlQuery = "SET @old_predmet = '';
+    SET @old_zadanie = -1;
+    SET @old_idpodtemy = '';
+    SET @num = 0;
+    update `zadacha` inner join (
+    select @num := CASE 
+    WHEN (@old_predmet <> `predmet`) OR (@old_zadanie <> `zadanie`) THEN 10
+    ELSE 
+        CASE 
+        WHEN @old_idpodtemy <> `id-podtemy` THEN @num+10
+        ELSE @num
+        END
+    END 
+    AS `new-id-podtemy`,
+    `id-zadachi`,
+    `predmet`,
+    `zadanie`,
+    `id-podtemy`,
+    @old_predmet:=`predmet`, 
+    @old_zadanie:=`zadanie`, 
+    @old_idpodtemy:=`id-podtemy` 
+    from `zadacha` 
+    where `zadanie`=" . $iNomerZadaniya .
+        " ORDER BY `predmet`, `zadanie`, `id-podtemy`) as s 
+    on `zadacha`.`id-zadachi`=`s`.`id-zadachi` 
+    set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
+    ;";
+}
+else {
+
+    $SqlQuery = "SET @old_predmet = '';
     SET @old_zadanie = -1;
     SET @old_kommentarii = '';
     SET @num = 0;
@@ -45,10 +76,11 @@ $SqlQuery = "SET @old_predmet = '';
     @old_kommentarii:=`kommentarii` 
     from `zadacha` 
     where `zadanie`=".$iNomerZadaniya.
-    " ORDER BY `predmet`, `zadanie`, ".($iOnlySort?"`id-podtemy`":"`kommentarii")."`) as s 
+    " ORDER BY `predmet`, `zadanie`, `kommentarii`) as s 
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi` 
     set `zadacha`.`id-podtemy`=`s`.`new-id-podtemy`
     ;";
+}
 
 $SqlQuery .="SET @old_predmet = '';
     SET @old_zadanie = -1;
