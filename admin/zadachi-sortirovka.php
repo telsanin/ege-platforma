@@ -36,13 +36,15 @@ $num_rows = mysqli_num_rows($res);
     }
 </style>
 
-<div style="position: fixed; right:0; top: 100px;">
-    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">По подт</button></br></br></br>
-    <button id='only-sort' style="height: 40px; background: none; border: solid 1px gray;">По ном</button></br></br></br>
-    <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&uarr; Подт &uarr;</button></br></br>
-    <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вверх</button></br></br>
-    <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button></br></br>
-    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&darr; Подт &darr;</br></button></br></br></br>
+<div style="position: fixed; top:0; left: 100px;">
+    <button id='zadachi-sortirovka' style="height: 40px; background: none; border: solid 1px red;">По подт</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id='only-sort' style="height: 40px; background: none; border: solid 1px gray;">По ном</button>
+</div>
+<div style="position: fixed; bottom:0; left: 30px;">
+    <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&uarr; Подт &uarr;</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вверх</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: none; border: solid 1px gray;">Вниз</br></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: none; border: solid 1px gray;">&darr; Подт &darr;</br></button>
 </div>
 
 <table>
