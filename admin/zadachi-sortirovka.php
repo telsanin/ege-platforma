@@ -47,7 +47,7 @@ $res->data_seek(0);
 <table>
 <tr>
 <th>Подт</th>
-<!--<th>Подт</th>-->
+<th>Ном</th>
 <th>С</th>
 <th>Текст</th>
 <!--<th>Отв</th>-->
