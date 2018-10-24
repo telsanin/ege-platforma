@@ -17,6 +17,7 @@ echo "<p><b>ЗАДАЧИ</b>:</p>";
 
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
+$num_rows = mysqli_num_rows($res);
 
 ?>
 
@@ -48,7 +49,7 @@ $res->data_seek(0);
 <tr>
 <th>Подт</th>
 <th>Ном</th>
-<th>С</th>
+<!--<th>С</th>-->
 <th>Текст</th>
 <!--<th>Отв</th>-->
 <th>Картинка</th>
@@ -69,11 +70,11 @@ while ($row = $res->fetch_assoc()) {
     echo "<input style='border: none;' size=1 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/>";
     echo "</td>";
     echo "<td>";
-    echo "<input style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/>";
+    echo "<input style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/></br></br>/".$num_rows;
     echo "</td>";
-    echo "<td>";
-        echo "<input style='border: none;' size=1 width='1px' class='sortirovka' id='sortirovka".$row['id-zadachi']."' name='sortirovka".$row['id-zadachi']."' value='".$row['sortirovka']."'/>";
-    echo "</td>";
+//    echo "<td>";
+        echo "<input type='hidden' style='border: none;' size=1 width='1px' class='sortirovka' id='sortirovka".$row['id-zadachi']."' name='sortirovka".$row['id-zadachi']."' value='".$row['sortirovka']."'/>";
+//    echo "</td>";
     echo "<td>";
         echo mb_substr($row['text-zadachi'],0,200,'UTF-8');
     echo "</td>";
