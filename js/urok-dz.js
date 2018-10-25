@@ -103,7 +103,8 @@ $(function(){
 
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
-        sKommentarii=$(this).val();
+        if(!(sKommentarii=$(this).val()))
+            sKommentarii=$(this).html();
 
         // c.c(sUchenik);
         // c.c(sPredmet);
@@ -298,6 +299,7 @@ $(function(){
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
+                idpodtemy: iIdPodtemy,
                 izadanie: iNomerZadaniya,
                 isortirovka: iSortirovka,
             },

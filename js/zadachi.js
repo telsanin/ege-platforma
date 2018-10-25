@@ -426,7 +426,9 @@ $(function(){
 
     $(".id-podtemy").focusout(function(e){
 
-        iIdPodtemy = $(this).val();
+        if(!(iIdPodtemy = $(this).val()))
+            iIdPodtemy = $(this).html();
+
         iTaskNumber = $(this).attr("id").substring(10);
 
         //сделать запрос на обновление поля id-podtemy таблицы zadacha

@@ -11,7 +11,7 @@ include_once $DbAccessFile;
 //параметры полученного POST-запроса на добавление строки в таблицу БД
 $sUchenik=$_POST["suchenik"];
 $sPredmet=$_POST["spredmet"];
-//$iIdPodtemy=$_POST["idpodtemy"];
+$iIdPodtemy=$_POST["idpodtemy"];
 $iSortirovka=$_POST["isortirovka"];
 $iNomerZadaniya=$_POST["izadanie"];
 
@@ -24,7 +24,7 @@ $iCount=0;
 //и если мы решали №16 а потом №8, то если текущая задача в задании №8, то все задачи из №16
 //не попадут в этот отчет
 
-$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND (`uchenik-zadachi`.`sortirovka`<=".$iSortirovka." OR `resheno-pravilno`=-1 OR `razobrat-na-zanyatii`);";
+$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' AND (((`zadacha`.`id-podtemy`<'".$iIdPodtemy."') OR (`zadacha`.`id-podtemy`='".$iIdPodtemy."' AND `zadacha`.`sortirovka`<=".$iSortirovka.")) OR `resheno-pravilno`=-1 OR `razobrat-na-zanyatii`);";
 
 //$SqlQuery = "SELECT count(`uchenik-zadachi`.`id-zadachi`) as count, `zadanie` FROM `uchenik-zadachi`, `zadacha` WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND (`zadacha`.`zadanie`<'".$iNomerZadaniya."' OR (`zadacha`.`zadanie`='".$iNomerZadaniya."' AND `uchenik-zadachi`.`sortirovka`<=".$iSortirovka.")) GROUP BY `zadacha`.`zadanie`;";
 

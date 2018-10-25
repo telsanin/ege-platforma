@@ -133,7 +133,7 @@ if($res = $mysqli->query($SqlQuery)){
 
 //echo "</br>";
 
-$SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `uchenik-zadachi`.`sortirovka`;";
+$SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 
 if($sParametr4=="sort")
 //    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
@@ -142,14 +142,40 @@ SELECT distinct k.*
 FROM `uchenik-zadachi` INNER JOIN (
 SELECT @num:=@num+1 as `new-sortirovka`, s.* 
 FROM `uchenik-zadachi` INNER JOIN (
-SELECT `uchenik-zadachi`.*, `zadacha`.`pravilnyi-otvet`, `zadacha`.`zadanie`, `zadacha`.`text-zadachi`, `zadacha`.`foto-teksta`
-FROM `uchenik-zadachi`, `zadacha` 
-WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
-ORDER BY `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`) 
+    SELECT 
+        `uchenik-zadachi`.*, 
+        `zadacha`.`pravilnyi-otvet`, 
+        `zadacha`.`zadanie`, 
+        `zadacha`.`id-podtemy`, 
+        `zadacha`.`text-zadachi`, 
+        `zadacha`.`foto-teksta`,
+        `zadacha`.`slojnyi-otvet-1`,
+        `zadacha`.`slojnyi-otvet-2`,
+        `zadacha`.`slojnyi-otvet-3`
+    FROM 
+        `uchenik-zadachi`, 
+        `zadacha` 
+    WHERE 
+        `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND 
+        `uchenik-zadachi`.`aktualno`=1 AND 
+        `uchenik-zadachi`.`predmet`='".$sPredmet."' AND 
+        `uchenik-zadachi`.`urok`='2' AND 
+        `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
+    ORDER BY 
+        `zadacha`.`zadanie`, 
+        `uchenik-zadachi`.`sortirovka`) 
 AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-WHERE `uchenik-zadachi`.`predmet`='".$sPredmet."' AND`uchenik-zadachi`.`uchenik`='".$sUchenik."') 
+WHERE 
+    `uchenik-zadachi`.`predmet`='".$sPredmet."' AND 
+    `uchenik-zadachi`.`uchenik`='".$sUchenik."') 
 as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadanie`, `id-podtemy`, `sortirovka`;
+ORDER BY 
+    `razobrat-na-zanyatii` DESC, 
+    `resheno-pravilno` ASC, 
+    `kolichestvo-popytok` DESC, 
+    `zadanie`, 
+    `id-podtemy`, 
+    `sortirovka`;
 ";
 
 $iNumDZ = 1;
@@ -169,79 +195,108 @@ do {
         $num_rows = count($rows);
         foreach($rows as $row) {
 
-        echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"]==1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='".$row['resheno-pravilno']."'>";
+            echo "<div " . (($iSkrytReshennye && $row["resheno-pravilno"] == 1) ? "style='display: none;'" : "") . " class='zadacha' resheno-pravilno='" . $row['resheno-pravilno'] . "'>";
 
-        //добавление горизонтальной полосы, разделяющией разные задания
-        $iNomerZadaniya = $row['zadanie'];
-        if ($iOldNomerZadaniya != 0)
-            //если это НЕ первая строка
-            if ($iNomerZadaniya != $iOldNomerZadaniya) {
-                //если Задание изменилось
-                $iOldNomerZadaniya = $iNomerZadaniya;
-                echo "</br><hr style='height: 1px; background-color: black;'></br>";
-            } else {
-                //добавление горизонтальной полосы, разделяющией разные подтемы
-                $iIdPodtemy = $row['id-podtemy'];
-                if ($iIdPodtemy != $iOldIdPodtemy) {
-                    //если подтема изменилась
-                    $iOldIdPodtemy = $iIdPodtemy;
-                    echo "<hr>";
+            //добавление горизонтальной полосы, разделяющией разные задания
+            $iNomerZadaniya = $row['zadanie'];
+            if ($iOldNomerZadaniya != 0)
+                //если это НЕ первая строка
+                if ($iNomerZadaniya != $iOldNomerZadaniya) {
+                    //если Задание изменилось
+                    $iOldNomerZadaniya = $iNomerZadaniya;
+                    echo "</br><hr style='height: 1px; background-color: black;'></br>";
                 } else {
-                    echo "</br>";
+                    //добавление горизонтальной полосы, разделяющией разные подтемы
+                    $iIdPodtemy = $row['id-podtemy'];
+                    if ($iIdPodtemy != $iOldIdPodtemy) {
+                        //если подтема изменилась
+                        $iOldIdPodtemy = $iIdPodtemy;
+                        echo "<hr>";
+                    } else {
+                        echo "</br>";
+                    }
+                    //-добавление горизонтальной полосы, разделяющией разные подтемы
                 }
-                //-добавление горизонтальной полосы, разделяющией разные подтемы
+            else {
+                //если это первая строка, инициализируем iIdPodtemy значением из первой строки
+                $iOldNomerZadaniya = $iNomerZadaniya;
+                $iOldIdPodtemy = $iIdPodtemy;
+                echo "</br>";
             }
-        else {
-            //если это первая строка, инициализируем iIdPodtemy значением из первой строки
-            $iOldNomerZadaniya = $iNomerZadaniya;
-            $iOldIdPodtemy = $iIdPodtemy;
-            echo "</br>";
-        }
-        //-добавление горизонтальной полосы, разделяющией разные задания
+            //-добавление горизонтальной полосы, разделяющией разные задания
 
-        //    if($row['srednee-vremya-vypolneniya']!="00:00:00")
-        //        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
-        echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
+            //    if($row['srednee-vremya-vypolneniya']!="00:00:00")
+            //        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
+            echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
 //        echo $iNumDZ++ . ") ";
-        if($row['new-sortirovka'])
-            echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
-        else
-        echo $iNumDZ++ . "/".$num_rows.") ";
+            if ($row['new-sortirovka'])
+                echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
+            else
+                echo $iNumDZ++ . "/" . $num_rows . ") ";
 
-        echo $row['text-zadachi'] . "</br>";
+            echo $row['text-zadachi'] . "</br>";
 
-        //    $filename =$sPredmet."-".$sZadanie."-".$row['id-zadachi'].".jpg";
-        //    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
-        //        echo "<img src='/img/".$filename."'/></br>";
-        if ($row['foto-teksta'])
-//            echo "<img src='/img/" . $row['foto-teksta'] . "'/></br></br>";
-            echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br></br>";
+            //    $filename =$sPredmet."-".$sZadanie."-".$row['id-zadachi'].".jpg";
+            //    if (file_exists( $_SERVER['DOCUMENT_ROOT']."/img/".$filename))
+            //        echo "<img src='/img/".$filename."'/></br>";
+            if ($row['foto-teksta'])
+                //echo "<img src='/img/" . $row['foto-teksta'] . "'/></br></br>";
+                echo "<img src='/img/" . $sPredmet . "-" . $iNomerZadaniya . "-" . $row['id-zadachi'] . ".jpg'/></br></br>";
 
-        $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
-        //вывод правильного ответа для тестирования
-        //echo "</br>".$row['pravilnyi-otvet'];
-        //-вывод правильного ответа для тестирования
+            $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");
+            //вывод правильного ответа для тестирования
+            //echo "</br>".$row['pravilnyi-otvet'];
+            //-вывод правильного ответа для тестирования
 
-        echo "<input type='hidden' id='vremya-predyduschih-popytok" . $row['id-zadachi'] . "' value=" . $row['vremya-vypolneniya'] . "></input>";
+            echo "<input type='hidden' id='vremya-predyduschih-popytok" . $row['id-zadachi'] . "' value=" . $row['vremya-vypolneniya'] . "></input>";
 
-        if($row['resheno-pravilno']!=1) {
-            echo "Ответ: <input id='input".$row['id-zadachi']."'></input>&nbsp;&nbsp;";
-            echo "<button class='uveren' id='uveren".$row['id-zadachi']."'>Уверен</button>&nbsp;&nbsp;";
-        }
-        switch($row['resheno-pravilno']){
-            case -1:
-                echo "</br><span id='result".$row['id-zadachi']."' style='color: red;'>Неправильно :(</span>";
-                echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-                break;
-            case 0:
-                echo "<div style='display: none;' id='result".$row['id-zadachi'] . "'></div>";
-                echo "<div style='display: none;' id='kolichestvo-popytok" . $row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi']."'>".$row['kolichestvo-popytok']."</span> попытки</div>";
-                break;
-            case 1:
-                echo "<span id='result".$row['id-zadachi']."' style='color: lime;'>Правильно :)</span>";
-                echo "<div id='div-kolichestvo-popytok".$row['id-zadachi']."'>с <span id='kolichestvo".$row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
-                break;
-        }
+            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+                //задачи с полным решением
+
+                echo "Ответы:</br>";
+
+                $iSlojnyiOtvenNumber = 1;
+                while($row["slojnyi-otvet-".$iSlojnyiOtvenNumber]<>"") {
+
+                    echo $iSlojnyiOtvenNumber.") <textarea class='slojnyi-otvet-uchenika' id='slojnyi-otvet-uchenika-'".$iSlojnyiOtvenNumber." cols='42' rows='5'></textarea></br>";
+                    echo "<div style='display: none;' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvenNumber."'>";
+                    echo "Правильный ответ: </br>";
+                    echo $row["slojnyi-otvet-".$iSlojnyiOtvenNumber]."</span></br>";
+                    echo "<input type='checkbox' id='slojnyi-otvet-checkbox-".$iSlojnyiOtvenNumber."' /><label for='slojnyi-otvet-checkbox-".$iSlojnyiOtvenNumber."'>я ответил правильно</label>";
+                    echo "</div>";
+
+                    echo "<button class='slojnyi-otvet-otpravit' id='slojnyi-otvet-otpravit-".$iSlojnyiOtvenNumber."'>Отправить</button></br></br>";
+
+                    $iSlojnyiOtvenNumber++;
+                }
+
+                //-задачи с полным решением
+            }
+            else {
+                //зачачи с числовым ответом
+                if ($row['resheno-pravilno'] != 1) {
+                    echo "Ответ: <input id='input" . $row['id-zadachi'] . "'></input>&nbsp;&nbsp;";
+                    echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
+                }
+
+                switch ($row['resheno-pravilno']) {
+                case -1:
+                    echo "</br><span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>";
+                    echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
+                    break;
+                case 0:
+                    echo "<div style='display: none;' id='result" . $row['id-zadachi'] . "'></div>";
+                    echo "<div style='display: none;' id='kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
+                    break;
+                case 1:
+                    echo "<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>";
+                    echo "<div id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</div>";
+                    break;
+                }
+                //-зачачи с числовым ответом
+            }
+
+
         echo "<div id='div-vsyo-ploho".$row['id-zadachi']."'><input " . $iVsyoPloho." class='vsyo-ploho' id='vsyo-ploho" . $row['id-zadachi']."' type='checkbox'/><label for='vsyo-ploho".$row['id-zadachi']."'>не получается; разобрать на занятии</label></div>";
 
 
@@ -250,7 +305,11 @@ do {
         //    echo "</br>";
 
 //        }}
-        }}}
+
+        }
+    }
+}
+
 while ($mysqli->more_results() && $mysqli->next_result());
 
 echo "<input type='hidden' id='last-zadanie' value='".$iNomerZadaniya."'></input>";

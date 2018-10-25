@@ -60,6 +60,7 @@ $num_rows = mysqli_num_rows($res);
 
 <?php
 
+$iNum=1;
 $iOldIdGruppyAnalogov = '';
 while ($row = $res->fetch_assoc()) {
 
@@ -70,10 +71,10 @@ while ($row = $res->fetch_assoc()) {
     echo "<tr podt='".$row['id-podtemy']."' class='tr-for-selection".$sTopBorderClass."' id='tr-for-selection-".$row['id-zadachi']."'>";
 
     echo "<td>";
-    echo "<input style='border: none;' size=1 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."' value='".$row['kommentarii']."'/>";
+    echo "<textarea cols='4' rows='5' style='border: none;' size=1 class='kommentarii' id='kommentarii".$row['id-zadachi']."' name='kommentarii".$row['id-zadachi']."'>".$row['kommentarii']."</textarea>";
     echo "</td>";
     echo "<td>";
-    echo "<input style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."' value='".$row['id-podtemy']."'/></br></br>/".$num_rows;
+    echo "<textarea cols='3' rows='4' style='border: none;' size=1 class='id-podtemy' id='id-podtemy".$row['id-zadachi']."' name='id-podtemy".$row['id-zadachi']."'>".$row['id-podtemy']."</textarea></br>".$iNum++."/".$num_rows;
     echo "</td>";
 //    echo "<td>";
         echo "<input type='hidden' style='border: none;' size=1 width='1px' class='sortirovka' id='sortirovka".$row['id-zadachi']."' name='sortirovka".$row['id-zadachi']."' value='".$row['sortirovka']."'/>";

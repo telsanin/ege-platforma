@@ -4,6 +4,16 @@
 
 $(function(){
 
+
+
+    $(".slojnyi-otvet-otpravit").click(function(e) {
+
+        iSlojnyiOtvenNumber = $(this).attr("id").substring(23);
+        $('#slojnyi-otvet-pravilnyi-'+iSlojnyiOtvenNumber).show('slow');
+
+    });
+
+
     $("#skryt-reshennye").click(function(e) {
 
         sUchenik = $('#uchenik').val();
