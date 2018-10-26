@@ -1,3 +1,9 @@
+<style type="text/css">
+    .pushedButton {
+        border: solid 2px blue;
+    }
+</style>
+
 <?php
 
 /*
@@ -83,10 +89,25 @@ else {
             echo "<font color='blue'>в уроке:&nbsp;&nbsp;&nbsp;<span id='TopBlockVUroke'>" . $aTopBlock[0][1] . "</span></font>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;";
             echo "<font color='red'>в выданном дз: <span id='TopBlockVVydannomDz'>" . $aTopBlock[0][2] . "</span></font>";
             echo "</div>";
-            echo "<button id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
-            echo "<button id='urok'>урок</button>&nbsp;&nbsp;";
-            echo "<button id='dz'>дз</button>&nbsp;&nbsp;";
-            echo "<button id='otchet'>отчет</button>&nbsp;&nbsp;";
+
+            $sButton1Class="";
+            $sButton2Class="";
+            $sButton3Class="";
+            $sButton4Class="";
+
+            if($sParametr4=='urok'||$sParametr4=='urok-uchenika')
+                $sButton2Class="pushedButton";
+            elseif($sParametr4=='dz'||$sParametr4=='dz-uchenika')
+                $sButton3Class="pushedButton";
+            elseif($sParametr4=='otchet'||$sParametr4=='otchet-uchenika')
+                $sButton4Class="pushedButton";
+            else
+                $sButton1Class="pushedButton";
+
+            echo "<button class='".$sButton1Class."' id='urokdz'>урок-дз</button>&nbsp;&nbsp;";
+            echo "<button class='".$sButton2Class."' id='urok'>урок</button>&nbsp;&nbsp;";
+            echo "<button class='".$sButton3Class."' id='dz'>дз</button>&nbsp;&nbsp;";
+            echo "<button class='".$sButton4Class."' id='otchet'>отчет</button>&nbsp;&nbsp;";
 
             if($sParametr4 == "urok"||$sParametr4 == "urok-uchenika"||$sParametr4 == "dz"||$sParametr4 == "dz-uchenika"||$sParametr4 == "otchet"||$sParametr4 == "otchet-uchenika") {
                 echo "<input id='rejim' type='checkbox' ";

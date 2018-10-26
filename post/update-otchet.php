@@ -11,9 +11,9 @@ include_once $DbAccessFile;
 //параметры полученного POST-запроса на добавление строки в таблицу БД
 $sUchenik=$_POST["suchenik"];
 $sPredmet=$_POST["spredmet"];
+$iNomerZadaniya=$_POST["izadanie"];
 $iIdPodtemy=$_POST["idpodtemy"];
 $iSortirovka=$_POST["isortirovka"];
-$iNomerZadaniya=$_POST["izadanie"];
 
 $sTextZanyatiya="";
 $iCount=0;

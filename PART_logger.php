@@ -1,5 +1,10 @@
 <?
 function logger($text, $mode="a"){
+
+//подключаем функцию логгинга чего угодно; include: если файла не будет - выдастся Warning и работа продолжится
+//работает так: logger('любой текст');
+//include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
+
 //запись чего угодно в лог
 	$filenameLog = ($_SERVER['DOCUMENT_ROOT'].'/_log_anything.txt');
 

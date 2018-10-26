@@ -30,7 +30,10 @@ $(function(){
             iIdPodtemyOther = 1*iIdPodtemyCurrent+10;
 
         oOtherObj=$('.tr-for-selection[podt='+iIdPodtemyOther+']');
+
+        //смысла в этом нет, но без этого почему-то глючит :(
         oOtherObj.css('border', 'solid 1px lightgray');
+        //-смысла в этом нет, но без этого почему-то глючит :(
 
         if(oOtherObj.length) {
 

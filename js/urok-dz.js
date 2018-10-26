@@ -286,21 +286,20 @@ $(function(){
 
     $(".razaktualizirovat").click(function(e) {
 
+        //обновим таблицу uchenik-zadachi
+        // iIdPodtemy=$(this).attr("id").substring(17);
         sUchenik=$('#uchenik').val();
         sPredmet=$('#predmet').val();
-        // iIdPodtemy=$(this).attr("id").substring(17);
-        iIdPodtemy = $(this).parent().children('.id-podtemy').val();
         iNomerZadaniya = $(this).parent().children('.zadanie').html();
+        iIdPodtemy = $(this).parent().children('.id-podtemy').val();
         iSortirovka = $(this).attr("id").substring(17);
-
-        //обновим таблицу uchenik-zadachi
         $.post(
             "/post/update-otchet.php",
             {
                 suchenik: sUchenik,
                 spredmet: sPredmet,
-                idpodtemy: iIdPodtemy,
                 izadanie: iNomerZadaniya,
+                idpodtemy: iIdPodtemy,
                 isortirovka: iSortirovka,
             },
             function(response){
