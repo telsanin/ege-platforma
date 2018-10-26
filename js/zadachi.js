@@ -30,6 +30,7 @@ $(function(){
             iIdPodtemyOther = 1*iIdPodtemyCurrent+10;
 
         oOtherObj=$('.tr-for-selection[podt='+iIdPodtemyOther+']');
+        oOtherObj.css('border', 'solid blue');
 
         if(oOtherObj.length) {
 
