@@ -1,1 +1,79 @@
-18.10.09 01:14:13C:/OpenServer/OSPanel/domains/ege-platforma.local/www/img/18.10.10 15:14:17INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('egor', 'matematika', '<b>Задачи, которые нужно было решить:</b></br>Попытался решить: 16 задач из 16 (100%)</br>Решено правильно: 13 (81%)</br><table><tbody><tr><td>Сколько задач</td><td>С какой попытки</td></tr><tr><td>8</td><td>1</td></tr><tr><td>3</td><td>2</td></tr><tr><td>1</td><td>3</td></tr><tr><td>1</td><td>5</td></tr></tbody></table>Отмечено "не получается, разобрать на занятии": 1</br>Среднее время выполнения: 01:03:03</br>Общее время выполнения: 16:48:48</br>', '2018.10.12');18.10.10 15:17:38INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('egor', 'matematika', '<b>Задачи, которые нужно было решить:</b></br>Попытался решить: 16 задач из 16 (100%)</br>Решено правильно: 13 (81%)</br><table><tbody><tr><td>Сколько задач</td><td>С какой попытки</td></tr><tr><td>8</td><td>1</td></tr><tr><td>3</td><td>2</td></tr><tr><td>1</td><td>3</td></tr><tr><td>1</td><td>5</td></tr></tbody></table>Отмечено "не получается, разобрать на занятии": 1</br>Среднее время выполнения: 01:03:03</br>Общее время выполнения: 16:48:48</br>', '2018.10.10');18.10.10 15:17:39INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('egor', 'matematika', '<b>Задачи, которые нужно было решить:</b></br>Попытался решить: 16 задач из 16 (100%)</br>Решено правильно: 13 (81%)</br><table><tbody><tr><td>Сколько задач</td><td>С какой попытки</td></tr><tr><td>8</td><td>1</td></tr><tr><td>3</td><td>2</td></tr><tr><td>1</td><td>3</td></tr><tr><td>1</td><td>5</td></tr></tbody></table>Отмечено "не получается, разобрать на занятии": 1</br>Среднее время выполнения: 01:03:03</br>Общее время выполнения: 16:48:48</br>', '2018.10.11');18.10.10 15:17:39INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('egor', 'matematika', '<b>Задачи, которые нужно было решить:</b></br>Попытался решить: 16 задач из 16 (100%)</br>Решено правильно: 13 (81%)</br><table><tbody><tr><td>Сколько задач</td><td>С какой попытки</td></tr><tr><td>8</td><td>1</td></tr><tr><td>3</td><td>2</td></tr><tr><td>1</td><td>3</td></tr><tr><td>1</td><td>5</td></tr></tbody></table>Отмечено "не получается, разобрать на занятии": 1</br>Среднее время выполнения: 01:03:03</br>Общее время выполнения: 16:48:48</br>', '2018.10.12');
+﻿18.10.27 00:30:49SET @num = 0; 
+SELECT distinct k.* 
+FROM `uchenik-zadachi` INNER JOIN (
+SELECT @num:=@num+1 as `new-sortirovka`, s.* 
+FROM `uchenik-zadachi` INNER JOIN (
+    SELECT 
+        `uchenik-zadachi`.*, 
+        `zadacha`.`pravilnyi-otvet`, 
+        `zadacha`.`zadanie`, 
+        `zadacha`.`id-podtemy`, 
+        `zadacha`.`text-zadachi`, 
+        `zadacha`.`foto-teksta`,
+        `zadacha`.`slojnyi-otvet-1`,
+        `zadacha`.`slojnyi-otvet-2`,
+        `zadacha`.`slojnyi-otvet-3`
+    FROM 
+        `uchenik-zadachi`, 
+        `zadacha` 
+    WHERE 
+        `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND 
+        `uchenik-zadachi`.`aktualno`=1 AND 
+        `uchenik-zadachi`.`predmet`='informatika' AND 
+        `uchenik-zadachi`.`urok`='2' AND 
+        `uchenik-zadachi`.`uchenik`='aleksandr' 
+    ORDER BY 
+        `zadacha`.`zadanie`, 
+        `uchenik-zadachi`.`sortirovka`) 
+AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+WHERE 
+    `uchenik-zadachi`.`predmet`='informatika' AND 
+    `uchenik-zadachi`.`uchenik`='aleksandr') 
+as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+ORDER BY 
+    `razobrat-na-zanyatii` DESC, 
+    `resheno-pravilno` ASC, 
+    `kolichestvo-popytok` DESC, 
+    `zadanie`, 
+    `id-podtemy`, 
+    `sortirovka`;
+18.10.27 00:41:04SET @num = 0; 
+SELECT distinct k.* 
+FROM `uchenik-zadachi` INNER JOIN (
+SELECT @num:=@num+1 as `new-sortirovka`, s.* 
+FROM `uchenik-zadachi` INNER JOIN (
+    SELECT 
+        `uchenik-zadachi`.*, 
+        `zadacha`.`pravilnyi-otvet`, 
+        `zadacha`.`zadanie`, 
+        `zadacha`.`id-podtemy`, 
+        `zadacha`.`text-zadachi`, 
+        `zadacha`.`foto-teksta`,
+        `zadacha`.`slojnyi-otvet-1`,
+        `zadacha`.`slojnyi-otvet-2`,
+        `zadacha`.`slojnyi-otvet-3`
+    FROM 
+        `uchenik-zadachi`, 
+        `zadacha` 
+    WHERE 
+        `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND 
+        `uchenik-zadachi`.`aktualno`=1 AND 
+        `uchenik-zadachi`.`predmet`='informatika' AND 
+        `uchenik-zadachi`.`urok`='2' AND 
+        `uchenik-zadachi`.`uchenik`='aleksandr' 
+    ORDER BY 
+        `zadacha`.`zadanie`, 
+        `uchenik-zadachi`.`sortirovka`) 
+AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+WHERE 
+    `uchenik-zadachi`.`predmet`='informatika' AND 
+    `uchenik-zadachi`.`uchenik`='aleksandr') 
+as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
+ORDER BY 
+    `razobrat-na-zanyatii` DESC, 
+    `resheno-pravilno` ASC, 
+    `kolichestvo-popytok` DESC, 
+    `zadanie`, 
+    `id-podtemy`, 
+    `sortirovka`;
+
