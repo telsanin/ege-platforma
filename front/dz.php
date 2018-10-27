@@ -135,8 +135,6 @@ if($res = $mysqli->query($SqlQuery)){
 
 $SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 
-include $_SERVER["DOCUMENT_ROOT"]."/PART_logger.php";
-
 if($sParametr4=="sort")
 //    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
     $SqlQuery = "SET @num = 0; 
@@ -179,8 +177,6 @@ ORDER BY
     `id-podtemy`, 
     `sortirovka`;
 ";
-
-logger($SqlQuery);
 
 $iNumDZ = 1;
 $iOldIdPodtemy = 0;

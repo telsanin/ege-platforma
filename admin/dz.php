@@ -18,6 +18,7 @@
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <input type="hidden" id="last-time" value="<?=time()*1000?>"></input>
 <input type="hidden" id="last-zadacha" value="0"></input>
+<input type="hidden" id="urokurok" value="dz"></input>
 
 <!--<button id='urokdz'>урок-дз</button>-->
 <!--<button id="urok">урок</button>-->
