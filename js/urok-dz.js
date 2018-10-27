@@ -729,6 +729,7 @@ $(function(){
         sUchenik = $('#uchenik').val();
         sPredmet = $('#predmet').val();
         iZadanie = $('#zadanie').val();
+        sUrok = $('#urokurok').val();
         iTaskNumber = $(this).attr("id").substring(10);
 
         // if($(this).attr('id').indexOf("none")>0){
@@ -739,7 +740,6 @@ $(function(){
         //     $(this).parent().css({'color': 'blue'});
         //     iVUrok=1;
         // }
-
 
         // c.c($('#result'+$(this).attr("id").substring(10)).html());
         // c.c($('#result'+$(this).attr("id").substring(10)).html()!=undefined);
@@ -808,6 +808,7 @@ $(function(){
                         suchenik: sUchenik,
                         spredmet: sPredmet,
                         izadanie: iZadanie,
+                        surok : sUrok,
                     },
                     function(response){
                         jTopBlock = JSON.parse(response);
