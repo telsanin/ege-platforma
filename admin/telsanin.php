@@ -97,11 +97,11 @@ if($res1->data_seek(0)) {
             }
             echo "<div>";
 //            echo "<span style='border-bottom: dashed 1px;' class='propuski-show-hide'>Пропуски:</span></br>";
-            echo "<a style='border-bottom: dashed 1px;' class='propuski-show-hide' href=''>Пропуски:</a></br>";
+            echo "<a style='border-bottom: dashed 1px;' class='propuski-show-hide' href=''>Пропуски ".($iPropuscheno?"(".$iPropuscheno.")":"").":</a></br>";
             echo "<div class='propuski' style='display: none;'>";
-            if($iPropuscheno)
-                echo "<span style='color: red;'>пропущено: ".$iPropuscheno."</span></br>";
-            else
+//            if($iPropuscheno)
+//                echo "<span style='color: red;'>пропущено: ".$iPropuscheno."</span></br>";
+//            else
                 echo "</br>";
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-vchera'>Вчера</button>";
             echo "&nbsp;&nbsp";
