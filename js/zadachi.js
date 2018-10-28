@@ -5,6 +5,15 @@
 
 $(function(){
 
+    $('.top-block').click(function(e) {
+
+        target=$(this).attr('id').substr(10);
+        c.c(target);
+
+        expl = location.pathname.split('/');
+        location.pathname = '/' + expl[1] + '/' + expl[2] + '/' + expl[3] + '/' + expl[4] + '/' + target;
+    });
+
 
     $('.tr-for-selection').click(function(e){
         $('.tr-for-selection').css('background-color','');

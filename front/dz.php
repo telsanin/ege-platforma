@@ -135,7 +135,7 @@ if($res = $mysqli->query($SqlQuery)){
 
 $SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 
-if($sParametr4=="sort")
+if($sParametr5=="sort")
 //    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
     $SqlQuery = "SET @num = 0; 
 SELECT distinct k.* 
@@ -163,7 +163,8 @@ FROM `uchenik-zadachi` INNER JOIN (
         `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
     ORDER BY 
         `zadacha`.`zadanie`, 
-        `uchenik-zadachi`.`sortirovka`) 
+        `id-podtemy`,
+        `zadacha`.`sortirovka`) 
 AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
 WHERE 
     `uchenik-zadachi`.`predmet`='".$sPredmet."' AND 

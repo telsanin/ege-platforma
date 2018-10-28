@@ -4,6 +4,19 @@
 
 $(function(){
 
+    $('.propuski-show-hide').click(function(e) {
+        elem = $(this).parent().children('.propuski');
+
+        $('.propuski').hide('slow');
+        // $('.propuski').hide('fast');
+        if((elem).is(':hidden'))
+            elem.show('slow')
+        else
+            elem.hide('slow');
+        e.preventDefault();
+        // return false;
+    });
+
     $("#urokdz").click(function(e) {
         iNomerZadaniya=$('#last-zadanie').val();
         expl = location.pathname.split('/');

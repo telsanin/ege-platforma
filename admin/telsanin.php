@@ -12,13 +12,21 @@
 
 <?php
 
-$SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchenik`, `predmet` ORDER BY `predmet` DESC;";
+$sLastPredmet='';
+
+$SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchenik`, `predmet` ORDER BY `predmet` DESC, `uchenik`;";
 $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
+
+        if($row1['predmet']<>$sLastPredmet){
+            if($sLastPredmet<>'')
+                echo "============================</br></br>";
+            $sLastPredmet = $row1['predmet'];
+        }
+
         if($row1['uchenik']<>"test"){
 //            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
-
             echo "<a href='/telsanin/".$row1['uchenik']."/".$row1['predmet']."/dz'>".$row1['uchenik']."-".$row1['predmet']."</a></b></br>";
 
             $SqlQuery = "select count(`kolichestvo-popytok`) as count, `kolichestvo-popytok`  from `uchenik-zadachi` where `uchenik`='".$row1['uchenik']."' and `predmet`='".$row1['predmet']."' and `urok`=2 and `aktualno`=1 and `resheno-pravilno`=1 group by `kolichestvo-popytok` asc;";
@@ -32,7 +40,7 @@ if($res1->data_seek(0)) {
             }
 
             //сформируем "задачную" часть отчета
-            $SqlQuery = "SELECT * FROM `uchenik-zadachi` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='" . $row1['predmet'] . "';";
+            $SqlQuery = "SELECT *, `uchenik-predmet`.`ssylka-na-dz-reshu-ege`,`uchenik-predmet`.`propuscheno`  FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='".$row1['predmet']."'";
             if($res = $mysqli->query($SqlQuery)){
                 $iVsego = 0;
                 $iReshal = 0;
@@ -54,29 +62,47 @@ if($res1->data_seek(0)) {
                     $iSumVremya += strtotime($row['vremya-vypolneniya']) - strtotime("00:00:00");
                     if ($row['razobrat-na-zanyatii'])
                         $iOtmechenoRazobrat++;
+                    $iDzNaReshuEge=0;
+                    if($row['ssylka-na-dz-reshu-ege'])
+                        $iDzNaReshuEge=1;
+                    $sPredmet=$row['predmet'];
+                    $iPropuscheno=$row['propuscheno'];
                 }
+                echo "Всего было задано: ".$iVsego."&nbsp;&nbsp;&nbsp;";
+                if($iDzNaReshuEge)
+//                    echo "<input type='checkbox' checked disabled /><span>&nbsp;ДЗ на Решу ЕГЭ</span></br>";
+                    if($sPredmet=='informatika')
+                        echo "<a target='_blank' href='https://inf-ege.sdamgia.ru/teacher?a=tests'>дз на решу егэ</a></br>";
+                    else
+                        echo "<a target='_blank' href='https://math-ege.sdamgia.ru/teacher?a=tests'>дз на решу егэ</a></br>";
+
                 if ($iReshal&&$iPravilno) {
                     $iSredPopytok = round($iSumPopytok / $iReshal, 1);
                     $iSredVremya = (int)($iSumVremya / $iReshal);
-                    echo "Всего было задано: ".$iVsego."</br>";
 //                    echo "Попытался решить: " .$iReshal."</br>";
-                    if($iPravilno)
-                        echo "<font color='lime'>Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
+                    if($iOtmechenoRazobrat)
+                        echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
                     if($iNepravilno)
                         echo "<font color='red'>Не получилось: </font>".$iNepravilno."</br>";
                     if($iVsego-$iReshal)
                         echo "<font color='magenta'>Не решал: </font>".($iVsego-$iReshal)."</br>";
-                    echo "Отмечено \"разобрать\": " . $iOtmechenoRazobrat."</br>";
+                    if($iPravilno)
+                        echo "<font color='lime'>Получилось: </font>".$iPravilno." (".round($iPravilno / $iVsego * 100)."%)</br>";
 //                    echo "Среднее количество попыток: " . $iSredPopytok . "</br>";
                     echo "Среднее время выполнения: " . gmdate("H:i:s", $iSredVremya) . "</br>";
                     echo "Общее время выполнения: " . gmdate("H:i:s", $iSumVremya) . "</br>";
                     if($iPravilno)
                         echo $sPopytki;
-                } else {
-                    echo "Всего было задано: ".$iVsego."</br>";
                 }
             }
-            echo "Пропустил: </br>";
+            echo "<div>";
+//            echo "<span style='border-bottom: dashed 1px;' class='propuski-show-hide'>Пропуски:</span></br>";
+            echo "<a style='border-bottom: dashed 1px;' class='propuski-show-hide' href=''>Пропуски:</a></br>";
+            echo "<div class='propuski' style='display: none;'>";
+            if($iPropuscheno)
+                echo "<span style='color: red;'>пропущено: ".$iPropuscheno."</span></br>";
+            else
+                echo "</br>";
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-vchera'>Вчера</button>";
             echo "&nbsp;&nbsp";
             echo "<button class='propustil' id='".$row1['uchenik']."-".$row1['predmet']."-segodnya'>Сегод</button>";
@@ -94,7 +120,7 @@ if($res1->data_seek(0)) {
             echo "&nbsp;&nbsp;";
             echo "<button class='vosstanovil' id='".$row1['uchenik']."-".$row1['predmet']."-plus'>&nbsp;&nbsp;+1&nbsp;&nbsp;</button>";
 //            echo "&nbsp;&nbsp;";
-            echo "</br></br>";
+            echo "</div></div></br>";
 
         }
     }
