@@ -123,15 +123,15 @@ while ($row = $res->fetch_assoc()) {
 //    if ($row['kolichestvo-popytok'] > 0)
     switch($row['resheno-pravilno']){
         case -1:
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>&nbsp;</br>";
             break;
         case 1:
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>&nbsp;</br>";
             break;
     }
 
     if($row['reshali-na-zanyatii'])
-        echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></br>";
+        echo "<span id='result" . $row['id-zadachi'] . "' style='color: blue;'>решали на занятии</span></br>";
 
     //если решено правильно с 1й попытки и не отмечено "все плохо"
     $iVsyoPloho = ($row['razobrat-na-zanyatii'] ? "checked" : "");

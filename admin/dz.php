@@ -50,7 +50,7 @@ $res->data_seek(0);
         else
             echo "<a target='_blank' href='https://math-ege.sdamgia.ru/teacher?a=tests'>Работы</a></br>";
 
-        echo ($row['ssylka-na-dz-reshu-ege']?($row['ssylka-na-dz-reshu-ege']):"")."</font>";
+        echo ($row['ssylka-na-dz-reshu-ege']?($row['ssylka-na-dz-reshu-ege']):"")."</font></br>";
 
 
 
@@ -370,18 +370,18 @@ do {
 
             switch ($row['resheno-pravilno']) {
                 case -1:
-                    echo "<b><span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></b>";
+                    echo "<b><span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></b>&nbsp;";
                     break;
                 case 0:
-                    echo "<b><span id='result" . $row['id-zadachi'] . "' style='color: magenta;'>Не решал!</span></b>";
+                    echo "<b><span id='result" . $row['id-zadachi'] . "' style='color: magenta;'>Не решал!</span></b>&nbsp;";
                     break;
                 case 1:
-                    echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></b>";
+                    echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></b>&nbsp;";
                     break;
             }
 
             if ($row['reshali-na-zanyatii'])
-                echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: blue;'>На занятии</span></b>";
+                echo "<b></b><span id='result" . $row['id-zadachi'] . "' style='color: blue;'>решали на занятии</span></b>";
 
             if ($row['kolichestvo-popytok'] > 0)
                 echo "&nbsp;&nbsp;&nbsp;<span id='div-kolichestvo-popytok" . $row['id-zadachi'] . "'></span>с <span id='kolichestvo" . $row['id-zadachi'] . "'>" . $row['kolichestvo-popytok'] . "</span> попытки</span>&nbsp;&nbsp;&nbsp;" . $row['vremya-vypolneniya'];

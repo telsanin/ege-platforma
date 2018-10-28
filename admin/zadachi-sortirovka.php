@@ -42,7 +42,7 @@ $num_rows = mysqli_num_rows($res);
     <button id='only-sort' style="height: 40px; background: white; border: solid 1px gray;">По ном</button>
 </div>
 <div style="position: fixed; bottom:0; left: 30px;">
-    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: white; border: solid 1px gray;">&darr; Подт &darr;</br></button>
+    <button class="sort-podtemu" id="vniz-podtemu" style="height: 40px; background: white; border: solid 1px gray;">&darr; Подт &darr;</br></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button class="sort-zadachu" id="vniz-zadachu" style="height: 40px; background: white; border: solid 1px gray;">Вниз</br></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button class="sort-zadachu" id="vverh-zadachu" style="height: 40px; background: white; border: solid 1px gray;">Вверх</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <button class="sort-podtemu" id="vverh-podtemu" style="height: 40px; background: white; border: solid 1px gray;">&uarr; Подт &uarr;</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

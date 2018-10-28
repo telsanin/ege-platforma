@@ -173,14 +173,14 @@ while ($row = $res->fetch_assoc()) {
 
     switch ($row['resheno-pravilno']) {
         case -1:
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: red;'>Неправильно :(</span>&nbsp;</br>";
             break;
         case 1:
-            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span></br>";
+            echo "&nbsp;<span id='result" . $row['id-zadachi'] . "' style='color: lime;'>Правильно :)</span>&nbsp;</br>";
             break;
     }
-        if($row['reshali-na-zanyatii'])
-            echo "&nbsp;<span id='result".$row['id-zadachi'] . "' style='color: RoyalBlue;'>На занятии</span></br>";
+    if($row['reshali-na-zanyatii'])
+        echo "<span id='result".$row['id-zadachi'] . "' style='color: RoyalBlue;'>решали на занятии</span></br>";
 //    echo "</br>";
 
     if($row['reshenie'])
