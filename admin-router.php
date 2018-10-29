@@ -270,6 +270,7 @@ else {
             <li class="uk-nav-divider"></li>
 
             <li class="uk-nav-header">Информатика:</li>
+            <li><a href="/telsanin/farid/informatika/dz">ФАРИД</a></li>
             <li><a href="/telsanin/amir/informatika/dz">АМИР</a></li>
             <li><a href="/telsanin/aleksandr/informatika/dz">АЛЕКСАНДР</a></li>
             <li><a href="/telsanin/artem/informatika/dz">АРТЕМ</a></li>
