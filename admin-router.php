@@ -70,6 +70,11 @@ else {
                 $iNomerZadaniya=$sParametr4;
                 include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-sortirovka.php";
                 break;
+            case "print":
+                $sPredmet=$sParametr3;
+                $iNomerZadaniya=$sParametr4;
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-print.php";
+                break;
         }
     }
     //http://ege-platforma.local/telsanin/egor/matematika/1
