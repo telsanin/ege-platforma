@@ -135,47 +135,48 @@ if($res = $mysqli->query($SqlQuery)){
 
 $SqlQuery = "SET @num = 0; SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 
-if($sParametr5=="sort")
+if($sParametr4=="sort")
 //    $SqlQuery = "SELECT * FROM `uchenik-zadachi`, `zadacha`  WHERE `aktualno`=1 AND `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `kolichestvo-popytok` DESC, `zadacha`.`zadanie`, `uchenik-zadachi`.`sortirovka`;";
-    $SqlQuery = "SET @num = 0; 
-SELECT distinct k.* 
+
+$SqlQuery = "SET @num = 0;
+SELECT distinct k.*
 FROM `uchenik-zadachi` INNER JOIN (
-SELECT @num:=@num+1 as `new-sortirovka`, s.* 
+SELECT @num:=@num+1 as `new-sortirovka`, s.*
 FROM `uchenik-zadachi` INNER JOIN (
-    SELECT 
-        `uchenik-zadachi`.*, 
-        `zadacha`.`pravilnyi-otvet`, 
-        `zadacha`.`zadanie`, 
-        `zadacha`.`id-podtemy`, 
-        `zadacha`.`text-zadachi`, 
+    SELECT
+        `uchenik-zadachi`.*,
+        `zadacha`.`pravilnyi-otvet`,
+        `zadacha`.`zadanie`,
+        `zadacha`.`id-podtemy`,
+        `zadacha`.`text-zadachi`,
         `zadacha`.`foto-teksta`,
         `zadacha`.`slojnyi-otvet-1`,
         `zadacha`.`slojnyi-otvet-2`,
         `zadacha`.`slojnyi-otvet-3`
-    FROM 
-        `uchenik-zadachi`, 
-        `zadacha` 
-    WHERE 
-        `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND 
-        `uchenik-zadachi`.`aktualno`=1 AND 
-        `uchenik-zadachi`.`predmet`='".$sPredmet."' AND 
-        `uchenik-zadachi`.`urok`='2' AND 
-        `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
-    ORDER BY 
-        `zadacha`.`zadanie`, 
+    FROM
+        `uchenik-zadachi`,
+        `zadacha`
+    WHERE
+        `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND
+        `uchenik-zadachi`.`aktualno`=1 AND
+        `uchenik-zadachi`.`predmet`='".$sPredmet."' AND
+        `uchenik-zadachi`.`urok`='2' AND
+        `uchenik-zadachi`.`uchenik`='".$sUchenik."'
+    ORDER BY
+        `zadacha`.`zadanie`,
         `id-podtemy`,
-        `zadacha`.`sortirovka`) 
-AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-WHERE 
-    `uchenik-zadachi`.`predmet`='".$sPredmet."' AND 
-    `uchenik-zadachi`.`uchenik`='".$sUchenik."') 
-as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi` 
-ORDER BY 
-    `razobrat-na-zanyatii` DESC, 
-    `resheno-pravilno` ASC, 
-    `kolichestvo-popytok` DESC, 
-    `zadanie`, 
-    `id-podtemy`, 
+        `zadacha`.`sortirovka`)
+AS s ON s.`id-zadachi`=`uchenik-zadachi`.`id-zadachi`
+WHERE
+    `uchenik-zadachi`.`predmet`='".$sPredmet."' AND
+    `uchenik-zadachi`.`uchenik`='".$sUchenik."')
+as k ON k.`id-zadachi`=`uchenik-zadachi`.`id-zadachi`
+ORDER BY
+    `razobrat-na-zanyatii` DESC,
+    `resheno-pravilno` ASC,
+    `kolichestvo-popytok` DESC,
+    `zadanie`,
+    `id-podtemy`,
     `sortirovka`;
 ";
 
