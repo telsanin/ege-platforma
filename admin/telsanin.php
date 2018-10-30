@@ -14,10 +14,12 @@
 
 $sLastPredmet='';
 
-$SqlQuery1 = "SELECT `uchenik`, `predmet` FROM `uchenik-zadachi` GROUP BY `uchenik`, `predmet` ORDER BY `predmet` DESC, `uchenik`;";
+$SqlQuery1 = "SELECT `uchenik-zadachi`.`uchenik`, `uchenik-zadachi`.`predmet`, `propuscheno` FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` GROUP BY `uchenik-zadachi`.`uchenik`, `uchenik-predmet`.`predmet` ORDER BY `uchenik-predmet`.`predmet` DESC, `uchenik-zadachi`.`uchenik`;";
 $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
+
+        $iPropuscheno = $row1['propuscheno'];
 
         if($row1['predmet']<>$sLastPredmet){
             if($sLastPredmet<>'')
@@ -40,7 +42,8 @@ if($res1->data_seek(0)) {
             }
 
             //сформируем "задачную" часть отчета
-            $SqlQuery = "SELECT *, `uchenik-predmet`.`ssylka-na-dz-reshu-ege`,`uchenik-predmet`.`propuscheno`  FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='".$row1['predmet']."'";
+//            $SqlQuery = "SELECT *, `uchenik-predmet`.`ssylka-na-dz-reshu-ege`,`uchenik-predmet`.`propuscheno`  FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='".$row1['predmet']."'";
+            $SqlQuery = "SELECT *, `uchenik-predmet`.`ssylka-na-dz-reshu-ege` FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='".$row1['predmet']."'";
             if($res = $mysqli->query($SqlQuery)){
                 $iVsego = 0;
                 $iReshal = 0;
@@ -66,7 +69,6 @@ if($res1->data_seek(0)) {
                     if($row['ssylka-na-dz-reshu-ege'])
                         $iDzNaReshuEge=1;
                     $sPredmet=$row['predmet'];
-                    $iPropuscheno=$row['propuscheno'];
                 }
                 echo "Всего было задано: ".$iVsego."&nbsp;&nbsp;&nbsp;";
                 if($iDzNaReshuEge)
@@ -97,6 +99,7 @@ if($res1->data_seek(0)) {
             }
             echo "<div>";
 //            echo "<span style='border-bottom: dashed 1px;' class='propuski-show-hide'>Пропуски:</span></br>";
+
             echo "<a style='border-bottom: dashed 1px;' class='propuski-show-hide' href=''>Пропуски ".($iPropuscheno?"(".$iPropuscheno.")":"").":</a></br>";
             echo "<div class='propuski' style='display: none;'>";
 //            if($iPropuscheno)
