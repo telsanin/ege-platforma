@@ -21,6 +21,7 @@ $sParametr2 = explode( '/', $sUrl )[1];
 $sParametr3 = explode( '/', $sUrl )[2];
 $sParametr4 = explode( '/', $sUrl )[3];
 $sParametr5 = explode( '/', $sUrl )[4];
+$sParametr6 = explode( '/', $sUrl )[5];
 
 if($sUrl == "telsanin" or $sUrl == "telsanin/") {
     include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/telsanin.php";
@@ -35,6 +36,7 @@ else {
         $sButton1Class = "";
         $sButton2Class = "";
         $sButton3Class = "";
+        $sButton4Class = "";
 
         switch ($sParametr5){
             case 'upload':
@@ -46,11 +48,15 @@ else {
             case 'sort':
                 $sButton3Class = " pushedButton";
                 break;
+            case 'print':
+                $sButton4Class = " pushedButton";
+                break;
         }
 
         echo "<button class='top-block".$sButton1Class."' id='top-block-upload'>upload</button>&nbsp;&nbsp;";
         echo "<button class='top-block".$sButton2Class."' id='top-block-edit'>edit</button>&nbsp;&nbsp;";
         echo "<button class='top-block".$sButton3Class."' id='top-block-sort'>sort</button>&nbsp;&nbsp;";
+        echo "<button class='top-block".$sButton4Class."' id='top-block-print'>print</button>&nbsp;&nbsp;";
 
         echo "</div>";
         echo "</br></br>";

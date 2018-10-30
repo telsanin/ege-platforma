@@ -37,8 +37,8 @@ $num_rows = mysqli_num_rows($res);
     }
 </style>
 
-<div style="position: fixed; top:0; left: 170px;">
-    <button id='zadachi-sortirovka' style="height: 40px; background: white; border: solid 1px red;">По подт</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div style="position: fixed; top:0; left: 212px;">
+    <button id='zadachi-sortirovka' style="height: 40px; background: white; border: solid 1px red;">По подт</button>&nbsp;
     <button id='only-sort' style="height: 40px; background: white; border: solid 1px gray;">По ном</button>
 </div>
 <div style="position: fixed; bottom:0; left: 30px;">

@@ -4,6 +4,25 @@
 
 $(function(){
 
+    $('.radio-filter').click(function(e) {
+
+        sUrl=location.pathname;
+        expl = sUrl.split('/');
+
+        switch($(this).attr('id').substring(13)){
+            case 'urokdz':
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5]+'/urokdz';
+            break;
+            case 'urok':
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5]+'/urok';
+                break;
+            case '':
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5];
+                break;
+        }
+
+    });
+
     $('.propuski-show-hide').click(function(e) {
         elem = $(this).parent().children('.propuski');
 

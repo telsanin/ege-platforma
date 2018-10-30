@@ -1,16 +1,40 @@
-<input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
-<p><b>ЗАНЯТИЕ</b></p>
-
 <?php
+
+echo "</br>";
+//echo "<input id='pokazat-vse' type='checkbox' /><label for='pokazat-vse'>показать все</label>";
+
+echo "<input " . ($sParametr6==''? "checked" : "") . " name='radio-filter' class='radio-filter' id='radio-filter' type='radio'><label for='radio-filter'>все</label>";
+echo "<input ".($sParametr6=='urokdz' ? "checked" : "")." name='radio-filter' class='radio-filter' id='radio-filter-urokdz' type='radio'><label for='radio-filter-urokdz'>урокдз</label>";
+echo "<input " . ($sParametr6=='urok' ? "checked" : "") . " name='radio-filter' class='radio-filter' id='radio-filter-urok' type='radio'><label for='radio-filter-urok'>урок</label>";
+
+echo "</br></br>";
+
+echo "<b>";
+echo $sPredmet;
+echo "</br>";
+echo "Задание ".$iNomerZadaniya;
+echo "</b>";
 
 /*
 лицевая часть сайта (для школьников и родителей)
 занятие
 */
 
+$sWhere="";
+switch($sParametr6){
+    case 'urokdz':
+    $sWhere=" AND urok<>0";
+        break;
+    case 'urok':
+        $sWhere=" AND urok=1";
+        break;
+    case '':
+        $sWhere="";
+        break;
+}
+
 //Задачи:
-echo "<p><b>Задачи</b>:</p>";
-$SqlQuery = "SELECT `zadacha`.* FROM `zadacha`  WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."' ORDER BY `id-podtemy`, `sortirovka`;";
+$SqlQuery = "SELECT `zadacha`.* FROM `zadacha`  WHERE `zadacha`.`predmet`='".$sPredmet."' AND `zadacha`.`zadanie`='".$iNomerZadaniya."'".$sWhere." ORDER BY `id-podtemy`, `sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $num_rows = mysqli_num_rows($res);
@@ -51,12 +75,9 @@ while ($row = $res->fetch_assoc()) {
     }
     //-добавление горизонтальной полосы, разделяющией разные задания
 
-    if($row['reshali-na-zanyatii']==1)
-        echo "<div style='color: Gray;'>";
-    else
-        echo "<div style='color: Black;'>";
+        //echo "<div urok='".$row['urok']."'".($row['urok']==0 ? " style='display: none'" : "").">";
+    echo "<div>";
 
-    echo ($row['zakonchili-na-etom']?"<b>":"");
 
     echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
 //    echo $iNumDZ++.") ";
@@ -65,8 +86,6 @@ while ($row = $res->fetch_assoc()) {
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
         echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
-
-    echo ($row['zakonchili-na-etom']?"</b>":"");
 
     echo "</div>";
 
