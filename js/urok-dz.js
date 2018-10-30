@@ -10,14 +10,14 @@ $(function(){
         expl = sUrl.split('/');
 
         switch($(this).attr('id').substring(13)){
-            case 'urokdz':
-                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5]+'/urokdz';
-            break;
+            case '':
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5];
+                break;
             case 'urok':
                 location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5]+'/urok';
                 break;
-            case '':
-                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5];
+            case 'vse':
+                location.pathname = '/'+expl[1]+'/'+expl[2]+'/'+expl[3]+'/'+expl[4]+'/'+expl[5]+'/vse';
                 break;
         }
 

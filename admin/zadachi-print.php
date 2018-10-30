@@ -3,8 +3,8 @@
 echo "</br>";
 //echo "<input id='pokazat-vse' type='checkbox' /><label for='pokazat-vse'>показать все</label>";
 
-echo "<input " . ($sParametr6==''? "checked" : "") . " name='radio-filter' class='radio-filter' id='radio-filter' type='radio'><label for='radio-filter'>все</label>";
-echo "<input ".($sParametr6=='urokdz' ? "checked" : "")." name='radio-filter' class='radio-filter' id='radio-filter-urokdz' type='radio'><label for='radio-filter-urokdz'>урокдз</label>";
+echo "<input " . ($sParametr6=='vse'? "checked" : "") . " name='radio-filter' class='radio-filter' id='radio-filter-vse' type='radio'><label for='radio-filter-vse'>все</label>";
+echo "<input ".($sParametr6=='' ? "checked" : "")." name='radio-filter' class='radio-filter' id='radio-filter' type='radio'><label for='radio-filter'>урокдз</label>";
 echo "<input " . ($sParametr6=='urok' ? "checked" : "") . " name='radio-filter' class='radio-filter' id='radio-filter-urok' type='radio'><label for='radio-filter-urok'>урок</label>";
 
 echo "</br></br>";
@@ -22,13 +22,13 @@ echo "</b>";
 
 $sWhere="";
 switch($sParametr6){
-    case 'urokdz':
+    case '':
     $sWhere=" AND urok<>0";
         break;
     case 'urok':
         $sWhere=" AND urok=1";
         break;
-    case '':
+    case 'vse':
         $sWhere="";
         break;
 }
