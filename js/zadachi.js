@@ -92,6 +92,11 @@ $(function(){
         else
             oOtherObj=$('#tr-for-selection-'+iSelectionNumber).next();
 
+        //смысла в этом нет, но без этого почему-то глючит :(
+        oOtherObj.css('border', 'solid 1px blue');
+        //-смысла в этом нет, но без этого почему-то глючит :(
+
+
         if(oOtherObj.attr('podt')) {
             iOtherSelectionNumber=oOtherObj.attr("id").substring(17);
 

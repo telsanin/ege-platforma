@@ -51,6 +51,9 @@ else {
             case 'print':
                 $sButton4Class = " pushedButton";
                 break;
+            case '':
+                $sButton4Class = " pushedButton";
+                break;
         }
 
         echo "<button class='top-block".$sButton1Class."' id='top-block-upload'>upload</button>&nbsp;&nbsp;";
@@ -77,6 +80,11 @@ else {
                 include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-sortirovka.php";
                 break;
             case "print":
+                $sPredmet=$sParametr3;
+                $iNomerZadaniya=$sParametr4;
+                include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-print.php";
+                break;
+            case "":
                 $sPredmet=$sParametr3;
                 $iNomerZadaniya=$sParametr4;
                 include_once $_SERVER['DOCUMENT_ROOT'] . "/admin/zadachi-print.php";
