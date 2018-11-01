@@ -392,6 +392,24 @@ $(function(){
         //-сделать запрос на обновление поля text-zadachi таблицы zadacha
     });
 
+    $(".slojnyi-otvet").focusout(function(e){
+
+        sSlojnyiOtvet = $(this).val();
+        iSlojnyiOtvetNumber = $(this).siblings('.slojnyu-otvet-number').val();
+        iIdZadachi = $(this).attr("id").substring(13);
+
+        // сделать запрос на обновление поля slojnyi-otvet-n таблицы zadacha
+        $.post(
+            "/post/update-slojnyi-otvet-zadachi.php",
+            {
+                iidzadachi: iIdZadachi,
+                sslojnyiotvet: sSlojnyiOtvet,
+                islojnyiotvetnumber: iSlojnyiOtvetNumber,
+            }
+        );
+        //-сделать запрос на обновление поля slojnyi-otvet-n таблицы zadacha
+    });
+
     $(".pravilnyi-otvet").focusout(function(e){
 
         sPravilnyiOtvet = $(this).val();

@@ -18,7 +18,7 @@ echo "задание: <b>".$iNomerZadaniya."</b></br>";
 </br><b>Добавить задачу:</b></br>
 <input type="checkbox" id="s-moimi-ciframi"/><label for="s-moimi-ciframi">С моими цифрами</label></br>
 Текст:</br><textarea id="text-zadachi" cols='42' rows="5"></textarea></br>
-Ответ:</br><input size="39" id="pravilnyi-otvet"/></br></br>
+Ответ:</br><input size='39' id='pravilnyi-otvet'/></br></br>
 <button id="insert-zadacha">Добавить</button></br></br>
 Решение:</br><textarea id="reshenie" cols='42' rows="5"></textarea></br>
 <input size=1 class="id-podtemy" id="id-podtemy" name="id-podtemy"/><label for="id-podtemy"></label>&nbsp;&nbsp;&nbsp;
@@ -52,8 +52,24 @@ while ($row = $res->fetch_assoc()) {
     echo "<textarea class='text-zadachi' id='text-zadachi".$row['id-zadachi']."' cols='42' rows='7'>".$row['text-zadachi']."</textarea></br>";
 //    echo "<span class='text-zadachi'>".$row['text-zadachi']."</span></br>";
 //    echo "<img src='/img/matematika-3-123.jpg'/></br>";
-    echo "<b>Ответ:</b></br>";
-    echo "<textarea class='pravilnyi-otvet' id='pravilnyi-otvet".$row['id-zadachi']."' cols='42' rows='1'>".$row['pravilnyi-otvet']."</textarea>";
+
+
+    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+        $iSlojnyiOtvetNumber = 1;
+        while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
+            echo "<div>";
+            echo "Слож отв ".$iSlojnyiOtvetNumber.":</br>";
+            echo "<input hidden class='slojnyu-otvet-number' value='".$iSlojnyiOtvetNumber."'/>";
+            echo "<textarea class='slojnyi-otvet' id='slojnyi-otvet".$row['id-zadachi']."' cols='42' rows='5'>".$row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</textarea></br>";
+            $iSlojnyiOtvetNumber++;
+            echo "</div>";
+        }
+    }
+    else {
+        echo "<b>Ответ:</b></br>";
+        echo "<textarea class='pravilnyi-otvet' id='pravilnyi-otvet" . $row['id-zadachi'] . "' cols='42' rows='1'>" . $row['pravilnyi-otvet'] . "</textarea>";
+    }
+
 //    echo "<span class='pravilnyi-otvet'>".$row['pravilnyi-otvet']."</span>";
 
 //    $filename=$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg";
