@@ -259,7 +259,7 @@ do {
 
                 $iReshenieUchenika=$row['foto-resheniya-uchenika'];
                 if($iReshenieUchenika)
-                    echo "<img src='/resheniya-uchenikov/".$sUchenik."-".$sPredmet."-".$row['id-zadachi'].".jpg'/></br>";
+                    echo "<img  width='640' src='/resheniya-uchenikov/".$sUchenik."-".$sPredmet."-".$row['id-zadachi'].".jpg'/></br>";
 
 
                 $iSlojnyiOtvetNumber = 1;
@@ -273,9 +273,11 @@ do {
                     if(!$iReshenieUchenika)
                         echo $iSlojnyiOtvetNumber.") <textarea class='slojnyi-otvet-uchenika' id='slojnyi-otvet-uchenika-".$iSlojnyiOtvetNumber."' cols='42' rows='5'>".$sSlojnyiOtvet."</textarea></br>";
 
-//                    echo "<div ".(!$sSlojnyiOtvet&&!$iOtvetilPravilno?"style='display: none;'":"")." class='slojnyi-otvet-pravilnyi' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvetNumber."'>";
+                    echo "<div ".(!$iOtvetilPravilno?"style='display: none;'":"")." class='slojnyi-otvet-pravilnyi' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvetNumber."'>";
                     echo "<div class='slojnyi-otvet-pravilnyi' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvetNumber."'>";
                     echo "<b>Правильный ответ: </b></br>";
+                    echo "</div>";
+
                     echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
                     echo "<input  type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>я ответил правильно</label>";
                     echo "</div>";
