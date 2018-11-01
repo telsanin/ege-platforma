@@ -142,7 +142,7 @@ if($res = $mysqli->query($SqlQuery)) {
 //        if($row['urok']==0)
 //            echo "</div>";
     }
-    if ($iReshal&&$iPravilno) {
+    if ($iReshal) {
         $iSredPopytok = round($iSumPopytok / $iReshal, 1);
         $iSredVremya = (int)($iSumVremya / $iReshal);
         echo "Всего было задано: ".$iVsego."</br>";
@@ -244,10 +244,20 @@ FROM `uchenik-zadachi` INNER JOIN (
         `uchenik-zadachi`.`kolichestvo-popytok`,
         `uchenik-zadachi`.`reshali-na-zanyatii`,
         `uchenik-zadachi`.`razobrat-na-zanyatii`,
+        `uchenik-zadachi`.`foto-resheniya-uchenika`,
+        `uchenik-zadachi`.`slojnyi-otvet-uchenika-1`,
+        `uchenik-zadachi`.`slojnyi-otvet-uchenika-2`,
+        `uchenik-zadachi`.`slojnyi-otvet-uchenika-3`,
+        `uchenik-zadachi`.`slojnyi-otvet-otvetil-pravilno-1`,
+        `uchenik-zadachi`.`slojnyi-otvet-otvetil-pravilno-2`,
+        `uchenik-zadachi`.`slojnyi-otvet-otvetil-pravilno-3`,
         `uchenik-zadachi`.`aktualno`,
         `uchenik-zadachi`.`zakonchili-na-etom`,  
         `zadacha`.`id-podtemy`, 
         `zadacha`.`pravilnyi-otvet`, 
+        `zadacha`.`slojnyi-otvet-1`, 
+        `zadacha`.`slojnyi-otvet-2`, 
+        `zadacha`.`slojnyi-otvet-3`, 
         `zadacha`.`zadanie`, 
         `zadacha`.`text-zadachi`, 
         `zadacha`.`foto-teksta`, 
@@ -344,8 +354,38 @@ do {
             if ($row['foto-teksta'])
 //                echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
                 echo "<img src='/img/".$sPredmet."-".$iZadanie."-".$row['id-zadachi'].".jpg'/></br>";
+            if ($row['foto-resheniya-uchenika'])
+//                echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";
+                echo "<img src='/resheniya-uchenikov/".$sUchenik."-".$sPredmet."-".$row['id-zadachi'].".jpg'/></br>";
 
-            echo "Ответ: " . $row['pravilnyi-otvet'];
+
+            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+                //задачи с полным решением
+
+                echo "Ответы:</br>";
+
+                $iSlojnyiOtvetNumber = 1;
+                while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
+
+                    echo "<input hidden class='id-zadachi' value='".$row['id-zadachi']."' />";
+
+                    $sSlojnyiOtvet = $row["slojnyi-otvet-".$iSlojnyiOtvetNumber];
+                    $sSlojnyiOtvetUchenika = $row["slojnyi-otvet-uchenika-".$iSlojnyiOtvetNumber];
+                    $iOtvetilPravilno = $row["slojnyi-otvet-otvetil-pravilno-".$iSlojnyiOtvetNumber];
+                    echo "<b>Правильный ответ: </b></br>";
+                    echo $iSlojnyiOtvetNumber.") ".$sSlojnyiOtvet."</br>";
+                    echo "<b>Ответ ученика: </b></br>";
+                    echo $sSlojnyiOtvetUchenika."</br>";
+                    echo "<input disabled  type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>я ответил правильно</label></br></br>";
+
+                    $iSlojnyiOtvetNumber++;
+                }
+
+                //-задачи с полным решением
+            }
+            else {
+                echo "Ответ: " . $row['pravilnyi-otvet'];
+            }
             echo "</br>";
             //если решено правильно с 1й попытки и не отмечено "все плохо"
 //        if (!($row['kolichestvo-popytok'] == 1 && !$row['razobrat-na-zanyatii'] && $row['resheno-pravilno'])) {

@@ -257,20 +257,47 @@ do {
 
                 echo "Ответы:</br>";
 
-                $iSlojnyiOtvenNumber = 1;
-                while($row["slojnyi-otvet-".$iSlojnyiOtvenNumber]<>"") {
+                $iReshenieUchenika=$row['foto-resheniya-uchenika'];
+                if($iReshenieUchenika)
+                    echo "<img src='/resheniya-uchenikov/".$sUchenik."-".$sPredmet."-".$row['id-zadachi'].".jpg'/></br>";
 
-                    echo $iSlojnyiOtvenNumber.") <textarea class='slojnyi-otvet-uchenika' id='slojnyi-otvet-uchenika-'".$iSlojnyiOtvenNumber." cols='42' rows='5'></textarea></br>";
-                    echo "<div style='display: none;' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvenNumber."'>";
-                    echo "Правильный ответ: </br>";
-                    echo $row["slojnyi-otvet-".$iSlojnyiOtvenNumber]."</span></br>";
-                    echo "<input type='checkbox' id='slojnyi-otvet-checkbox-".$iSlojnyiOtvenNumber."' /><label for='slojnyi-otvet-checkbox-".$iSlojnyiOtvenNumber."'>я ответил правильно</label>";
+
+                $iSlojnyiOtvetNumber = 1;
+                while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
+
+                    echo "<input hidden class='id-zadachi' value='".$row['id-zadachi']."' />";
+
+                    $sSlojnyiOtvet = $row["slojnyi-otvet-uchenika-".$iSlojnyiOtvetNumber];
+                    $iOtvetilPravilno = $row["slojnyi-otvet-otvetil-pravilno-".$iSlojnyiOtvetNumber];
+
+                    if(!$iReshenieUchenika)
+                        echo $iSlojnyiOtvetNumber.") <textarea class='slojnyi-otvet-uchenika' id='slojnyi-otvet-uchenika-".$iSlojnyiOtvetNumber."' cols='42' rows='5'>".$sSlojnyiOtvet."</textarea></br>";
+
+//                    echo "<div ".(!$sSlojnyiOtvet&&!$iOtvetilPravilno?"style='display: none;'":"")." class='slojnyi-otvet-pravilnyi' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvetNumber."'>";
+                    echo "<div class='slojnyi-otvet-pravilnyi' id='slojnyi-otvet-pravilnyi-".$iSlojnyiOtvetNumber."'>";
+                    echo "<b>Правильный ответ: </b></br>";
+                    echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
+                    echo "<input  type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>я ответил правильно</label>";
                     echo "</div>";
 
-                    echo "<button class='slojnyi-otvet-otpravit' id='slojnyi-otvet-otpravit-".$iSlojnyiOtvenNumber."'>Отправить</button></br></br>";
+                    if(!$iReshenieUchenika)
+                        echo "<button ".($sSlojnyiOtvet||$iOtvetilPravilno?"style='display: none;'":"")." class='slojnyi-otvet-otpravit' id='slojnyi-otvet-otpravit-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>Отправить</button></br></br>";
 
-                    $iSlojnyiOtvenNumber++;
+                    $iSlojnyiOtvetNumber++;
                 }
+                echo "<div ".($row['kolichestvo-popytok']?"style='display: none;'":"").">";
+                echo "или</br></br>";
+
+
+                echo "<form class='upload-form' id='frm".$row['id-zadachi']."' method='post' enctype='multipart/form-data' action=''>";
+                echo "<input type='file' id='file".$row['id-zadachi']."' name='file".$row['id-zadachi']."' /></br></br>";
+//                echo "<input type='submit' value='Добавить'/>";
+
+                echo "<input type='button' value='Загрузить фото решения целиком' class='zagruzit-reshenie-celikom' id='zagruzit-reshenie-celikom-".$row['id-zadachi']."'/></br></br>";
+                echo "</form></br>";
+
+                echo "</div></br>";
+
 
                 //-задачи с полным решением
             }

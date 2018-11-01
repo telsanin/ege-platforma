@@ -5,11 +5,184 @@
 $(function(){
 
 
+    $("form.upload-form").submit(function(e){
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iIdZadachi = $(this).parent().parent().children('.id-zadachi').val();
+
+        var fileData = document.getElementById("file"+iIdZadachi);
+        file = fileData.files[0];
+
+        if(file) {
+
+            sFileName = sUchenik + '-' + sPredmet + '-' + iIdZadachi + '.jpg';
+
+            var formData = new FormData();
+            formData.append("userfile", file, sFileName);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/post/reshenie-uchenika-upload.php");
+            xhr.send(formData);
+
+            //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
+            $.post(
+                "/post/update-foto-resheniya-uchenika.php",
+                {
+                    spredmet: sPredmet,
+                    suchenik: sUchenik,
+                    idzadachi: iIdZadachi,
+                    sfilename: sFileName,
+                },
+                function (response) {
+                    // location.reload();
+                }
+            );
+        }
+    });
+
+    $(".slojnyi-otvet-checkbox").click(function(e) {
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iThisId = $(this).attr("id");
+        iSlojnyiOtvetNumber = iThisId.substring(iThisId.length-1);
+        iOtvetilPravilno = ($(this).prop('checked')?1:0);
+        iIdZadachi = $(this).parent().parent().children('.id-zadachi').val();
+
+        iReshenoPravino = 1;
+        $(this).parent().parent().find('.slojnyi-otvet-checkbox').each(function(i, elem){
+            iReshenoPravino *= ($(this).prop('checked')?1:0);
+            if(!iReshenoPravino) return false;
+        });
+
+        if(iReshenoPravino==0) iReshenoPravino=-1;
+
+        $.post(
+            "/post/update-slojnyi-otvet-otvetil-pravilno.php",
+            {
+                iotvetilpravilno: iOtvetilPravilno,
+                ireshenopravino: iReshenoPravino,
+                islojnyiotvetnumber: iSlojnyiOtvetNumber,
+                spredmet: sPredmet,
+                suchenik: sUchenik,
+                idzadachi: iIdZadachi,
+            }
+        );
+    });
+
+
+    $(".zagruzit-reshenie-celikom").click(function(e) {
+
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iThisId = $(this).attr("id");
+        iIdZadachi = $(this).attr('id').substring(26);
+
+        var fileData = document.getElementById("file"+iIdZadachi);
+        file = fileData.files[0];
+
+        if(file) {
+
+            $(this).parent().parent().parent().find('.slojnyi-otvet-pravilnyi').show('slow');
+            $(this).parent().parent().hide();
+            $(this).parent().parent().parent().find('.slojnyi-otvet-uchenika').hide();
+            $(this).parent().parent().parent().find('.slojnyi-otvet-otpravit').hide();
+
+            sFileName = sUchenik + '-' + sPredmet + '-' + iIdZadachi + '.jpg';
+
+            var formData = new FormData();
+            formData.append("userfile", file, sFileName);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/post/reshenie-uchenika-upload.php");
+            xhr.send(formData);
+
+            //здесь в поле `foto-teksta` вновь добавленной задачи пропишем имя файла с картинкой
+            $.post(
+                "/post/update-foto-resheniya-uchenika.php",
+                {
+                    spredmet: sPredmet,
+                    suchenik: sUchenik,
+                    idzadachi: iIdZadachi,
+                    sfilename: sFileName,
+                },
+                function (response) {
+                    $.post(
+                        "/post/kolichestvo-popytok.php",
+                        {
+                            idzadachi: iIdZadachi,
+                            uchenik: sUchenik,
+                        },
+                        function(response){
+                            $.post(
+                                "/post/resheno-pravilno.php",
+                                {
+                                    idzadachi: iIdZadachi,
+                                    uchenik: sUchenik,
+                                    predmet: sPredmet,
+                                    result: -1,
+                                }
+                            );
+                        }
+                    );
+
+                }
+            );
+        }
+
+    });
+
+    // $(".zagruzit-reshenie-celikom").click(function(e) {
+    //     sUchenik = $('#uchenik').val();
+    //     sPredmet = $('#predmet').val();
+    //     iThisId = $(this).attr("id");
+    //     iIdZadachi = $(this).attr('id').substring(26);
+    //
+    //     $(this).parent().parent().find('.slojnyi-otvet-pravilnyi').show('slow');
+    //     $(this).parent().hide();
+    //
+    //     $.post(
+    //         "/post/kolichestvo-popytok.php",
+    //         {
+    //             idzadachi: iIdZadachi,
+    //             uchenik: sUchenik,
+    //         },
+    //         function(response){
+    //             $.post(
+    //                 "/post/resheno-pravilno.php",
+    //                 {
+    //                     idzadachi: iIdZadachi,
+    //                     uchenik: sUchenik,
+    //                     predmet: sPredmet,
+    //                     result: -1,
+    //                 }
+    //             );
+    //         }
+    //     );
+    // });
+
 
     $(".slojnyi-otvet-otpravit").click(function(e) {
 
-        iSlojnyiOtvenNumber = $(this).attr("id").substring(23);
-        $('#slojnyi-otvet-pravilnyi-'+iSlojnyiOtvenNumber).show('slow');
+        sUchenik = $('#uchenik').val();
+        sPredmet = $('#predmet').val();
+        iThisId = $(this).attr("id");
+        iSlojnyiOtvetNumber = iThisId.substring(iThisId.length-1);
+        sSlojnyiOtvetUchenika = $(this).parent().children('#slojnyi-otvet-uchenika-'+iSlojnyiOtvetNumber).val();
+        iIdZadachi = $(this).parent().children('.id-zadachi').val();
+
+        $(this).parent().children('#slojnyi-otvet-pravilnyi-'+iSlojnyiOtvetNumber).show('slow');
+        $(this).hide();
+
+        $.post(
+            "/post/update-slojnyi-otvet.php",
+            {
+                sslojnyiotvetuchenika: sSlojnyiOtvetUchenika,
+                islojnyiotvetnumber: iSlojnyiOtvetNumber,
+                spredmet: sPredmet,
+                suchenik: sUchenik,
+                idzadachi: iIdZadachi,
+            }
+        );
 
     });
 
