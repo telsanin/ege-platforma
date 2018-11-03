@@ -1,6 +1,7 @@
 <style>
+    .low-height-if-narrow {max-height: 180px;}
     @media screen and (max-device-width: 700px) {
-        .hide-if-narrow {display: none;}
+        .low-height-if-narrow {height: 80px;}
     }
 </style>
 
@@ -86,8 +87,7 @@ while ($row = $res->fetch_assoc()) {
         echo "<input type='hidden' style='border: none;' size=1 width='1px' class='sortirovka' id='sortirovka".$row['id-zadachi']."' name='sortirovka".$row['id-zadachi']."' value='".$row['sortirovka']."'/>";
 //    echo "</td>";
     echo "<td>";
-        echo mb_substr($row['text-zadachi'],0,200,'UTF-8');
-        echo "<span class='hide-if-narrow'>".mb_substr($row['text-zadachi'],200,200,'UTF-8')."</span>";
+        echo "<div style='overflow: hidden;' class='low-height-if-narrow'>".$row['text-zadachi']."</div>";
     echo "</td>";
 //    echo "<td>";
 //        echo $row['pravilnyi-otvet'];
