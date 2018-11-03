@@ -1,3 +1,9 @@
+<style>
+    @media screen and (max-device-width: 700px) {
+        .hide-if-narrow {display: none;}
+    }
+</style>
+
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <input type="hidden" id="zadanie" value="<?=$iNomerZadaniya?>"></input>
 <input type="hidden" id="selectionnumber" value=""></input>
@@ -81,6 +87,7 @@ while ($row = $res->fetch_assoc()) {
 //    echo "</td>";
     echo "<td>";
         echo mb_substr($row['text-zadachi'],0,200,'UTF-8');
+        echo "<span class='hide-if-narrow'>".mb_substr($row['text-zadachi'],200,200,'UTF-8')."</span>";
     echo "</td>";
 //    echo "<td>";
 //        echo $row['pravilnyi-otvet'];
