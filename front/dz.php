@@ -252,7 +252,7 @@ do {
 
             echo "<input type='hidden' id='vremya-predyduschih-popytok" . $row['id-zadachi'] . "' value=" . $row['vremya-vypolneniya'] . "></input>";
 
-            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
                 //задачи с полным решением
 
                 echo "Ответы:</br>";

@@ -285,6 +285,7 @@ else {
             <li><a href="/telsanin/denis/matematika/dz">ДЕНИС</a></li>
             <li><a href="/telsanin/vladimir/matematika/dz">ВЛАДИМИР</a></li>
             <li><a href="/telsanin/rostislav/matematika/dz">РОСТИСЛАВ</a></li>
+            <li><a href="/telsanin/sergei/matematika/dz">СЕРГЕЙ</a></li>
 
             <li class="uk-nav-divider"></li>
 
@@ -296,6 +297,7 @@ else {
             <li><a href="/telsanin/ilya/informatika/dz">ИЛЬЯ</a></li>
             <li><a href="/telsanin/egor/informatika/dz">ЕГОР</a></li>
             <li><a href="/telsanin/daniil/informatika/dz">ДАНИИЛ</a></li>
+            <li><a href="/telsanin/viktoriya/informatika/dz">ВИКТОРИЯ</a></li>
         </ul>
     </div>
 <!--</div><button style="position: fixed; right: 0; top: 0;" class="uk-button" data-uk-offcanvas="{target:'#menu', mode:'slide'}">&#9776;</button>-->
