@@ -170,21 +170,24 @@ $(function(){
 
     $("#zadachi-sortirovka").click(function(e) {
 
-        iNomerZadaniya = $('#zadanie').val();
-        sPredmet = $('#predmet').val();
+        if(confirm('уверен?')) {
 
-        $.post(
-            "/post/sortirovka.php",
-            {
-                inomerzadaniya: iNomerZadaniya,
-                spredmet: sPredmet,
-            }
-            ,
-            function(response){
-                // c.c(response);
-                location.reload();
-            }
-        );
+            iNomerZadaniya = $('#zadanie').val();
+            sPredmet = $('#predmet').val();
+
+            $.post(
+                "/post/sortirovka.php",
+                {
+                    inomerzadaniya: iNomerZadaniya,
+                    spredmet: sPredmet,
+                }
+                ,
+                function (response) {
+                    // c.c(response);
+                    location.reload();
+                }
+            );
+        }
     });
 
     $("#upload-zadachi").click(function(e){
