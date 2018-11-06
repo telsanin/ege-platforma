@@ -1,7 +1,10 @@
 <style>
     .low-height-if-narrow {max-height: 180px;}
+    .th-image {width: 350px;}
     @media screen and (max-device-width: 700px) {
         .low-height-if-narrow {height: 80px;}
+    @media screen and (max-device-width: 700px) {
+        .th-image {width: 250px;}
     }
 </style>
 
@@ -92,7 +95,7 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<td>";
 //        echo $row['pravilnyi-otvet'];
 //    echo "</td>";
-    echo "<td width='250px'>";
+    echo "<td class='th-image'>";
         if($row['foto-teksta'])
 //            echo "<img src='/img/".$row['foto-teksta']."'/></br>";
             echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
