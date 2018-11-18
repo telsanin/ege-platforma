@@ -19,6 +19,10 @@ $res1 = $mysqli->query($SqlQuery1);
 if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
 
+
+        $sCurrentPredmet = '-';
+        $sUchenik = '-';
+
         $iPropuscheno = $row1['propuscheno'];
         $sCurrentPredmet = $row1['predmet'];
         $sUchenik = $row1['uchenik'];
@@ -43,6 +47,8 @@ if($res1->data_seek(0)) {
                 $sPopytki .= "</tbody></table>";
             }
 
+            $iZadanie=0;
+            $iAbsolutnayaSortirovka=0;
 
 
             $SqlQuery = "select `zadacha`.`zadanie`, `zadacha`.`absulutnaya-sortirovka` from `uchenik-zadachi` inner join `zadacha` on `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` where `uchenik-zadachi`.`uchenik`='".$sUchenik."' and `zakonchili-na-etom`=1 and `zadacha`.`predmet`='".$sCurrentPredmet."';";
@@ -53,6 +59,8 @@ if($res1->data_seek(0)) {
                     $iAbsolutnayaSortirovka=$row5['absulutnaya-sortirovka'];
                 }
             }
+            
+            $iZadachVZadanii=0;
 
             $SqlQuery = "select max(`zadacha`.`absulutnaya-sortirovka`) as max from `zadacha` where `predmet`='".$sCurrentPredmet."' and `zadanie`=".$iZadanie.";";
             if($res = $mysqli->query($SqlQuery)) {
