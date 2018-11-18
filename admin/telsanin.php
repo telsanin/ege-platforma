@@ -3,8 +3,8 @@
     </tr><thead><tbody>
 <tr>	    <td>		    </td><td>		        </td><td>	Артем	</td><td>		        </td><td>		    </td><td>		        </td>	</tr>
     <tr>	<td>	16:00	</td><td>	Елизавета   </td><td>	Никита	</td><td>	Егор	    </td><td>	Егор	</td><td>	Никита	    </td>	</tr>
-    <tr>	<td>	17:05	</td><td>	Егор        </td><td>	Андрей	</td><td>	Елизавета	</td><td>	Андрей	</td><td>	Владимир	</td>	</tr>
-    <tr>	<td>	18:10	</td><td>		        </td><td>	Егор	</td><td>		        </td><td>	Артем	</td><td>	Даниил	    </td>	</tr>
+    <tr>	<td>	17:05	</td><td>	Егор        </td><td>	Андрей	</td><td>	Елизавета	</td><td>	Андрей	</td><td>		</td>	</tr>
+    <tr>	<td>	18:10	</td><td>	Виктория </td><td>	Егор	</td><td> Виктория </td><td>	Артем	</td><td>	Даниил	    </td>	</tr>
     <tr>	<td>	19:15	</td><td>	Амир        </td><td>	Илья    </td><td>   Фарид   </td><td>	Артем	</td><td>  Ростислав       </td>	</tr>
     <tr>	<td>	20:20	</td><td>	Александр   </td><td>		    </td><td>   Анастасия   </td><td>   Денис   </td><td>	Александр	</td>	</tr>
     </tbody></table></br>
