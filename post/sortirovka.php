@@ -83,15 +83,22 @@ else {
     ;";
 }
 
+//это делается в любом случае
 $SqlQuery .="SET @old_predmet = '';
     SET @old_zadanie = -1;
     SET @old_idpodtemy = -1;
     SET @num = -1;
+    SET @abs_num = -1;
     update `zadacha` inner join (
-    select @num := CASE
+    select 
+    @num := CASE
     WHEN (@old_predmet <> `predmet`) OR (@old_zadanie <> `zadanie`) OR (@old_idpodtemy <> `id-podtemy`) THEN 1
     ELSE @num + 1
     END AS `new-sortirovka`,
+    @abs_num := CASE
+    WHEN (@old_predmet <> `predmet`) OR (@old_zadanie <> `zadanie`) THEN 1
+    ELSE @abs_num + 1
+    END AS `absulutnaya-sortirovka`,
     `id-zadachi`,
     `predmet`,
     `zadanie`,
@@ -104,7 +111,8 @@ $SqlQuery .="SET @old_predmet = '';
     where `zadanie`=".$iNomerZadaniya." and `predmet`='".$sPredmet."' 
     ORDER BY `predmet`, `zadanie`, `id-podtemy`, `sortirovka`, `id-zadachi`) as s
     on `zadacha`.`id-zadachi`=`s`.`id-zadachi`
-    set `zadacha`.`sortirovka`=`s`.`new-sortirovka`
+    set `zadacha`.`sortirovka`=`s`.`new-sortirovka`,
+    `zadacha`.`absulutnaya-sortirovka`=`s`.`absulutnaya-sortirovka`
 ;";
 
 //выполним запрос

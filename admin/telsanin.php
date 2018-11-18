@@ -20,11 +20,13 @@ if($res1->data_seek(0)) {
     while ($row1 = $res1->fetch_assoc()) {
 
         $iPropuscheno = $row1['propuscheno'];
+        $sCurrentPredmet = $row1['predmet'];
+        $sUchenik = $row1['uchenik'];
 
-        if($row1['predmet']<>$sLastPredmet){
+        if($sCurrentPredmet<>$sLastPredmet){
             if($sLastPredmet<>'')
                 echo "============================</br></br>";
-            $sLastPredmet = $row1['predmet'];
+            $sLastPredmet = $sCurrentPredmet;
         }
 
         if($row1['uchenik']<>"test"){
@@ -40,6 +42,29 @@ if($res1->data_seek(0)) {
                 }
                 $sPopytki .= "</tbody></table>";
             }
+
+
+
+            $SqlQuery = "select `zadacha`.`zadanie`, `zadacha`.`absulutnaya-sortirovka` from `uchenik-zadachi` inner join `zadacha` on `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` where `uchenik-zadachi`.`uchenik`='".$sUchenik."' and `zakonchili-na-etom`=1 and `zadacha`.`predmet`='".$sCurrentPredmet."';";
+            if($res = $mysqli->query($SqlQuery)) {
+                $res->data_seek(0);
+                while ($row5 = $res->fetch_assoc()) {
+                    $iZadanie=$row5['zadanie'];
+                    $iAbsolutnayaSortirovka=$row5['absulutnaya-sortirovka'];
+                }
+            }
+
+            $SqlQuery = "select max(`zadacha`.`absulutnaya-sortirovka`) as max from `zadacha` where `predmet`='".$sCurrentPredmet."' and `zadanie`=".$iZadanie.";";
+            if($res = $mysqli->query($SqlQuery)) {
+                $res->data_seek(0);
+                while ($row6 = $res->fetch_assoc()) {
+                    $iZadachVZadanii=$row6['max'];
+                }
+            }
+
+            echo "Закончили на: ".$iZadanie.".".$iAbsolutnayaSortirovka."/".$iZadachVZadanii;
+            echo "</br>";
+
 
             //сформируем "задачную" часть отчета
 //            $SqlQuery = "SELECT *, `uchenik-predmet`.`ssylka-na-dz-reshu-ege`,`uchenik-predmet`.`propuscheno`  FROM `uchenik-zadachi` INNER JOIN `uchenik-predmet` ON `uchenik-zadachi`.`uchenik`=`uchenik-predmet`.`uchenik` AND `uchenik-zadachi`.`predmet`=`uchenik-predmet`.`predmet` WHERE `aktualno`=1 AND `urok`=2 AND `uchenik-zadachi`.`uchenik`='" . $row1['uchenik'] . "' AND `uchenik-zadachi`.`predmet`='".$row1['predmet']."'";
@@ -96,6 +121,7 @@ if($res1->data_seek(0)) {
                     if($iPravilno)
                         echo $sPopytki;
                 }
+
             }
             echo "<div>";
 //            echo "<span style='border-bottom: dashed 1px;' class='propuski-show-hide'>Пропуски:</span></br>";

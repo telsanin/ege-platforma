@@ -280,7 +280,7 @@ do {
 //                    echo "</div>";
 
                     echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
-                    echo "<input type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>я ответил правильно</label>";
+                    echo "<input type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>у меня получилось</label>";
 
                     echo "</div>";
 
@@ -309,7 +309,7 @@ do {
                 //зачачи с числовым ответом
                 if ($row['resheno-pravilno'] != 1) {
                     echo "Ответ: <input id='input" . $row['id-zadachi'] . "'></input>&nbsp;&nbsp;";
-                    echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Уверен</button>&nbsp;&nbsp;";
+                    echo "<button class='uveren' id='uveren" . $row['id-zadachi'] . "'>Отправить</button>&nbsp;&nbsp;";
                 }
 
                 switch ($row['resheno-pravilno']) {
