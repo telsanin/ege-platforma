@@ -33,7 +33,7 @@ if($res1->data_seek(0)) {
             $sLastPredmet = $sCurrentPredmet;
         }
 
-        if($row1['uchenik']<>"test"){
+        if($row1['uchenik']<>"test"&&$row1['uchenik']<>"vladimir"){
 //            echo  "<b>".$row1['uchenik']."-".$row1['predmet']."</b></br>";
             echo "<a href='/telsanin/".$row1['uchenik']."/".$row1['predmet']."/dz'>".$row1['uchenik']."-".$row1['predmet']."</a></b></br>";
 
