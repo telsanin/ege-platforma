@@ -167,7 +167,16 @@ $(function(){
         sPredmet = $('#predmet').val();
         iThisId = $(this).attr("id");
         iSlojnyiOtvetNumber = iThisId.substring(iThisId.length-1);
-        sSlojnyiOtvetUchenika = $(this).parent().children('#slojnyi-otvet-uchenika-'+iSlojnyiOtvetNumber).val();
+        sSlojnyiOtvetUchenika = $(this).parent().children('#slojnyi-otvet-uchenika-'+iSlojnyiOtvetNumber).val().replace(/'/g, "\\\'").replace(/\"/g, "\\\"").replace(/>/g, "&gt;").replace(/</g, "&lt;");
+        //заменяем
+        //' на \'
+        //и
+        //" на \"
+        //и
+        //< на &lt;
+        //и
+        //> на &gt;
+        // c.c(sSlojnyiOtvetUchenika);
         iIdZadachi = $(this).parent().children('.id-zadachi').val();
 
         $(this).parent().children('#slojnyi-otvet-pravilnyi-'+iSlojnyiOtvetNumber).show('slow');
