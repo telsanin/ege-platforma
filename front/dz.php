@@ -229,12 +229,13 @@ do {
 
             //    if($row['srednee-vremya-vypolneniya']!="00:00:00")
             //        echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
-            echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
+//            echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
 //        echo $iNumDZ++ . ") ";
             if ($row['new-sortirovka'])
                 echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
             else
                 echo $iNumDZ++ . "/" . $num_rows . ") ";
+            echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
 
             echo $row['text-zadachi'] . "</br>";
 

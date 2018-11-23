@@ -261,7 +261,8 @@ FROM `uchenik-zadachi` INNER JOIN (
         `zadacha`.`zadanie`, 
         `zadacha`.`text-zadachi`, 
         `zadacha`.`foto-teksta`, 
-        `zadacha`.`sortirovka`
+        `zadacha`.`sortirovka`,
+        `zadacha`.`absulutnaya-sortirovka`
         FROM `uchenik-zadachi`, `zadacha` 
         WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`aktualno`=1 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`urok`='2' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' 
         ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `sortirovka`) 
@@ -346,10 +347,11 @@ do {
 
 //        if ($row['srednee-vremya-vypolneniya'] != "00:00:00")
 //            echo "в среднем: " . $row['srednee-vremya-vypolneniya'] . "</br>";
-            echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
+//            echo "<span style='border: solid 1px;'>" . $row['zadanie'] . "</span>&nbsp;";
 //        echo $iNumDZ++ . ") ";
 //            echo $iNumDZ++ . "/" . $num_rows . ") ";
             echo $row['new-sortirovka'] . "/" . $num_rows . ") ";
+            echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
             echo $row['text-zadachi'] . "</br>";
             if ($row['foto-teksta'])
 //                echo "<img src='/img/" . $row['foto-teksta'] . "'/></br>";

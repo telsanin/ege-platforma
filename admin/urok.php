@@ -29,7 +29,7 @@ echo "предмет: <b>".$sPredmet."</b></br>";
 
 //Задачи:
 echo "<b>Задачи</b>: ";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie`, `zadacha`.`id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`reshali-na-zanyatii`<>1 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`sortirovka`, `zadacha`.`text-zadachi`, `zadanie`, `foto-teksta`, `id-podtemy`, `pravilnyi-otvet`, `reshenie`, `zadacha`.`id-podtemy`, `zadacha`.`slojnyi-otvet-1`, `zadacha`.`slojnyi-otvet-2`, `zadacha`.`slojnyi-otvet-3`, `zadacha`.`absulutnaya-sortirovka` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `zadacha`.`predmet`='".$sPredmet."' AND (`reshali-na-zanyatii`<>1 OR `zakonchili-na-etom`=1) AND `uchenik-zadachi`.`urok`='1' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `razobrat-na-zanyatii` DESC, `resheno-pravilno` ASC, `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $num_rows = mysqli_num_rows($res);
@@ -96,9 +96,11 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
-    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+//    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
 //    echo $iNumDZ++.") ";
     echo $iNumDZ++ . "/".$num_rows.") ";
+    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
+
     echo $row['text-zadachi']."</br>";
 
     echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' /></br>";
@@ -107,7 +109,22 @@ while ($row = $res->fetch_assoc()) {
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
         echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
-    echo "<b>Ответ: </b>" . $row['pravilnyi-otvet']."</br>";
+    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
+        //задачи с полным решением
+        echo "<b>Ответы: </b></br>";
+        $iSlojnyiOtvetNumber = 1;
+        while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
+            echo $iSlojnyiOtvetNumber . ".</br>" . $row["slojnyi-otvet-" . $iSlojnyiOtvetNumber]."</br></br>";
+            $iSlojnyiOtvetNumber++;
+        }
+        //-задачи с полным решением
+    }
+    else {
+        //зачачи с числовым ответом
+        echo "<b>Ответ: </b>" . $row['pravilnyi-otvet']."</br>";
+        //-зачачи с числовым ответом
+    }
+
 
     if($row['reshenie'])
         echo "</br><b>Решение:</b></br>".$row['reshenie']."</br>";

@@ -10,7 +10,7 @@
 
 //Задачи:
 echo "<p><b>Задачи</b>:</p>";
-$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
+$SqlQuery = "SELECT `uchenik-zadachi`.*, `zadacha`.`text-zadachi`, `foto-teksta`, `zadanie`, `id-podtemy`, `zadacha`.`absulutnaya-sortirovka` FROM `uchenik-zadachi`, `zadacha`  WHERE `uchenik-zadachi`.`id-zadachi`=`zadacha`.`id-zadachi` AND `uchenik-zadachi`.`urok`=1 AND `uchenik-zadachi`.`reshali-na-zanyatii`=0 AND `uchenik-zadachi`.`predmet`='".$sPredmet."' AND `uchenik-zadachi`.`uchenik`='".$sUchenik."' ORDER BY `zadacha`.`zadanie`, `id-podtemy`, `zadacha`.`sortirovka`;";
 $res = $mysqli->query($SqlQuery);
 $res->data_seek(0);
 $num_rows = mysqli_num_rows($res);
@@ -58,9 +58,10 @@ while ($row = $res->fetch_assoc()) {
 
     echo ($row['zakonchili-na-etom']?"<b>":"");
 
-    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+//    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
 //    echo $iNumDZ++.") ";
     echo $iNumDZ++ . "/".$num_rows.") ";
+    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";

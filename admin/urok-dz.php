@@ -159,8 +159,10 @@ while ($row = $res->fetch_assoc()) {
     if($row['s-moimi-ciframi'])
         echo "С моими цифрами</br>";
 //    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
-    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+//    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
     echo $iNum++ . "/".$num_rows.") ";
+    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
+
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";

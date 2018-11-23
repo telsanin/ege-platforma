@@ -79,9 +79,9 @@ while ($row = $res->fetch_assoc()) {
     echo "<div>";
 
 
-    echo "<span style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
 //    echo $iNumDZ++.") ";
-    echo $iNumDZ++ . "/".$num_rows.") ";
+    echo $iNumDZ++ . "/".$num_rows.")&nbsp;";
+    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
     echo $row['text-zadachi']."</br>";
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
