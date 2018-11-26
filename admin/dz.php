@@ -375,7 +375,12 @@ do {
                     $sSlojnyiOtvetUchenika = $row["slojnyi-otvet-uchenika-".$iSlojnyiOtvetNumber];
                     $iOtvetilPravilno = $row["slojnyi-otvet-otvetil-pravilno-".$iSlojnyiOtvetNumber];
                     echo "<b>Правильный ответ: </b></br>";
-                    echo $iSlojnyiOtvetNumber.") ".$sSlojnyiOtvet."</br>";
+
+                    if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
+                        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+                    else
+                        echo $iSlojnyiOtvetNumber.") ".$sSlojnyiOtvet."</br>";
+
                     echo "<b>Ответ ученика: </b></br>";
                     echo $sSlojnyiOtvetUchenika."</br>";
                     echo "<input disabled  type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>я ответил правильно</label></br></br>";

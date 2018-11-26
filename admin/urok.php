@@ -114,7 +114,7 @@ while ($row = $res->fetch_assoc()) {
         echo "<b>Ответы: </b></br>";
         $iSlojnyiOtvetNumber = 1;
         while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
-            if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]='img')
+            if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
                 echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
             else
 //                echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
