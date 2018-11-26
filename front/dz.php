@@ -280,7 +280,12 @@ do {
                     echo "<b>Правильный ответ: </b></br>";
 //                    echo "</div>";
 
-                    echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
+                    if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]='img')
+                        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+                    else
+                        echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
+
+
                     echo "<input type='checkbox' ".($iOtvetilPravilno?"checked":"")." class='slojnyi-otvet-checkbox' id='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."' /><label for='slojnyi-otvet-checkbox-".$row['id-zadachi']."-".$iSlojnyiOtvetNumber."'>у меня получилось</label>";
 
                     echo "</div>";

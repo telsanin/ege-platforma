@@ -96,7 +96,7 @@ while ($row = $res->fetch_assoc()) {
 
 //    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
-//    echo "<span class='zadanie' style='border: solid 1px;'>".$row['zadanie']."</span>&nbsp;";
+    echo "<span class='zadanie' style='display:none;'>".$row['zadanie']."</span>";
 //    echo $iNumDZ++.") ";
     echo $iNumDZ++ . "/".$num_rows.") ";
     echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
@@ -114,7 +114,11 @@ while ($row = $res->fetch_assoc()) {
         echo "<b>Ответы: </b></br>";
         $iSlojnyiOtvetNumber = 1;
         while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
-            echo $iSlojnyiOtvetNumber . ".</br>" . $row["slojnyi-otvet-" . $iSlojnyiOtvetNumber]."</br></br>";
+            if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]='img')
+                echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+            else
+//                echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
+                echo $iSlojnyiOtvetNumber . ".</br>" . $row["slojnyi-otvet-" . $iSlojnyiOtvetNumber]."</br></br>";
             $iSlojnyiOtvetNumber++;
         }
         //-задачи с полным решением
