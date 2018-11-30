@@ -276,28 +276,28 @@ else {
             <li class="uk-nav-divider"></li>
 
             <li class="uk-nav-header">Математика:</li>
-            <li><a href="/telsanin/elizaveta/matematika/dz">ЕЛИЗАВЕТА</a></li>
-            <li><a href="/telsanin/egor/matematika/dz">ЕГОР</a></li>
-            <li><a href="/telsanin/nikita/matematika/dz">НИКИТА</a></li>
-            <li><a href="/telsanin/andrei/matematika/dz">АНДРЕЙ</a></li>
-            <li><a href="/telsanin/anastasiya/matematika/dz">АНАСТАСИЯ</a></li>
-            <li><a href="/telsanin/artem/matematika/dz">АРТЕМ</a></li>
-            <li><a href="/telsanin/denis/matematika/dz">ДЕНИС</a></li>
-            <li><a href="/telsanin/vladimir/matematika/dz">ВЛАДИМИР</a></li>
-            <li><a href="/telsanin/rostislav/matematika/dz">РОСТИСЛАВ</a></li>
-            <li><a href="/telsanin/sergei/matematika/dz">СЕРГЕЙ</a></li>
+                <li><a href="/telsanin/elizaveta/matematika/dz">ЕЛИЗАВЕТА</a></li>
+                <li><a href="/telsanin/egor/matematika/dz">ЕГОР</a></li>
+                <li><a href="/telsanin/nikita/matematika/dz">НИКИТА</a></li>
+                <li><a href="/telsanin/artem/matematika/dz">АРТЕМ</a></li>
+                <li><a href="/telsanin/andrei/matematika/dz">АНДРЕЙ</a></li>
+                <li><a href="/telsanin/anastasiya/matematika/dz">АНАСТАСИЯ</a></li>
+                <li><a href="/telsanin/denis/matematika/dz">ДЕНИС</a></li>
+                <li><a href="/telsanin/rostislav/matematika/dz">РОСТИСЛАВ</a></li>
 
             <li class="uk-nav-divider"></li>
 
             <li class="uk-nav-header">Информатика:</li>
-            <li><a href="/telsanin/farid/informatika/dz">ФАРИД</a></li>
-            <li><a href="/telsanin/amir/informatika/dz">АМИР</a></li>
-            <li><a href="/telsanin/aleksandr/informatika/dz">АЛЕКСАНДР</a></li>
-            <li><a href="/telsanin/artem/informatika/dz">АРТЕМ</a></li>
-            <li><a href="/telsanin/ilya/informatika/dz">ИЛЬЯ</a></li>
-            <li><a href="/telsanin/egor/informatika/dz">ЕГОР</a></li>
-            <li><a href="/telsanin/daniil/informatika/dz">ДАНИИЛ</a></li>
-            <li><a href="/telsanin/viktoriya/informatika/dz">ВИКТОРИЯ</a></li>
+                <li><a href="/telsanin/daniil/informatika/dz">ДАНИИЛ</a></li>
+                <li><a href="/telsanin/artem/informatika/dz">АРТЕМ</a></li>
+                <li><a href="/telsanin/egor/informatika/dz">?ЕГОР?</a></li>
+                <li><a href="/telsanin/ilya/informatika/dz">ИЛЬЯ</a></li>
+                <li><a href="/telsanin/aleksandr/informatika/dz">АЛЕКСАНДР</a></li>
+                <li><a href="/telsanin/amir/informatika/dz">АМИР</a></li>
+                <li><a href="/telsanin/viktoriya/informatika/dz">ВИКТОРИЯ</a></li>
+                <li><a href="/telsanin/farid/informatika/dz">ФАРИД</a></li>
+                <li><a href="/telsanin/denis/informatika/dz">ДЕНИС</a></li>
+                <li><a href="/telsanin/vladislav/informatika/dz">ВЛАДИСЛАВ</a></li>
         </ul>
     </div>
 <!--</div><button style="position: fixed; right: 0; top: 0;" class="uk-button" data-uk-offcanvas="{target:'#menu', mode:'slide'}">&#9776;</button>-->
