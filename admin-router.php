@@ -218,27 +218,6 @@ else {
             <a href="#">ЗАДАЧИ</a>
                 <ul class="uk-nav-sub" data-uk-nav">
                     <li class="uk-parent">
-                        <div class="uk-nav-header">Математика</div>
-                        <ul class="uk-nav-sub">
-                            <li><a href="/telsanin/zadachi/matematika/19/sort">Задание 19</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/17/sort">Задание 17</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/15/sort">Задание 15</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/13/sort">Задание 13</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/12/sort">Задание 12</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/11/sort">Задание 11</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/10/sort">Задание 10</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/9/sort">Задание 9</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/8/sort">Задание 8</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/7/sort">Задание 7</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/6/sort">Задание 6</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/5/sort">Задание 5</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/4/sort">Задание 4</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/3/sort">Задание 3</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/2/sort">Задание 2</a></li>
-                            <li><a href="/telsanin/zadachi/matematika/1/sort">Задание 1</a></li>
-                        </ul>
-                    </li>
-                    <li class="uk-parent">
                         <div class="uk-nav-header">Информатика</div>
                         <ul class="uk-nav-sub">
                             <li><a href="/telsanin/zadachi/informatika/23/sort">Задание 23</a></li>
@@ -268,6 +247,27 @@ else {
                             <li><a href="/telsanin/zadachi/informatika/8/sort">Задание 8</a></li>
                             <li><a href="/telsanin/zadachi/informatika/16/sort">Задание 16</a></li>
                             <li><a href="/telsanin/zadachi/informatika/1/sort">Задание 1</a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <div class="uk-nav-header">Математика</div>
+                        <ul class="uk-nav-sub">
+                            <li><a href="/telsanin/zadachi/matematika/19/sort">Задание 19</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/17/sort">Задание 17</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/15/sort">Задание 15</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/13/sort">Задание 13</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/12/sort">Задание 12</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/11/sort">Задание 11</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/10/sort">Задание 10</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/9/sort">Задание 9</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/8/sort">Задание 8</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/7/sort">Задание 7</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/6/sort">Задание 6</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/5/sort">Задание 5</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/4/sort">Задание 4</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/3/sort">Задание 3</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/2/sort">Задание 2</a></li>
+                            <li><a href="/telsanin/zadachi/matematika/1/sort">Задание 1</a></li>
                         </ul>
                     </li>
                 </ul>
