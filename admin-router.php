@@ -290,7 +290,6 @@ else {
             <li class="uk-nav-header">Информатика:</li>
                 <li><a href="/telsanin/daniil/informatika/dz">ДАНИИЛ</a></li>
                 <li><a href="/telsanin/artem/informatika/dz">АРТЕМ</a></li>
-                <li><a href="/telsanin/egor/informatika/dz">?ЕГОР?</a></li>
                 <li><a href="/telsanin/ilya/informatika/dz">ИЛЬЯ</a></li>
                 <li><a href="/telsanin/aleksandr/informatika/dz">АЛЕКСАНДР</a></li>
                 <li><a href="/telsanin/amir/informatika/dz">АМИР</a></li>
