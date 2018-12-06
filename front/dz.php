@@ -281,7 +281,7 @@ do {
 //                    echo "</div>";
 
                     if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
-                        echo "<img src=='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+                        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
                     else
                         echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
 
