@@ -63,7 +63,7 @@ else
 
 <body>
 
-<?=(!strpos($_SERVER["DOCUMENT_ROOT"], "teleginresume")?"<div style='position: fixed; top: 0; width: 100%;z-index: 1; border: solid 2px #4caf50; margin: 0; padding: 0;'></div>":"")?>
+<?=(!strpos($_SERVER["DOCUMENT_ROOT"], "teleginresume")?"<div style='position: fixed; top: 0; width: 100%;z-index: 1; border: solid 3px palevioletred; margin: 0; padding: 0;'></div>":"")?>
 
 <div style="margin: 8px;">
 
