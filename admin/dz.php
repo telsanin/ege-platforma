@@ -377,7 +377,7 @@ do {
                     echo "<b>Правильный ответ: </b></br>";
 
                     if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
-                        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+                        echo "<img src='/img/".$sPredmet."-".$iZadanie."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
                     else
                         echo $iSlojnyiOtvetNumber.") ".$sSlojnyiOtvet."</br>";
 
