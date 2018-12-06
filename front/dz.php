@@ -152,7 +152,8 @@ FROM `uchenik-zadachi` INNER JOIN (
         `zadacha`.`foto-teksta`,
         `zadacha`.`slojnyi-otvet-1`,
         `zadacha`.`slojnyi-otvet-2`,
-        `zadacha`.`slojnyi-otvet-3`
+        `zadacha`.`slojnyi-otvet-3`,
+        `zadacha`.`absulutnaya-sortirovka`
     FROM
         `uchenik-zadachi`,
         `zadacha`
