@@ -303,7 +303,7 @@ do {
                 echo "<input type='file' id='file".$row['id-zadachi']."' name='file".$row['id-zadachi']."' /></br></br>";
 //                echo "<input type='submit' value='Добавить'/>";
 
-                echo "<input type='button' value='Загрузить фото решения целиком' class='zagruzit-reshenie-celikom' id='zagruzit-reshenie-celikom-".$row['id-zadachi']."'/></br></br>";
+                echo "<input type='button' value='Загрузить фото решения целиком' class='zagruzit-reshenie-celikom' id='zagruzit-reshenie-celikom-".$row['id-zadachi']."'/> (только скриншоты в формате .jpeg)</br></br>";
                 echo "</form></br>";
 
                 echo "</div></br>";
