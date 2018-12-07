@@ -276,27 +276,27 @@ else {
             <li class="uk-nav-divider"></li>
 
             <li class="uk-nav-header">Математика:</li>
-                <li><a href="/elizaveta/matematika/dz/sort">ЕЛИЗАВЕТА</a><a style="margin-left: 20px;" href="/telsanin/elizaveta/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/egor/matematika/dz/sort">ЕГОР</a><a style="margin-left: 20px;" href="/telsanin/egor/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/nikita/matematika/dz/sort">НИКИТА</a><a style="margin-left: 20px;" href="/telsanin/nikita/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/artem/matematika/dz/sort">АРТЕМ</a><a style="margin-left: 20px;" href="/telsanin/artem/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/andrei/matematika/dz/sort">АНДРЕЙ</a><a style="margin-left: 20px;" href="/telsanin/andrei/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/anastasiya/matematika/dz/sort">АНАСТАСИЯ</a><a style="margin-left: 20px;" href="/telsanin/anastasiya/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/denis/matematika/dz/sort">ДЕНИС</a><a style="margin-left: 20px;" href="/telsanin/denis/matematika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/rostislav/matematika/dz/sort">РОСТИСЛАВ</a><a style="margin-left: 20px;" href="/telsanin/rostislav/matematika/dz">ЗАДАТЬ</a></li>
+                <li><a href="/telsanin/elizaveta/matematika/dz">ЕЛИЗАВЕТА</a><a style="margin-left: 20px;" href="/elizaveta/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/egor/matematika/dz">ЕГОР</a><a style="margin-left: 20px;" href="/egor/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/nikita/matematika/dz">НИКИТА</a><a style="margin-left: 20px;" href="/nikita/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/artem/matematika/dz">АРТЕМ</a><a style="margin-left: 20px;" href="/artem/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/andrei/matematika/dz">АНДРЕЙ</a><a style="margin-left: 20px;" href="/andrei/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/anastasiya/matematika/dz">АНАСТАСИЯ</a><a style="margin-left: 20px;" href="/anastasiya/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/denis/matematika/dz">ДЕНИС</a><a style="margin-left: 20px;" href="/denis/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/rostislav/matematika/dz">РОСТИСЛАВ</a><a style="margin-left: 20px;" href="/rostislav/matematika/dz/sort">ДЗ УЧЕНИКА</a></li>
 
             <li class="uk-nav-divider"></li>
 
             <li class="uk-nav-header">Информатика:</li>
-                <li><a href="/daniil/informatika/dz/sort">ДАНИИЛ</a><a style="margin-left: 20px;" href="/telsanin/daniil/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/artem/informatika/dz/sort">АРТЕМ</a><a style="margin-left: 20px;" href="/telsanin/artem/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/ilya/informatika/dz/sort">ИЛЬЯ</a><a style="margin-left: 20px;" href="/telsanin/ilya/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/aleksandr/informatika/dz/sort">АЛЕКСАНДР</a><a style="margin-left: 20px;" href="/telsanin/aleksandr/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/amir/informatika/dz/sort">АМИР</a><a style="margin-left: 20px;" href="/telsanin/amir/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/viktoriya/informatika/dz/sort">ВИКТОРИЯ</a><a style="margin-left: 20px;" href="/telsanin/viktoriya/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/farid/informatika/dz/sort">ФАРИД</a><a style="margin-left: 20px;" href="/telsanin/farid/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/denis/informatika/dz/sort">ДЕНИС</a><a style="margin-left: 20px;" href="/telsanin/denis/informatika/dz">ЗАДАТЬ</a></li>
-                <li><a href="/vladislav/informatika/dz/sort">ВЛАДИСЛАВ</a><a style="margin-left: 20px;" href="/telsanin/vladislav/informatika/dz">ЗАДАТЬ</a></li>
+                <li><a href="/telsanin/daniil/informatika/dz">ДАНИИЛ</a><a style="margin-left: 20px;" href="/daniil/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/artem/informatika/dz">АРТЕМ</a><a style="margin-left: 20px;" href="/artem/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/ilya/informatika/dz">ИЛЬЯ</a><a style="margin-left: 20px;" href="/ilya/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/aleksandr/informatika/dz">АЛЕКСАНДР</a><a style="margin-left: 20px;" href="/aleksandr/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/amir/informatika/dz">АМИР</a><a style="margin-left: 20px;" href="/amir/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/viktoriya/informatika/dz">ВИКТОРИЯ</a><a style="margin-left: 20px;" href="/viktoriya/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/farid/informatika/dz">ФАРИД</a><a style="margin-left: 20px;" href="/farid/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/denis/informatika/dz">ДЕНИС</a><a style="margin-left: 20px;" href="/denis/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
+                <li><a href="/telsanin/vladislav/informatika/dz">ВЛАДИСЛАВ</a><a style="margin-left: 20px;" href="/vladislav/informatika/dz/sort">ДЗ УЧЕНИКА</a></li>
         </ul>
     </div>
 <!--</div><button style="position: fixed; right: 0; top: 0;" class="uk-button" data-uk-offcanvas="{target:'#menu', mode:'slide'}">&#9776;</button>-->
