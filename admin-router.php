@@ -284,6 +284,7 @@ else {
                 <li><a href="/telsanin/anastasiya/matematika/dz">АНАСТАСИЯ</a><a style="margin-left: 20px;" href="/anastasiya/matematika/dz/sort">дз ученика</a></li>
                 <li><a href="/telsanin/denis/matematika/dz">ДЕНИС</a><a style="margin-left: 20px;" href="/denis/matematika/dz/sort">дз ученика</a></li>
                 <li><a href="/telsanin/rostislav/matematika/dz">РОСТИСЛАВ</a><a style="margin-left: 20px;" href="/rostislav/matematika/dz/sort">дз ученика</a></li>
+                <li><a href="/telsanin/klim/matematika/dz">КЛИМ</a><a style="margin-left: 20px;" href="/klim/matematika/dz/sort">дз ученика</a></li>
 
             <li class="uk-nav-divider"></li>
 
