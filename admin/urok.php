@@ -110,15 +110,26 @@ while ($row = $res->fetch_assoc()) {
         echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
     if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
+
         //задачи с полным решением
         echo "<b>Ответы: </b></br>";
         $iSlojnyiOtvetNumber = 1;
         while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
-            if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
-                echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+
+            //если $row["slojnyi-otvet-".$iSlojnyiOtvetNumber] содержит img
+            if($iNumImg = stripos($row["slojnyi-otvet-".$iSlojnyiOtvetNumber], 'img')) {
+                // то
+                //исключить img (!предполагается, что img стои'т в конце и после этого ничего нет!)
+                //вывести $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]
+                echo $iSlojnyiOtvetNumber . ".</br>" . substr($row["slojnyi-otvet-" . $iSlojnyiOtvetNumber], 0, $iNumImg-1) . "</br></br>";
+                //вывести картинку
+                echo "<img src='/img/" . $sPredmet . "-" . $iNomerZadaniya . "-" . $row['id-zadachi'] . "-slojnyi-otvet-" . $iSlojnyiOtvetNumber . ".jpg' /></br>";
+                //иначе
+            }
             else
+            //просто вывести $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]
+               echo $iSlojnyiOtvetNumber . ".</br>" . $row["slojnyi-otvet-" . $iSlojnyiOtvetNumber]."</br></br>";
 //                echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
-                echo $iSlojnyiOtvetNumber . ".</br>" . $row["slojnyi-otvet-" . $iSlojnyiOtvetNumber]."</br></br>";
             $iSlojnyiOtvetNumber++;
         }
         //-задачи с полным решением
