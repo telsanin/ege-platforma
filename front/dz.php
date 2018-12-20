@@ -282,10 +282,12 @@ do {
 //                    echo "</div>";
 
 //                    if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
-                    if($iNumImg = stripos($row["slojnyi-otvet-".$iSlojnyiOtvetNumber], 'img')) {
+                    $iNumImg = stripos($row["slojnyi-otvet-".$iSlojnyiOtvetNumber], 'img');
+                    if($iNumImg!==false){
 //                        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
+                    if($iNumImg!==0)
                         echo $iSlojnyiOtvetNumber . ".</br>" . substr($row["slojnyi-otvet-" . $iSlojnyiOtvetNumber], 0, $iNumImg - 1) . "</br></br>";
-                        echo "<img src='/img/" . $sPredmet . "-" . $iNomerZadaniya . "-" . $row['id-zadachi'] . "-slojnyi-otvet-" . $iSlojnyiOtvetNumber . ".jpg' /></br>";
+                        echo "</br><img src='/img/" . $sPredmet . "-" . $iNomerZadaniya . "-" . $row['id-zadachi'] . "-slojnyi-otvet-" . $iSlojnyiOtvetNumber . ".jpg' /></br></br>";
                    }
                     else
                         echo $row["slojnyi-otvet-".$iSlojnyiOtvetNumber]."</span></br>";
