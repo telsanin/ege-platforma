@@ -42,6 +42,22 @@ else
         table, th, td {
             border: 1px solid lightgray;
         }
+
+        /*для таблиц в Задании №2*/
+        table.logic1 th, table.logic1 td, table.logic2 th, table.logic2 td  {
+            text-align: center;
+        }
+        table.logic1 th {
+            border-bottom: none;
+        }
+        table.logic1 tr:nth-child(2) td {
+            border-top: none;
+        }
+        table.logic2 td {
+            padding: 0 20px;
+        }
+        /*-для таблиц в Задании №2*/
+
     </style>
 
     <script>
