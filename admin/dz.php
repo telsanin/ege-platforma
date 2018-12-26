@@ -377,7 +377,8 @@ do {
                     echo "<b>Правильный ответ: </b></br>";
 
                     //if($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]=='img')
-                    if($iNumImg = stripos($row["slojnyi-otvet-".$iSlojnyiOtvetNumber], 'img')) {
+                    $iNumImg = stripos($row["slojnyi-otvet-".$iSlojnyiOtvetNumber], 'img');
+                    if($iNumImg!==false){
                         //   echo "<img src='/img/".$sPredmet."-".$iZadanie."-".$row['id-zadachi']."-slojnyi-otvet-".$iSlojnyiOtvetNumber.".jpg' /></br>";
                         echo $iSlojnyiOtvetNumber . ".</br>" . substr($row["slojnyi-otvet-" . $iSlojnyiOtvetNumber], 0, $iNumImg - 1) . "</br></br>";
                         echo "<img src='/img/" . $sPredmet . "-" . $iZadanie . "-" . $row['id-zadachi'] . "-slojnyi-otvet-" . $iSlojnyiOtvetNumber . ".jpg' /></br>";

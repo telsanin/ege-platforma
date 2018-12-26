@@ -222,7 +222,6 @@ else {
                         <ul class="uk-nav-sub">
                             <li><a href="/telsanin/zadachi/informatika/23/sort">Задание 23</a></li>
                             <li><a href="/telsanin/zadachi/informatika/22/sort">Задание 22</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/18/sort">Задание 18</a></li>
                             <li><a href="/telsanin/zadachi/informatika/17/sort">Задание 17</a></li>
                             <li><a href="/telsanin/zadachi/informatika/14/sort">Задание 14</a></li>
                             <li><a href="/telsanin/zadachi/informatika/13/sort">Задание 13</a></li>
@@ -233,9 +232,10 @@ else {
                             <li><a href="/telsanin/zadachi/informatika/6/sort">Задание 6</a></li>
                             <li><a href="/telsanin/zadachi/informatika/5/sort">Задание 5</a></li>
                             <li><a href="/telsanin/zadachi/informatika/4/sort">Задание 4</a></li>
-                            <li><a href="/telsanin/zadachi/informatika/15/sort">Задание 15</a></li>
                             <li><a href="/telsanin/zadachi/informatika/3/sort">Задание 3</a></li>
+                            <li><a href="/telsanin/zadachi/informatika/15/sort">Задание 15</a></li>
                             <li><a href="/telsanin/zadachi/informatika/2/sort">Задание 2</a></li>
+                            <li><a href="/telsanin/zadachi/informatika/18/sort">Задание 18</a></li>
                             <li><a href="/telsanin/zadachi/informatika/26/sort">Задание 26</a></li>
                             <li><a href="/telsanin/zadachi/informatika/27/sort">Задание 27</a></li>
                             <li><a href="/telsanin/zadachi/informatika/25/sort">Задание 25</a></li>
