@@ -54,7 +54,7 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<img src='/img/matematika-3-123.jpg'/></br>";
 
 
-    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13 && $row['zadanie']*1 != 17) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
         $iSlojnyiOtvetNumber = 1;
         while($row["slojnyi-otvet-".$iSlojnyiOtvetNumber]<>"") {
             echo "<div>";

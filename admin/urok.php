@@ -109,7 +109,7 @@ while ($row = $res->fetch_assoc()) {
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
         echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
-    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
+    if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13 && $row['zadanie']*1 != 17) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
 
         //задачи с полным решением
         echo "<b>Ответы: </b></br>";

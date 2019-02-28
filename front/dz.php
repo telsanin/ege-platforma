@@ -17,11 +17,14 @@
 
 echo "<a href='/".$sUchenik."/".$sPredmet."/otchet'>Отчет по занятиям</a></br>";
 
+//Это для учеников, у которых 2 предмета, в новой системе этого не будет
 if($sUchenik=='artem')
     if($sPredmet=='matematika')
         echo "Математика&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='/".$sUchenik."/informatika/dz'>Информатика</a>";
     elseif($sPredmet=='informatika')
         echo "<a href='/".$sUchenik."/matematika/dz'>Математика</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Информатика";
+//-Это для учеников, у которых 2 предмета, в новой системе этого не будет
+
 ?>
 
 <p><b>ДОМАШНЕЕ ЗАДАНИЕ:</b></p></br>
@@ -254,7 +257,7 @@ do {
 
             echo "<input type='hidden' id='vremya-predyduschih-popytok" . $row['id-zadachi'] . "' value=" . $row['vremya-vypolneniya'] . "></input>";
 
-            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
+            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13 && $row['zadanie']*1 != 17) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
                 //задачи с полным решением
 
                 echo "Ответы:</br>";
