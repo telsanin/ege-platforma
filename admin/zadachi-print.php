@@ -80,9 +80,18 @@ while ($row = $res->fetch_assoc()) {
 
 
 //    echo $iNumDZ++.") ";
-    echo $iNumDZ++ . "/".$num_rows.")&nbsp;";
-    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
+//    echo $iNumDZ++ . "/".$num_rows.")&nbsp;";
+//    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
+
+    //    echo $iNumDZ++.") ";
+  //echo $iNumDZ++ . "/".$num_rows.") ";
+  echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>";
+  if (!$row['zakonchili-na-etom'])
+    echo " ".($num_rows-$iNumDZ++ + 1);
+  echo "</br>";
+
     echo $row['text-zadachi']."</br>";
+    
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
         echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";

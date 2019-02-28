@@ -98,9 +98,13 @@ while ($row = $res->fetch_assoc()) {
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
     echo "<span class='zadanie' style='display:none;'>".$row['zadanie']."</span>";
 //    echo $iNumDZ++.") ";
-    echo $iNumDZ++ . "/".$num_rows.") ";
-    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>&nbsp;</br>";
+    //echo $iNumDZ++ . "/".$num_rows.") ";
+    echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>";
+    if (!$row['zakonchili-na-etom'])
+        echo " ".($num_rows-$iNumDZ++);
+    echo "</br>";
 
+    
     echo $row['text-zadachi']."</br>";
 
     echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' /></br>";
