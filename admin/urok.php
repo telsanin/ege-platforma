@@ -44,7 +44,7 @@ while ($row = $res->fetch_assoc()) {
     $iIdPodtemy = $row['id-podtemy'];
 
     if($iOldNomerZadaniya!=0 && $iNomerZadaniya != $iOldNomerZadaniya)
-        echo "<hr style='margin: 8px -8px 0 -8px; height: 1px; background-color: black;'>";
+        echo "<hr style='margin: 0 -8px 0 -8px; height: 1px; background-color: black;'>";
 	
 	if($iIdPodtemy != $iOldIdPodtemy) {
         if ($bChessStyleDark)
@@ -55,7 +55,7 @@ while ($row = $res->fetch_assoc()) {
     $iOldNomerZadaniya = $iNomerZadaniya;
     $iOldIdPodtemy = $iIdPodtemy;
     
-    echo "<div style='margin: 0 -8px; padding: 8px; background-color: ".($bChessStyleDark ? 'WhiteSmoke        ' : 'none').";'>";
+    echo "<div style='margin: 0 -8px; padding: 8px; background-color: ".($bChessStyleDark ? 'FloralWhite         ' : 'none').";'>";
   
 /*        //добавление горизонтальной полосы, разделяющией разные задания
         if ($iOldNomerZadaniya!=0)
