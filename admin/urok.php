@@ -36,37 +36,54 @@ $num_rows = mysqli_num_rows($res);
 $iNumDZ = 1;
 $iOldIdPodtemy = 0;
 $iOldNomerZadaniya = 0;
-while ($row = $res->fetch_assoc()) {
 
-    //добавление горизонтальной полосы, разделяющией разные задания
+$bChessStyleDark = false;
+while ($row = $res->fetch_assoc()) {
+  
     $iNomerZadaniya = $row['zadanie'];
     $iIdPodtemy = $row['id-podtemy'];
-    if ($iOldNomerZadaniya!=0)
-        //если это НЕ первая строка
-        if($iNomerZadaniya!=$iOldNomerZadaniya){
-            //если задание изменилось
-            $iOldNomerZadaniya=$iNomerZadaniya;
-            echo "</br><hr style='height: 1px; background-color: black;'></br>";
-        }
-        else{
-            //добавление горизонтальной полосы, разделяющией разные подтемы
-            if($iIdPodtemy!=$iOldIdPodtemy){
-                //если подтема изменилась
-                $iOldIdPodtemy=$iIdPodtemy;
-                echo "</br><hr></br>";
-            }
-            else{
-                echo "</br>";
-            }
-            //-добавление горизонтальной полосы, разделяющией разные подтемы
-        }
-    else {
-        //если это первая строка, инициализируем iIdPodtemy значением из первой строки
-        $iOldNomerZadaniya = $iNomerZadaniya;
-        $iOldIdPodtemy = $iIdPodtemy;
-        echo "</br></br>";
+
+    if($iOldNomerZadaniya!=0 && $iNomerZadaniya != $iOldNomerZadaniya)
+        echo "<hr style='margin: 8px -8px 0 -8px; height: 1px; background-color: black;'>";
+	
+	if($iIdPodtemy != $iOldIdPodtemy) {
+        if ($bChessStyleDark)
+            $bChessStyleDark = false;
+        else
+            $bChessStyleDark = true;
     }
-    //-добавление горизонтальной полосы, разделяющией разные задания
+    $iOldNomerZadaniya = $iNomerZadaniya;
+    $iOldIdPodtemy = $iIdPodtemy;
+    
+    echo "<div style='margin: 0 -8px; padding: 8px; background-color: ".($bChessStyleDark ? 'WhiteSmoke        ' : 'none').";'>";
+  
+/*        //добавление горизонтальной полосы, разделяющией разные задания
+        if ($iOldNomerZadaniya!=0)
+          //если это НЕ первая строка
+          if($iNomerZadaniya!=$iOldNomerZadaniya){
+              //если задание изменилось
+              $iOldNomerZadaniya=$iNomerZadaniya;
+              echo "</br><hr style='height: 1px; background-color: black;'></br>";
+          }
+          else{
+              //добавление горизонтальной полосы, разделяющией разные подтемы
+              if($iIdPodtemy!=$iOldIdPodtemy){
+                  //если подтема изменилась
+                  $iOldIdPodtemy=$iIdPodtemy;
+                  echo "</br><hr></br>";
+              }
+              else{
+                  echo "</br>";
+              }
+              //-добавление горизонтальной полосы, разделяющией разные подтемы
+          }
+      else {
+          //если это первая строка, инициализируем iIdPodtemy значением из первой строки
+          $iOldNomerZadaniya = $iNomerZadaniya;
+          $iOldIdPodtemy = $iIdPodtemy;
+          echo "</br></br>";
+      }
+      //-добавление горизонтальной полосы, разделяющией разные задания*/
 
     if($row['urok']==0)
         if($row['resheno-pravilno']==1 or $row['reshali-na-zanyatii']==1)
@@ -93,12 +110,14 @@ while ($row = $res->fetch_assoc()) {
 //            echo "<div style='color: Green;'>";
 
     echo ($row['zakonchili-na-etom']?"<b>":"");
-
+  
 //    echo "в среднем: ".$row['srednee-vremya-vypolneniya']."</br>";
 //    echo "<button class='sbrosit-vremya'>Сбросить время</button></br>";
     echo "<span class='zadanie' style='display:none;'>".$row['zadanie']."</span>";
 //    echo $iNumDZ++.") ";
     //echo $iNumDZ++ . "/".$num_rows.") ";
+  
+    //абсолютный и относительный номера задания
     echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>";
     if (!$row['zakonchili-na-etom'])
         echo " ".($num_rows-$iNumDZ++);
@@ -192,11 +211,17 @@ while ($row = $res->fetch_assoc()) {
     echo "</div>";
 
 //    echo "<input type='checkbox' class='zadacha-uchenika-aktualna' id='aktualno".$row['id-zadachi']."' ".($row['aktualno']>0?"checked":"")."><label for='aktualno".$row['id-zadachi']."'>актуально</label></br></br>";
+  
+  echo "</div>";
 
 }
 //echo "(".mysqli_num_rows($res).")";
 
 echo "<input type='hidden' id='last-zadanie' value='".$iNomerZadaniya."'></input>";
+
+
+
+
 
 //Вопросы:
 echo "</br><p><b>Вопросы (по заданию, которое последнее в уроке)</b>:</p>";
