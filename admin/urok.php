@@ -43,7 +43,8 @@ while ($row = $res->fetch_assoc()) {
     $iNomerZadaniya = $row['zadanie'];
     $iIdPodtemy = $row['id-podtemy'];
 
-    if($iOldNomerZadaniya!=0 && $iNomerZadaniya != $iOldNomerZadaniya)
+    //поставить <hr>, если пошел другой номер задания
+    if($iOldNomerZadaniya!=0 && $iNomerZadaniya!=$iOldNomerZadaniya)
         echo "<hr style='margin: 0 -8px 0 -8px; height: 1px; background-color: black;'>";
 	
 	if($iIdPodtemy != $iOldIdPodtemy) {
@@ -55,7 +56,7 @@ while ($row = $res->fetch_assoc()) {
     $iOldNomerZadaniya = $iNomerZadaniya;
     $iOldIdPodtemy = $iIdPodtemy;
     
-    echo "<div style='margin: 0 -8px; padding: 8px; background-color: ".($bChessStyleDark ? 'FloralWhite         ' : 'none').";'>";
+    echo "<div style='margin: 0 -8px; padding: 8px; background-color: ".($bChessStyleDark ? 'Cornsilk' : 'none').";'>";
   
 /*        //добавление горизонтальной полосы, разделяющией разные задания
         if ($iOldNomerZadaniya!=0)
@@ -126,11 +127,11 @@ while ($row = $res->fetch_assoc()) {
     
     echo $row['text-zadachi']."</br>";
 
-    echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' /></br>";
+    echo "<input hidden class='id-podtemy' value='".$row['id-podtemy']."' />";
 
     if($row['foto-teksta'])
 //        echo "<img src='/img/".$row['foto-teksta']."'/></br>";
-        echo "<img src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
+        echo "<img style='padding: 0 10px;' src='/img/".$sPredmet."-".$iNomerZadaniya."-".$row['id-zadachi'].".jpg'/></br>";
 
     if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13 && $row['zadanie']*1 != 17) || ($sPredmet == 'informatika' && (($row['zadanie']*1 >= 24)||($row['slojnyi-otvet-1']!='')))) {
 

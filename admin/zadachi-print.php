@@ -87,7 +87,7 @@ while ($row = $res->fetch_assoc()) {
   //echo $iNumDZ++ . "/".$num_rows.") ";
   echo "<span style='border: solid 1px;'>".$row['zadanie'].".".$row['absulutnaya-sortirovka']."</span>";
   if (!$row['zakonchili-na-etom'])
-    echo " ".($num_rows-$iNumDZ++ + 1);
+//    echo " ".($num_rows-$iNumDZ++ + 1);
   echo "</br>";
 
     echo $row['text-zadachi']."</br>";
