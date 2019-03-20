@@ -12,8 +12,14 @@
 административная часть сайта
 домашнее задание ученика - проверка
 */
+
+//Дата последнего отчета этого ученика
+$aLastReportDate = fGetArrayFromSelect("SELECT `otchet`.`date` FROM `otchet` WHERE `otchet`.`uchenik` = '".$sUchenik."' ORDER BY `otchet`.`date` DESC LIMIT 1;");
+$dLastReportDate = $aLastReportDate[1]["date"];
+
 ?>
 
+<input type="hidden" id="dLastReportDate" value="<?=$dLastReportDate?>"></input>
 <input type="hidden" id="uchenik" value="<?=$sUchenik?>"></input>
 <input type="hidden" id="predmet" value="<?=$sPredmet?>"></input>
 <input type="hidden" id="last-time" value="<?=time()*1000?>"></input>
@@ -361,7 +367,7 @@ do {
                 echo "<img src='/resheniya-uchenikov/".$sUchenik."-".$sPredmet."-".$row['id-zadachi'].".jpg'/></br>";
 
 
-            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
+            if (($sPredmet == 'matematika' && $row['zadanie']*1 >= 13 && $row['zadanie']*1 != 17) || ($sPredmet == 'informatika' && $row['zadanie']*1 >= 24)) {
                 //задачи с полным решением
 
                 echo "Ответы:</br>";
@@ -500,3 +506,83 @@ while ($row = $res->fetch_assoc()) {
 <button id="insert-vopros-ucheniku">Добавить</button>
 
 <!--/Добавление вопроса-->
+
+
+<div id="ServiceMessages" style="position: fixed; bottom: 20px; left: 20px; background-color: white; padding: 10px; border: solid 1px gray; border-radius: 10px; display: none;">
+    <span></span>
+    <a style="display: none; text-decoration: underline;">Отменить</a>
+    <a id="ServiceMessagesClose">X</a>
+</div>
+
+
+<script>
+  
+  
+  $(document).ready(function (){
+
+    //если дата последнего отчета по этому ученику (и предмету) < текущей даты, добавим запись в таблицу `otchet`
+
+    sUchenik = 'viktoriya';
+    sPredmet = 'informatika';
+
+    oServiceMessages = new cServiceMessages;
+    oServiceMessages.sSqlQuery = "SELECT MAX(`date`) FROM `otchet` WHERE `otchet`.`uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "';";
+    oServiceMessages.sCancelSqlQuery = "DELETE FROM `otchet` WHERE `uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "' AND `date` = '" + fTodayMySqlDate() + "';";
+
+    fExecuteSelectSqlQuery(oServiceMessages.sSqlQuery, function (sResponse) {
+      if (sResponse != '') {
+        if (fJsDate(sResponse) < fTodayJsDate().withoutTime()) {
+
+          //добавим отчет по ученику на сегодня
+          $.post(
+            "/post/zafiksirovat-dz.php",
+            {
+              sUchenik: sUchenik,
+              sPredmet: sPredmet,
+              sDate: fTodayMySqlDate(),
+            },
+            function(){
+              oServiceMessages.resultText('Добавил отчет по <b>' + sUchenik + '</b> за сегодня');
+              oServiceMessages.resultTextFadeIn();
+              oServiceMessages.cancelButtonFadeIn();
+              oServiceMessages.fadeIn();
+              oServiceMessages.countdownStart();
+            }
+          );
+
+        }
+      }
+      else {
+        oServiceMessages.resultText('Не удалось получить дату последнего отчет по <b>' + sUchenik + '</b>');
+        oServiceMessages.resultTextShow();
+        oServiceMessages.fadeIn();
+        oServiceMessages.countdownStart();
+      }
+    });
+
+  });
+
+</script>
+
+
+<!--<script>
+
+$(document).ready(function() {
+  
+  //если дата последнего отчета по этому ученику (и предмету) !== текущей дате, добавим запись в таблицу `otchet`
+  sLastReportDate = fDateFromDBViewToPeopleView($('#dLastReportDate').val());
+  if (sLastReportDate !== fToday()){
+    sResult = fAddRecordToTable(
+      'otchet',
+      {
+        uchenik: $('#uchenik').val(),
+        predmet: $('#predmet').val(),
+        date: fToday()
+      }
+    );
+
+  }
+
+})
+
+</script>-->

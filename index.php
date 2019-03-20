@@ -4,6 +4,9 @@
 $DbAccessFile=$_SERVER['DOCUMENT_ROOT']."/_db-info.php";
 include_once $DbAccessFile;
 
+$sFunctionsFile=$_SERVER['DOCUMENT_ROOT']."/admin/functions.php";
+include_once $sFunctionsFile;
+
 $sUrl = $_SERVER["REQUEST_URI"];
 
 //удалим слеш в начале url'а
@@ -20,6 +23,7 @@ if (substr_count($sUrl, "telsanin")){
 }
 else
     $sRole = "front";
+
 ?>
 
 <!DOCTYPE HTML>
@@ -31,7 +35,9 @@ else
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/css/uikit.min.css" />
 
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/cconsole.js"></script>
+    <script src="/js/fCconsole.js"></script>
+    <script src="/js/fServiceFunctions.js"></script>
+    <!--<script src="/js/functions.js"></script>-->
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
     <style type="text/css">
@@ -79,7 +85,7 @@ else
 
 <body>
 
-<?=(!strpos($_SERVER["DOCUMENT_ROOT"], "teleginresume")?"<div style='position: fixed; top: 0; width: 100%;z-index: 1; border: solid 3px palevioletred; margin: 0; padding: 0;'></div>":"")?>
+<?=(!strpos($_SERVER["DOCUMENT_ROOT"], "teleginresume")?"<div style='position: fixed; top: 0; width: 100%;z-index: 1; border: solid 2px palevioletred; margin: 0; padding: 0;'></div>":"")?>
 
 <div style="margin: 8px;">
 

@@ -77,5 +77,3 @@ $SqlQuery = "UPDATE `otchet` SET `zanyatie`='".$sInitialTextZanyatiya.$sTextZany
 //выполним запрос
 $res = $mysqli->query($SqlQuery);
 
-//test
-//test
