@@ -522,8 +522,8 @@ while ($row = $res->fetch_assoc()) {
 
     //если дата последнего отчета по этому ученику (и предмету) < текущей даты, добавим запись в таблицу `otchet`
 
-    sUchenik = 'viktoriya';
-    sPredmet = 'informatika';
+    sUchenik = $('#uchenik').val();
+    sPredmet = $('#predmet').val();
 
     oServiceMessages = new cServiceMessages;
     oServiceMessages.sSqlQuery = "SELECT MAX(`date`) FROM `otchet` WHERE `otchet`.`uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "';";
