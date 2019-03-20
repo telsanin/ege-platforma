@@ -172,13 +172,13 @@ if($res = $mysqli->query($SqlQuery)) {
 //-сформируем "задачную" часть отчета
 
 echo "</br>";
-echo "Задачи -> в отчет (создать)";
+/*echo "Задачи -> в отчет (создать)";
 echo "&nbsp;&nbsp";
 echo "<button class='zafiksirovat' id='zafiksirovat-segodnya'>Сег</button>";
 echo "&nbsp;&nbsp";
 echo "<button class='zafiksirovat' id='zafiksirovat-zavtra'>Зав</button>";
 echo "&nbsp;&nbsp";
-echo "<button class='zafiksirovat' id='zafiksirovat-poslezavtra'>Пос</button></br></br>";
+echo "<button class='zafiksirovat' id='zafiksirovat-poslezavtra'>Пос</button></br></br>";*/
 
 //Вопросы:
 echo "<p><b>Вопросы</b>: (!если снимаешь - он как-бы ответил!)</p>";
@@ -525,11 +525,12 @@ while ($row = $res->fetch_assoc()) {
     sUchenik = $('#uchenik').val();
     sPredmet = $('#predmet').val();
 
+    sSqlQuery = "SELECT MAX(`date`) FROM `otchet` WHERE `otchet`.`uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "';";
+
     oServiceMessages = new cServiceMessages;
-    oServiceMessages.sSqlQuery = "SELECT MAX(`date`) FROM `otchet` WHERE `otchet`.`uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "';";
     oServiceMessages.sCancelSqlQuery = "DELETE FROM `otchet` WHERE `uchenik` = '" + sUchenik + "' AND `predmet`='" + sPredmet + "' AND `date` = '" + fTodayMySqlDate() + "';";
 
-    fExecuteSelectSqlQuery(oServiceMessages.sSqlQuery, function (sResponse) {
+    fExecuteSelectSqlQuery(sSqlQuery, function (sResponse) {
       if (sResponse != '') {
         if (fJsDate(sResponse) < fTodayJsDate().withoutTime()) {
 
@@ -543,8 +544,8 @@ while ($row = $res->fetch_assoc()) {
             },
             function(){
               oServiceMessages.resultText('Добавил отчет по <b>' + sUchenik + '</b> за сегодня');
-              oServiceMessages.resultTextFadeIn();
-              oServiceMessages.cancelButtonFadeIn();
+              oServiceMessages.resultTextShow();
+              oServiceMessages.cancelButtonShow();
               oServiceMessages.fadeIn();
               oServiceMessages.countdownStart();
             }

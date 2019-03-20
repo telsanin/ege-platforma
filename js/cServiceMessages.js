@@ -168,18 +168,21 @@ class cServiceMessages {
     $('#oServiceMessages #ServiceMessagesCountdown').fadeIn();
   }
 
-  cancelButtonFadeIn() {
-    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCancelButton').fadeIn();
-  }
 
-  countdownItemShow() {
-    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCountdownItem').show();
-  }
   countdownItemFadeIn() {
     $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCountdownItem').fadeIn();
   }
+  countdownItemShow() {
+    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCountdownItem').show();
+  }
 
 
+  cancelButtonFadeIn() {
+    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCancelButton').fadeIn();
+  }
+  cancelButtonShow() {
+    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCancelButton').show();
+  }
   // setter обработчика события Cancel.click
   serviceMessagesCancelOnClick(fFunc) {
     $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesCancelButton').off('click');
@@ -193,16 +196,14 @@ class cServiceMessages {
   }
 
 
-  resultTextShow() {
-    // $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').fadeIn();
-    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').show();
-  }
   resultTextFadeIn() {
     // $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').fadeIn();
     $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').fadeIn();
   }
-
-
+  resultTextShow() {
+    // $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').fadeIn();
+    $('#oServiceMessages #ServiceMessagesCountdown #ServiceMessagesResultText').show();
+  }
   // setter текста результата операции
   resultText(sResultText) {
     this.sResultText = sResultText;
