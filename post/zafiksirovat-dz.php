@@ -9,10 +9,12 @@
 $DbAccessFile=$_SERVER['DOCUMENT_ROOT']."/_db-info.php";
 include_once $DbAccessFile;
 
+
 //параметры полученного POST-запроса на добавление строки в таблицу БД
-$sPredmet=$_POST["spredmet"];
-$sUchenik=$_POST["suchenik"];
-$sDate=$_POST["sdate"];
+$sPredmet=$_POST["sPredmet"];
+$sUchenik=$_POST["sUchenik"];
+$sDate=$_POST["sDate"];
+
 
 $SqlQuery = "select count(`kolichestvo-popytok`) as count, `kolichestvo-popytok`  from `uchenik-zadachi` where `uchenik`='".$sUchenik."' and `predmet`='".$sPredmet."' and `urok`=2 and `aktualno`=1 and `resheno-pravilno`=1 group by `kolichestvo-popytok` asc;";
 $res = $mysqli->query($SqlQuery);
@@ -77,11 +79,8 @@ if($res->data_seek(0)) {
 //-сформируем "задачную" часть отчета
 }
 
+
 //добавим строку в таблицу otchet
-
-
-
 $SqlQuery = "INSERT INTO `otchet` (`uchenik`, `predmet`, `dz`, `date`) VALUES ('".$sUchenik."', '".$sPredmet."', '".$TextZadachi."', '".$sDate."');";//выполним запрос
 $res = $mysqli->query($SqlQuery);
-
 //-добавим строку в таблицу otchet

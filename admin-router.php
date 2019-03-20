@@ -4,6 +4,10 @@
     }
 </style>
 
+<div id="oServiceMessages" style="position: fixed; bottom: 20px; left: 20px; background-color: white; padding: 10px; border: solid 1px gray; border-radius: 10px; display: none;">
+</div>
+
+
 <?php
 
 /*
